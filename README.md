@@ -22,7 +22,6 @@ npm install
   document.createElement(<element type>);
   ````
 
-
 ##How do I test if my answer is correct?
 Run the following code in your terminal to test your code:
 ````
