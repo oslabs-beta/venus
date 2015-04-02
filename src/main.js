@@ -1,3 +1,7 @@
+var title = document.createElement('div');
+title.innerHTML = 'Social Calendar';
+document.body.appendChild(title);
+
 for (var i = 0; i < schedule.length; i++) {
   document.body.appendChild(appendDay(schedule[i]));
 }
@@ -6,9 +10,9 @@ function appendDay(day) {
   var div = document.createElement('div');
   div.setAttribute('class', 'day');
   div.appendChild(createParagraph(day.week, 'week_number'));
-  div.appendChild(createParagraph(day.day, 'day'));
+  div.appendChild(createParagraph(day.day, 'weekday'));
   div.appendChild(createParagraph(day.sprint_name, 'sprint_name'));
-  div.appendChild(createUnorderedList(day.goals, 'sprint_name'));
+  div.appendChild(createUnorderedList(day.goals, 'goals'));
   return div;
 }
 
@@ -21,8 +25,9 @@ function createParagraph(value, className) {
 
 function createUnorderedList(values, className) {
   var list = document.createElement('ul');
+  list.setAttribute('class', 'goals');
   for (var i = 0; i < values.length; i++) {
-    list.appendChild(createListElement(values[i],'list'))
+    list.appendChild(createListElement(values[i],'goal'))
   }
   return list;
 }
