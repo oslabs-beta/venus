@@ -22,12 +22,6 @@ npm install
   document.createElement(<element type>);
   ````
 
-3. To serve your page, run the following command in your terminal:
-````
-npm start
-````
-Open your page by visiting "http://localhost:3000/"
-
 ##How do I test if my answer is correct?
 Run the following code in your terminal to test your code:
 ````

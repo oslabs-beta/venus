@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
     "test": "node_modules/casperjs/bin/casperjs test test/calendarSpec.js"
   },
   "preinstall": "brew update && brew install phantomjs && brew install casperjs --devel",
@@ -12,8 +11,5 @@
   "license": "ISC",
   "devDependencies": {
     "casperjs": "^1.1.0-beta3"
-  },
-  "dependencies": {
-    "express": "^4.12.3"
   }
 }
