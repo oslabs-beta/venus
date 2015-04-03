@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/casperjs/bin/casperjs test spec/calendarSpec.js"
+    "start" : "node server.js",
+    "test": "node_modules/casperjs/bin/casperjs test test/calendarSpec.js"
   },
   "preinstall" : "brew update && brew install phantomjs && brew install casperjs --devel",
   "author": "",
