@@ -2,8 +2,14 @@ var schedule =
 [
 {
   week: 1,
-  day: "Wednesday",
+  day: "Monday",
   sprint_name: "Javascript Fundaments",
+  goals: [1,2,3]
+},
+{
+  week: 1,
+  day: "Wednesday",
+  sprint_name: "DOM Manipulation",
   goals: [1,2,3]
 },
 {
