@@ -15,8 +15,8 @@ casper.test.begin("Calendar Spec", 12, function(test) {
   });
 
   casper.then(function(){
-    test.assertExists('.sprint_name','.sprint_name exists');
-    test.assertElementCount('p.sprint_name', 2, '2 .sprint_name elements are present');
+    test.assertExists('.challege','.challege exists');
+    test.assertElementCount('p.challege', 2, '2 .challege elements are present');
   });
 
   casper.then(function(){
