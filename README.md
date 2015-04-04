@@ -3,7 +3,7 @@
 ##Goal
 Javascript is the primary language that allows developers to interact directly with the browser (also known as the Document Object Model or DOM, for short). Without it, rich web apps such as Gmail and Facebook that have elements on their pages that are constantly changing would not be possible. The following challenge will teach you the basic javascript functions to get you started building your dynamic web apps.
 
-The goal of this challenge is to create your own personal calendar. The content of your calendar can be accessed through the global variable "schedule"; use javascript, HTML, and css to render the content onto your page. You will be using this calendar everyday through the program, so make it perfect!
+The goal of this challenge is to create your own personal calendar. The content of your calendar can be accessed through the global variable "schedule"; use javascript, HTML, and CSS to render the content onto your page. You will be using this calendar everyday throughout the program, so make it perfect!
 
 ##How do I get started
 1. After forking and cloning this repo (see the [previous challenge's README.md](https://github.com/CodesmithLLC/w1-s1-fs-fundamentals) if needed), run the following command in your terminal:

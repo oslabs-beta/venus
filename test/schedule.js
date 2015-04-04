@@ -10,7 +10,10 @@ var schedule =
   week: 1,
   day: "Wednesday",
   sprint_name: "DOM Manipulation",
-  goals: [1,2,3]
+  goals: [
+
+  'Serve the pages (type npm start into your terminal and go to "http://localhost:3000/"'
+  ]
 },
 {
   week: 1,
