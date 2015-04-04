@@ -22,7 +22,7 @@ npm install
   document.createElement(<element type>);
   ````
 
-3. View your page by opening the index.html page (found in the client folder) in your browser.
+3. View your page by opening the index.html page in your browser.
 
 ##How do I test if my answer is correct?
 Run the following code in your terminal to test your code:

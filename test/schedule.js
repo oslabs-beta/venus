@@ -11,8 +11,10 @@ var schedule =
   day: "Wednesday",
   sprint_name: "DOM Manipulation",
   goals: [
-
-  'Serve the pages (type npm start into your terminal and go to "http://localhost:3000/"'
+  ''
+  'Serve the pages (type npm start into your terminal and go to "http://localhost:3000/"',
+  'Load this following images into your application (using image elements)',
+  'Rewrite your application with jQuery - jQuery is a library that makes it easier to manipulate the DOM (instead of using native javascript)'
   ]
 },
 {
