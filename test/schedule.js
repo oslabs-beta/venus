@@ -3,7 +3,7 @@ var schedule =
 {
   week: 1,
   day: "Monday",
-  challenge: "Javascript Fundaments",
+  challenge: "Javascript Fundamentals",
   goals: [
     'Complete js-fundamental challenge'
   ]
