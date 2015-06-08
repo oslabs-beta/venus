@@ -23,7 +23,7 @@ npm install
 3. View your page by opening the index.html page in your browser.
 
 ##How do I test if my answer is correct?
-Run the following code in your terminal to test your code:
+Previous, we ran tests in the browser (we opened an index.html). In production though, we often run test in the terminal. To run tests in the terminal for this challenge, type the following code:
 ````
 npm test
 ````
