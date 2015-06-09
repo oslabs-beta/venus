@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/casperjs/bin/casperjs test test/calendarSpec.js"
+    "test": "node_modules/.bin/mocha-phantomjs test/test.html"
   },
-  "preinstall": "brew update && brew install phantomjs && brew install casperjs --devel",
+  "preinstall": "brew update && brew install phantomjs",
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "casperjs": "^1.1.0-beta3",
-    "express": "^4.12.3"
+    "expect": "^1.6.0",
+    "express": "^4.12.3",
+    "jquery": "^2.1.4",
+    "mocha": "^2.2.5",
+    "mocha-phantomjs": "^3.5.3"
   }
 }

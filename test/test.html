@@ -2,16 +2,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Calendar</title>
-  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="./../lib/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="./../lib/expect/index.js"></script>
+	<script src="./../lib/mocha/mocha.js"></script>
 </head>
 <body>
 	<div id="mocha"></div>
-	<script src="http://localhost:8001/sinonjs/sinon.js"></script>
-	<script src="http://localhost:8001/mocha/mocha.js"></script>
-	<script src='schedule.js'></script>
+	<script src="schedule.js"></script>
+	<script src="./../client/main.js"></script>
 	<script>mocha.setup('bdd');</script>
-	<script src="http://localhost:8001/expect/index.js"></script>
-	<script src='../client/jquery_version.js'></script>
+	<script type="text/javascript" src="schedule.js"></script>
 	<script src='calendarTest.js'></script>
 	<script>
 		mocha.globals();

@@ -1,22 +1,30 @@
 describe('Calendar Spec', function() {
-  it('should have .day elements', function() {
-    expect(document.querySelector("div.day")).to.not.equal(null);
-    expect(document.querySelectorAll("div.day").length).to.equal(2);
+  var length = schedule.length;
+  var number_of_goals = schedule.reduce(function(prev, curr) {
+     return prev + curr.goals.length;
+  },0);
+  it('should have ' +length +' .day elements', function() {
+    expect(document.querySelector(".day")).to.not.equal(null);
+    expect(document.querySelectorAll(".day").length).to.equal(length);
 	});
-	it('should have .week_number elements',function(){
+	it('should have ' +length +' .week_number elements',function(){
     expect(document.querySelector(".week_number")).to.not.equal(null);
-    expect(document.querySelectorAll("p.week_number").length).to.equal(2);
+    expect(document.querySelectorAll(".week_number").length).to.equal(length);
 	});
-	it('should have .challenge elements',function(){
+  it('should have ' +length +' .unit elements',function(){
+    expect(document.querySelector(".unit")).to.not.equal(null);
+    expect(document.querySelectorAll(".unit").length).to.equal(length);
+  });
+	it('should have ' +length +' .challenge elements',function(){
     expect(document.querySelector(".challenge")).to.not.equal(null);
-    expect(document.querySelectorAll("p.challenge").length).to.equal(2);
+    expect(document.querySelectorAll(".challenge").length).to.equal(length);
 	});
-	it('should have .goals elements',function(){
+	it('should have ' +length +' .goals elements',function(){
     expect(document.querySelector(".goals")).to.not.equal(null);
-    expect(document.querySelectorAll("ul.goals").length).to.equal(2);
+    expect(document.querySelectorAll(".goals").length).to.equal(length);
 	});
-	it('should have .goal elements',function(){
+	it('should have ' +number_of_goals +' .goal elements',function(){
     expect(document.querySelector(".goal")).to.not.equal(null);
-    expect(document.querySelectorAll("li.goal").length).to.equal(6);
+    expect(document.querySelectorAll(".goal").length).to.equal(number_of_goals);
 	});
 });

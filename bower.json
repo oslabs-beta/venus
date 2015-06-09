@@ -1,0 +1,22 @@
+{
+  "name": "unit-4SB-calendar",
+  "version": "0.0.0",
+  "homepage": "https://github.com/CodesmithLLC/unit-4SB-calendar",
+  "authors": [
+    "Alex Zai <azai91@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "expect": "~0.3.1",
+    "jquery": "~2.1.4",
+    "mocha": "~2.2.5"
+  }
+}
