@@ -5,20 +5,22 @@ The goal of this challenge is to create your own personal calendar. The content 
 
 ##How do I get started
 1. After forking and cloning this repo (see the [previous challenge's README.md](https://github.com/CodesmithLLC/w1-s1-fs-fundamentals) if needed), run the following command in your terminal:
-````
-npm install
-````
+  ````
+  npm install
+  ````
 1. To install front-end essential libraries (also called dependencies), run the following command:
-````
-bower install
-````
+  ````
+  bower install
+  ````
 
 1. Complete the challenge by adding code to client/main.js file
+
   - The schedule is found in the global variable schedule which can be accessed as such:
   ````
   console.log(schedule);
   ````
-  -The following two commands will be instrumental:
+
+  - The following two commands will be instrumental:
   ````
   document.body.appendChild(<custom node>);
   document.createElement(<element type>);
