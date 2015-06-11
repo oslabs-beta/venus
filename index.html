@@ -2,12 +2,28 @@
 <head>
   <meta charset="UTF-8">
   <title>Calendar</title>
+  <script src="lib/jquery/dist/jquery.js"></script>
+  <script src='test/schedule.js'></script>
 </head>
 <body>
-<script src="lib/jquery/dist/jquery.js"></script>
-<script src='test/schedule.js'></script>
-<script src='client/main.js'></script>
-
 
 </body>
+<script src="./lib/expect/index.js"></script>
+<script src="./lib/mocha/mocha.js"></script>
+<script src="./test/polyfill.js"></script>
+<script src='client/main.js'></script>
+<script>
+  if (window.mochaPhantomJS) {
+    mocha.setup('bdd');
+    addScript("./test/calendar-test.js");
+    // addScript("./test/online-calendar-test.js");
+  }
+
+  function addScript(path) {
+    var js = document.createElement('script');
+    js.type = 'text/javascript';
+    js.src = path;
+    document.body.appendChild(js);
+  }
+</script>
 </html>

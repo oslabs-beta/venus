@@ -28,3 +28,6 @@ describe('Calendar Spec', function() {
     expect(document.querySelectorAll(".goal").length).to.equal(number_of_goals);
 	});
 });
+
+mocha.globals();
+mochaPhantomJS.run();
