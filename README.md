@@ -4,7 +4,7 @@
 The goal of this challenge is to create your own personal calendar. The content of your calendar can be accessed through the global variable "schedule"; use javascript, HTML, and CSS to render the content onto your page. You will be using this calendar for the next two weeks, so make it pretty!
 
 ##How do I get started
-1. After forking and cloning this repo (see the [previous challenge's README.md](https://github.com/CodesmithLLC/w1-s1-fs-fundamentals) if needed), run the following command in your terminal:
+1. After forking and cloning this repo (see the [previous challenge's README.md](https://github.com/CodesmithLLC/unit-1-js-fundamentals) if needed), run the following command in your terminal:
   ````
   npm install
   ````
