@@ -10,8 +10,8 @@ var schedule =
   ]
 },
 {
-  week: 1,
-  day: "Wednesday",
+  week: 2,
+  day: "Monday",
   unit: 2,
   challenge: "Data Structures",
   goals: [
@@ -19,8 +19,8 @@ var schedule =
   ]
 },
 {
-  week: 1,
-  day: "Friday",
+  week: 2,
+  day: "Tuesday",
   unit: 3,
   challenge: "Algorithms",
   goals: [
@@ -29,28 +29,32 @@ var schedule =
   ]
 },
 {
-  week: 2,
+  week: 3,
   day: "Monday",
   unit: 4,
-  challenge: "Front-end Fundamentals",
+  challenge: "Frontend Fundamentals",
   goals: [
     'Complete'
   ]
 },
 {
-  week: 2,
+  week: 3,
   day: "Wednesday",
   unit: 5,
   challenge: "AJAX",
   goals: [
-    'Connect calendar to data base'
+    'Connect calendar to google API',
+    'Create chatroom'
   ]
 },
 {
-  week: 2,
+  week: 3,
   day: "Friday",
   unit: 6,
   challenge: "React",
-  goals: [4,5,6]
+  goals: [
+    'Create tic tac toe',
+    'Reactify frontend code'
+  ]
 },
 ];
