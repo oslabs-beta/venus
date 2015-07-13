@@ -1,3 +1,0 @@
-describe('Online-Calendar', function() {
-  // body...
-});
