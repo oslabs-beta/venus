@@ -19,6 +19,11 @@ The goal of this challenge is to create your own personal calendar. The content 
   ````
   console.log(schedule);
   ````
+  take a look at what appears in your console. It migh tbe helpful to write out how this data is structured and do a little whiteboarding on how you can convert this datamodel into something that users can see and interact with. Will you structure this using a table? A bunch of divs? A unordered list? 
+
+1. No matter what you decide to use you will have to create HTML elements to hold your newly created data, check out [MDN's documentation}(https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) to find a method we can use to create different DOMNodes.
+
+1. Once these DOM nodes are created, we need to attach them to the page (so they actually appear!) there are a bunch of cool methods we can use
 
   - The following two commands will be instrumental:
   ````
@@ -33,3 +38,9 @@ Previous, we ran tests in the browser (we opened an index.html). In production t
 ````
 npm test
 ````
+#Extension Work
+
+Make it so that you can click through and see your data a week at a time!
+Integrate it so that you can click a button and it downloads the entry as something you can import into ical!
+Allow people to click events and add them to their google calendar!
+Allow users to edit events and change it on the page!
