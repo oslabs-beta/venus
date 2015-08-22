@@ -46,3 +46,25 @@ npm test
 1. Allow users to edit events and change it on the page! *Investigate using `localStorage` to allow someone to save their own calendar)
 
 
+#Instructions on how to use branches!
+
+![](https://www.atlassian.com/wac/landing/git/tutorial/git-branches/pageSections/0/contentColumnTwo/0/imageBinary/git-tutorial_branching-merging.png)
+
+
+From now on out you're going to have to switch to different branches to do your work, this skils builder was in the `master` branch but others won't be. 
+You can always look at what branches you have locally by typing `git branch`.
+
+Easiest way to get all the branches off of github is to run `git fetch --all`. 
+After that, run `git branch` with a `-a` flag to see all the branches you have, including remotes you've just fetched.
+
+To switch to one of these branches we first have to create a local branch that tracks that remote.
+
+try running `git branch unit-5SB-online-calendar origin/unit-5SB-online-calendar`
+
+This creates a local branch, that tracks the remote branch.
+
+After that branch has been created, we need to switch over to it. make sure you don't have any uncommitted changes on your branch. Run a `git status` and make sure you dont have any uncommitted changes that you want. If you do, add them and commit them. After that, switch to your new branch by running `git checkout unit-5SB-online-calendar`
+
+Thats it!
+
+
