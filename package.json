@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha-phantomjs index.html"
+    "test": "node_modules/.bin/mocha-phantomjs index.html",
+    "start": "node server/server.js"
   },
   "preinstall": "brew update && brew install phantomjs",
   "author": "",
