@@ -38,6 +38,9 @@ Previous, we ran tests in the browser (we opened an index.html). In production t
 ````
 npm test
 ````
+
+The simplest example would be something like this
+![](finished.png)
 #Extension Work
 
 1. Make it so that you can click through and see your data a week at a time!
