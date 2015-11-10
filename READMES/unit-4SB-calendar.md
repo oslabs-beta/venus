@@ -4,7 +4,7 @@
 The goal of this challenge is to create your own personal calendar. The content of your calendar can be accessed through the global variable "schedule"; use javascript, HTML, and CSS to render the content onto your page. You will be using this calendar for the next two weeks, so make it pretty!
 
 The simplest example would be something like this (without much styling)
-![](finished.png)
+![](assets/finished.png)
 
 ###Learning Goals
 - Understand basic DOM manipulation with javascript
