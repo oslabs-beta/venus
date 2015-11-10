@@ -33,7 +33,7 @@ npm test
   ````
   console.log(schedule);
   ````
-  take a look at what appears in your console. It migh tbe helpful to write out how this data is structured and do a little whiteboarding on how you can convert this datamodel into something that users can see and interact with. Will you structure this using a table? A bunch of divs? A unordered list?
+  take a look at what appears in your console. It might be helpful to write out how this data is structured and do a little whiteboarding on how you can convert this datamodel into something that users can see and interact with. Will you structure this using a table? A bunch of divs? A unordered list?
 
 1. No matter what you decide to use you will have to create HTML elements to hold your newly created data, check out [MDN's documentation](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) to find a method we can use to create different DOMNodes.
 
@@ -45,7 +45,7 @@ npm test
   document.createElement(<element type>);
   ````
 
-1. View your page by opening the index.html page in your browser. Style the page accordingly.
+1. View your page by opening the ```index.html``` page in your browser. Style the page accordingly.
 
 #Extension Work
 
