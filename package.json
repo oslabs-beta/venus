@@ -4,17 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha-phantomjs index.html",
     "start": "node server/server.js"
   },
-  "preinstall": "brew update && brew install phantomjs",
   "author": "",
   "license": "ISC",
   "dependencies": {
     "expect": "^1.6.0",
     "express": "^4.12.3",
-    "jquery": "^2.1.4",
-    "mocha": "^2.2.5",
-    "mocha-phantomjs": "^3.5.3"
+    "jquery": "^2.1.4"
   }
 }
