@@ -8,8 +8,7 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "expect": "^1.6.0",
+  "dependencies": {    
     "express": "^4.12.3",
     "jquery": "^2.1.4"
   }

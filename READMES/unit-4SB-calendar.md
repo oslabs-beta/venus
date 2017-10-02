@@ -1,31 +1,23 @@
-#Calendar
+# Calendar
 
-##Summary
+## Summary
 The goal of this challenge is to create your own personal calendar. The content of your calendar can be accessed through the global variable "schedule"; use javascript, HTML, and CSS to render the content onto your page. You will be using this calendar for the next two weeks, so make it pretty!
 
 The simplest example would be something like this (without much styling)
 ![](assets/finished.png)
 
-###Learning Goals
+### Learning Goals
 - Understand basic DOM manipulation with javascript
 
-##Getting Started
+## Getting Started
 1. After forking and cloning this repo (see the [previous challenge's README.md](https://github.com/CodesmithLLC/unit-1-js-fundamentals) if needed), run the following command in your terminal:
   ````
   npm install
   ````
-1. To install front-end essential libraries (also called dependencies), run the following command:
-  ````
-  bower install
-  ````
+## How do I test if my answer is correct?
+There are no tests for this exercise. Visually inspect your ```index.html``` in the browser to verify your work.
 
-##How do I test if my answer is correct?
-Previous, we ran tests in the browser (we opened an index.html). In production though, we often run test in the terminal. To run tests in the terminal for this challenge, type the following code:
-````
-npm test
-````
-
-##Challenges
+## Challenges
 
 1. Complete the challenge by adding code to client/main.js file
 
@@ -47,7 +39,7 @@ npm test
 
 1. View your page by opening the ```index.html``` page in your browser. Style the page accordingly.
 
-#Extension Work
+# Extension Work
 
 1. Make it so that you can click through and see your data a week at a time!
 1. Integrate it so that you can click a button and it downloads the entry as something you can import into ical!
