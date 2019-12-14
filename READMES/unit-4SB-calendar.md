@@ -1,17 +1,23 @@
-#Calendar
+# Calendar
 
-##Goal
+## Summary
 The goal of this challenge is to create your own personal calendar. The content of your calendar can be accessed through the global variable "schedule"; use javascript, HTML, and CSS to render the content onto your page. You will be using this calendar for the next two weeks, so make it pretty!
 
-##How do I get started
+The simplest example would be something like this (without much styling)
+![](assets/finished.png)
+
+### Learning Goals
+- Understand basic DOM manipulation with javascript
+
+## Getting Started
 1. After forking and cloning this repo (see the [previous challenge's README.md](https://github.com/CodesmithLLC/unit-1-js-fundamentals) if needed), run the following command in your terminal:
   ````
   npm install
   ````
-1. To install front-end essential libraries (also called dependencies), run the following command:
-  ````
-  bower install
-  ````
+## How do I test if my answer is correct?
+There are no tests for this exercise. Visually inspect your ```index.html``` in the browser to verify your work.
+
+## Challenges
 
 1. Complete the challenge by adding code to client/main.js file:
 
@@ -31,45 +37,12 @@ The goal of this challenge is to create your own personal calendar. The content 
   document.createElement(<element type>);
   ````
 
-1. View your page by opening the index.html page in your browser. Style the page accordingly.
+1. View your page by opening the ```index.html``` page in your browser. Style the page accordingly.
 
-##How do I test if my answer is correct?
-Previously, we ran tests in the browser (we opened an index.html). In production though, we often run test in the terminal. To run tests in the terminal for this challenge, type the following code:
-````
-npm test
-````
 
-The simplest example would be something like this:
-![](finished.png)
-#Extension Work
+# Extension Work
 
 1. Make it so that you can click through and see your data a week at a time!
 1. Integrate it so that you can click a button and it downloads the entry as something you can import into iCal!
 1. Allow people to click events and add them to their Google calendar!
 1. Allow users to edit events and change it on the page! (Investigate using `localStorage` to allow someone to save their own calendar)
-
-
-#Instructions on how to use branches!
-
-![](https://www.atlassian.com/wac/landing/git/tutorial/git-branches/pageSections/0/contentColumnTwo/0/imageBinary/git-tutorial_branching-merging.png)
-
-
-From now on out you're going to have to switch to different branches to do your work; this skills builder was in the `master` branch but others won't be. 
-You can always look at what branches you have locally by typing `git branch`.
-
-Easiest way to get all the branches off of github is to run `git fetch --all`. 
-After that, run `git branch` with a `-a` flag to see all the branches you have, including remotes you've just fetched.
-
-To switch to one of these branches we first have to create a local branch that tracks that remote.
-
-Try running:
-`git branch unit-5SB-online-calendar origin/unit-5SB-online-calendar`
-
-This creates a local branch that tracks the remote branch.
-
-After that branch has been created, we need to switch over to it. Make sure you don't have any uncommitted changes on your branch. Run a `git status` and make sure you dont have any uncommitted changes that you want. If you do, add them and commit them. After that, switch to your new branch by running:
-`git checkout unit-5SB-online-calendar`
-
-Thats it!
-
-
