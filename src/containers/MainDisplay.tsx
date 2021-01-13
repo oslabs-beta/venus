@@ -5,17 +5,25 @@
 
 //imports to be used in file
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import Navbar from './Navbar';
+// import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import NavBar from './Navbar';
 import Dashboard from './Dashboard';
 
  export default class MainDisplay extends Component {
-     constructor() {
-         super();
-         this.state = {
-
-         }
+    //  constructor(props) {
+    //      super(props);
+    //      this.state = {
+    //      }
+    //  }
+     render() {
+         return(
+             <div>
+             <h1>Main Display</h1>
+             <NavBar />
+             </div>
+         )
      }
+ }
 
 //add any bindings here
 
@@ -23,7 +31,3 @@ import Dashboard from './Dashboard';
 
 //add axios
 
-render() {
-
-    }
-}
