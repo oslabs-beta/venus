@@ -20,6 +20,7 @@ import Dashboard from './Dashboard';
              <div>
              <h1>Main Display</h1>
              <NavBar />
+             <Dashboard />
              </div>
          )
      }

@@ -7,6 +7,19 @@
  import React from 'react';
  import TabContainer from './TabContainer'
 
- export default function Dashboard({ }){
-     return ()
+ export default class Dashboard extends React.Component {
+    //  constructor(props) {
+    //      super(props);
+    //      this.state = {
+    //      }
+    //  }
+     render() {
+         return(
+             <div>
+             <h1>Dashboard</h1>
+             </div>
+         )
+     }
  }
+
+ // exports to MainContainer

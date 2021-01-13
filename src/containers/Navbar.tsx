@@ -19,3 +19,5 @@ export default class NavBar extends Component {
          )
      }
  }
+
+ // exports to containers/MainContainer
