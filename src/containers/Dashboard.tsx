@@ -5,7 +5,9 @@
  */
 
  import React from 'react';
- import TabContainer from './TabContainer'
+//  import TabContainer from './TabContainer'
+import ServiceContainer from './ServiceContainer';
+import ChartContainer from './ChartContainer';
 
  export default class Dashboard extends React.Component {
     //  constructor(props) {
@@ -16,7 +18,13 @@
      render() {
          return(
              <div>
-             <h1>Dashboard</h1>
+             <ServiceContainer />
+
+
+
+             <ChartContainer />
+
+                 
              </div>
          )
      }

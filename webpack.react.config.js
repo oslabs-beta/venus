@@ -6,7 +6,7 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
     mainFields: ["main", "module", "browser"],
   },
-  entry: "./src/index.js",
+  entry: "./src/app.tsx",
   target: "electron-renderer",
   devtool: "source-map",
   module: {

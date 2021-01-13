@@ -6,5 +6,12 @@
  import React from 'react'
 
  export default function Tab (){
-     return ()
+     return (
+         <h1 style={{color: "red", fontSize: "16px"}}>
+             this is the tab on the navbar ya bish
+             {/* create onClick method */}
+         </h1>
+     )
  }
+
+ // exports to Tab container
