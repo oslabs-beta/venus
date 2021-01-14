@@ -8,7 +8,7 @@ document.body.appendChild(mainElement);
 const App = () => {
   return (
     <h1 className="app">
-      Hi from a react
+      Hi from evan at 11:21pm.
     </h1>
   )
 }
