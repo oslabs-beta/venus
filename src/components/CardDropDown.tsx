@@ -7,7 +7,7 @@ import React from 'react'
 
 export default function CardDropDown (){
     return (
-        <div>
+        <div className="cardDrop">
         <h1>
             Card Drop down on page 2
             {/* create onClick method */}

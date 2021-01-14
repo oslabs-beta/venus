@@ -110,23 +110,40 @@ function createWindow() {
   mainWindow = new electron__WEBPACK_IMPORTED_MODULE_0__["BrowserWindow"]({
     width: 800,
     height: 600,
+    // so the app will show
+    // show: true,
+    // frame: false,
+    // fullscramble: false,
+    // // can resize frame
+    // resizeable: true,
+    // transparent: false,
+    //   // stops console from opening upon load
     webPreferences: {
       nodeIntegration: true,
-      webSecurity: false
+      webSecurity: false,
+      devTools: false
     }
   });
 
   if (true) {
     mainWindow.loadURL("http://localhost:4000");
     mainWindow.webContents.openDevTools();
-  } else {}
+  } else {} // Quit when all windows are closed, except on macOS. There, it's common
+  // for applications and their menu bar to stay active until the user quits
+  // explicitly with Cmd + Q.
 
-  mainWindow.on("closed", function () {
-    mainWindow = null;
+
+  electron__WEBPACK_IMPORTED_MODULE_0__["app"].on('window-all-closed', function () {
+    if (process.platform !== 'darwin') electron__WEBPACK_IMPORTED_MODULE_0__["app"].quit();
   });
 }
 
 electron__WEBPACK_IMPORTED_MODULE_0__["app"].on("ready", createWindow);
+electron__WEBPACK_IMPORTED_MODULE_0__["app"].on('activate', function () {
+  // On macOS it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  if (electron__WEBPACK_IMPORTED_MODULE_0__["BrowserWindow"].getAllWindows().length === 0) createWindow();
+});
 electron__WEBPACK_IMPORTED_MODULE_0__["app"].allowRendererProcessReuse = true;
 
 /***/ }),

@@ -7,8 +7,8 @@
 
  export default function Tab (){
      return (
-         <h1 style={{background: "yellow", fontSize: "16px"}}>
-             actual tab. see that in lime ^^? thats my daddy
+         <h1 className="tab">
+             This is tab
              {/* create onClick method */}
          </h1>
      )
