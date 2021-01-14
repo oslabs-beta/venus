@@ -15,7 +15,7 @@ import React from 'react';
     //  }
      render() {
          return(
-             <div>
+             <div id="serviceContainer">
              <h1>Service Container</h1>
              <ServiceCard />
              </div>
