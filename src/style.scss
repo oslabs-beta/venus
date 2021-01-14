@@ -4,6 +4,13 @@
   border: 1px black dotted;
 };
 
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:rgb(52, 250, 52);
+}
+
 // #mainDisplay {
 //   background-color: rgb(88, 241, 247);
 // }
@@ -17,11 +24,11 @@
 // }
 
 #serviceContainer {
-  background-color: orange;
+  background-color: rgb(1, 101, 252);
 }
 
 #tabContainer {
-  background-color: palevioletred;
+  background-color: rgb(68, 6, 139);
 }
 
 #chartContainer {
@@ -39,26 +46,25 @@
   left: 0;
   background-color: black;
 }
+
 #navBar {
   display:flex;
   justify-content: center;
-  background-color:#F8F8F8;
+  background-color: black;
   flex-grow: 1;
   padding: 10px;
   box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
   border-radius: 4px;
-  border: 3px solid white;
 }
 #dashboard {
   flex-grow: 10;
   display: flex;
-  background-color: rgb(233, 230, 88);
+  background-color: black;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  border-radius: 10px;
   padding: 10px;
-  border: 3px solid white;
+  border: 3px solid grey
 }
 
 .serviceCard {
@@ -70,7 +76,7 @@
 }
 
 .tab {
-  background-color: beige;
+  background-color: blue
 }
 
 .aggStats {
@@ -78,5 +84,5 @@
 }
 
 .cardDrop {
-  background-color: darkorange
+  background-color: rgb(255, 115, 0)
 }
