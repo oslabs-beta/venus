@@ -8,9 +8,11 @@ import React from 'react'
 
 export default function AggregateStats (){
     return (
-        <h1 style={{background: "blue", fontSize: "16px"}}>
+        <div>
+        <h1>
             actual tab. see that in lime ^^? thats my daddy
             {/* create onClick method */}
         </h1>
+        </div>
     )
 }

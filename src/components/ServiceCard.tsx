@@ -7,8 +7,10 @@ import React from 'react'
 
 export default function ServiceCard (){
     return (
-        <h1 style={{background: "indigo", fontSize: "20px"}}>
+        <div className="serviceCard">
+        <h1>
             {/* create onClick method */}Service Card
         </h1>
+        </div>
     )
 }

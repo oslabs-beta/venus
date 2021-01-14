@@ -5,7 +5,7 @@
 
 
 import React from 'react';
-import CardDropDown from './CardDropDown'
+import CardDropDown from '../components/CardDropDown'
 import Chart from '../components/Chart'
 //import service card container
 //import chart container
