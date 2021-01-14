@@ -4,13 +4,17 @@
   border: 1px black dotted;
 };
 
-#mainDisplay {
-  background-color: rgb(88, 241, 247);
-}
+// #mainDisplay {
+//   background-color: rgb(88, 241, 247);
+// }
 
-#dashboard {
-  background-color: rgb(233, 230, 88);
-}
+// #dashboard {
+//   background-color: rgb(233, 230, 88);
+// }
+
+// #navBar {
+//   background-color: rgb(96, 247, 82);
+// }
 
 #serviceContainer {
   background-color: orange;
@@ -25,7 +29,7 @@
 }
 
 // styling for navBar and dashboard
-.landing {
+#mainDisplay {
   display: flex;
   flex-direction: row;
   position: fixed;
@@ -33,21 +37,22 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: white;
+  background-color: black;
 }
 #navBar {
   display:flex;
   justify-content: center;
-  background-color: rgb(96, 247, 82);
+  background-color:#F8F8F8;
   flex-grow: 1;
   padding: 10px;
   box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
   border-radius: 4px;
   border: 3px solid white;
 }
-.rightSide {
+#dashboard {
   flex-grow: 10;
   display: flex;
+  background-color: rgb(233, 230, 88);
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
