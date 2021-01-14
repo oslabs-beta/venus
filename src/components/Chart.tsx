@@ -5,7 +5,7 @@
 
 import React from 'react'
 
-export default function Chart (){
+export default function Chart (): JSX.Element{
     return (
         <div className="chart">
             <h1>Individual Chart in chart container</h1>

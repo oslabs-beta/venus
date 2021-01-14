@@ -1,26 +1,24 @@
-import React, {createContext, useState, useContext} from 'react'; 
-import React, { ReactNode } from 'react';
-// const [loggedIn, setLogin] = useState(false);
+import React, {createContext, useState, useContext, ReactNode} from 'react'; 
 
-const myContext = React.createContext<ContextValue>(undefined)
+// "interface" declares a completely "new" type
+// by "new type" we mean "an object composed of a few types"
+interface IState {
+  text: string
+}
 
-// regular contextApi
-// const myContext = React.createContext({
-//   url: {},
-//   setUrl: () => {}
-// });
+// now that we have the types, declare the initial value
+// I've also declared the type as our "IState" interface
+const initialState: IState = {
+  text: 'here is the state'
+}
 
-export type Props = {
-    children: ReactNode;
-    axiosInstance: AxiosInstance;
-  };
-//  what is the type of value that the state will become
-  export type ProviderValue = AxiosInstance; // since you know this is what the provider will be passing
-// what is the default value of the state
-  export type DefaultValue = undefined;
-  // what types can the context be
-  export type ContextValue = DefaultValue | ProviderValue;
+// create a new context with initialState as our state and IState as our type
+export const myContext = React.createContext<IState>(initialState)
 
-// const myContext = React.createContext(null);
-
-export default myContext; 
+// return the provider part of the context we've created
+// make sure we have our props
+// declare the type as a JSX element
+// goal is to make sure the value gets passed down into components that are inside this context
+export function ContextProvider(props: any): JSX.Element {
+  return <myContext.Provider value={initialState}>{props.children}</myContext.Provider>
+}

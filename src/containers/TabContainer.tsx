@@ -6,18 +6,17 @@
  import React from 'react';
  import Tab from '../components/Tab'
 
- export default class TabContainer extends React.Component {
+ export default function  TabContainer(): JSX.Element{
      //  constructor(props) {
      //      super(props);
      //      this.state = {
      //      }
      //  }
-      render() {
           return(
               <div id="tabContainer">
               <h1>t4b C0Nt4iN3R tH4Ts H0Ld5 tH3 T4B</h1>
               <Tab />
+              <button>Add endpoint</button>
               </div>
           ) 
-      }
   }

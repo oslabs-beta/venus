@@ -9,20 +9,18 @@ import React, { Component } from 'react';
 import NavBar from './Navbar';
 import Dashboard from './Dashboard';
 
- export default class MainDisplay extends Component {
+export default function  MainDisplay(): JSX.Element{
     //  constructor(props) {
     //      super(props);
     //      this.state = {
     //      }
     //  }
-     render() {
          return(
              <div id="mainDisplay">
              <NavBar />
              <Dashboard />
              </div>
          )
-     }
  }
 
 //add any bindings here
