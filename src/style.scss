@@ -4,28 +4,67 @@
   border: 1px black dotted;
 };
 
-#mainDisplay {
-  background-color: rgb(88, 241, 247);
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:rgb(52, 250, 52);
 }
 
-#dashboard {
-  background-color: rgb(233, 230, 88);
-}
+// #mainDisplay {
+//   background-color: rgb(88, 241, 247);
+// }
 
-#navBar {
-  background-color: rgb(96, 247, 82);
-}
+// #dashboard {
+//   background-color: rgb(233, 230, 88);
+// }
+
+// #navBar {
+//   background-color: rgb(96, 247, 82);
+// }
 
 #serviceContainer {
-  background-color: orange;
+  background-color: rgb(1, 101, 252);
 }
 
 #tabContainer {
-  background-color: palevioletred;
+  background-color: rgb(68, 6, 139);
 }
 
 #chartContainer {
   background-color: sienna;
+}
+
+// styling for navBar and dashboard
+#mainDisplay {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: black;
+}
+
+#navBar {
+  display:flex;
+  justify-content: center;
+  background-color: black;
+  flex-grow: 1;
+  padding: 10px;
+  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+  border-radius: 4px;
+}
+#dashboard {
+  flex-grow: 10;
+  display: flex;
+  background-color: black;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  border: 3px solid grey
 }
 
 .serviceCard {
@@ -37,7 +76,7 @@
 }
 
 .tab {
-  background-color: beige;
+  background-color: blue
 }
 
 .aggStats {
@@ -45,5 +84,5 @@
 }
 
 .cardDrop {
-  background-color: darkorange
+  background-color: rgb(255, 115, 0)
 }
