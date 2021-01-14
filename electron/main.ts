@@ -8,17 +8,10 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    // so the app will show
-    // show: true,
-    // frame: false,
-    // fullscramble: false,
-    // // can resize frame
-    // resizeable: true,
-    // transparent: false,
-    //   // stops console from opening upon load
     webPreferences: {
       nodeIntegration: true,
       webSecurity: false,
+      // stops console from opening upon load
       devTools: false,
     },
   });
