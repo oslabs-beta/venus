@@ -18,9 +18,10 @@ import Chart from '../components/Chart'
     //  }
      render() {
          return(
-             <div>
-                 
+             <div id= "chartContainer">
              <h1>This is the Chart Container</h1>
+             <Chart />
+             <CardDropDown />ß
              </div>
          )
      }

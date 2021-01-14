@@ -8,9 +8,9 @@ import React from 'react'
 
 export default function AggregateStats (){
     return (
-        <div>
+        <div className= "aggStats">
         <h1>
-            actual tab. see that in lime ^^? thats my daddy
+            I am aggregate Stats on 1st page Dashboard is my daddy. I dont have kids.
             {/* create onClick method */}
         </h1>
         </div>

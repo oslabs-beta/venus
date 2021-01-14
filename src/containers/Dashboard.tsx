@@ -19,7 +19,7 @@ import AggregateStats from '../components/AggregateStats';
     //  }
      render() {
          return(
-             <div>
+             <div id="dashboard">
                 <h1>This is the dashboard</h1>
                 <AggregateStats />
                 <ServiceContainer />
