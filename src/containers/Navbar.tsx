@@ -14,7 +14,7 @@ export default class NavBar extends Component {
     //  }
      render() {
          return(
-             <div style={{background: "green", fontSize: "20px"}}>
+             <div id="navBar">
              <h1>Nav Bar</h1>
              <TabContainer />
              </div>

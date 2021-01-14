@@ -24,7 +24,6 @@ import AggregateStats from '../components/AggregateStats';
                 <AggregateStats />
                 <ServiceContainer />
 
-
                
                 <ChartContainer />
 

@@ -5,10 +5,10 @@
 
 import React from 'react'
 
-export default function ServiceCardComponent (){
+export default function ServiceCard (){
     return (
-        <div>
-            {/* create onClick method */}
-        </div>
+        <h1 style={{background: "indigo", fontSize: "20px"}}>
+            {/* create onClick method */}Service Card
+        </h1>
     )
 }

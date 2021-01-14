@@ -17,7 +17,7 @@ import Dashboard from './Dashboard';
     //  }
      render() {
          return(
-             <div>
+             <div id="mainDisplay">
              <h1>Main Display</h1>
              <NavBar />
              <Dashboard />
