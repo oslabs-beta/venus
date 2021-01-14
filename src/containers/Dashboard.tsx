@@ -8,6 +8,8 @@
 //  import TabContainer from './TabContainer'
 import ServiceContainer from './ServiceContainer';
 import ChartContainer from './ChartContainer';
+import AggregateStats from '../components/AggregateStats';
+
 
  export default class Dashboard extends React.Component {
     //  constructor(props) {
@@ -18,11 +20,13 @@ import ChartContainer from './ChartContainer';
      render() {
          return(
              <div>
-             <ServiceContainer />
+                <h1>This is the dashboard</h1>
+                <AggregateStats />
+                <ServiceContainer />
 
 
-
-             <ChartContainer />
+               
+                <ChartContainer />
 
                  
              </div>

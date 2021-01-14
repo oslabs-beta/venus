@@ -16,7 +16,8 @@ import React from 'react';
      render() {
          return(
              <div>
-             <h1>Chart Container</h1>
+             <h1>This is the Chart Container</h1>
+  // chart components here
              </div>
          )
      }
