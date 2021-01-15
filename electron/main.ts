@@ -1,7 +1,7 @@
 import { app, BrowserWindow, Menu } from "electron";
 import * as path from "path";
 import * as url from "url";
-import electron from ""
+
 let mainWindow: Electron.BrowserWindow | null;
 const menu = Menu
 function createWindow() {
@@ -21,7 +21,7 @@ function createWindow() {
     // and set allowRunningInsecureContent to true if this options has not been set by user. Default is true.
       webSecurity: false,
       // stops console from opening upon load
-      devTools: false,
+      // devTools: false,
     },
   });
 

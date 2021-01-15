@@ -5,7 +5,7 @@
 
 import React from 'react'
 
-export default function CardDropDown (){
+export default function CardDropDown (): JSX.Element{
     return (
         <div className="cardDrop">
         <h1>

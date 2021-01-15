@@ -10,19 +10,12 @@ import Chart from '../components/Chart'
 //import service card container
 //import chart container
 
- export default class ChartContainer extends React.Component {
-    //  constructor(props) {
-    //      super(props);
-    //      this.state = {
-    //      }
-    //  }
-     render() {
-         return(
-             <div id="chartContainer">
-             <h1>This is the Chart Container</h1>
-             <Chart />
-             <CardDropDown />
-             </div>
-         )
-     }
- }
+export default function ChartContainer(): JSX.Element {
+	return(
+		<div id="chartContainer">
+			<h1>This is the Chart Container</h1>
+			<Chart />
+			<CardDropDown />
+		</div>
+	)
+}

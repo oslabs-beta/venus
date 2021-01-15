@@ -7,20 +7,13 @@ import ServiceCard from '../components/ServiceCard'
 import React from 'react';
 //  import TabContainer from './TabContainer'
 
- export default class ServiceContainer extends React.Component {
-    //  constructor(props) {
-    //      super(props);
-    //      this.state in= {
-    //      }
-    //  }
-     render() {
+export default function  ServiceContainer(): JSX.Element{
          return(
              <div id="serviceContainer">
              <h1>Service Container</h1>
              <ServiceCard />
              </div>
          )
-     }
  }
 
  // exports to Dashboard
