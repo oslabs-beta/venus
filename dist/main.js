@@ -122,9 +122,9 @@ function createWindow() {
       nodeIntegration: true,
       // When false, it will disable the same-origin policy (usually using testing websites by people)
       // and set allowRunningInsecureContent to true if this options has not been set by user. Default is true.
-      webSecurity: false // stops console from opening upon load
-      // devTools: false,
-
+      webSecurity: false,
+      // stops console from opening upon load
+      devTools: false
     }
   });
 
