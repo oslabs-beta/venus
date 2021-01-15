@@ -10,9 +10,10 @@ export default function AggregateStats(): JSX.Element{
     return (
         <div className= "aggStats">
         <h1>
-            I am aggregate Stats on 1st page Dashboard is my daddy. I dont have kids.
+            I am aggregate Stats on 1st page. Dashboard is my daddy. Dont mess with daddy. 
             {/* create onClick method */}
         </h1>
         </div>
     )
 }
+ 
