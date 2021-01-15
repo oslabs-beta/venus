@@ -3,13 +3,15 @@ import React, {createContext, useState, useContext, ReactNode} from 'react';
 // "interface" declares a completely "new" type
 // by "new type" we mean "an object composed of a few types"
 interface IState {
-  text: string
+  text: string,
+  urls: []
 }
 
 // now that we have the types, declare the initial value
 // I've also declared the type as our "IState" interface
 const initialState: IState = {
-  text: 'here is the state'
+  text: '',
+  urls: []
 }
 
 // create a new context with initialState as our state and IState as our type

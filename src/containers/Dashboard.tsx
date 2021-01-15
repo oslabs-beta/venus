@@ -14,11 +14,11 @@ import {myContext} from '../contexts/globalContext'
 export default function  Dashboard(): JSX.Element{
     
     const context = useContext(myContext)
-
+console.log(context, "dashboard")
          return(
              <div id="dashboard">
                 <h1>This is the dashboard</h1>
-                <h1>{JSON.stringify(context.text)}</h1>
+                <h1>{JSON.stringify(context.urls)}</h1>
                 <AggregateStats />
                 <ServiceContainer />
 
