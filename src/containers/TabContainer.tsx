@@ -19,18 +19,19 @@
 
  export default function TabContainer(): JSX.Element{
   const { handleSubmit, register } = useForm<FormInputs>();
-  const context = useContext(myContext)
+  // destructure urls out of our global context
+  const { urls } = useContext(myContext);
+
+  // const [text, setText] = useState<string>()
 
   const onSubmit = handleSubmit((data) => {  
-    setText(JSON.stringify(data.input))
-    context.urls.push(data.input)
+    // setText(JSON.stringify(data.input))
+// push the user input to our urls array
+    urls.push(data.input)
   })
 
-console.log(context.urls)
-//  const { text } = useContext(myContext);
-  const [text, setText] = useState<string>()
-
-
+  // console.log(urls)
+  
 // required : true means this field has to be filled
   return(
     <div id="tabContainer">
@@ -42,7 +43,7 @@ console.log(context.urls)
             <div>
               <input ref={register({required: true})} id="input" name="input" placeholder="URL here" type="text" />
               <h1>
-                {context.urls}            
+                {urls}            
               </h1>
             </div>
           <button type="submit">Submit</button>
