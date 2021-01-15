@@ -1,17 +1,25 @@
 import React, {createContext, useState, useContext, ReactNode} from 'react'; 
 
+// define the array Typescript style
+interface iUrl {
+  [index: number]: string;
+}
+
 // "interface" declares a completely "new" type
 // by "new type" we mean "an object composed of a few types"
 interface IState {
-  text: string,
-  urls: []
+  // text: string,
+  urls: iUrl,
+  // assign type to setUrls function
+  setUrls(): any
 };
 
 // now that we have the types, declare the initial value
 // I've also declared the type as our "IState" interface
 const initialState: IState = {
-  text: '',
-  urls: []
+  // text: '',
+  urls: [],
+  setUrls: () => {}
 };
 
 // instead of having the context be a single large object

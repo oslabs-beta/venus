@@ -8,10 +8,10 @@
  import { appendErrors, useForm } from "react-hook-form"
  import Typography from '@material-ui/core/Typography';
  import Button from '@material-ui/core/Button';
- import axios from 'axios'
+//  import axios from 'axios'
  import { myContext } from '../contexts/globalContext'
 
-// you could model this to get multiple input fields depending how many you want
+// you could model this to get multiple input fields depending how many form fields you want
 // later we can use a context in place of this
  type FormInputs = {
   input: string
@@ -22,9 +22,10 @@
   // destructure urls out of our global context
   const { urls } = useContext(myContext);
 
-  // const [text, setText] = useState<string>()
+  const [text, setText] = useState<string>()
 
   const onSubmit = handleSubmit((data) => {  
+    console.log(data.input)
     // setText(JSON.stringify(data.input))
 // push the user input to our urls array
     urls.push(data.input)
