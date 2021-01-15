@@ -6,7 +6,7 @@
 
 import React from 'react'
 
-export default function AggregateStats (){
+export default function AggregateStats(): JSX.Element{
     return (
         <div className= "aggStats">
         <h1>

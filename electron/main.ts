@@ -1,7 +1,7 @@
 import { app, BrowserWindow, Menu } from "electron";
 import * as path from "path";
 import * as url from "url";
-import electron from ""
+
 let mainWindow: Electron.BrowserWindow | null;
 const menu = Menu
 function createWindow() {

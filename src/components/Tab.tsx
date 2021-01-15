@@ -5,7 +5,7 @@
 
  import React from 'react'
 
- export default function Tab (){
+ export default function Tab (): JSX.Element{
      return (
          <h1 className="tab">
              This is tab

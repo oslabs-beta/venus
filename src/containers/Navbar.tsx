@@ -6,20 +6,13 @@
 import React, { Component } from 'react';
 import TabContainer from './TabContainer'
 
-export default class NavBar extends Component {
-    //  constructor(props) {
-    //      super(props);
-    //      this.state = {
-    //      }
-    //  }
-     render() {
+export default function  NavBar(): JSX.Element {
          return(
              <div id="navBar">
              <h1>Nav Bar</h1>
              <TabContainer />
              </div>
          ) 
-     }
  }
 
  // exports to containers/MainContainer
