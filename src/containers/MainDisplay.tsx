@@ -10,12 +10,12 @@ import NavBar from './Navbar';
 import Dashboard from './Dashboard';
 
 export default function  MainDisplay(): JSX.Element{
-         return(
-             <div id="mainDisplay">
-             <NavBar />
-             <Dashboard />
-             </div>
-         )
+return(
+  <div id="mainDisplay">
+  <NavBar />
+  <Dashboard />
+  </div>
+)
  }
 
 //add any bindings here
