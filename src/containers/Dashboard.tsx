@@ -19,10 +19,10 @@ export default function  Dashboard(): JSX.Element{
          return(
              <div id="dashboard">
                 <h1>This is the dashboard</h1>
-                <h1>{JSON.stringify(urls)}</h1>
+                
                 <AggregateStats />
                 <ServiceContainer />
-
+                <h1>{urls}</h1>
                 <ChartContainer />
              </div>
          )

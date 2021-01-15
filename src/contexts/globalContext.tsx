@@ -1,15 +1,15 @@
 import React, {createContext, useState, useContext, ReactNode} from 'react'; 
 
 // define the array Typescript style
-interface iUrl {
-  [index: number]: string;
-}
+// interface iUrl {
+//   [index: number]: string;
+// }
 
 // "interface" declares a completely "new" type
 // by "new type" we mean "an object composed of a few types"
 interface IState {
   // text: string,
-  urls: iUrl,
+  urls: [],
   // assign type to setUrls function
   setUrls(): any
 };
