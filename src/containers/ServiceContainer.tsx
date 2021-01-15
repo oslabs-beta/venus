@@ -8,11 +8,6 @@ import React from 'react';
 //  import TabContainer from './TabContainer'
 
 export default function  ServiceContainer(): JSX.Element{
-    //  constructor(props) {
-    //      super(props);
-    //      this.state in= {
-    //      }
-    //  }
          return(
              <div id="serviceContainer">
              <h1>Service Container</h1>

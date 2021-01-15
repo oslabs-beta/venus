@@ -11,11 +11,6 @@ import Chart from '../components/Chart'
 //import chart container
 
 export default function  ChartContainer(): JSX.Element {
-    //  constructor(props) {
-    //      super(props);
-    //      this.state = {
-    //      }
-    //  }
          return(
              <div id="chartContainer">
              <h1>This is the Chart Container</h1>

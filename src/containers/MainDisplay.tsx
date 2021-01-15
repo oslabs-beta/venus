@@ -10,11 +10,6 @@ import NavBar from './Navbar';
 import Dashboard from './Dashboard';
 
 export default function  MainDisplay(): JSX.Element{
-    //  constructor(props) {
-    //      super(props);
-    //      this.state = {
-    //      }
-    //  }
          return(
              <div id="mainDisplay">
              <NavBar />

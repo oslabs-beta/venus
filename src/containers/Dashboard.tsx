@@ -12,11 +12,7 @@ import AggregateStats from '../components/AggregateStats';
 import {myContext} from '../contexts/globalContext'
 
 export default function  Dashboard(): JSX.Element{
-    //  constructor(props) {
-    //      super(props);
-    //      this.state = {
-    //      }
-    //  }
+    
     const context = useContext(myContext)
 
          return(

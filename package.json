@@ -51,6 +51,7 @@
     "@types/react-dom": "^16.9.6",
     "contentful": "^8.1.7",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "react-hook-form": "^6.14.1"
   }
 }

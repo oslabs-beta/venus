@@ -7,11 +7,6 @@ import React, { Component } from 'react';
 import TabContainer from './TabContainer'
 
 export default function  NavBar(): JSX.Element {
-    //  constructor(props) {
-    //      super(props);
-    //      this.state = {
-    //      }
-    //  }
          return(
              <div id="navBar">
              <h1>Nav Bar</h1>
