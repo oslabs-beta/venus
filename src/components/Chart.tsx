@@ -5,10 +5,13 @@
 
 import React from 'react'
 
-export default function Chart (){
+function Chart (): JSX.Element{
     return (
-        <div>
+        <div className="chart">
+            <h1>Individual Chart in chart container</h1>
             {/* create onClick method */}
         </div>
     )
 }
+
+export { Chart };

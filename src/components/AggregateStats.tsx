@@ -6,13 +6,15 @@
 
 import React from 'react'
 
-export default function AggregateStats (){
+function AggregateStats(): JSX.Element{
     return (
-        <div>
-        <h1>
-            actual tab. see that in lime ^^? thats my daddy
-            {/* create onClick method */}
-        </h1>
+        <div className= "aggStats">
+            <h1>
+                I am aggregate Stats on 1st page. Dashboard is my daddy. Dont mess with daddy. 
+                {/* create onClick method */}
+            </h1>
         </div>
     )
 }
+
+export { AggregateStats };

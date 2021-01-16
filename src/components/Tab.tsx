@@ -5,13 +5,15 @@
 
  import React from 'react'
 
- export default function Tab (){
+function Tab (): JSX.Element{
      return (
-         <h1 style={{background: "yellow", fontSize: "16px"}}>
-             actual tab. see that in lime ^^? thats my daddy
+         <h1 className="tab">
+             this is tab
              {/* create onClick method */}
          </h1>
      )
  }
 
+
+ export { Tab };
  // exports to Tab container
