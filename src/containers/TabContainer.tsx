@@ -1,56 +1,103 @@
-/**
- * @name TabContainer
- * @desc Child of Navbar.jsx, parent container that hosts each tab displayed in NavBar
- */
+// /**
+//  * @name TabContainer
+//  * @desc Child of Navbar.jsx, parent container that hosts each tab displayed in NavBar
+//  */
 
- import React, { useContext, useState, useEffect } from 'react';
+ import React, { useContext, useState, useEffect, ContextType } from 'react';
  import { Tab } from '../components/Tab'
- import { appendErrors, useForm } from "react-hook-form"
- import Typography from '@material-ui/core/Typography';
- import Button from '@material-ui/core/Button';
-//  import axios from 'axios'
- import { myContext } from '../contexts/globalContext'
+//  import { appendErrors, useForm } from "react-hook-form"
+//  import Typography from '@material-ui/core/Typography';
+//  import Button from '@material-ui/core/Button';
+// //  import axios from 'axios'
+//  import { myContext } from '../contexts/globalContext'
 
-// you could model this to get multiple input fields depending how many form fields you want
-// later we can use a context in place of this
- type FormInputs = {
-  input: string
-}
+// // you could model this to get multiple input fields depending how many form fields you want
+// // later we can use a context in place of this
+//  type FormInputs = {
+//   input: string
+// }
 
- export default function TabContainer(): JSX.Element{
-  const { handleSubmit, register } = useForm<FormInputs>();
-  // destructure urls out of our global context
-  const { urls, setUrls } = useContext(myContext);
-  const [value, setValue] = useState<string>()
+//  export default function TabContainer(): JSX.Element{
+//   const { handleSubmit, register } = useForm<FormInputs>();
+//   // destructure urls out of our global context
+//   const { urls, setUrls } = useContext(myContext);
+//   const [value, setValue] = useState<string>()
   
+  
+//   const onSubmit = handleSubmit((data) => {  
+//    // console.log(data.input, "value", value, 'urls', urls)
+//     setValue(data.input)
+//    // push the user input to our urls array
+//     urls.push(data.input)
+//   })
 
-  const onSubmit = handleSubmit((data) => {  
-    // console.log(data.input, "value", value, 'urls', urls)
-    setValue(data.input)
-// push the user input to our urls array
-    setUrls(value)
-  })
-
+//   // console.log(urls every time value changes)
+//   useEffect(() =>{
+//     console.log(urls, "useEffect in tab container")
+//   }, [value])
  
-  // console.log(urls)
+//   // console.log(urls)
 
-// required : true means this field has to be filled
-  return(
+// // required : true means this field has to be filled
+//   return(
+//     <div id="tabContainer">
+//       Tab Container
+//       <Tab />
+//       <div className="navBarForm">
+//         <form onSubmit={onSubmit}>
+//           <label>Enter The Venus Fly Trap</label>
+//             <div>
+//               <input ref={register({required: true})} id="input" name="input" placeholder="URL here" type="text" />
+//               <h1>
+//                 {urls}          
+//               </h1>
+//             </div>
+//           <button type="submit">Submit</button>
+//         </form>
+//       </div>
+//     </div>
+//   ) 
+// }
+
+// import * as React from "react";
+import { UrlContext } from '../contexts/globalContext'
+
+const AddUrl: React.FC = () => {
+  const { saveUrl } = React.useContext(UrlContext) as ContextType;
+  const [formData, setFormData] = React.useState<IUrl | {}>();
+
+  const handleForm = (e: React.FormEvent<HTMLInputElement>): void => {
+    setFormData({
+      ...formData,
+      [e.currentTarget.id]: e.currentTarget.value
+    });
+  };
+
+  const handleSaveUrl = (e: React.FormEvent, formData: IUrl | any) => {
+    e.preventDefault();
+    saveUrl(formData);
+  };
+
+  return (
     <div id="tabContainer">
-      Tab Container
-      <Tab />
-      <div className="navBarForm">
-        <form onSubmit={onSubmit}>
-          <label>Enter The Venus Fly Trap</label>
-            <div>
-              <input ref={register({required: true})} id="input" name="input" placeholder="URL here" type="text" />
-              <h1>
-                {urls}          
-              </h1>
-            </div>
-          <button type="submit">Submit</button>
-        </form>
+       Tab Container
+       <Tab />
+
+    <form className="Form" onSubmit={(e) => handleSaveTodo(e, formData)}>
+      <div>
+        <div>
+          <label htmlFor="name">Title</label>
+          <input onChange={handleForm} type="text" id="title" />
+        </div>
+        <div>
+          <label htmlFor="description">Description</label>
+          <input onChange={handleForm} type="text" id="description" />
+        </div>
       </div>
+      <button disabled={formData === undefined ? true : false}>Add Todo</button>
+    </form>
     </div>
-  ) 
-}
+  );
+};
+
+export default AddUrl;
