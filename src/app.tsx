@@ -5,21 +5,22 @@ import './style.scss';
 import MainDisplay from './containers/MainDisplay'
 // make sure we can use our state and pass it into our main component
 import { ContextProvider } from './contexts/globalContext'
-import { myContext } from './contexts/globalContext'
+import { myContext, AppState } from './contexts/globalContext'
 import Container from '@material-ui/core/Container';
 
 
 
 
 const App: React.FC = () => {
+  // const [state, updateState] = useState<AppState>(myContext)
+  const [urls, updateUrls] = useState<string[]>([])
 
-  const [urls, setUrls] = useState<string[]>([])
+ useEffect(() => {
+  updateUrls(["a", "b"]);
+  console.log(urls)
+ }, []) 
 
-  useEffect(() => {
-    setUrls(['evan']);
-  }, [])
-
-
+ 
   return (
     <div>
       <ContextProvider>

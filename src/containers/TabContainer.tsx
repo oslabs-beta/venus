@@ -20,17 +20,12 @@
  export default function TabContainer(): JSX.Element{
   const { handleSubmit, register } = useForm<FormInputs>();
   // destructure urls out of our global context
-  const { urls, setUrls } = useContext(myContext);
-  
-
-  console.log(urls)
+ 
   const [value, setValue] = useState<string>()
 
-  console.log(urls);
   const onSubmit = handleSubmit((data) => {  
     // console.log(data.input, "value", value, 'urls', urls)
     setValue(data.input)
-    setUrls(['test', 'two'])
 // push the user input to our urls array
   })
 
