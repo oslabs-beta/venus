@@ -19,7 +19,7 @@ interface IState {
 const initialState: IState = {
   // text: '',
   urls: [],
-  setUrls: () => {}
+  setUrls: () => {},
 };
 
 // instead of having the context be a single large object

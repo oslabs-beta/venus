@@ -3,7 +3,7 @@
  * @desc Child of Navbar.jsx, parent container that hosts each tab displayed in NavBar
  */
 
- import React, { useContext, useState } from 'react';
+ import React, { useContext, useState, useEffect } from 'react';
  import { Tab } from '../components/Tab'
  import { appendErrors, useForm } from "react-hook-form"
  import Typography from '@material-ui/core/Typography';
@@ -21,23 +21,19 @@
   const { handleSubmit, register } = useForm<FormInputs>();
   // destructure urls out of our global context
   const { urls, setUrls } = useContext(myContext);
-
-
-  const [value, setValue] = useState<string>('hello from context')
+  const [value, setValue] = useState<string>()
+  
 
   const onSubmit = handleSubmit((data) => {  
-    console.log(data.input, "value", value, 'urls', urls)
+    // console.log(data.input, "value", value, 'urls', urls)
     setValue(data.input)
-    // setText(JSON.stringify(data.input))
 // push the user input to our urls array
-// setUrls({
-//   url: data.input
-// })
-    urls.push(data.input)
+    setUrls(value)
   })
 
+ 
   // console.log(urls)
-  
+
 // required : true means this field has to be filled
   return(
     <div id="tabContainer">
