@@ -25,13 +25,8 @@
   
 
   const onSubmit = handleSubmit((data) => {  
-<<<<<<< HEAD
-   // console.log(data.input)
-    // setText(JSON.stringify(data.input))
-=======
     // console.log(data.input, "value", value, 'urls', urls)
     setValue(data.input)
->>>>>>> c55bd27ed36c921570d32073b6f549096f8aab39
 // push the user input to our urls array
     setUrls(value)
   })

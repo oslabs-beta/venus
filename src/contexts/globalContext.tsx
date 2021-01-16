@@ -22,6 +22,8 @@ const initialState: IState = {
   setUrls: () => {},
 };
 
+export const TeamContext = createContext<{team:string,changeTeam:any}>({team:"rcb",changeTeam:null})
+
 // instead of having the context be a single large object
 // create pairs of value and update methods.
 // return <myContext.Provider value={value, setValue}>{props.children}</myContext.Provider>
@@ -38,6 +40,6 @@ export const myContext = React.createContext<IState>(initialState)
 export function ContextProvider(props: any): JSX.Element {
   return <myContext.Provider value={initialState}>{props.children}</myContext.Provider>
 
-  
+
 
 }
