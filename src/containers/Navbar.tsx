@@ -8,9 +8,9 @@ import TabContainer from './TabContainer'
 
 export default function  NavBar(): JSX.Element {
   return(
-      <div id="navBar">
- <TabContainer />
-      </div>
+		<div id="navBar">
+			<TabContainer />
+    </div>
   ) 
  }
 

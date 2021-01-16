@@ -21,18 +21,22 @@
   const { handleSubmit, register } = useForm<FormInputs>();
   // destructure urls out of our global context
   const { urls, setUrls } = useContext(myContext);
-  const [value, setValue] = useState<string>()
   
 
+  console.log(urls)
+  const [value, setValue] = useState<string>()
+
+  console.log(urls);
   const onSubmit = handleSubmit((data) => {  
     // console.log(data.input, "value", value, 'urls', urls)
     setValue(data.input)
+<<<<<<< HEAD
+=======
+    setUrls(['test', 'two'])
+>>>>>>> 1078b72358070e9d51c2fa0ae461f012d99155be
 // push the user input to our urls array
-    setUrls(value)
   })
 
- 
-  // console.log(urls)
 
 // required : true means this field has to be filled
   return(
@@ -44,9 +48,6 @@
           <label>Enter The Venus Fly Trap</label>
             <div>
               <input ref={register({required: true})} id="input" name="input" placeholder="URL here" type="text" />
-              <h1>
-                {urls}          
-              </h1>
             </div>
           <button type="submit">Submit</button>
         </form>
@@ -54,3 +55,4 @@
     </div>
   ) 
 }
+

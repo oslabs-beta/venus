@@ -6,10 +6,10 @@
 
  import React, {useContext, useEffect} from 'react';
 //  import TabContainer from './TabContainer'
-import ServiceContainer from './ServiceContainer';
-import ChartContainer from './ChartContainer';
-import AggregateStats from '../components/AggregateStats';
-import {myContext} from '../contexts/globalContext'
+import  { ServiceContainer } from './ServiceContainer';
+import { ChartContainer } from './ChartContainer';
+import { AggregateStats } from '../components/AggregateStats';
+import { myContext } from '../contexts/globalContext'
 
 export default function  Dashboard(): JSX.Element{
   const {urls, setUrls} = useContext(myContext)
@@ -18,11 +18,10 @@ export default function  Dashboard(): JSX.Element{
   useEffect(() =>{
 
   })
-
     return(
         <div id="dashboard">
         <h1>This is the dashboard</h1>
-        <h1>{urls}test</h1>                
+        <h1>test{urls}</h1>                
         <AggregateStats />
         <ServiceContainer />
         <ChartContainer />

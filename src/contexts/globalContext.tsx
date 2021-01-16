@@ -1,4 +1,4 @@
-import React, {createContext, useState, useContext, ReactNode} from 'react'; 
+import React, {createContext, useState, useContext, ReactNode, useEffect} from 'react'; 
 
 // define the array Typescript style
 // interface iUrl {
@@ -9,16 +9,17 @@ import React, {createContext, useState, useContext, ReactNode} from 'react';
 // by "new type" we mean "an object composed of a few types"
 interface IState {
   // text: string,
-  urls: [],
+  urls: any[],
   // assign type to setUrls function
-  setUrls(): any
+  setUrls: () => void,
 };
+
 
 // now that we have the types, declare the initial value
 // I've also declared the type as our "IState" interface
 const initialState: IState = {
   // text: '',
-  urls: [],
+  urls: ['hello'],
   setUrls: () => {},
 };
 
@@ -37,7 +38,8 @@ export const myContext = React.createContext<IState>(initialState)
 // make sure we have our props
 // declare the type as a JSX element
 // goal is to make sure the value gets passed down into components that are inside this context
-export function ContextProvider(props: any): JSX.Element {
+export const ContextProvider: React.FC = (props: any) => {
+  
   return <myContext.Provider value={initialState}>{props.children}</myContext.Provider>
 
 

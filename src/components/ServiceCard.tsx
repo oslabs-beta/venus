@@ -5,7 +5,7 @@
 
 import React from 'react'
 
-export default function ServiceCard (): JSX.Element{
+function ServiceCard (): JSX.Element{
     return (
         <div className="serviceCard">
         <h1>
@@ -14,3 +14,5 @@ export default function ServiceCard (): JSX.Element{
         </div>
     )
 }
+
+export { ServiceCard };
