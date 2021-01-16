@@ -3,7 +3,7 @@
  * @desc Child of Navbar.jsx, parent container that hosts each tab displayed in NavBar
  */
 
- import React, { useContext, useState } from 'react';
+ import React, { useContext, useState, useEffect } from 'react';
  import { Tab } from '../components/Tab'
  import { appendErrors, useForm } from "react-hook-form"
  import Typography from '@material-ui/core/Typography';
@@ -20,19 +20,25 @@
  export default function TabContainer(): JSX.Element{
   const { handleSubmit, register } = useForm<FormInputs>();
   // destructure urls out of our global context
-  const { urls } = useContext(myContext);
-
-  const [text, setText] = useState<string>()
+  const { urls, setUrls } = useContext(myContext);
+  const [value, setValue] = useState<string>()
+  
 
   const onSubmit = handleSubmit((data) => {  
+<<<<<<< HEAD
    // console.log(data.input)
     // setText(JSON.stringify(data.input))
+=======
+    // console.log(data.input, "value", value, 'urls', urls)
+    setValue(data.input)
+>>>>>>> c55bd27ed36c921570d32073b6f549096f8aab39
 // push the user input to our urls array
-    urls.push(data.input)
+    setUrls(value)
   })
 
+ 
   // console.log(urls)
-  
+
 // required : true means this field has to be filled
   return(
     <div id="tabContainer">
@@ -44,7 +50,7 @@
             <div>
               <input ref={register({required: true})} id="input" name="input" placeholder="URL here" type="text" />
               <h1>
-                {urls}            
+                {urls}          
               </h1>
             </div>
           <button type="submit">Submit</button>
