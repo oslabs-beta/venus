@@ -30,10 +30,7 @@
   const onSubmit = handleSubmit((data) => {  
     // console.log(data.input, "value", value, 'urls', urls)
     setValue(data.input)
-<<<<<<< HEAD
-=======
     setUrls(['test', 'two'])
->>>>>>> 1078b72358070e9d51c2fa0ae461f012d99155be
 // push the user input to our urls array
   })
 
