@@ -6,10 +6,10 @@
 
  import React, {useContext, useEffect} from 'react';
 //  import TabContainer from './TabContainer'
-import ServiceContainer from './ServiceContainer';
-import ChartContainer from './ChartContainer';
-import AggregateStats from '../components/AggregateStats';
-import {UrlContext} from '../contexts/globalContext'
+import  { ServiceContainer } from './ServiceContainer';
+import { ChartContainer } from './ChartContainer';
+import { AggregateStats } from '../components/AggregateStats';
+import { myContext } from '../contexts/globalContext'
 
 export default function  Dashboard(): JSX.Element{
   const {urls, setUrls} = useContext(UrlContext)
@@ -20,10 +20,11 @@ export default function  Dashboard(): JSX.Element{
     console.log(urls, "useEffect in dashboard")
   }, [urls])
 
+  })
     return(
         <div id="dashboard">
         <h1>This is the dashboard</h1>
-        <h1>{JSON.stringify(urls)}test</h1>                
+        <h1>test{urls}</h1>                
         <AggregateStats />
         <ServiceContainer />
         <ChartContainer />

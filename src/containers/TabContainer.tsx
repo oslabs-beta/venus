@@ -17,11 +17,10 @@
 //   input: string
 // }
 
-//  export default function TabContainer(): JSX.Element{
-//   const { handleSubmit, register } = useForm<FormInputs>();
-//   // destructure urls out of our global context
-//   const { urls, setUrls } = useContext(myContext);
-//   const [value, setValue] = useState<string>()
+ export default function TabContainer(): JSX.Element{
+  const { handleSubmit, register } = useForm<FormInputs>();
+  // destructure urls out of our global context
+  const { urls, setUrls } = useContext(myContext);
   
   
 //   const onSubmit = handleSubmit((data) => {  
@@ -31,12 +30,17 @@
 //     urls.push(data.input)
 //   })
 
-//   // console.log(urls every time value changes)
-//   useEffect(() =>{
-//     console.log(urls, "useEffect in tab container")
-//   }, [value])
- 
-//   // console.log(urls)
+  console.log(urls)
+  const [value, setValue] = useState<string>()
+
+  console.log(urls);
+  const onSubmit = handleSubmit((data) => {  
+    // console.log(data.input, "value", value, 'urls', urls)
+    setValue(data.input)
+    setUrls(['test', 'two'])
+// push the user input to our urls array
+  })
+
 
 // // required : true means this field has to be filled
 //   return(
@@ -80,19 +84,16 @@ const AddUrl: React.FC = () => {
 
   return (
     <div id="tabContainer">
-       Tab Container
-       <Tab />
-
-    <form className="Form" onSubmit={(e) => handleSaveTodo(e, formData)}>
-      <div>
-        <div>
-          <label htmlFor="name">Title</label>
-          <input onChange={handleForm} type="text" id="title" />
-        </div>
-        <div>
-          <label htmlFor="description">Description</label>
-          <input onChange={handleForm} type="text" id="description" />
-        </div>
+      Tab Container
+      <Tab />
+      <div className="navBarForm">
+        <form onSubmit={onSubmit}>
+          <label>Enter The Venus Fly Trap</label>
+            <div>
+              <input ref={register({required: true})} id="input" name="input" placeholder="URL here" type="text" />
+            </div>
+          <button type="submit">Submit</button>
+        </form>
       </div>
       <button disabled={formData === undefined ? true : false}>Add Todo</button>
     </form>
@@ -100,4 +101,3 @@ const AddUrl: React.FC = () => {
   );
 };
 
-export default AddUrl;

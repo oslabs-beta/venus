@@ -14,12 +14,12 @@ export default function  MainDisplay(): JSX.Element{
   const addUrl = (val:string) => {setUrls(urls = [...urls,val])}
   
 return(
-  <div id="mainDisplay">
-  <NavBar />
-  <Dashboard />
-  </div>
-)
- }
+    <div id="mainDisplay">
+    <NavBar />
+    <Dashboard />
+    </div>
+  )
+}
 
 //add any bindings here
 
