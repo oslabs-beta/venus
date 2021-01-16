@@ -5,12 +5,12 @@
 
 
 import React from 'react';
-import CardDropDown from '../components/CardDropDown'
-import Chart from '../components/Chart'
+import { CardDropDown } from '../components/CardDropDown'
+import { Chart } from '../components/Chart'
 //import service card container
 //import chart container
 
-export default function ChartContainer(): JSX.Element {
+function ChartContainer(): JSX.Element {
 	return(
 		<div id="chartContainer">
 			<h1>This is the Chart Container</h1>
@@ -19,3 +19,5 @@ export default function ChartContainer(): JSX.Element {
 		</div>
 	)
 }
+
+export { ChartContainer };
