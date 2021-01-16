@@ -25,7 +25,7 @@
   const [text, setText] = useState<string>()
 
   const onSubmit = handleSubmit((data) => {  
-    console.log(data.input)
+   // console.log(data.input)
     // setText(JSON.stringify(data.input))
 // push the user input to our urls array
     urls.push(data.input)

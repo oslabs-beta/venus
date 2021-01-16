@@ -37,4 +37,7 @@ export const myContext = React.createContext<IState>(initialState)
 // goal is to make sure the value gets passed down into components that are inside this context
 export function ContextProvider(props: any): JSX.Element {
   return <myContext.Provider value={initialState}>{props.children}</myContext.Provider>
+
+  
+
 }
