@@ -15,9 +15,12 @@ export default function  Dashboard(): JSX.Element{
   
   // const { urls } = useContext<AppState>(initialState)
   
-  useEffect(() =>{
+  // useEffect(() =>{
+  //     window 
+  //   console.log(urls, "useEffect in dashboard")
+  // }, [urls])
 
-  })
+  
     return(
         <div id="dashboard">
         <h1>This is the dashboard</h1>

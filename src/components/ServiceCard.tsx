@@ -7,12 +7,10 @@ import React from 'react'
 
 function ServiceCard (): JSX.Element{
     return (
-        <div className="serviceCard">
-        <h1>
-            {/* create onClick method */}Service Card
-        </h1>
-        </div>
+      <div className="Card">
+          
+      </div>
     )
-}
+  }
 
 export { ServiceCard };
