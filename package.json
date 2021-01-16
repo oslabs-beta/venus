@@ -32,6 +32,7 @@
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
     "@babel/preset-typescript": "^7.9.0",
+    "axios": "^0.21.1",
     "babel-loader": "^8.1.0",
     "css-loader": "^5.0.1",
     "electron": "^8.2.2",
