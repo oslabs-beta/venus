@@ -7,7 +7,7 @@ import React, { useContext } from 'react'
 import { myContext } from "../contexts/globalContext"
 
 let test: any[] = [];
-let friends: string[] =['oliver', 'will', 'evan', 'leo']
+let friends: string[] =['proof', 'of', 'concept', 'render']
 for (let i = 0; i < friends.length ; i++){
   test.push(<button>{friends[i]}</button>)
 }

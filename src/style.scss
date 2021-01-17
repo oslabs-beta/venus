@@ -1,16 +1,14 @@
-.app {
-  color: green;
-  font-size: x-large;
-  border: 1px black dotted;
-}
-
-;
-
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   color: rgb(52, 250, 52);
+}
+
+.app {
+  color: green;
+  font-size: x-large;
+  border: 1px black dotted;
 }
 
 // #mainDisplay {

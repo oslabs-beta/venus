@@ -10,7 +10,7 @@ function AggregateStats(): JSX.Element{
     return (
         <div className= "aggStats">
             <h1>
-                I am aggregate Stats on 1st page. Dashboard is my daddy. Dont mess with daddy. 
+                System Aggregate Stats   
                 {/* create onClick method */}
             </h1>
         </div>
