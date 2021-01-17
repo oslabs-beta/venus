@@ -26,16 +26,15 @@ body {
 // }
 
 #serviceContainer {
-  background-color: rgb(1, 101, 252);
-  display: flex;
-  height: 100%;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: stretch;
-  flex-direction: column;
-  padding: 30px;
-  border: 3px solid grey;
-  overflow: auto;
+  color: rgb(1, 101, 252);
+  border-color: rgb(0, 255, 0);
+  // height: 100%;
+  // width: 100%;
+  // justify-content: flex-start;
+  // align-items: stretch;
+  // flex-direction: column;
+  // padding: 30px;
+  // border: 3px solid grey;
 }
 
 #tabContainer {
@@ -82,8 +81,7 @@ body {
 }
 
 .serviceCard {
-  background-color: rgb(79, 17, 138);
-
+  background-color: black;
 }
 
 .chart {
