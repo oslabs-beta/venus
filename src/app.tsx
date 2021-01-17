@@ -1,16 +1,43 @@
-import React from 'react';
-import ReactDom from 'react-dom';
+import React, { useState, useEffect } from 'react';
+import ReactDom, { render} from 'react-dom';
 import './style.scss';
+// import Main Display
+import { MainDisplay } from './containers/MainDisplay'
+// make sure we can use our state and pass it into our main component
+import { ContextProvider } from './contexts/globalContext'
+// import { myContext } from './contexts/globalContext'
+import Container from '@material-ui/core/Container';
 
-const mainElement = document.createElement('div');
-document.body.appendChild(mainElement);
+import { BrowserRouter  } from 'react-router-dom';
 
-const App = () => {
+const App: React.FC = () => {
+
+  const [urls, setUrls] = useState<string[]>([])
+
+  useEffect(() => {
+    setUrls(['evan']);
+  }, [])
+
+
   return (
-    <h1 className="app">
-      Hi from a react
-    </h1>
+    <div>
+      <ContextProvider>
+        <Container>
+          <MainDisplay/>
+        </Container>
+      </ContextProvider>
+    </div>
   )
 }
 
-ReactDom.render(<App />, mainElement);
+// create an element "div"
+const mainElement = document.createElement('div');
+// append div to root index.html
+document.body.appendChild(mainElement);
+// make sure we can use our state in App
+ReactDom.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>, mainElement);
+
+
