@@ -10,7 +10,7 @@
 //  import Typography from '@material-ui/core/Typography';
 //  import Button from '@material-ui/core/Button';
 // //  import axios from 'axios'
-//  import { myContext } from '../contexts/globalContext'
+ import { myContext } from '../contexts/globalContext'
 
 // you could model this to get multiple input fields depending how many form fields you want
 // later we can use a context in place of this
@@ -24,16 +24,28 @@
 
   const onSubmit = handleSubmit((data) => {  
     // console.log(data.input, "value", value, 'urls', urls)
-    // setValue(data.input)
+    setUrls([...urls, data.input])
 // push the user input to our urls array
   })
+  const [will, setWill] = useState('')
+	
+	const { urls, setUrls } = useContext(myContext);
+	// let test = urls
+	// useEffect(() => {
+	// 	setUrls(['mike', 'evan'])
+	// 	setWill('will')
+	// }, []);
 
+	const handlePress = () => {
+		setUrls(['new', 'state'])
+
+	}
 
 // // required : true means this field has to be filled
   return(
 
     <div id="tabContainer">
-      Tab Container
+      Add Service Here
       {/* <Tab /> */}
       <div className="navBarForm">
         <form onSubmit={onSubmit}>

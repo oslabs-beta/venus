@@ -2,13 +2,15 @@
   color: green;
   font-size: x-large;
   border: 1px black dotted;
-};
+}
+
+;
 
 body {
   display: flex;
   justify-content: center;
   align-items: center;
-  color:rgb(52, 250, 52);
+  color: rgb(52, 250, 52);
 }
 
 // #mainDisplay {
@@ -29,6 +31,8 @@ body {
 
 #tabContainer {
   background-color: rgb(68, 6, 139);
+  margin-top: 500px;
+  ;
 }
 
 #chartContainer {
@@ -48,14 +52,15 @@ body {
 }
 
 #navBar {
-  display:flex;
+  display: flex;
   justify-content: center;
   background-color: black;
   flex-grow: 1;
   padding: 10px;
-  box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
   border-radius: 4px;
 }
+
 #dashboard {
   flex-grow: 10;
   display: flex;
@@ -68,7 +73,7 @@ body {
 }
 
 .serviceCard {
-  background-color:rgb(206, 66, 211);
+  background-color: rgb(79, 17, 138);
 }
 
 .chart {

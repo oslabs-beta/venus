@@ -18,7 +18,7 @@ return(
     <div id="mainDisplay">
     <NavBar />
     <Dashboard />
-    <h1>{urls}</h1>
+    
     </div>
   )
 }
