@@ -6,7 +6,7 @@
 //imports to be used in file
 import React, { Component, useContext } from 'react';
 // import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import NavBar from './Navbar';
+import { NavBar } from './Navbar';
 import Dashboard from './Dashboard';
 import { myContext } from "../contexts/globalContext"
 

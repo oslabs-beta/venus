@@ -4,10 +4,13 @@
  */
 
 import React, { Component, useContext, useEffect, useState } from 'react';
+import { Router, Route, Link, Switch } from 'react-router-dom';
 // import TabContainer from './TabContainer'
 import { myContext } from '../contexts/globalContext';
+import  TabContainer  from './TabContainer'
 
-export default function  NavBar(): JSX.Element {
+
+function NavBar(): JSX.Element {
 	const [will, setWill] = useState('')
 	
 	const { urls, setUrls } = useContext(myContext);
@@ -22,56 +25,35 @@ export default function  NavBar(): JSX.Element {
 
 	}
 
-
-	console.log(urls, "navbar")
   return(
 		<div id="navBar">
-			{/* <TabContainer /> */}
-			<input type="button" onClick={handlePress}></input>
-			<h1>{test}</h1>
-			<h1>{will}</h1>
+		 	<input type="button" onClick={handlePress}></input>
+		 	<h1>{test}</h1>
+		 	<h1>{will}</h1>
+      <TabContainer />
+ 
+<Switch>
+  <Route exact path='/'>
+    <div>
+      <Link className="navbarButtons" to="/">
+        <button>RealTimeMatrixShit</button>
+      </Link>
+      <Link className="navbarButtons" to="/historical">
+        <button>HistoricalAssShit</button>
+      </Link>
+      <Link className="navbarButtons" to="/dependencies">
+        <button>Dependencies</button>
+      </Link>
     </div>
-  ) 
- }
+  </Route>
 
- // exports to containers/MainContainer
+  <Route exact path="/" component={TabContainer} />
+      <Route path="/historical" component={TabContainer} />
+      <Route path="/dependency" component={TabContainer} />
+  
+</Switch>
+</div>
 
-// // import Tab from '../components/Tab'
-// import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+)}
 
-// export default function  NavBar(): JSX.Element {
-//   return (
-//     // React Router boilerplate code
-//     <div className="container-fluid">
-//       <Router>
-//         <div className="row ml-3">
-//           <ul className="list-inline">
-//             <li className="customLink list-inline-item brand mr-3">VENUS NOIR beta™</li>
-//             <li className="list-inline-item mr-3">
-//               <Link className="customLink" to="/">
-//                 REAL-TIME
-//               </Link>
-//             </li>
-//             <li className="list-inline-item">
-//               <Link className="customLink" to="/historical">
-//                 HISTORICAL
-//               </Link>
-//             </li>
-//             <li className="list-inline-item">
-//               <Link className="customLink" to="/dependency">
-//                 DEPENDENCIES
-//               </Link>
-//             </li>
-//           </ul>
-//         </div>
-//         <div className="container">
-//           <Switch>
-//             <Route exact path="/" component={TabContainer} />
-//             <Route path="/historical" component={TabContainer} />
-//             <Route path="/dependency" component={TabContainer} />
-//           </Switch>
-//         </div>
-//       </Router>
-//     </div>
-//   );
-// }
+export { NavBar };
