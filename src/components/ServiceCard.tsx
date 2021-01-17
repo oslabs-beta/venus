@@ -6,18 +6,23 @@
 import React, { useContext } from 'react'
 import { myContext } from "../contexts/globalContext"
 
-let test: any[] = [];
-let friends: string[] =['oliver', 'will', 'evan', 'leo']
-for (let i = 0; i < friends.length ; i++){
-  test.push(<button>{friends[i]}</button>)
-}
+
 
 function ServiceCard (): JSX.Element{
-  const { urls } = useContext(myContext)
+    const { urls } = useContext(myContext)
+console.log({urls}, 'urls')
+let urlList: any[] = [];
+let friends: string[] = urls
+for (let i = 0; i < urls.length ; i++){
+  urlList.push(<button key={i} >{friends[i]}</button>)
+}
+
+
+
     return (
       <div className="serviceCard">
-          <h1>{urls}</h1>
-          {test}
+          {/* <h1>{urls}</h1> */}
+          {urlList}
       </div>
     )
   }
