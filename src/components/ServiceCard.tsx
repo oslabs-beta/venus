@@ -5,7 +5,7 @@
 
 import React, { useContext } from 'react'
 import { myContext } from "../contexts/globalContext"
-
+import { Button } from '@material-ui/core';
 
 
 function ServiceCard (): JSX.Element{
@@ -14,7 +14,7 @@ console.log({urls}, 'urls')
 let urlList: any[] = [];
 let friends: string[] = urls
 for (let i = 0; i < urls.length ; i++){
-  urlList.push(<button key={i} >{friends[i]}</button>)
+  urlList.push(<Button fullWidth variant="outlined" color="primary" key={i} >{friends[i]}</Button>)
 }
 
 
