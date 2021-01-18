@@ -18,7 +18,6 @@ function  Dashboard(): JSX.Element{
         <h1>Dashboard Container</h1>             
         <AggregateStats />
         <ServiceContainer />
-        <ChartContainer />
       </div>
     )
  }
