@@ -13,7 +13,7 @@ import { Chart } from '../components/Chart'
 function ChartContainer(): JSX.Element {
 	return(
 		<div id="chartContainer">
-			<h1>This is the Chart Container</h1>
+			<h1>Chart Container</h1>
 			<Chart />
 			<CardDropDown />
 		</div>

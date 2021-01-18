@@ -7,15 +7,14 @@
 import React, { Component, useContext } from 'react';
 // import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { NavBar } from './Navbar';
-import Dashboard from './Dashboard';
+import { Dashboard } from './Dashboard';
 import { myContext } from "../contexts/globalContext"
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "../dashboardTheme";
 
-export default function  MainDisplay(): JSX.Element{
+function  MainDisplay(): JSX.Element{
 
-  const { urls } = useContext(myContext);
-  console.log(urls, "MainDisplay")
+
 return(
     <div id="mainDisplay">
     <NavBar />
@@ -26,9 +25,6 @@ return(
   )
 }
 
-//add any bindings here
 
-//add any methods here
-
-//add axios
+export { MainDisplay }
 

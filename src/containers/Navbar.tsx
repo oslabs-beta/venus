@@ -7,7 +7,7 @@ import React, { Component, useContext, useEffect, useState } from 'react';
 import { Router, Route, Link, Switch } from 'react-router-dom';
 // import TabContainer from './TabContainer'
 import { myContext } from '../contexts/globalContext';
-import  AddService  from './AddService'
+import { AddService }  from './AddService'
 
 
 function NavBar(): JSX.Element {
@@ -31,13 +31,13 @@ function NavBar(): JSX.Element {
         <Route exact path='/'>
           <div>
             <Link className="navbarButtons" to="/">
-              <button>RealTimeMatrixShit</button>
+              <button>Current Status</button>
             </Link>
             <Link className="navbarButtons" to="/historical">
-              <button>HistoricalAssShit</button>
+              <button>Historical Status</button>
             </Link>
             <Link className="navbarButtons" to="/dependencies">
-              <button>Dependencies</button>
+              <button>Dependency Graph</button>
             </Link>
           </div>
         </Route>

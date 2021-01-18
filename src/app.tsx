@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDom, { render} from 'react-dom';
 import './style.scss';
 // import Main Display
-import MainDisplay from './containers/MainDisplay'
+import { MainDisplay } from './containers/MainDisplay'
 // make sure we can use our state and pass it into our main component
 import { ContextProvider } from './contexts/globalContext'
 // import { myContext } from './contexts/globalContext'
@@ -23,7 +23,7 @@ const App: React.FC = () => {
     <div>
       <ContextProvider>
         <Container>
-          <MainDisplay />
+          <MainDisplay/>
         </Container>
       </ContextProvider>
     </div>
