@@ -8,7 +8,7 @@
 function Tab (): JSX.Element{
      return (
          <h1 className="tab">
-             this is tab
+             Single Tab
              {/* create onClick method */}
          </h1>
      )
