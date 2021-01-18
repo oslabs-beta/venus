@@ -7,7 +7,6 @@
  import React, {useContext, useEffect} from 'react';
 //  import TabContainer from './TabContainer'
 import  { ServiceContainer } from './ServiceContainer';
-import { ChartContainer } from './ChartContainer';
 import { AggregateStats } from '../components/AggregateStats';
 import { initialState, myContext, AppState } from '../contexts/globalContext'
 
@@ -18,7 +17,6 @@ function  Dashboard(): JSX.Element{
         <h1>Dashboard Container</h1>             
         <AggregateStats />
         <ServiceContainer />
-        <ChartContainer />
       </div>
     )
  }
