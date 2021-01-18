@@ -8,7 +8,7 @@ import React, { Component, useContext } from 'react';
 // import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { NavBar } from './Navbar';
 import { Dashboard } from './Dashboard';
-import { myContext } from "../contexts/globalContext"
+
 
 function  MainDisplay(): JSX.Element{
 

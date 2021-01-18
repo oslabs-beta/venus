@@ -44,9 +44,6 @@ const onSubmit = handleSubmit((data) => {
       <div className="navBarForm">
         <form onSubmit={onSubmit}>
                <input ref={register({required: true})} id="input" name="input" placeholder="URL here" type="text" />
-              <h1>
-              </h1>
-            
           <button type="submit">Submit</button>
         </form>
       </div>

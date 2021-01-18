@@ -41,7 +41,6 @@ function NavBar(): JSX.Element {
             </Link>
           </div>
         </Route>
-
         <Route exact path="/" component={AddService} />
             <Route path="/historical" component={AddService} />
             <Route path="/dependency" component={AddService} />
