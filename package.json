@@ -10,7 +10,8 @@
     "build:react": "NODE_ENV=production webpack --config webpack.react.config.js --mode production",
     "build": "npm run build:electron && npm run build:react",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "start": "node server/redis-handler.js"
   },
   "keywords": [],
   "author": "elisealcala",
