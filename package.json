@@ -11,7 +11,7 @@
     "build": "npm run build:electron && npm run build:react",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "start": "node server/redis-handler.js"
+    "start": "node src/server/redis-handler.js"
   },
   "keywords": [],
   "author": "elisealcala",
