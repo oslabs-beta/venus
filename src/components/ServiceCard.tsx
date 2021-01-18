@@ -6,7 +6,7 @@
 import React, { useContext, useState } from 'react'
 import { myContext } from "../contexts/globalContext"
 import { Button } from '@material-ui/core';
-
+import { ChartContainer } from '../containers/ChartContainer'
 
 function ServiceCard (): JSX.Element{
     const { urls } = useContext(myContext)
@@ -14,7 +14,6 @@ function ServiceCard (): JSX.Element{
 const [toggle, setToggle] = useState<boolean>(false)
 
 let urlList: any[] = [];
-// let friends: string[] = urls
 for (let i = 0; i < urls.length ; i++){
   urlList.push(
     <div key={i}>
@@ -22,16 +21,11 @@ for (let i = 0; i < urls.length ; i++){
     onClick={() => {console.log(toggle); setToggle(!toggle)}}>
       {urls[i]}
       </Button>
-      {/* <ul className={toggle ? "show" : ""}>
-        <li>
-         <h1>Test</h1>
-        </li>
-      </ul> */}
+      <div className={toggle ? 'show' :'hide'}>
+        { toggle ? <ChartContainer /> : null}
+      </div>
       </div>)
 }
-
-
-
     return (
       <div className="serviceCard">
           {/* <h1>{urls}</h1> */}
