@@ -10,7 +10,7 @@ console.log(`Reading the stream named ${STREAM_KEY}...`);
 
 const readRedisStream = async () => {
 
-  let streamEntries = await cluster.xrange(STREAM_KEY, '-', '+', 'COUNT', 1); 
+  let streamEntries = await cluster.xrange(STREAM_KEY, '-', '+', 'COUNT', 2); 
 
   console.log('XRANGE, standard response:'); 
   console.log(streamEntries); 
@@ -40,7 +40,7 @@ const readRedisStream = async () => {
     return result; 
   }); 
 
-  streamEntries = await cluster.xrange(STREAM_KEY, '-', '+', 'COUNT', 1); 
+  streamEntries = await cluster.xrange(STREAM_KEY, '-', '+', 'COUNT', 2); 
 
   console.log('XRANGE, response with reply transformer'); 
   console.log(streamEntries); 
