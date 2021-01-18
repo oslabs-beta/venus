@@ -9,6 +9,8 @@ import React, { Component, useContext } from 'react';
 import { NavBar } from './Navbar';
 import Dashboard from './Dashboard';
 import { myContext } from "../contexts/globalContext"
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "../dashboardTheme";
 
 export default function  MainDisplay(): JSX.Element{
 
@@ -17,8 +19,9 @@ export default function  MainDisplay(): JSX.Element{
 return(
     <div id="mainDisplay">
     <NavBar />
-    <Dashboard />
-    
+    <ThemeProvider theme={theme}>
+      <Dashboard />
+    </ThemeProvider>
     </div>
   )
 }
