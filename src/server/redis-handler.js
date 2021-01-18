@@ -6,7 +6,7 @@ const cluster = new Redis.Cluster([{
 
 const STREAM_KEY = 'logstream'
 
-console.log('something is happening'); 
+console.log(`Reading the stream named ${STREAM_KEY}...`); 
 
 const readRedisStream = async () => {
 
