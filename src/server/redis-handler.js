@@ -26,8 +26,8 @@ const readRedisStream = async () => {
         const fieldNamesValues = r[1]; 
 
         for(let i = 0; i < fieldNamesValues.length; i += 2){
-          const k = fieldNamesValues[n]; 
-          const v = fieldNamesValues[n + 1]; 
+          const k = fieldNamesValues[i]; 
+          const v = fieldNamesValues[i + 1]; 
           obj[k] = v; 
         }
 
