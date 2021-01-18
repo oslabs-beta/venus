@@ -9,19 +9,21 @@
 import  { ServiceContainer } from './ServiceContainer';
 import { ChartContainer } from './ChartContainer';
 import { AggregateStats } from '../components/AggregateStats';
-import { myContext } from '../contexts/globalContext'
+import { initialState, myContext, AppState } from '../contexts/globalContext'
 
 export default function  Dashboard(): JSX.Element{
-  const {urls, setUrls} = useContext(myContext)
-  console.log(urls, "dashboard", setUrls)
   
-  useEffect(() =>{
-
-  })
+  // const { urls } = useContext<AppState>(initialState)
+  
+  // useEffect(() =>{
+  //     window 
+  //   console.log(urls, "useEffect in dashboard")
+  // }, [urls])
+  
     return(
         <div id="dashboard">
         <h1>This is the dashboard</h1>
-        <h1>test{urls}</h1>                
+        <h1>test</h1>                
         <AggregateStats />
         <ServiceContainer />
         <ChartContainer />

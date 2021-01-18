@@ -4,16 +4,24 @@
  **/
 
 //imports to be used in file
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 // import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import NavBar from './Navbar';
+import { NavBar } from './Navbar';
 import Dashboard from './Dashboard';
+import { myContext } from "../contexts/globalContext"
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "../dashboardTheme";
 
 export default function  MainDisplay(): JSX.Element{
+
+  const { urls } = useContext(myContext);
+  console.log(urls, "MainDisplay")
 return(
     <div id="mainDisplay">
     <NavBar />
-    <Dashboard />
+    <ThemeProvider theme={theme}>
+      <Dashboard />
+    </ThemeProvider>
     </div>
   )
 }
