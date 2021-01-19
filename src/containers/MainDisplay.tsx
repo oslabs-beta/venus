@@ -12,7 +12,7 @@ import { AddService } from './AddService';
 import { ChartContainer } from './ChartContainer';
 import { DependencyGraph } from './DependencyGraph'
 import Button from 'antd/es/button';
-import venusGif = require('../imgs/venusGif.gif')
+// import venusGif = require('../imgs/venusGif.gif')
 
 // import 'antd/dist/antd.less';
 
