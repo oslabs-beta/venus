@@ -7,7 +7,7 @@ import { MainDisplay } from './containers/MainDisplay'
 import { ContextProvider } from './contexts/globalContext'
 // import { myContext } from './contexts/globalContext'
 import Container from '@material-ui/core/Container';
-// import 'antd/dist/antd.css'
+import 'antd/dist/antd.less';
 import { BrowserRouter  } from 'react-router-dom';
 
 const App: React.FC = () => {

@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   resolve: {
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js", ".less"],
     mainFields: ["main", "module", "browser"],
   },
   entry: "./src/app.tsx",
@@ -23,8 +23,22 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader',
-          'sass-loader',
+          'sass-loader'
         ],
+      },
+      {
+        test: /\.less$/,
+        use: [
+        { loader: "style-loader"},
+        { loader: "css-loader?modules"},
+        { loader: "less-loader",
+        options: {
+          lessOptions:{
+            javascriptEnabled: true
+        }
+      }
+      }
+]
       }
     ],
   },
