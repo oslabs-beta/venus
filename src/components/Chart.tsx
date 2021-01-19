@@ -9,9 +9,9 @@ import React from 'react';
 function Chart(): JSX.Element {
   return (
     <div className="chart">
-      <h1>Individual Chart</h1>
+      <h1>Cycle Duration</h1>
       <ParentSize>
-        {({ width, height }) => <PerformanceChart width={width} height={800} />}
+        {({ width, height }) => <PerformanceChart width={800} height={400} />}
       </ParentSize>
       ,{/* <img src={require("../imgs/performanceChart2.png")} /> */}
       {/* create onClick method */}

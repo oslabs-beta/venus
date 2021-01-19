@@ -35,7 +35,7 @@ const chartSeparation = 30;
 const PATTERN_ID = "brush_pattern";
 const GRADIENT_ID = "brush_gradient";
 export const accentColor = "green";
-export const background = "purple";
+export const background = "black";
 export const background2 = "green";
 const selectedBrushStyle = {
   fill: `url(#${PATTERN_ID})`,

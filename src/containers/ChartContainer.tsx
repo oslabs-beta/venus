@@ -7,6 +7,7 @@
 import React from 'react';
 import { CardDropDown } from '../components/CardDropDown'
 import { Chart } from '../components/Chart'
+import { ChartRender } from '../components/ChartRender'
 
 //import service card container
 //import chart container
@@ -14,9 +15,9 @@ import { Chart } from '../components/Chart'
 function ChartContainer(): JSX.Element {
 	return(
 		<div id="chartContainer">
-			<h1>Chart Container</h1>
+			<h1>See Your Charts</h1>
 			<CardDropDown />
-			<Chart />
+			<ChartRender />
 		</div>
 	)
 }
