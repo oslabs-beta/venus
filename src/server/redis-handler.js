@@ -1,8 +1,9 @@
+const { read } = require('fs');
 const Redis = require('ioredis'); 
-const cluster = new Redis.Cluster([{
+const redis = new Redis({
   port: 6379, 
-  host: 'venus-redis-cluster-2.syohjt.clustercfg.use2.cache.amazonaws.com'
-}]);
+  host: 'localhost'
+});
 
 const STREAM_KEY = 'logstream'
 
@@ -10,7 +11,10 @@ console.log(`Reading the stream named ${STREAM_KEY}...`);
 
 const readRedisStream = async () => {
 
-  let streamEntries = await cluster.xrange(STREAM_KEY, '-', '+', 'COUNT', 5); 
+  const startTime = Date.now() - 300000; 
+  const endTime = startTime + 300000; 
+
+  let streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
 
   console.log('XRANGE, standard response:'); 
   console.log(streamEntries); 
@@ -40,7 +44,7 @@ const readRedisStream = async () => {
     return result; 
   }); 
 
-  streamEntries = await cluster.xrange(STREAM_KEY, '-', '+', 'COUNT', 5); 
+  streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
 
   console.log('XRANGE, response with reply transformer'); 
   console.log(streamEntries); 
@@ -48,7 +52,7 @@ const readRedisStream = async () => {
 }
 
 try {
-  readRedisStream(); 
+  setInterval(async () => { await readRedisStream()}, 3000); 
 } catch (e) {
   console.error(e); 
 }
