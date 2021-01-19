@@ -2,7 +2,7 @@ const { read } = require('fs');
 const Redis = require('ioredis'); 
 
 //Name of stream we are reading from
-const STREAM_KEY = 'logstream'
+const STREAM_KEY = 'venus'
 //Interval of the stream we are processing to determine the "real-time" statistics
 const INTERVAL = 300000;
 //Rate at which we want to query the stream for data
