@@ -11,7 +11,7 @@
     "build": "npm run build:electron && npm run build:react",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "start": "node src/server/redis-handler.js"
+    "start": "node src/server/real-time-read-handler.js"
   },
   "keywords": [],
   "author": "elisealcala",
@@ -51,6 +51,7 @@
     "@material-ui/core": "^4.11.2",
     "@types/react": "^16.9.34",
     "@types/react-dom": "^16.9.6",
+    "aws-sdk": "^2.828.0",
     "contentful": "^8.1.7",
     "ioredis": "^4.19.4",
     "react": "^16.13.1",

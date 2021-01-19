@@ -1,36 +1,35 @@
 const { read } = require('fs');
 const Redis = require('ioredis');
 const dynamodb = require('aws-sdk/clients/dynamodb');  
-const docClient = new dynamodb.DocumentClient(); 
 
 //Name of stream we are reading from
 const STREAM_KEY = 'logstream'
 //Interval of the stream we are processing to determine the "real-time" statistics
-const INTERVAL = 300000;
+const INTERVAL = 3000;
 //Rate at which we want to query the stream for data
 const PING_RATE = 3000; 
 //Where Redis is being hosted (either local machine or elasticache)
 const REDIS_HOST = 'localhost'
 
-const tableName = 'log_data'; 
+const TABLE_NAME = 'log_data_second'; 
+
+const REGION = 'us-east-2'
 
 const redis = new Redis({
   port: 6379, 
   host: REDIS_HOST
 });
 
+const docClient = new dynamodb.DocumentClient({region: REGION}); 
+
+
 console.log(`Reading the stream named ${STREAM_KEY}...`); 
 
-const readRedisStream = async () => {
+const readAndWriteToDB = async () => {
 
   //Get the milliseconds for start and end time
   const startTime = Date.now() - INTERVAL; 
   const endTime = startTime + INTERVAL; 
-
-  // let streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
-
-  // console.log('XRANGE, standard response:'); 
-  // console.log(streamEntries); 
 
   //Transform xrange's output from two arrays of keys and value into one array of log objects
   Redis.Command.setReplyTransformer('xrange', function (result) {
@@ -64,10 +63,24 @@ const readRedisStream = async () => {
   //real-time entries should be sent for processing elsewhere 
   console.log(streamEntries); 
 
+  console.log(`Writing to table ${TABLE_NAME}...`); 
+
+  streamEntries.forEach( async (log) => {
+
+    const params = {
+      TableName: TABLE_NAME, 
+      Item: log
+    }
+
+    await docClient.put(params).promise(); 
+  })
+
+  console.log(`Finished writing to ${TABLE_NAME}...`); 
+
 }
 
 try {
-  setInterval(async () => { await readRedisStream()}, PING_RATE); 
+  setInterval(async () => { await readAndWriteToDB()}, PING_RATE); 
 } catch (e) {
   console.error(e); 
 }

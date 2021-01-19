@@ -8,7 +8,7 @@ const INTERVAL = 300000;
 //Rate at which we want to query the stream for data
 const PING_RATE = 3000; 
 //Where Redis is being hosted (either local machine or elasticache)
-const REDIS_HOST = 'localhost'
+const REDIS_HOST = 'venus-redis-micro.syohjt.ng.0001.use2.cache.amazonaws.com'
 
 const redis = new Redis({
   port: 6379, 
@@ -21,12 +21,7 @@ const readRedisStream = async () => {
 
   //Get the milliseconds for start and end time
   const startTime = Date.now() - INTERVAL; 
-  const endTime = startTime + INTERVAL; 
-
-  // let streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
-
-  // console.log('XRANGE, standard response:'); 
-  // console.log(streamEntries); 
+  const endTime = startTime + INTERVAL;  
 
   //Transform xrange's output from two arrays of keys and value into one array of log objects
   Redis.Command.setReplyTransformer('xrange', function (result) {
