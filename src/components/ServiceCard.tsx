@@ -11,7 +11,6 @@ const { Title } = Typography
 
 function ServiceCard (props: { service: any }): JSX.Element{
   const { urls } = useContext(myContext)
-  console.log(props)
   const color: string = props.color
     return (
       (

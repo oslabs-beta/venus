@@ -4,12 +4,10 @@
 //  */
 
 import React, { useContext, useState, useEffect, ContextType } from 'react';
-import { appendErrors, useForm } from "react-hook-form"
-//  import Typography from '@material-ui/core/Typography';
-//  import Button from '@material-ui/core/Button';
-// //  import axios from 'axios'
-import { myContext } from '../contexts/globalContext'
-
+import { appendErrors, useForm } from 'react-hook-form';
+import { myContext } from '../contexts/globalContext';
+import { Button , Input } from 'antd';
+const { Search } = Input
 // you could model this to get multiple input fields depending how many form fields you want
 // later we can use a context in place of this
 
@@ -33,15 +31,11 @@ const onSubmit = handleSubmit((data) => {
 	const handlePress = () => {
 		setUrls(['new', 'state'])
 	}
-
+  const large: any = "medium"; 
   return(
     <div id="tabContainer">
-      Add Service Here
       <div className="navBarForm">
-        <form onSubmit={onSubmit}>
-               <input ref={register({required: true})} id="input" name="input" placeholder="Add Endpoint" type="text" />
-          <button type="submit">Submit</button>
-        </form>
+      <Search placeholder="Add API Endpoint" allowClear enterButton="Submit" size="large" />
       </div>
     </div>
   ) 

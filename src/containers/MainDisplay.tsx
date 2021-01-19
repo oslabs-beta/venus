@@ -4,59 +4,59 @@
  **/
 
 //imports to be used in file
-import React, { Component, useContext } from 'react';
+import React, { Component, useContext } from "react";
 // import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import { Dashboard } from './Dashboard';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-import { AddService } from './AddService';
-import { ChartContainer } from './ChartContainer';
-import { DependencyGraph } from './DependencyGraph'
-import Button from 'antd/es/button'
+import { Dashboard } from "./Dashboard";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { AddService } from "./AddService";
+import { ChartContainer } from "./ChartContainer";
+import { DependencyGraph } from "./DependencyGraph";
+import Button from "antd/es/button";
+import Typography from "antd/es/typography";
+import { Radio } from "antd";
+const { Title } = Typography;
 
 // import 'antd/dist/antd.less';
 
-
-function  MainDisplay(): JSX.Element{
-  const large: any = "large"; 
-return(
-    
-  <Router>
-    <Switch>
-    <div id="mainDisplay">
-      <div id="navBar">
+function MainDisplay(): JSX.Element {
+  const large: any = "large";
+  return (
+    <Router>
+      <Switch>
+        <div id="mainDisplay">
+          <div id="navBar">
             <div className="navButtonsContainer">
-              <span>VENUS</span> 
+              <Title level={2}>VENUS</Title>
               <br></br>
               <AddService />
               <br></br>
-              <Link  to="/">
-                <Button className="navbarButtons" block size={large}>Current Status</Button>
+              <Link to="/">
+                <Button className="navbarButtons" block size={large}>
+                  Current Status
+                </Button>
               </Link>
               <br></br>
               <Link to="/historicalData">
-                <Button className="navbarButtons" block size={large}>Historical Status</Button>
+                <Button className="navbarButtons" block size={large}>
+                  Historical Status
+                </Button>
               </Link>
               <br></br>
-              <Link  to="/dependencyGraph">
-                <Button className="navbarButtons" block size={large}>Dependency Graph</Button>
+              <Link to="/dependencyGraph">
+                <Button className="navbarButtons" block size={large}>
+                  Dependency Graph
+                </Button>
               </Link>
             </div>
 
-            <Route path="/" exact component={Dashboard}/>
-            <Route path="/historicalData" component={ChartContainer}/>
-            <Route path="/dependencyGraph" component={DependencyGraph}/>
-      </div>
-    </div>
-    </Switch>
-  </Router>
-
-
-  )
+            <Route path="/" exact component={Dashboard} />
+            <Route path="/historicalData" component={ChartContainer} />
+            <Route path="/dependencyGraph" component={DependencyGraph} />
+          </div>
+        </div>
+      </Switch>
+    </Router>
+  );
 }
 
-
-
-
-
-export { MainDisplay }
-
+export { MainDisplay };
