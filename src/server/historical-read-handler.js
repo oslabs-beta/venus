@@ -9,7 +9,7 @@ const INTERVAL = 3000;
 //Rate at which we want to query the stream for data
 const PING_RATE = 3000; 
 //Where Redis is being hosted (either local machine or elasticache)
-const REDIS_HOST = 'localhost'
+const REDIS_HOST = 'venus-redis-micro.syohjt.ng.0001.use2.cache.amazonaws.com'
 
 const TABLE_NAME = 'log_data_second'; 
 
