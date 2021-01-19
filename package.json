@@ -11,7 +11,8 @@
     "build": "npm run build:electron && npm run build:react",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "start": "node src/server/real-time-read-handler.js"
+    "hist": "node src/server/historical-read-handler.js",
+    "rt": "node src/server/real-time-read-handler.js"
   },
   "keywords": [],
   "author": "elisealcala",

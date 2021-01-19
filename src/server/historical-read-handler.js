@@ -4,7 +4,7 @@ const dynamodb = require('aws-sdk/clients/dynamodb');
 
 //Name of stream we are reading from
 const STREAM_KEY = 'venus'
-//Interval of the stream we are processing to determine the "real-time" statistics
+//Interval of the stream we are processing to write to the database
 const INTERVAL = 3000;
 //Rate at which we want to query the stream for data
 const PING_RATE = 3000; 
