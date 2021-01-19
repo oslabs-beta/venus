@@ -11,28 +11,37 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { AddService } from './AddService';
 import { ChartContainer } from './ChartContainer';
 import { DependencyGraph } from './DependencyGraph'
-import { Button, Menu } from 'antd'
+import Button from 'antd/es/button'
+
+// import 'antd/dist/antd.less';
+
 
 function  MainDisplay(): JSX.Element{
+  const large: any = "large"; 
 return(
     
   <Router>
     <Switch>
     <div id="mainDisplay">
       <div id="navBar">
-            <div>
-              <Link className="navbarButtons" to="/">
-                <Button>Current Status</Button>
+            <div className="navButtonsContainer">
+              <span>VENUS</span> 
+              <br></br>
+              <AddService />
+              <br></br>
+              <Link  to="/">
+                <Button className="navbarButtons" block size={large}>Current Status</Button>
               </Link>
-              <Link className="navbarButtons" to="/historicalData">
-                <Button>Historical Status</Button>
+              <br></br>
+              <Link to="/historicalData">
+                <Button className="navbarButtons" block size={large}>Historical Status</Button>
               </Link>
-              <Link className="navbarButtons" to="/dependencyGraph">
-                <Button>Dependency Graph</Button>
+              <br></br>
+              <Link  to="/dependencyGraph">
+                <Button className="navbarButtons" block size={large}>Dependency Graph</Button>
               </Link>
             </div>
-            
-            <AddService />
+
             <Route path="/" exact component={Dashboard}/>
             <Route path="/historicalData" component={ChartContainer}/>
             <Route path="/dependencyGraph" component={DependencyGraph}/>

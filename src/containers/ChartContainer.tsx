@@ -14,8 +14,8 @@ function ChartContainer(): JSX.Element {
 	return(
 		<div id="chartContainer">
 			<h1>Chart Container</h1>
-			<Chart />
 			<CardDropDown />
+			<Chart />
 		</div>
 	)
 }

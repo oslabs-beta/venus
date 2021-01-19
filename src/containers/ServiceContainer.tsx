@@ -7,10 +7,15 @@ import { ServiceCard } from '../components/ServiceCard'
 import React from 'react';
 //  import TabContainer from './TabContainer'
 
+const services: any = {
+	
+}
+
+
+
 function ServiceContainer(): JSX.Element{
 	return(
 			<div id="serviceContainer">
-				<h1>Service Container</h1>
 				<ServiceCard />
 			</div>
 	)

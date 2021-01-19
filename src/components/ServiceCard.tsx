@@ -5,20 +5,47 @@
 
 import React, { useContext } from 'react'
 import { myContext } from "../contexts/globalContext"
-
-let test: any[] = [];
-let friends: string[] =['proof', 'of', 'concept', 'render']
-for (let i = 0; i < friends.length ; i++){
-  test.push(<button>{friends[i]}</button>)
-}
+import Typography from 'antd/es/typography';
+// import { CheckCircleFilled } from '@ant-design/icons';
+const { Title } = Typography
 
 function ServiceCard (): JSX.Element{
   const { urls } = useContext(myContext)
     return (
-      <div className="serviceCard">
-          <h1>{urls}</h1>
-          {test}
-      </div>
+      (
+        <div className= "aggregateStats">
+  
+            <Title level={3}>Overall Health</Title>
+            {/* <CheckCircleFilled /> */}
+            <div className="icon"></div>
+          <div className="allStats">
+            <div className="statsContainer">
+              <Title level={5}>Uptime</Title>
+              <div className="dataContainer">
+                <Title level={5}>97%</Title>
+              </div>
+            </div>
+            <div className="statsContainer">
+              <Title level={5}>Latency</Title>
+              <div className="dataContainer">
+                <Title level={5}>250ms</Title>
+              </div>
+            </div>
+            <div className="statsContainer">
+              <Title level={5}>Load</Title>
+              <div className="dataContainer">
+                <Title level={5}>50req/min</Title>
+              </div>
+            </div>
+            <div className="statsContainer">
+              <Title level={5}>Error %</Title>
+              <div className="dataContainer">
+                <Title level={5}>3.413%</Title>
+              </div>
+            </div>
+          </div>
+        </div>
+    )
     )
   }
 

@@ -5,7 +5,6 @@
 
 import React, { useContext, useState, useEffect, ContextType } from 'react';
 import { appendErrors, useForm } from "react-hook-form"
-import { Router, Route, Link, Switch } from 'react-router-dom';
 //  import Typography from '@material-ui/core/Typography';
 //  import Button from '@material-ui/core/Button';
 // //  import axios from 'axios'
@@ -29,10 +28,7 @@ const onSubmit = handleSubmit((data) => {
   const [will, setWill] = useState('')
 	
 	const { urls, setUrls } = useContext(myContext);
-	// useEffect(() => {
-	// 	setUrls(['mike', 'evan'])
-	// 	setWill('will')
-	// }, []);
+	
 
 	const handlePress = () => {
 		setUrls(['new', 'state'])
@@ -43,7 +39,7 @@ const onSubmit = handleSubmit((data) => {
       Add Service Here
       <div className="navBarForm">
         <form onSubmit={onSubmit}>
-               <input ref={register({required: true})} id="input" name="input" placeholder="URL here" type="text" />
+               <input ref={register({required: true})} id="input" name="input" placeholder="Add Endpoint" type="text" />
           <button type="submit">Submit</button>
         </form>
       </div>
