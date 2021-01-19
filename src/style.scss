@@ -83,10 +83,6 @@
   margin: 5px 5px; 
 }
 
-.navbarbuttons:focus {
-  background-color: blue;
-}
-
 #dashboard {
   flex-grow: 10;
   display: flex;
@@ -94,7 +90,7 @@
   align-items: center;
   flex-direction: column;
   padding: 10px;
-  border: 3px solid grey
+  border: 1px solid black;
 }
 
 .serviceCard {
@@ -103,22 +99,4 @@
 
 .chart {
   background-color: coral;
-}
-
-.tab {
-  background-color: blue
-}
-
-.aggregateStats {
-  border: 1px solid black;
-  display: flex;
-  flex-direction: row;
-  height: fit-content;
-  width: 100%;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.cardDrop {
-  background-color: rgb(255, 115, 0)
 }

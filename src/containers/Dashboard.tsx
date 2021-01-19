@@ -6,17 +6,143 @@
 
  import React, {useContext, useEffect} from 'react';
 //  import TabContainer from './TabContainer'
-import  { ServiceContainer } from './ServiceContainer';
 import { AggregateStats } from '../components/AggregateStats';
 import { initialState, myContext, AppState } from '../contexts/globalContext';
 import { Divider } from 'antd';
+import { Table, Tag } from 'antd';
+
 
 function  Dashboard(): JSX.Element{
+
+    const expandedRowRender: any = () => {
+  
+      const subColumns = [
+        { 
+          title: 'Path', 
+          dataIndex: 'path', 
+          key: 'path' },
+        { 
+          title: 'Method', 
+          dataIndex: 'method', 
+          key: 'method' 
+        },
+        {
+          title: 'Status',
+          dataIndex: 'status',
+          key: 'status',
+          render: () => (
+          <Tag color={'green'} key={'test'}>GOOD</Tag> 
+          ),
+        },
+        {
+          title: 'Uptime',
+          dataIndex: 'uptime',
+          key: 'uptime',
+        },
+        {
+          title: 'Latency',
+          dataIndex: 'latency',
+          key: 'latency',
+        },
+        {
+          title: 'Load',
+          dataIndex: 'load',
+          key: 'load',
+        },
+        {
+          title: 'Error',
+          dataIndex: 'error',
+          key: 'error',
+        },
+      ];
+  
+  
+      const subDataSource: any = [
+        {
+          path: '/WEATHER',
+          method: 'GET',
+          status: 'good',
+          uptime: '98%',      
+          latency: '300ms',
+          load: '1000hpm',
+          error: '2%'
+        }
+      ];
+      return <Table columns={subColumns} dataSource={subDataSource} pagination={false} />
+    }
+  
+  
+  const dataSource: any = [];
+  const source: any = [ 
+    {
+      service: 'Google Weather API',
+      status: 'good',
+      uptime: '98%',      
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Surfline API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+  ];
+  
+  for (let i = 0; i < source.length; i++) {
+    source[i].key = i;
+    dataSource.push(source[i])
+  }
+  const columns: any = [
+    {
+      title: 'Service',
+      dataIndex: 'service',
+      key: 'service',
+      // sorter: {
+      //   compare: (a:any, b:any) => a.title.length - b.title.length,
+      //   multiple: 1,
+      // }
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      render: () => (
+      <Tag color={'green'} key={'test'}>GOOD</Tag>
+      ),
+    },
+    {
+      title: 'Uptime',
+      dataIndex: 'uptime',
+      key: 'uptime',
+    },
+    {
+      title: 'Latency',
+      dataIndex: 'latency',
+      key: 'latency',
+    },
+    {
+      title: 'Load',
+      dataIndex: 'load',
+      key: 'load',
+    },
+    {
+      title: 'Error',
+      dataIndex: 'error',
+      key: 'error',
+    },
+  ];
+  
+
     return(
       <div id="dashboard">          
         <AggregateStats />
         <Divider></Divider>
-        <ServiceContainer/>
+
+        <Table columns={columns} dataSource={dataSource} pagination={false} expandable={{expandedRowRender}} style={{width: "100%"}} />
       </div>
   )
  };

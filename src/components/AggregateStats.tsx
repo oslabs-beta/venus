@@ -7,42 +7,61 @@
 import React from 'react'
 import Typography from 'antd/es/typography';
 // import { CheckCircleFilled } from '@ant-design/icons';
-const { Title } = Typography
+import { Statistic, Card, Row, Col } from 'antd';
+import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 
+										
 function AggregateStats(): JSX.Element{
     return (
-			<div className= "aggregateStats">
-
-					<Title level={3}>Overall Health</Title>
-					{/* <CheckCircleFilled /> */}
-					<div className="icon"></div>
-				<div className="allStats">
-					<div className="statsContainer">
-						<Title level={5}>Uptime</Title>
-						<div className="dataContainer">
-							<Title level={5}>97%</Title>
-						</div>
-					</div>
-					<div className="statsContainer">
-						<Title level={5}>Latency</Title>
-						<div className="dataContainer">
-							<Title level={5}>250ms</Title>
-						</div>
-					</div>
-					<div className="statsContainer">
-						<Title level={5}>Load</Title>
-						<div className="dataContainer">
-							<Title level={5}>50req/min</Title>
-						</div>
-					</div>
-					<div className="statsContainer">
-						<Title level={5}>Error %</Title>
-						<div className="dataContainer">
-							<Title level={5}>3.413%</Title>
-						</div>
-					</div>
-				</div>
-			</div>
+		
+		<div className="aggregateStats">
+			<Row gutter={[8,8]}>
+				<Col span={7}>
+					<Card>
+						<Statistic
+							title=" System Uptime"
+							value={94.28}
+							precision={2}
+							valueStyle={{ color: '#3f8600' }}
+							suffix="%"
+						/>
+					</Card>
+				</Col>
+				<Col span={7}>
+					<Card>
+						<Statistic
+							title="System Latency"
+							value={9.3}
+							precision={2}
+							valueStyle={{ color: '#cf1322' }}
+							suffix="ms"
+						/>
+					</Card>
+				</Col>
+				<Col span={7}>
+					<Card>
+						<Statistic
+							title="System Load"
+							value={9.3}
+							precision={2}
+							valueStyle={{ color: '#cf1322' }}
+							suffix="hpm"
+						/>
+					</Card>
+				</Col>
+				<Col span={7}>
+					<Card>
+						<Statistic
+							title="System Error"
+							value={6.9}
+							precision={2}
+							valueStyle={{ color: '#cf1322' }}
+							suffix="%"
+						/>
+					</Card>
+				</Col>
+			</Row>
+  </div>
   )
 };
 
