@@ -11,7 +11,8 @@ import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { AddService } from './AddService';
 import { ChartContainer } from './ChartContainer';
 import { DependencyGraph } from './DependencyGraph'
-import Button from 'antd/es/button'
+import Button from 'antd/es/button';
+import venusGif = require('../imgs/venusGif.gif')
 
 // import 'antd/dist/antd.less';
 
@@ -26,6 +27,7 @@ return(
       <div id="navBar">
             <div className="navButtonsContainer">
               <span>VENUS</span> 
+
               <br></br>
               <AddService />
               <br></br>
