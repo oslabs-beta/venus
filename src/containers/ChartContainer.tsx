@@ -18,13 +18,13 @@ function onChange( pagination:any, filters:any, sorter:any, extra:any) {
 
     const subColumns = [
       { 
-        Path: 'Path', 
+        title: 'Path', 
         dataIndex: 'path', 
         key: 'path' },
       { 
-        ReqMethod: 'Request Method', 
-        dataIndex: 'request method', 
-        key: 'request method' 
+        title: 'Method', 
+        dataIndex: 'method', 
+        key: 'method' 
       },
       {
         title: 'Status',
@@ -60,7 +60,7 @@ function onChange( pagination:any, filters:any, sorter:any, extra:any) {
     const subDataSource: any = [
       {
         path: '/weather',
-        RequestMethod: 'GET',
+        method: 'GET',
         status: 'good',
         uptime: '98%',      
         latency: '300ms',
@@ -68,8 +68,7 @@ function onChange( pagination:any, filters:any, sorter:any, extra:any) {
         error: '2%'
       }
     ];
-
-    return <Table columns={columns} dataSource={subDataSource} pagination={false} />
+    return <Table columns={subColumns} dataSource={subDataSource} pagination={false} />
   }
 
 
@@ -77,7 +76,7 @@ const dataSource: any = [];
 
 const source: any = [
   {
-    service: 'Google Weather',
+    service: 'Google Weather API',
     status: 'good',
     uptime: '98%',      
     latency: '300ms',
@@ -85,7 +84,7 @@ const source: any = [
     error: '2%'
   },
   {
-    service: 'Google Weather',
+    service: 'Surfline API',
     status: 'good',
     uptime: '98%',
     latency: '300ms',
