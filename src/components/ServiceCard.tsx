@@ -7,6 +7,8 @@ import React, { useContext, useState } from 'react'
 import { myContext } from "../contexts/globalContext"
 import { Button } from '@material-ui/core';
 import { ChartContainer } from '../containers/ChartContainer'
+import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import {Switch } from 'antd'
 
 function ServiceCard (): JSX.Element{
     const { urls } = useContext(myContext)
@@ -14,6 +16,7 @@ function ServiceCard (): JSX.Element{
 const [toggle, setToggle] = useState<boolean>(false)
 
 let urlList: any[] = [];
+
 for (let i = 0; i < urls.length ; i++){
   urlList.push(
     <div key={i}>
@@ -21,8 +24,9 @@ for (let i = 0; i < urls.length ; i++){
     onClick={() => {console.log(toggle); setToggle(!toggle)}}>
       {urls[i]}
       </Button>
+      <Switch></Switch>
       <div className={toggle ? 'show' :'hide'}>
-        { toggle ? <ChartContainer /> : null}
+        { toggle ? <ChartContainer key={i} /> : null}
       </div>
       </div>)
 }

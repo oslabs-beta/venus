@@ -1,14 +1,17 @@
+.app {
+  
+  font-size: x-large;
+  color: rgb(52, 250, 52);
+  border: 1px black dotted;
+}
+
+;
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   color: rgb(52, 250, 52);
-}
-
-.app {
-  color: green;
-  font-size: x-large;
-  border: 1px black dotted;
 }
 
 // #mainDisplay {
@@ -36,13 +39,13 @@ body {
 }
 
 #tabContainer {
-  background-color: rgb(68, 6, 139);
-  margin-top: 500px;
-  ;
+  color: rgb(52, 250, 52);
+  background-color: black;
 }
 
 #chartContainer {
-  background-color: sienna;
+  background-color: black;
+  border-color:3px solid whitesmoke;
 }
 
 // styling for navBar and dashboard
@@ -80,22 +83,25 @@ body {
 
 .serviceCard {
   background-color: black;
+  color: rgb(1, 101, 252);
 }
 
 .chart {
-  background-color: coral;
+  background-color: black;
+  color: rgb(1, 101, 252);
 }
 
 .tab {
-  background-color: blue
+  background-color: rgb(1, 101, 252);
 }
 
 .aggStats {
-  background-color: gray;
+  background-color: black;
+  color: rgb(1, 101, 252);
 }
 
 .cardDrop {
-  background-color: rgb(255, 115, 0)
+  background-color: black;
 }
 
 .show {

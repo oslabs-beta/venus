@@ -8,7 +8,8 @@ import { Router, Route, Link, Switch } from 'react-router-dom';
 // import TabContainer from './TabContainer'
 import { myContext } from '../contexts/globalContext';
 import { AddService }  from './AddService'
-
+import { Paper, Grid } from "@material-ui/core";
+import { Button } from '@material-ui/core';
 
 function NavBar(): JSX.Element {
 	// const [will, setWill] = useState('')
@@ -27,17 +28,23 @@ function NavBar(): JSX.Element {
 
   return(
 		<div id="navBar">
+      <Paper>
+        <Grid container direction="column">
+      <AddService />
+      <br />
       <Switch>
         <Route exact path='/'>
           <div>
             <Link className="navbarButtons" to="/">
-              <button>Current Status</button>
+              <Button>Current Status</Button>
             </Link>
+            < br/>
             <Link className="navbarButtons" to="/historical">
-              <button>Historical Status</button>
+              <Button>Historical Status</Button>
             </Link>
+            <br />
             <Link className="navbarButtons" to="/dependencies">
-              <button>Dependency Graph</button>
+              <Button>Dependency Graph</Button>
             </Link>
           </div>
         </Route>
@@ -47,8 +54,8 @@ function NavBar(): JSX.Element {
             <Route path="/dependency" component={AddService} />
         
       </Switch>
-
-      <AddService />
+      </Grid>
+      </Paper>
     </div>
 
 )}
