@@ -7,20 +7,19 @@
  import React, {useContext, useEffect} from 'react';
 //  import TabContainer from './TabContainer'
 import  { ServiceContainer } from './ServiceContainer';
-import { ChartContainer } from './ChartContainer';
 import { AggregateStats } from '../components/AggregateStats';
-import { initialState, myContext, AppState } from '../contexts/globalContext'
+import { initialState, myContext, AppState } from '../contexts/globalContext';
+import { Divider } from 'antd';
 
 function  Dashboard(): JSX.Element{
-  
     return(
-      <div id="dashboard">
-        <h1>Dashboard Container</h1>             
+      <div id="dashboard">          
         <AggregateStats />
-        <ServiceContainer />
+        <Divider></Divider>
+        <ServiceContainer/>
       </div>
-    )
- }
+  )
+ };
 
  export { Dashboard };
  // exports to MainContainer
