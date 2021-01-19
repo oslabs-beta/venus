@@ -4,6 +4,8 @@
  */
 
 import React from 'react'
+// import performanceChart1 from '../imgs/performanceChart1.png';
+// const logo = require('../imgs/performanceChart1.png')
 
 function Chart (): JSX.Element{
     return (
