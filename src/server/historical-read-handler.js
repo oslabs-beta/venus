@@ -75,11 +75,7 @@ const readAndWriteToDB = async () => {
           id: log[0]
         }; 
 
-        console.log('result inside transformer:', result); 
-        console.log('log iterable inside transformer:', log); 
-
         const fieldNamesValues = log[1]; 
-        console.log('fieldNamesValues:', fieldNamesValues); 
 
         for(let i = 0; i < fieldNamesValues.length; i+=2){
             const k = fieldNamesValues[i]; 
