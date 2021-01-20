@@ -72,11 +72,11 @@ const readAndWriteToDB = async () => {
       const newResult = []; 
       for(const log of result[0][1]){
         const obj = {
-          id: r[0]
+          id: log[0]
         }; 
 
         console.log('result inside transformer:', result); 
-        console.log('r iterable inside transformer:', r); 
+        console.log('log iterable inside transformer:', log); 
 
         const fieldNamesValues = r[1]; 
         console.log('fieldNamesValues:', fieldNamesValues); 
