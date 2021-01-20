@@ -87,9 +87,9 @@ const readAndWriteToDB = async () => {
 
   streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
 
-  // console.log('XREAD, response with reply transformer'); 
+  console.log('XREAD, response with reply transformer'); 
   // //real-time entries should be sent for processing elsewhere 
-  // console.log(streamEntries); 
+  console.log(streamEntries); 
 
   console.log(`Writing to table ${DB_NAME}...`); 
 
