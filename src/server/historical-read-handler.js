@@ -82,9 +82,9 @@ const readAndWriteToDB = async () => {
   console.log('mostRecentTimeStamp: ', mostRecentTimeStamp); 
   streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
 
-  // console.log('XREAD, response with reply transformer'); 
+  console.log('XREAD, response with reply transformer'); 
   // //real-time entries should be sent for processing elsewhere 
-  // console.log(streamEntries); 
+  console.log(streamEntries); 
 
   console.log(`Writing to table ${DB_NAME}...`); 
 
@@ -125,12 +125,13 @@ const readAndWriteToDB = async () => {
 
 try {
   setInterval(async () => { 
-    client.query('SELECT * FROM logs;', (err, result) => {
+    client.query('SELECT * FROM logs LIMIT 1;', (err, result) => {
       if(err){
         console.log(err); 
       } else {
-        console.log('result from limit 1 query: ',result); 
+        // console.log('result from limit 1 query: ',result); 
         mostRecentTimeStamp = result.rows[0].redis_timestamp; 
+        console.log('mostRecentTimeStamp: ', mostRecentTimeStamp); 
       }
     })
     await readAndWriteToDB()
