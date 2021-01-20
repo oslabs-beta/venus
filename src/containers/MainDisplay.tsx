@@ -14,7 +14,6 @@ import { DependencyGraph } from "./DependencyGraph";
 import Button from "antd/es/button";
 import Typography from "antd/es/typography";
 import { Layout, Menu } from "antd";
-import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined, VideoCameraOutlined, UploadOutlined,} from '@ant-design/icons';
 const { Title } = Typography;
 const { Header, Sider, Content} = Layout
 
@@ -53,6 +52,7 @@ function MainDisplay(): JSX.Element {
                   </div>
                 </Link>
               </Menu.Item>
+              <div>test</div>
             </Menu>
           </Sider>
             <Content>

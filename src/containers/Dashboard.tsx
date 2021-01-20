@@ -90,6 +90,54 @@ function  Dashboard(): JSX.Element{
       load: '1000hpm',
       error: '2%'
     },
+    {
+      service: 'Stripe API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Surfline API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Unemployment API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'AWS API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Codesmith API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Plaid API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
   ];
   
   for (let i = 0; i < source.length; i++) {
