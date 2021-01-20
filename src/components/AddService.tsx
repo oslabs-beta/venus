@@ -4,7 +4,8 @@
 //  */
 
 import React, { useContext, useState, useEffect, ContextType } from 'react';
-import { Button , Modal } from 'antd';
+import Button from 'antd/es/button';
+import Modal from 'antd/es/modal';
 import { InputForm } from "./InputForm"
 
 

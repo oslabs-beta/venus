@@ -1,5 +1,11 @@
-import { Form, Input, Button, Space, Select } from 'antd';
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+
+import MinusCircleOutlined from '@ant-design/icons/MinusCircleFilled';
+import PlusOutlined from '@ant-design/icons/PlusOutlined';
+import Form from 'antd/es/form';
+import Input from 'antd/es/input';
+import Button from 'antd/es/button';
+import Space from 'antd/es/space';
+import Select from 'antd/es/select'
 import React, { useContext, useState, useEffect, ContextType } from 'react';
 
 const { Option } = Select;

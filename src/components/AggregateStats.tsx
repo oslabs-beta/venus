@@ -5,8 +5,10 @@
  */
 
 import React from 'react'
-import { Statistic, Card, Row, Col } from 'antd';
-
+import Statistic from 'antd/es/statistic'
+import Card from 'antd/es/card'
+import Row from 'antd/es/row'
+import Col from 'antd/es/col'
 										
 function AggregateStats(): JSX.Element{
     return (

@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ReactDom, { render } from 'react-dom';
 import './style.scss';
-
 import { MainDisplay } from './containers/MainDisplay'
-
 import { ContextProvider } from './contexts/globalContext'
 // import { myContext } from './contexts/globalContext'
 import { BrowserRouter  } from 'react-router-dom';
 
 const App: React.FC = () => {
-
   const [urls, setUrls] = useState<string[]>([])
-
   useEffect(() => {
     setUrls(['evan']);
   }, [])

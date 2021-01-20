@@ -1,5 +1,5 @@
 import React  from 'react';
-import { Line } from '@ant-design/charts' ;   
+import Line from '@ant-design/charts/es/line' ;   
 
 function LineGraph(): JSX.Element {
   const data:any = [ 
