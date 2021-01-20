@@ -159,7 +159,7 @@ try {
     //   }
     // })
 
-    readAndWriteToDB();
+    await readAndWriteToDB();
   }, PING_RATE); 
 } catch (e) {
   console.error(e); 
