@@ -66,37 +66,61 @@ const readAndWriteToDB = async () => {
 
   console.log(streamEntries); 
 
-  //Transform xread's output from two arrays of keys and value into one array of log objects
+  // //Transform xread's output from two arrays of keys and value into one array of log objects
+  // Redis.Command.setReplyTransformer('xread', function (result) {
+  //   if(Array.isArray(result)){
+  //     const newResult = []; 
+  //     for(const r of result[1]){
+  //       const obj = {
+  //         id: r[0]
+  //       }; 
+
+  //       console.log('result inside transformer:', result); 
+  //       console.log('r iterable inside transformer:', r); 
+
+  //       const fieldNamesValues = r[1]; 
+  //       console.log('fieldNamesValues:', fieldNamesValues); 
+
+  //       for(let i = 0; i < fieldNamesValues.length; i++){
+  //         for(let j = 0; j < fieldNamesValues[i]; j += 2){
+  //           const k = fieldNamesValues[i][j]; 
+  //           const v = fieldNamesValues[i][j + 1]; 
+  //           obj[k] = v; 
+  //         }
+  //         newResult.push(obj); 
+  //       }
+  //     }
+
+  //     return newResult; 
+  //   }
+
+  //   return result; 
+  // }); 
+
   Redis.Command.setReplyTransformer('xread', function (result) {
     if(Array.isArray(result)){
+      
       const newResult = []; 
-      for(const r of result){
-        const obj = {
-          id: r[0]
-        }; 
 
-        console.log('result inside transformer:', result); 
-        console.log('r iterable inside transformer:', r); 
-
-        const fieldNamesValues = r[1]; 
-        console.log('fieldNamesValues:', fieldNamesValues); 
-
-        for(let i = 0; i < fieldNamesValues.length; i++){
-          for(let j = 0; j < fieldNamesValues[i]; j += 2){
-            const k = fieldNamesValues[i][j]; 
-            const v = fieldNamesValues[i][j + 1]; 
-            obj[k] = v; 
-          }
-          newResult.push(obj); 
+      for(const log in result[1]){
+        let obj = {
+          id: log[0]
         }
+
+        for(let i = 0; i < log[1].length; i +=2){
+          const k = log[1][i]; 
+          const v = log[1][i + 1]; 
+          obj[k] = v; 
+        }
+
+        newResult.push(obj); 
       }
 
-      return newResult; 
+      return newResult
     }
 
     return result; 
-  }); 
-
+  });
 
 
   //QUERY STREAM
@@ -108,16 +132,6 @@ const readAndWriteToDB = async () => {
   console.log(streamEntries); 
 
   console.log(`Writing to table ${DB_NAME}...`); 
-
-  // streamEntries.forEach( async (log) => {
-
-  //   const params = {
-  //     TableName: TABLE_NAME, 
-  //     Item: log
-  //   }
-
-  //   await docClient.put(params).promise(); 
-  // })
 
   //WRITE TO THE DATABASE
 
