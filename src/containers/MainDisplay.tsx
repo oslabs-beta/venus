@@ -28,10 +28,7 @@ function MainDisplay(): JSX.Element {
       <Switch>
         <Layout className="custom" style={{minHeight:"100vh", minWidth: "100vw"}} hasSider={true}>
           <Sider theme="light">
-          <Space>
-            <Title level={2} className="title">VENUS</Title>
-          </Space>
-          
+          <Title level={2} className="title">VENUS</Title>
           <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
               <Menu.Item key="1" >
                 <Link to="/">
@@ -55,21 +52,18 @@ function MainDisplay(): JSX.Element {
                 </Link>
               </Menu.Item>
             </Menu>
-            {/* <Button type="primary" shape="round" size={"large"}>
-              Add Service
-            </Button> */}
-            <div className="addService">
-              <AddService />
-            </div>
-          </Sider>
+              <div className="addService">
+                <AddService />
+              </div>
+            </Sider>
           <Layout>
-          <Header style={{backgroundColor: "#fff"}}/>
-            <Content>
-              <Route path="/" exact component={Dashboard} />
-              <Route path="/historicalData" component={ChartContainer} />
-              <Route path="/dependencyGraph" component={DependencyGraph} />
-            </Content>
-            </Layout>
+            <Header style={{backgroundColor: "#fff"}}/>
+              <Content>
+                <Route path="/" exact component={Dashboard} />
+                <Route path="/historicalData" component={ChartContainer} />
+                <Route path="/dependencyGraph" component={DependencyGraph} />
+              </Content>
+          </Layout>
         </Layout>  
       </Switch>
     </Router>
