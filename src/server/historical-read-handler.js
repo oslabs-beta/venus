@@ -60,6 +60,9 @@ const readAndWriteToDB = async () => {
     }
   })
   
+  streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
+
+  console.log('XREAD, response without reply transformer'); 
 
   //Transform xread's output from two arrays of keys and value into one array of log objects
   Redis.Command.setReplyTransformer('xread', function (result) {
