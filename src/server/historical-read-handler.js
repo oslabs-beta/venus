@@ -56,6 +56,12 @@ const readAndWriteToDB = async () => {
     } else {
       console.log('result from limit 1 query: ',result); 
       mostRecentTimeStamp = result.rows[0].redis_timestamp; 
+
+      try {
+        setInterval(async () => { await readAndWriteToDB()}, PING_RATE); 
+      } catch (e) {
+        console.error(e); 
+      }
     }
   })
 
@@ -130,8 +136,3 @@ const readAndWriteToDB = async () => {
   }
 }
 
-try {
-  setInterval(async () => { await readAndWriteToDB()}, PING_RATE); 
-} catch (e) {
-  console.error(e); 
-}
