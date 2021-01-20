@@ -57,12 +57,6 @@ const readAndWriteToDB = async () => {
       mostRecentTimeStamp = result.rows[0].redis_timestamp; 
     }
   })
-  
-  streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
-
-  console.log('XREAD, response without reply transformer'); 
-
-  console.log(streamEntries); 
 
   // //Transform xread's output from two arrays of keys and value into one array of log objects
   Redis.Command.setReplyTransformer('xread', function (result) {
@@ -93,9 +87,9 @@ const readAndWriteToDB = async () => {
 
   streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
 
-  console.log('XREAD, response with reply transformer'); 
-  //real-time entries should be sent for processing elsewhere 
-  console.log(streamEntries); 
+  // console.log('XREAD, response with reply transformer'); 
+  // //real-time entries should be sent for processing elsewhere 
+  // console.log(streamEntries); 
 
   console.log(`Writing to table ${DB_NAME}...`); 
 
@@ -117,7 +111,7 @@ const readAndWriteToDB = async () => {
       if(err){
         console.log(err); 
       } else {
-        console.log(`Finished writing to ${DB_NAME}...`); 
+        console.log(`Finished writing to ${DB_NAME}...`, result.rows); 
       }
     })
   } else {
