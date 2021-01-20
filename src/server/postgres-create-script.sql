@@ -20,6 +20,7 @@ INSERT INTO logs (
   redis_timestamp, 
   req_method, 
   req_host,
+  req_path,
   req_url,
   res_status_code,
   res_message,
