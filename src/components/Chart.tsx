@@ -8,7 +8,7 @@ import React from 'react'
 function Chart (): JSX.Element{
     return (
         <div className="chart">
-            <h1>Individual Chart in chart container</h1>
+            <h1>Individual Chart</h1>
             {/* create onClick method */}
         </div>
     )

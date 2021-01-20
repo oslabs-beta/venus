@@ -6,28 +6,193 @@
 
  import React, {useContext, useEffect} from 'react';
 //  import TabContainer from './TabContainer'
-import  { ServiceContainer } from './ServiceContainer';
-import { ChartContainer } from './ChartContainer';
 import { AggregateStats } from '../components/AggregateStats';
-import { initialState, myContext, AppState } from '../contexts/globalContext'
+import { initialState, myContext, AppState } from '../contexts/globalContext';
+import { Divider } from 'antd';
+import { Table, Tag } from 'antd';
 
-export default function  Dashboard(): JSX.Element{
+
+function  Dashboard(): JSX.Element{
+
+    const expandedRowRender: any = () => {
   
-  // const { urls } = useContext<AppState>(initialState)
+      const subColumns = [
+        { 
+          title: 'Path', 
+          dataIndex: 'path', 
+          key: 'path' },
+        { 
+          title: 'Method', 
+          dataIndex: 'method', 
+          key: 'method' 
+        },
+        {
+          title: 'Status',
+          dataIndex: 'status',
+          key: 'status',
+          render: () => (
+          <Tag color={'green'} key={'test'}>GOOD</Tag> 
+          ),
+        },
+        {
+          title: 'Uptime',
+          dataIndex: 'uptime',
+          key: 'uptime',
+        },
+        {
+          title: 'Latency',
+          dataIndex: 'latency',
+          key: 'latency',
+        },
+        {
+          title: 'Load',
+          dataIndex: 'load',
+          key: 'load',
+        },
+        {
+          title: 'Error',
+          dataIndex: 'error',
+          key: 'error',
+        },
+      ];
   
-  // useEffect(() =>{
-  //     window 
-  //   console.log(urls, "useEffect in dashboard")
-  // }, [urls])
   
+      const subDataSource: any = [
+        {
+          path: '/WEATHER',
+          method: 'GET',
+          status: 'good',
+          uptime: '98%',      
+          latency: '300ms',
+          load: '1000hpm',
+          error: '2%'
+        }
+      ];
+      return <Table columns={subColumns} dataSource={subDataSource} pagination={false} />
+    }
+  
+  
+  const dataSource: any = [];
+  const source: any = [ 
+    {
+      service: 'Google Weather API',
+      status: 'good',
+      uptime: '98%',      
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Surfline API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Stripe API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Surfline API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Unemployment API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'AWS API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Codesmith API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Plaid API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+  ];
+  
+  for (let i = 0; i < source.length; i++) {
+    source[i].key = i;
+    dataSource.push(source[i])
+  }
+  const columns: any = [
+    {
+      title: 'Service',
+      dataIndex: 'service',
+      key: 'service',
+      // sorter: {
+      //   compare: (a:any, b:any) => a.title.length - b.title.length,
+      //   multiple: 1,
+      // }
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      render: () => (
+      <Tag color={'green'} key={'test'}>GOOD</Tag>
+      ),
+    },
+    {
+      title: 'Uptime',
+      dataIndex: 'uptime',
+      key: 'uptime',
+    },
+    {
+      title: 'Latency',
+      dataIndex: 'latency',
+      key: 'latency',
+    },
+    {
+      title: 'Load',
+      dataIndex: 'load',
+      key: 'load',
+    },
+    {
+      title: 'Error',
+      dataIndex: 'error',
+      key: 'error',
+    },
+  ];
+  
+
     return(
-        <div id="dashboard">
-        <h1>This is the dashboard</h1>
-        <h1>test</h1>                
+      <div id="dashboard">          
         <AggregateStats />
-        <ServiceContainer />
-        <ChartContainer />
-        </div>
-    )
- }
+        <Divider></Divider>
+        <Table columns={columns} dataSource={dataSource} pagination={false} expandable={{expandedRowRender}} style={{width: "100%"}} />
+      </div>
+  )
+ };
+
+ export { Dashboard };
  // exports to MainContainer

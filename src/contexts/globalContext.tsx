@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 export type AppState = {
   urls: string[];
   setUrls: (urls: string[]) => void;
-
 };
+
 export const initialState: AppState = {
   urls: [],
   setUrls: () => {}

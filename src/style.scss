@@ -1,42 +1,79 @@
-.app {
-  color: green;
-  font-size: x-large;
-  border: 1px black dotted;
+@import '~antd/dist/antd.css';
+
+.graphHolder {
+  width: fit-content;
+  height:fit-content;
 }
 
-;
-
-body {
-  display: flex;
+.addService {
+  width: 100%;
+  height: 100%;
   justify-content: center;
-  align-items: center;
-  color: rgb(52, 250, 52);
+  background-color: blueviolet;
 }
 
-// #mainDisplay {
-//   background-color: rgb(88, 241, 247);
-// }
+.title{
+  margin-left: 16px;
+  margin-top: 4px;
+  margin-bottom: 0px;
+}
 
-// #dashboard {
-//   background-color: rgb(233, 230, 88);
-// }
 
-// #navBar {
-//   background-color: rgb(96, 247, 82);
-// }
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+#components-layout-demo-custom-trigger .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 16px;
+}
 
 #serviceContainer {
-  background-color: rgb(1, 101, 252);
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: auto
 }
 
-#tabContainer {
-  background-color: rgb(68, 6, 139);
-  margin-top: 500px;
-  ;
+.dataContainer {
+  border: 1px solid black;
+  background-color: white;
+  margin: 5px;
+  align-items: center;
+  justify-content: center;
+  align-self: center
+}
+
+.allStats {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 #chartContainer {
-  background-color: sienna;
+  flex-grow: 10;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  height: 100%;
 }
 
 // styling for navBar and dashboard
@@ -48,46 +85,25 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: black;
-}
 
-#navBar {
-  display: flex;
-  justify-content: center;
-  background-color: black;
-  flex-grow: 1;
-  padding: 10px;
-  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
 }
 
 #dashboard {
+  padding: 10px;
   flex-grow: 10;
   display: flex;
-  background-color: black;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  padding: 10px;
-  border: 3px solid grey
 }
 
 .serviceCard {
   background-color: rgb(79, 17, 138);
 }
 
-.chart {
-  background-color: coral;
-}
-
-.tab {
-  background-color: blue
-}
-
-.aggStats {
-  background-color: gray;
-}
-
-.cardDrop {
-  background-color: rgb(255, 115, 0)
+.custom {
+  .ant-collapse-content-box {
+    padding: 0;
+    max-width: 0;
+   }
 }
