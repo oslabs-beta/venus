@@ -122,6 +122,14 @@ const readAndWriteToDB = async () => {
     }
   })
 
+  client.query('SELECT * FROM logs', (err, result) => {
+    if(err){
+      console.log(err); 
+    } else {
+      console.log(`Read from DB...`); 
+    }
+  })
+
 }
 
 try {
