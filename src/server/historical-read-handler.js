@@ -113,16 +113,7 @@ const readAndWriteToDB = async () => {
         console.log(`Finished writing to ${DB_NAME}...`, result); 
       }
     })
-  } else {
-      
-  //   client.query('SELECT * FROM logs', (err, result) => {
-  //     if(err){
-  //       console.log(err); 
-  //     } else {
-  //       console.log(`Result of ${TABLE_NAME}:`, result); 
-  //     }
-  //   })
-  // }
+  }
 }
 
 try {
