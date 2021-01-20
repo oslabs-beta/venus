@@ -79,8 +79,8 @@ const readAndWriteToDB = async () => {
 
   //QUERY STREAM
 
-  // streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
-  streamEntries = await redis.xread('BLOCK', PING_RATE, 'STREAMS', STREAM_KEY, '$'); 
+  streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
+  // streamEntries = await redis.xread('BLOCK', PING_RATE, 'STREAMS', STREAM_KEY, '$'); 
 
   console.log('XREAD, response with reply transformer'); 
   // //real-time entries should be sent for processing elsewhere 
