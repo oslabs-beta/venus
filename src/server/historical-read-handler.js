@@ -111,7 +111,7 @@ const readAndWriteToDB = async () => {
       if(err){
         console.log(err); 
       } else {
-        console.log(`Finished writing to ${DB_NAME}...`, result.rows); 
+        console.log(`Finished writing to ${DB_NAME}...`, result); 
       }
     })
   } else {
