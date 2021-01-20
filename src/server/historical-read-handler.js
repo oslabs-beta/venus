@@ -70,13 +70,16 @@ const readAndWriteToDB = async () => {
   Redis.Command.setReplyTransformer('xread', function (result) {
     if(Array.isArray(result)){
       const newResult = []; 
-      const fedResult = result[STREAM_KEY]; 
-      for(const r of fedResult){
+      for(const r of result){
         const obj = {
           id: r[0]
         }; 
 
+        console.log('result inside transformer:', result); 
+        console.log('r iterable inside transformer:', r); 
+
         const fieldNamesValues = r[1]; 
+        console.log('fieldNamesValues:', fieldNamesValues); 
 
         for(let i = 0; i < fieldNamesValues.length; i += 2){
           const k = fieldNamesValues[i]; 
@@ -90,7 +93,7 @@ const readAndWriteToDB = async () => {
       return newResult; 
     }
 
-    return fedResult; 
+    return result; 
   }); 
 
 
