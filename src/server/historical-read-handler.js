@@ -103,36 +103,35 @@ const readAndWriteToDB = async () => {
 
   let queryText = `INSERT INTO ${TABLE_NAME} (id, req_method, req_host, req_path, req_URL, res_status_code, res_message, cycle_duration) VALUES `; 
 
-  streamEntries.forEach( (log) => {
-    queryText += `('${streamEntries[0].id}', '${streamEntries[0].reqMethod}', '${streamEntries[0].reqHost}', '${streamEntries[0].reqPath}', '${streamEntries[0].reqURL}', '${streamEntries[0].resStatusCode}', '${streamEntries[0].resMessage}', '${streamEntries[0].cycleDuration}'),`; 
-  })
+  if(streamEntries.length !== 0){
+    streamEntries.forEach( (log) => {
+      queryText += `('${streamEntries[0].id}', '${streamEntries[0].reqMethod}', '${streamEntries[0].reqHost}', '${streamEntries[0].reqPath}', '${streamEntries[0].reqURL}', '${streamEntries[0].resStatusCode}', '${streamEntries[0].resMessage}', '${streamEntries[0].cycleDuration}'),`; 
+    })
+  
+    //Modify the last comma and replace with a semi-colon
+    queryText = queryText.slice(0, queryText.length - 1); 
+    queryText += ';'; 
+  
+    console.log('queryText:', queryText)
 
-  //Modify the last comma and replace with a semi-colon
-  queryText = queryText.slice(0, queryText.length - 1); 
-  queryText += ';'; 
-
-  console.log('queryText:', queryText)
-
-  client.query('SELECT * FROM logs', (err, result) => {
-    if(err){
-      console.log(err); 
-    } else {
-      console.log(`Read from DB...`); 
-    }
-  })
-
-
-  //Write to the database
-  client.query(queryText, (err, result) => {
-    if(err){
-      console.log(err); 
-    } else {
-      console.log(`Finished writing to ${DB_NAME}...`); 
-    }
-  })
-
-
-
+    //Write to the database
+    client.query(queryText, (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        console.log(`Finished writing to ${DB_NAME}...`); 
+      }
+    })
+  } else {
+      
+    client.query('SELECT * FROM logs', (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        console.log(`Read from DB...`); 
+      }
+    })
+  }
 }
 
 try {
