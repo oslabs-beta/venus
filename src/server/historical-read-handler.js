@@ -117,13 +117,13 @@ const readAndWriteToDB = async () => {
   // //real-time entries should be sent for processing elsewhere 
   console.log(streamEntries); 
 
-  console.log(`Writing to table ${DB_NAME}...`); 
-
   //WRITE TO THE DATABASE
-
   let queryText = `INSERT INTO ${TABLE_NAME} (redis_timestamp, req_method, req_host, req_path, req_url, res_status_code, res_message, cycle_duration) VALUES `; 
 
   if(streamEntries.length !== 0){
+
+    console.log(`Writing to table ${DB_NAME}...`);
+
     streamEntries.forEach( (log) => {
       console.log('log: ', log); 
       queryText += `('${log.id}', '${log.reqMethod}', '${log.reqHost}', '${log.reqPath}', '${log.reqURL}', '${log.resStatusCode}', '${log.resMessage}', '${log.cycleDuration}'),`; 
@@ -147,7 +147,7 @@ const readAndWriteToDB = async () => {
 }
 
 try {
-  setInterval(async () => { await readAndWriteToDB(); }, PING_RATE); 
+  setInterval(async () => { await readAndWriteToDB() }, PING_RATE); 
 } catch (e) {
   console.error(e); 
 }
