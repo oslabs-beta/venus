@@ -51,16 +51,17 @@ const readAndWriteToDB = async () => {
   const startTime = Date.now() - INTERVAL; 
   const endTime = startTime + INTERVAL; 
   const mostRecentTimeStamp; 
-  
 
-  client.query('SELECT * FROM logs LIMIT 1 ORDER BY redis_timestamp;', (err, result) => {
+  client.query('SELECT * FROM logs LIMIT 1 ORDER BY redis_timestamp', (err, result) => {
     if(err){
       console.log(err); 
     } else {
-      mostRecentTimeStamp = result[0].redis_timestamp; 
-  }
+      mostRecentTimeStamp = result.rows[0].redis_timestamp; 
+    }
+  })
+  
 
-  //Transform xrange's output from two arrays of keys and value into one array of log objects
+  //Transform xread's output from two arrays of keys and value into one array of log objects
   Redis.Command.setReplyTransformer('xread', function (result) {
     if(Array.isArray(result)){
       const newResult = []; 
@@ -97,6 +98,16 @@ const readAndWriteToDB = async () => {
   console.log(streamEntries); 
 
   console.log(`Writing to table ${DB_NAME}...`); 
+
+  // streamEntries.forEach( async (log) => {
+
+  //   const params = {
+  //     TableName: TABLE_NAME, 
+  //     Item: log
+  //   }
+
+  //   await docClient.put(params).promise(); 
+  // })
 
   //WRITE TO THE DATABASE
 
