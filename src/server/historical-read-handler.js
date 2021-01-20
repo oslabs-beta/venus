@@ -36,34 +36,21 @@ const client = new Client({
 
 client.connect(); 
 
-// const dbconnection = async () => {
-//   await client.connect(); 
-//   console.log('Successfully connected to the database!'); 
-// }
-
-// dbconnection(); 
+//Get the milliseconds for start and end time
+let mostRecentTimeStamp = '0-0'
 
 console.log(`Reading the stream named ${STREAM_KEY}...`); 
 
 const readAndWriteToDB = async () => {
 
-  //Get the milliseconds for start and end time
-  let mostRecentTimeStamp = '0-0'; 
-
-  await client.query('SELECT * FROM logs;', (err, result) => {
-    if(err){
-      console.log(err); 
-    } else {
-      console.log('result from limit 1 query: ',result); 
-      mostRecentTimeStamp = result.rows[0].redis_timestamp; 
-
-      try {
-        setInterval(async () => { await readAndWriteToDB()}, PING_RATE); 
-      } catch (e) {
-        console.error(e); 
-      }
-    }
-  })
+  // client.query('SELECT * FROM logs;', (err, result) => {
+  //   if(err){
+  //     console.log(err); 
+  //   } else {
+  //     console.log('result from limit 1 query: ',result); 
+  //     mostRecentTimeStamp = result.rows[0].redis_timestamp; 
+  //   }
+  // })
 
   // //Transform xread's output from two arrays of keys and value into one array of log objects
   Redis.Command.setReplyTransformer('xread', function (result) {
@@ -136,3 +123,18 @@ const readAndWriteToDB = async () => {
   }
 }
 
+try {
+  setInterval(async () => { 
+    client.query('SELECT * FROM logs;', (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        console.log('result from limit 1 query: ',result); 
+        mostRecentTimeStamp = result.rows[0].redis_timestamp; 
+      }
+    })
+    await readAndWriteToDB()
+  }, PING_RATE); 
+} catch (e) {
+  console.error(e); 
+}
