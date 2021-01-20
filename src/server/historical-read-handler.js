@@ -50,83 +50,84 @@ const readAndWriteToDB = async () => {
   //Get the milliseconds for start and end time
   let mostRecentTimeStamp = '0-0'; 
 
-  client.query('SELECT * FROM logs LIMIT 1;', (err, result) => {
+  await client.query('SELECT * FROM logs LIMIT 1;', (err, result) => {
     if(err){
       console.log(err); 
     } else {
       console.log('result from limit 1 query: ',result); 
       mostRecentTimeStamp = result.rows[0].redis_timestamp; 
-        // //Transform xread's output from two arrays of keys and value into one array of log objects
-      Redis.Command.setReplyTransformer('xread', function (result) {
-        if(Array.isArray(result)){
-          const newResult = []; 
-          for(const log of result[0][1]){
-            const obj = {
-              id: log[0]
-            }; 
-
-            const fieldNamesValues = log[1]; 
-
-            for(let i = 0; i < fieldNamesValues.length; i+=2){
-                const k = fieldNamesValues[i]; 
-                const v = fieldNamesValues[i + 1]; 
-                obj[k] = v; 
-            }
-            newResult.push(obj); 
-          }
-
-          return newResult; 
-        }
-
-        return result; 
-      }); 
-
-      //QUERY STREAM
-
-      console.log('mostRecentTimeStamp: ', mostRecentTimeStamp); 
-      streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
-
-      console.log('XREAD, response with reply transformer'); 
-      // //real-time entries should be sent for processing elsewhere 
-      console.log(streamEntries); 
-
-      console.log(`Writing to table ${DB_NAME}...`); 
-
-      //WRITE TO THE DATABASE
-
-      let queryText = `INSERT INTO ${TABLE_NAME} (redis_timestamp, req_method, req_host, req_path, req_url, res_status_code, res_message, cycle_duration) VALUES `; 
-
-      if(streamEntries.length !== 0){
-        streamEntries.forEach( (log) => {
-          queryText += `('${streamEntries[0].id}', '${streamEntries[0].reqMethod}', '${streamEntries[0].reqHost}', '${streamEntries[0].reqPath}', '${streamEntries[0].reqURL}', '${streamEntries[0].resStatusCode}', '${streamEntries[0].resMessage}', '${streamEntries[0].cycleDuration}'),`; 
-        })
-      
-        //Modify the last comma and replace with a semi-colon
-        queryText = queryText.slice(0, queryText.length - 1); 
-        queryText += ';'; 
-
-        console.log('finalquerytext: ', queryText); 
-      
-        //Write to the database
-        client.query(queryText, (err, result) => {
-          if(err){
-            console.log(err); 
-          } else {
-            console.log(`Finished writing to ${DB_NAME}...`, result); 
-          }
-        })
-      } else {
-          
-        client.query('SELECT * FROM logs', (err, result) => {
-          if(err){
-            console.log(err); 
-          } else {
-            console.log(`Result of ${TABLE_NAME}:`, result); 
-          }
-        })
-      }
     }
   })
+
+  // //Transform xread's output from two arrays of keys and value into one array of log objects
+  Redis.Command.setReplyTransformer('xread', function (result) {
+    if(Array.isArray(result)){
+      const newResult = []; 
+      for(const log of result[0][1]){
+        const obj = {
+          id: log[0]
+        }; 
+
+        const fieldNamesValues = log[1]; 
+
+        for(let i = 0; i < fieldNamesValues.length; i+=2){
+            const k = fieldNamesValues[i]; 
+            const v = fieldNamesValues[i + 1]; 
+            obj[k] = v; 
+        }
+        newResult.push(obj); 
+      }
+
+      return newResult; 
+    }
+
+    return result; 
+  }); 
+
+  //QUERY STREAM
+
+  console.log('mostRecentTimeStamp: ', mostRecentTimeStamp); 
+  streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
+
+  console.log('XREAD, response with reply transformer'); 
+  // //real-time entries should be sent for processing elsewhere 
+  console.log(streamEntries); 
+
+  console.log(`Writing to table ${DB_NAME}...`); 
+
+  //WRITE TO THE DATABASE
+
+  let queryText = `INSERT INTO ${TABLE_NAME} (redis_timestamp, req_method, req_host, req_path, req_url, res_status_code, res_message, cycle_duration) VALUES `; 
+
+  if(streamEntries.length !== 0){
+    streamEntries.forEach( (log) => {
+      queryText += `('${streamEntries[0].id}', '${streamEntries[0].reqMethod}', '${streamEntries[0].reqHost}', '${streamEntries[0].reqPath}', '${streamEntries[0].reqURL}', '${streamEntries[0].resStatusCode}', '${streamEntries[0].resMessage}', '${streamEntries[0].cycleDuration}'),`; 
+    })
+  
+    //Modify the last comma and replace with a semi-colon
+    queryText = queryText.slice(0, queryText.length - 1); 
+    queryText += ';'; 
+
+    console.log('finalquerytext: ', queryText); 
+  
+    //Write to the database
+    client.query(queryText, (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        console.log(`Finished writing to ${DB_NAME}...`, result); 
+      }
+    })
+  } else {
+      
+    client.query('SELECT * FROM logs', (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        console.log(`Result of ${TABLE_NAME}:`, result); 
+      }
+    })
+  }
 }
 
 try {
