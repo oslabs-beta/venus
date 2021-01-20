@@ -39,6 +39,15 @@ console.log(`Reading the stream named ${STREAM_KEY}...`);
 
 const readAndWriteToDB = async () => {
 
+  //Write to the database
+  client.query('SELECT * FROM logs', (err, result) => {
+    if(err){
+      console.log(err); 
+    } else {
+      console.log(`Finished reading ${DB_NAME}...`, result); 
+    }
+  })
+
   //Get the milliseconds for start and end time
   const startTime = Date.now() - INTERVAL; 
   const endTime = startTime + INTERVAL;  
