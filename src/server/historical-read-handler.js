@@ -12,7 +12,7 @@ const PING_RATE = 3000;
 //Where Redis is being hosted (either local machine or elasticache)
 const REDIS_HOST = 'venus-redis-micro.syohjt.ng.0001.use2.cache.amazonaws.com'
 
-const TABLE_NAME = 'log_data_second'; 
+const DB_NAME = 'log-database-1'; 
 
 const REGION = 'us-east-2'
 
@@ -26,7 +26,7 @@ const redis = new Redis({
 const client = new Client({
   user: 'postgres', 
   host: 'log-database-1.cluster-czysdiigcqcb.us-east-2.rds.amazonaws.com', 
-  database: 'log-database-1', 
+  database: DB_NAME, 
   password: 'NMnNA2IXwfuyJcyPyBen', 
   port: 5432
 })
@@ -68,6 +68,10 @@ const readAndWriteToDB = async () => {
     return result; 
   }); 
 
+
+
+  //QUERY STREAM
+
   streamEntries = await redis.xread(STREAM_KEY, startTime, endTime); 
 
   console.log('XRANGE, response with reply transformer'); 
@@ -76,17 +80,36 @@ const readAndWriteToDB = async () => {
 
   console.log(`Writing to table ${TABLE_NAME}...`); 
 
-  streamEntries.forEach( async (log) => {
+  // streamEntries.forEach( async (log) => {
 
-    const params = {
-      TableName: TABLE_NAME, 
-      Item: log
-    }
+  //   const params = {
+  //     TableName: TABLE_NAME, 
+  //     Item: log
+  //   }
 
-    await docClient.put(params).promise(); 
+  //   await docClient.put(params).promise(); 
+  // })
+
+  //WRITE TO THE DATABASE
+
+  let queryText = `INSERT INTO ${DB_NAME} (id, reqMethod, reqHost, reqPath, reqURL, resStatusCode, resMessage, cycleDuration) VALUES `; 
+
+  streamEntries.forEach( (log) => {
+    queryText += `('${streamEntries[0].id}', '${streamEntries[0].reqMethod}', '${streamEntries[0].reqHost}', '${streamEntries[0].reqPath}', '${streamEntries[0].reqURL}', '${streamEntries[0].resStatusCode}', '${streamEntries[0].resMessage}', '${streamEntries[0].cycleDuration}'),`; 
   })
 
-  console.log(`Finished writing to ${TABLE_NAME}...`); 
+  //Modify the last comma and replace with a semi-colon
+  queryText = queryText.slice(0, queryText.length - 1); 
+  queryText += ';'; 
+
+  //Write to the database
+  client.query(queryText, (err, result) => {
+    if(err){
+      console.log(err); 
+    } else {
+      console.log(`Finished writing to ${DB_NAME}...`); 
+    }
+  })
 
 }
 
