@@ -55,7 +55,7 @@ const readAndWriteToDB = async () => {
       console.log(err); 
     } else {
       console.log('result from limit 1 query: ',result); 
-      // mostRecentTimeStamp = result.rows[0].redis_timestamp; 
+      mostRecentTimeStamp = result.rows[0].redis_timestamp; 
     }
   })
 
@@ -86,6 +86,7 @@ const readAndWriteToDB = async () => {
 
   //QUERY STREAM
 
+  console.log('mostRecentTimeStamp: ', mostRecentTimeStamp); 
   streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
 
   console.log('XREAD, response with reply transformer'); 
@@ -106,6 +107,8 @@ const readAndWriteToDB = async () => {
     //Modify the last comma and replace with a semi-colon
     queryText = queryText.slice(0, queryText.length - 1); 
     queryText += ';'; 
+
+    console.log('finalquerytext: ', queryText); 
   
     //Write to the database
     client.query(queryText, (err, result) => {
