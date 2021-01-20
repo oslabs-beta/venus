@@ -2,8 +2,10 @@ import { Layout } from 'antd';
 const { Header, Footer, Sider, Content } = Layout;
 import React, { useContext, useState } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { Form, Input, Button, Checkbox } from 'antd';
-
+import Form from 'antd/es/form';
+import Input from 'antd/es/input';
+import Button from 'antd/es/button';
+import Checkbox from 'antd/es/checkbox';
 
 function SignIn():JSX.Element {
   

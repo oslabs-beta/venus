@@ -13,7 +13,9 @@ import { ChartContainer } from "./ChartContainer";
 import { DependencyGraph } from "./DependencyGraph";
 import Button from "antd/es/button";
 import Typography from "antd/es/typography";
-import { Layout, Menu, Space } from "antd";
+import Menu from "antd/es/menu";
+import Layout from "antd/es/layout"
+import Space from "antd/es/space"
 const { Title } = Typography;
 const { Header, Sider, Content} = Layout
 

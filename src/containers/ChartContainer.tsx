@@ -10,7 +10,8 @@ import { CardDropDown } from "../components/CardDropDown";
 // import { TestChart } from "../charts/TestChart";
 import PieChart from "../charts/PieChart";
 import { Chart } from "../components/Chart";
-import { Row, Col } from 'antd'
+import Row from 'antd/es/row'
+import Col from 'antd/es/col'
 
 
 function ChartContainer(): JSX.Element {

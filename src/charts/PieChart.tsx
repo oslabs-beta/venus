@@ -1,13 +1,13 @@
 import React, { useState , useEffect } from 'react' ;    
-import { Pie , G2 } from '@ant-design/charts' ;    
+import Pie  from '@ant-design/charts/es/pie' ;    
 
 
 function PieChart(): JSX.Element {      
-  const { registerTheme } = G2 ;   
-  registerTheme ( 'custom-theme' , { 
-    colors10 : [ '#FACDAA' , '#F4A49E' , '#EE7B91' , '#E85285' , '#BE408C' , '#BE408C' ] ,      
-    colors20 : [ '#FACDAA' , '#F4A49E' , '#EE7B91' , '#E85285' , '#BE408C' , '#BE408C' , '#942D93' ] ,       
-  } ) ;
+  // const { registerTheme } = G2 ;   
+  // registerTheme ( 'custom-theme' , { 
+  //   colors10 : [ '#FACDAA' , '#F4A49E' , '#EE7B91' , '#E85285' , '#BE408C' , '#BE408C' ] ,      
+  //   colors20 : [ '#FACDAA' , '#F4A49E' , '#EE7B91' , '#E85285' , '#BE408C' , '#BE408C' , '#942D93' ] ,       
+  // } ) ;
   const data:any = [ 
     {
       type : 'Classification One' , 

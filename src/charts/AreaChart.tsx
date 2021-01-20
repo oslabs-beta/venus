@@ -1,5 +1,5 @@
 import React ,{ useState, useEffect } from'react';    
-import { Area } from '@ant-design/charts';
+import Area from '@ant-design/charts/es/area';
 function AreaChart(): JSX.Element {
   const[data, setData]=useState([]);   
   useEffect(()=>{  

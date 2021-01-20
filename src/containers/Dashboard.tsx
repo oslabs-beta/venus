@@ -8,8 +8,9 @@
 //  import TabContainer from './TabContainer'
 import { AggregateStats } from '../components/AggregateStats';
 import { initialState, myContext, AppState } from '../contexts/globalContext';
-import { Divider } from 'antd';
-import { Table, Tag } from 'antd';
+import Divider from 'antd/es/divider';
+import Table from 'antd/es/table';
+import Tag  from 'antd/es/tag';
 
 
 function  Dashboard(): JSX.Element{
