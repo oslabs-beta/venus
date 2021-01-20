@@ -2,13 +2,13 @@ const { read } = require('fs');
 const Redis = require('ioredis'); 
 
 //Name of stream we are reading from
-const STREAM_KEY = 'venus'
+const STREAM_KEY = process.env.STREAM_KEY; 
 //Interval of the stream we are processing to determine the "real-time" statistics
-const INTERVAL = 300000;
+const INTERVAL = process.env.RT_INTERVAL;
 //Rate at which we want to query the stream for data
-const PING_RATE = 3000; 
+const PING_RATE = process.env.RT_PING_RATE; 
 //Where Redis is being hosted (either local machine or elasticache)
-const REDIS_HOST = 'venus-redis-micro.syohjt.ng.0001.use2.cache.amazonaws.com'
+const REDIS_HOST = process.env.REDIS_HOST; 
 
 const redis = new Redis({
   port: 6379, 

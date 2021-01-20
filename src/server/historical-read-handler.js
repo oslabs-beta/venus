@@ -3,33 +3,32 @@ const Redis = require('ioredis');
 const { Client } = require('pg'); 
 
 //Name of stream we are reading from
-const STREAM_KEY = 'logstream'
+const STREAM_KEY = process.env.STREAM_KEY; 
 //Interval of the stream we are processing to write to the database
-const INTERVAL = 3000;
+const INTERVAL = process.env.INTERVAL;
 //Rate at which we want to query the stream for data
-const PING_RATE = 3000; 
+const PING_RATE = process.env.PING_RATE; 
 //Where Redis is being hosted (either local machine or elasticache)
-const REDIS_HOST = 'venus-redis-micro.syohjt.ng.0001.use2.cache.amazonaws.com'
-// const REDIS_HOST = 'localhost'
-
-const DB_NAME = 'postgres'; 
-
-const TABLE_NAME = 'logs'
-
-const REGION = 'us-east-2'
+const REDIS_HOST = process.env.REDIS_HOST; 
+//DB name is not DB instance name, technically it's the AWS user name
+const DB_NAME = process.env.DB_NAME; 
+//DB password 
+const DB_PASS = process.env.DB_PASS; 
+//DB table name you set up in config
+const TABLE_NAME = process.env.TABLE_NAME; 
+//AWS region that the DB instance is spun up in 
+const REGION = process.env.AWS_REGION; 
 
 const redis = new Redis({
   port: 6379, 
   host: REDIS_HOST
 });
 
-// const docClient = new dynamodb.DocumentClient({region: REGION}); 
-
 const client = new Client({
   user: DB_NAME, 
-  host: 'log-database-1.cluster-czysdiigcqcb.us-east-2.rds.amazonaws.com', 
+  host: REDIS_HOST, 
   database: DB_NAME, 
-  password: 'NMnNA2IXwfuyJcyPyBen', 
+  password: DB_PASS, 
   port: 5432
 })
 
@@ -79,23 +78,21 @@ const readAndWriteToDB = async () => {
     }); 
 
   //QUERY STREAM
-
   streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime);
 
-  console.log('XRANGE, response with reply transformer'); 
   // //real-time entries should be sent for processing elsewhere 
+  console.log('XRANGE, response with reply transformer'); 
   console.log(streamEntries); 
 
   //WRITE TO THE DATABASE
-
   let queryText = `INSERT INTO ${TABLE_NAME} (redis_timestamp, req_method, req_host, req_path, req_url, res_status_code, res_message, cycle_duration) VALUES `; 
 
   if(streamEntries.length !== 0){
 
     console.log(`Writing to table ${DB_NAME}...`); 
 
+    //Construct the query for all the new entries to the SQL table
     streamEntries.forEach( (log) => {
-      // console.log('log: ', log); 
       queryText += `('${log.id}', '${log.reqMethod}', '${log.reqHost}', '${log.reqPath}', '${log.reqURL}', '${log.resStatusCode}', '${log.resMessage}', '${log.cycleDuration}'),`; 
     })
   
@@ -103,7 +100,7 @@ const readAndWriteToDB = async () => {
     queryText = queryText.slice(0, queryText.length - 1); 
     queryText += ';'; 
   
-    //Write to the database
+    //Write the query to the database
     client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
