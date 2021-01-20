@@ -6,13 +6,21 @@
 import React from "react";
 import { CardDropDown } from "../components/CardDropDown";
 import { Chart } from "../components/Chart";
-
+import { Row, Col } from 'antd'
 function ChartContainer(): JSX.Element {
   return (
    
     <div id="chartContainer">
-      <h1>Chart Container</h1>
       <CardDropDown /> 
+
+        <Row gutter={[16, 16]}>
+          <Col span={12}>test</Col>
+          <Col span={12}>test</Col>
+        </Row>
+        <Row gutter={[16, 16]}>
+          <Col span={12}>test</Col>
+          <Col span={12}>test</Col>
+        </Row>
       <Chart />
     </div>
 

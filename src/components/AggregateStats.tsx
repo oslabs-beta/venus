@@ -5,21 +5,16 @@
  */
 
 import React from 'react'
-import Typography from 'antd/es/typography';
-// import { CheckCircleFilled } from '@ant-design/icons';
 import { Statistic, Card, Row, Col } from 'antd';
-import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 
 										
 function AggregateStats(): JSX.Element{
     return (
-		
-		<div className="aggregateStats">
-			<Row gutter={[8,8]}>
-				<Col span={7}>
-					<Card>
+			<Row gutter={30}>
+				<Col span={6}>
+					<Card bordered={true} bodyStyle={{width: "200px"}}>
 						<Statistic
-							title=" System Uptime"
+							title="System Uptime"
 							value={94.28}
 							precision={2}
 							valueStyle={{ color: '#3f8600' }}
@@ -27,8 +22,8 @@ function AggregateStats(): JSX.Element{
 						/>
 					</Card>
 				</Col>
-				<Col span={7}>
-					<Card>
+				<Col span={6}>
+					<Card bordered={true}>
 						<Statistic
 							title="System Latency"
 							value={9.3}
@@ -38,7 +33,7 @@ function AggregateStats(): JSX.Element{
 						/>
 					</Card>
 				</Col>
-				<Col span={7}>
+				<Col span={6}>
 					<Card>
 						<Statistic
 							title="System Load"
@@ -49,7 +44,7 @@ function AggregateStats(): JSX.Element{
 						/>
 					</Card>
 				</Col>
-				<Col span={7}>
+				<Col span={6}>
 					<Card>
 						<Statistic
 							title="System Error"
@@ -61,13 +56,9 @@ function AggregateStats(): JSX.Element{
 					</Card>
 				</Col>
 			</Row>
-  </div>
   )
 };
 
 export { AggregateStats };
 
 
-{/* <CheckCircleFilled />
-<ExclamationCircleFilled />
-<CloseCircleFilled /> */}

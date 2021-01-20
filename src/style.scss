@@ -1,10 +1,31 @@
 @import '~antd/dist/antd.css';
 
 
-.app {
-  color: green;
-  font-size: x-large;
-  border: 1px black dotted;
+
+.MuiContainer-root {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+#components-layout-demo-custom-trigger .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #1890ff;
+}
+
+#components-layout-demo-custom-trigger .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 16px;
 }
 
 #serviceContainer {
@@ -26,14 +47,6 @@
   justify-content: center;
   align-self: center
 }
-.icon {
-  background-Color: yellow;
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  border: 1px solid black;
-
-}
 
 .allStats {
   display: flex;
@@ -48,7 +61,7 @@
   align-items: center;
   flex-direction: column;
   padding: 10px;
-  border: 3px solid grey
+  height: 100%;
 }
 
 // styling for navBar and dashboard
@@ -63,26 +76,6 @@
 
 }
 
-#navBar {
-  display: flex;
-  justify-content: center;
-  flex-grow: 1;
-  padding: 10px;
-  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
-}
-
-.navButtonsContainer {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  border-spacing: 1em
-}
-
-.navbarbuttons {
-  margin: 5px 5px; 
-}
-
 #dashboard {
   flex-grow: 10;
   display: flex;
@@ -90,7 +83,7 @@
   align-items: center;
   flex-direction: column;
   padding: 10px;
-  border: 1px solid black;
+ 
 }
 
 .serviceCard {
@@ -99,4 +92,11 @@
 
 .chart {
   background-color: coral;
+}
+
+.custom {
+  .ant-collapse-content-box {
+    padding: 0;
+    max-width: 0;
+   }
 }

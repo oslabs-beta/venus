@@ -141,7 +141,6 @@ function  Dashboard(): JSX.Element{
       <div id="dashboard">          
         <AggregateStats />
         <Divider></Divider>
-
         <Table columns={columns} dataSource={dataSource} pagination={false} expandable={{expandedRowRender}} style={{width: "100%"}} />
       </div>
   )

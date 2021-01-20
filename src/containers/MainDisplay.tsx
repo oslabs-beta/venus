@@ -13,47 +13,54 @@ import { ChartContainer } from "./ChartContainer";
 import { DependencyGraph } from "./DependencyGraph";
 import Button from "antd/es/button";
 import Typography from "antd/es/typography";
-import { Radio } from "antd";
+import { Layout, Menu } from "antd";
+import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined, VideoCameraOutlined, UploadOutlined,} from '@ant-design/icons';
 const { Title } = Typography;
+const { Header, Sider, Content} = Layout
 
 // import 'antd/dist/antd.less';
+
+
 
 function MainDisplay(): JSX.Element {
   const large: any = "large";
   return (
     <Router>
       <Switch>
-        <div id="mainDisplay">
-          <div id="navBar">
-            <div className="navButtonsContainer">
-              <Title level={2}>VENUS</Title>
-              <br></br>
-              <AddService />
-              <br></br>
-              <Link to="/">
-                <Button className="navbarButtons" block size={large}>
-                  Current Status
-                </Button>
-              </Link>
-              <br></br>
-              <Link to="/historicalData">
-                <Button className="navbarButtons" block size={large}>
-                  Historical Status
-                </Button>
-              </Link>
-              <br></br>
-              <Link to="/dependencyGraph">
-                <Button className="navbarButtons" block size={large}>
-                  Dependency Graph
-                </Button>
-              </Link>
-            </div>
-
-            <Route path="/" exact component={Dashboard} />
-            <Route path="/historicalData" component={ChartContainer} />
-            <Route path="/dependencyGraph" component={DependencyGraph} />
-          </div>
-        </div>
+        <Layout className="custom" style={{minHeight:"100vh", minWidth: "100vw"}} hasSider={true} >
+          <Sider theme="light">
+          <div className="logo" />
+          <Title level={2}>VENUS</Title>
+          <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
+              <Menu.Item key="1" >
+                <Link to="/">
+                  <div style={{width: "100%", height: "100%"}}>
+                    Current Status
+                  </div>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="2" >
+                <Link to="/historicalData">
+                <div style={{width: "100%", height: "100%"}}>
+                    Historical Status
+                  </div>
+               </Link>
+              </Menu.Item>
+              <Menu.Item key="3" >
+                <Link to="dependencyGraph">  
+                  <div style={{width: "100%", height: "100%"}}>
+                    Dependency Graph
+                  </div>
+                </Link>
+              </Menu.Item>
+            </Menu>
+          </Sider>
+            <Content>
+              <Route path="/" exact component={Dashboard} />
+              <Route path="/historicalData" component={ChartContainer} />
+              <Route path="/dependencyGraph" component={DependencyGraph} />
+            </Content>
+        </Layout>  
       </Switch>
     </Router>
   );
