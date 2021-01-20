@@ -113,6 +113,15 @@ const readAndWriteToDB = async () => {
 
   console.log('queryText:', queryText)
 
+  client.query('SELECT * FROM logs', (err, result) => {
+    if(err){
+      console.log(err); 
+    } else {
+      console.log(`Read from DB...`); 
+    }
+  })
+
+
   //Write to the database
   client.query(queryText, (err, result) => {
     if(err){
@@ -122,13 +131,7 @@ const readAndWriteToDB = async () => {
     }
   })
 
-  client.query('SELECT * FROM logs', (err, result) => {
-    if(err){
-      console.log(err); 
-    } else {
-      console.log(`Read from DB...`); 
-    }
-  })
+
 
 }
 
