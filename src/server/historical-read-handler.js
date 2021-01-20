@@ -115,14 +115,14 @@ const readAndWriteToDB = async () => {
     })
   } else {
       
-    client.query('SELECT * FROM logs', (err, result) => {
-      if(err){
-        console.log(err); 
-      } else {
-        console.log(`Result of ${TABLE_NAME}:`, result); 
-      }
-    })
-  }
+  //   client.query('SELECT * FROM logs', (err, result) => {
+  //     if(err){
+  //       console.log(err); 
+  //     } else {
+  //       console.log(`Result of ${TABLE_NAME}:`, result); 
+  //     }
+  //   })
+  // }
 }
 
 try {
