@@ -64,6 +64,8 @@ const readAndWriteToDB = async () => {
 
   console.log('XREAD, response without reply transformer'); 
 
+  console.log(streamEntries); 
+
   //Transform xread's output from two arrays of keys and value into one array of log objects
   Redis.Command.setReplyTransformer('xread', function (result) {
     if(Array.isArray(result)){
