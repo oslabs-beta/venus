@@ -70,7 +70,8 @@ const readAndWriteToDB = async () => {
   Redis.Command.setReplyTransformer('xread', function (result) {
     if(Array.isArray(result)){
       const newResult = []; 
-      for(const r of result){
+      const fedResult = result[STREAM_KEY]; 
+      for(const r of fedResult){
         const obj = {
           id: r[0]
         }; 
@@ -89,7 +90,7 @@ const readAndWriteToDB = async () => {
       return newResult; 
     }
 
-    return result; 
+    return fedResult; 
   }); 
 
 
