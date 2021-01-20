@@ -94,7 +94,7 @@ const readAndWriteToDB = async () => {
 
   let queryText = `INSERT INTO ${TABLE_NAME} (redis_timestamp, req_method, req_host, req_path, req_url, res_status_code, res_message, cycle_duration) VALUES `; 
 
-  if(streamEntries.length){
+  if(streamEntries){
     streamEntries.forEach( (log) => {
       queryText += `('${streamEntries[0].id}', '${streamEntries[0].reqMethod}', '${streamEntries[0].reqHost}', '${streamEntries[0].reqPath}', '${streamEntries[0].reqURL}', '${streamEntries[0].resStatusCode}', '${streamEntries[0].resMessage}', '${streamEntries[0].cycleDuration}'),`; 
     })
