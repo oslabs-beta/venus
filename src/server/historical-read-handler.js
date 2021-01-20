@@ -81,14 +81,12 @@ const readAndWriteToDB = async () => {
         const fieldNamesValues = log[1]; 
         console.log('fieldNamesValues:', fieldNamesValues); 
 
-        for(let i = 0; i < fieldNamesValues.length; i++){
-          for(let j = 0; j < fieldNamesValues[i]; j += 2){
-            const k = fieldNamesValues[i][j]; 
-            const v = fieldNamesValues[i][j + 1]; 
+        for(let i = 0; i < fieldNamesValues.length; i+=2){
+            const k = fieldNamesValues[i]; 
+            const v = fieldNamesValues[i + 1]; 
             obj[k] = v; 
-          }
-          newResult.push(obj); 
         }
+        newResult.push(obj); 
       }
 
       return newResult; 
