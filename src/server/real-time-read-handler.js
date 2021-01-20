@@ -51,8 +51,9 @@ const readRedisStream = async () => {
 
   streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
 
-  console.log('XRANGE, response with reply transformer'); 
+  //TODO: SEND TO PROCESSING ELSEWHERE 
   //real-time entries should be sent for processing elsewhere 
+  console.log('XRANGE, response with reply transformer'); 
   console.log(streamEntries); 
 
 }
