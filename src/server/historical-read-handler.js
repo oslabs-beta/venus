@@ -99,7 +99,9 @@ const readAndWriteToDB = async () => {
 
   Redis.Command.setReplyTransformer('xread', function (result) {
     if(Array.isArray(result)){
-      
+
+      console.log('ENTERED REPLY TRANSFORMER'); 
+
       const newResult = []; 
 
       for(const log in result[1]){
@@ -149,8 +151,6 @@ const readAndWriteToDB = async () => {
     queryText = queryText.slice(0, queryText.length - 1); 
     queryText += ';'; 
   
-    console.log('queryText:', queryText)
-
     //Write to the database
     client.query(queryText, (err, result) => {
       if(err){
