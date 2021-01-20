@@ -111,6 +111,8 @@ const readAndWriteToDB = async () => {
   queryText = queryText.slice(0, queryText.length - 1); 
   queryText += ';'; 
 
+  console.log('queryText:', queryText)
+
   //Write to the database
   client.query(queryText, (err, result) => {
     if(err){
