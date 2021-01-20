@@ -53,67 +53,67 @@ const readAndWriteToDB = async () => {
   // })
 
   //Get the milliseconds for start and end time
-  // const startTime = Date.now() - INTERVAL; 
-  // const endTime = startTime + INTERVAL;  
+  const startTime = Date.now() - INTERVAL; 
+  const endTime = startTime + INTERVAL;  
 
   // // //Transform xread's output from two arrays of keys and value into one array of log objects
-  Redis.Command.setReplyTransformer('xread', function (result) {
-    if(Array.isArray(result)){
-      const newResult = []; 
-      for(const log of result[0][1]){
-        const obj = {
-          id: log[0]
-        }; 
+  // Redis.Command.setReplyTransformer('xread', function (result) {
+  //   if(Array.isArray(result)){
+  //     const newResult = []; 
+  //     for(const log of result[0][1]){
+  //       const obj = {
+  //         id: log[0]
+  //       }; 
 
-        const fieldNamesValues = log[1]; 
+  //       const fieldNamesValues = log[1]; 
 
-        for(let i = 0; i < fieldNamesValues.length; i+=2){
+  //       for(let i = 0; i < fieldNamesValues.length; i+=2){
+  //           const k = fieldNamesValues[i]; 
+  //           const v = fieldNamesValues[i + 1]; 
+  //           obj[k] = v; 
+  //       }
+  //       newResult.push(obj); 
+  //     }
+
+  //     return newResult; 
+  //   }
+
+  //   return result; 
+  // }); 
+
+    //Transform xrange's output from two arrays of keys and value into one array of log objects
+    Redis.Command.setReplyTransformer('xrange', function (result) {
+      if(Array.isArray(result)){
+        const newResult = []; 
+        for(const r of result){
+          const obj = {
+            id: r[0]
+          }; 
+  
+          const fieldNamesValues = r[1]; 
+  
+          for(let i = 0; i < fieldNamesValues.length; i += 2){
             const k = fieldNamesValues[i]; 
             const v = fieldNamesValues[i + 1]; 
             obj[k] = v; 
+          }
+  
+          newResult.push(obj); 
         }
-        newResult.push(obj); 
+  
+        return newResult; 
       }
-
-      return newResult; 
-    }
-
-    return result; 
-  }); 
-
-    //Transform xrange's output from two arrays of keys and value into one array of log objects
-    // Redis.Command.setReplyTransformer('xrange', function (result) {
-    //   if(Array.isArray(result)){
-    //     const newResult = []; 
-    //     for(const r of result){
-    //       const obj = {
-    //         id: r[0]
-    //       }; 
   
-    //       const fieldNamesValues = r[1]; 
-  
-    //       for(let i = 0; i < fieldNamesValues.length; i += 2){
-    //         const k = fieldNamesValues[i]; 
-    //         const v = fieldNamesValues[i + 1]; 
-    //         obj[k] = v; 
-    //       }
-  
-    //       newResult.push(obj); 
-    //     }
-  
-    //     return newResult; 
-    //   }
-  
-    //   return result; 
-    // }); 
+      return result; 
+    }); 
 
   //QUERY STREAM
 
   // streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
-  // streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime);
-  streamEntries = await redis.xread('BLOCK', PING_RATE, 'COUNT','1000','STREAMS', STREAM_KEY, '$'); 
+  streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime);
+  // streamEntries = await redis.xread('BLOCK', PING_RATE, 'COUNT','1000','STREAMS', STREAM_KEY, '$'); 
 
-  console.log('XREAD, response with reply transformer'); 
+  console.log('XRANGE, response with reply transformer'); 
   // //real-time entries should be sent for processing elsewhere 
   console.log(streamEntries); 
 
