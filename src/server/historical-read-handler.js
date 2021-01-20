@@ -10,10 +10,10 @@ const INTERVAL = 3000;
 //Rate at which we want to query the stream for data
 const PING_RATE = 3000; 
 //Where Redis is being hosted (either local machine or elasticache)
-const REDIS_HOST = 'venus-redis-micro.syohjt.ng.0001.use2.cache.amazonaws.com'
-// const REDIS_HOST = 'localhost'
+// const REDIS_HOST = 'venus-redis-micro.syohjt.ng.0001.use2.cache.amazonaws.com'
+const REDIS_HOST = 'localhost'
 
-const DB_NAME = 'log-database-1'; 
+const DB_NAME = 'postgres'; 
 
 const TABLE_NAME = 'logs'
 
@@ -27,9 +27,9 @@ const redis = new Redis({
 // const docClient = new dynamodb.DocumentClient({region: REGION}); 
 
 const client = new Client({
-  user: 'postgres', 
+  user: DB_NAME, 
   host: 'log-database-1.cluster-czysdiigcqcb.us-east-2.rds.amazonaws.com', 
-  database: 'postgres', 
+  database: DB_NAME, 
   password: 'NMnNA2IXwfuyJcyPyBen', 
   port: 5432
 })
