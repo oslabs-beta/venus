@@ -50,7 +50,7 @@ const readAndWriteToDB = async () => {
   //Get the milliseconds for start and end time
   const startTime = Date.now() - INTERVAL; 
   const endTime = startTime + INTERVAL; 
-  let mostRecentTimeStamp; 
+  let mostRecentTimeStamp = '0-0'; 
 
   client.query('SELECT * FROM logs LIMIT 1 ORDER BY redis_timestamp', (err, result) => {
     if(err){
