@@ -1,6 +1,5 @@
 const { read } = require('fs');
 const Redis = require('ioredis');
-const dynamodb = require('aws-sdk/clients/dynamodb');  
 const { Client } = require('pg'); 
 
 //Name of stream we are reading from
@@ -43,43 +42,9 @@ console.log(`Reading the stream named ${STREAM_KEY}...`);
 
 const readAndWriteToDB = async () => {
 
-  // client.query('SELECT * FROM logs;', (err, result) => {
-  //   if(err){
-  //     console.log(err); 
-  //   } else {
-  //     console.log('result from limit 1 query: ',result); 
-  //     mostRecentTimeStamp = result.rows[0].redis_timestamp; 
-  //   }
-  // })
-
   //Get the milliseconds for start and end time
   const startTime = Date.now() - INTERVAL; 
   const endTime = startTime + INTERVAL;  
-
-  // // //Transform xread's output from two arrays of keys and value into one array of log objects
-  // Redis.Command.setReplyTransformer('xread', function (result) {
-  //   if(Array.isArray(result)){
-  //     const newResult = []; 
-  //     for(const log of result[0][1]){
-  //       const obj = {
-  //         id: log[0]
-  //       }; 
-
-  //       const fieldNamesValues = log[1]; 
-
-  //       for(let i = 0; i < fieldNamesValues.length; i+=2){
-  //           const k = fieldNamesValues[i]; 
-  //           const v = fieldNamesValues[i + 1]; 
-  //           obj[k] = v; 
-  //       }
-  //       newResult.push(obj); 
-  //     }
-
-  //     return newResult; 
-  //   }
-
-  //   return result; 
-  // }); 
 
     //Transform xrange's output from two arrays of keys and value into one array of log objects
     Redis.Command.setReplyTransformer('xrange', function (result) {
@@ -109,21 +74,20 @@ const readAndWriteToDB = async () => {
 
   //QUERY STREAM
 
-  // streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
   streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime);
-  // streamEntries = await redis.xread('BLOCK', PING_RATE, 'COUNT','1000','STREAMS', STREAM_KEY, '$'); 
 
   console.log('XRANGE, response with reply transformer'); 
   // //real-time entries should be sent for processing elsewhere 
   console.log(streamEntries); 
-
-  console.log(`Writing to table ${DB_NAME}...`); 
 
   //WRITE TO THE DATABASE
 
   let queryText = `INSERT INTO ${TABLE_NAME} (redis_timestamp, req_method, req_host, req_path, req_url, res_status_code, res_message, cycle_duration) VALUES `; 
 
   if(streamEntries.length !== 0){
+
+    console.log(`Writing to table ${DB_NAME}...`); 
+
     streamEntries.forEach( (log) => {
       // console.log('log: ', log); 
       queryText += `('${log.id}', '${log.reqMethod}', '${log.reqHost}', '${log.reqPath}', '${log.reqURL}', '${log.resStatusCode}', '${log.resMessage}', '${log.cycleDuration}'),`; 
@@ -132,8 +96,6 @@ const readAndWriteToDB = async () => {
     //Modify the last comma and replace with a semi-colon
     queryText = queryText.slice(0, queryText.length - 1); 
     queryText += ';'; 
-
-    console.log('finalquerytext: ', queryText); 
   
     //Write to the database
     client.query(queryText, (err, result) => {
@@ -147,20 +109,7 @@ const readAndWriteToDB = async () => {
 }
 
 try {
-  setInterval(async () => { 
-    // await client.query('SELECT * FROM logs LIMIT 1;', (err, result) => {
-    //   if(err){
-    //     console.log(err); 
-    //   } else {
-    //     // console.log('result from limit 1 query: ',result); 
-    //     mostRecentTimeStamp = result.rows[0].redis_timestamp; 
-    //     // console.log('mostRecentTimeStamp: ', mostRecentTimeStamp); 
-    //     readAndWriteToDB(); 
-    //   }
-    // })
-
-    await readAndWriteToDB();
-  }, PING_RATE); 
+  setInterval(async () => { await readAndWriteToDB() }, PING_RATE); 
 } catch (e) {
   console.error(e); 
 }
