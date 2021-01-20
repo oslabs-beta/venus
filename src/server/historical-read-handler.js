@@ -107,6 +107,9 @@ const readAndWriteToDB = async () => {
           id: log[0]
         }
 
+        console.log('log at index 0:', log[0]);
+        console.log('log at index 1:', log[1]); 
+
         for(let i = 0; i < log[1].length; i +=2){
           const k = log[1][i]; 
           const v = log[1][i + 1]; 
