@@ -48,8 +48,6 @@ console.log(`Reading the stream named ${STREAM_KEY}...`);
 const readAndWriteToDB = async () => {
 
   //Get the milliseconds for start and end time
-  const startTime = Date.now() - INTERVAL; 
-  const endTime = startTime + INTERVAL; 
   let mostRecentTimeStamp = '0-0'; 
 
   client.query('SELECT * FROM logs LIMIT 1;', (err, result) => {
@@ -90,38 +88,6 @@ const readAndWriteToDB = async () => {
 
     return result; 
   }); 
-
-  // Redis.Command.setReplyTransformer('xread', function (result) {
-
-  //   if(Array.isArray(result)){
-
-  //     console.log('ENTERED REPLY TRANSFORMER'); 
-
-  //     const newResult = []; 
-
-  //     for(const log in result[1]){
-  //       let obj = {
-  //         id: log[0]
-  //       }
-
-  //       console.log('log at index 0:', log[0]);
-  //       console.log('log at index 1:', log[1]); 
-
-  //       for(let i = 0; i < log[1].length; i +=2){
-  //         const k = log[1][i]; 
-  //         const v = log[1][i + 1]; 
-  //         obj[k] = v; 
-  //       }
-
-  //       newResult.push(obj); 
-  //     }
-
-  //     return newResult
-  //   }
-
-  //   return result; 
-  // });
-
 
   //QUERY STREAM
 
