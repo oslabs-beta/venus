@@ -70,7 +70,7 @@ const readAndWriteToDB = async () => {
   Redis.Command.setReplyTransformer('xread', function (result) {
     if(Array.isArray(result)){
       const newResult = []; 
-      for(const r of result[1]){
+      for(const r of result){
         const obj = {
           id: r[0]
         }; 
