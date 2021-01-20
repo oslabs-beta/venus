@@ -79,7 +79,7 @@ const readAndWriteToDB = async () => {
 
   //QUERY STREAM
 
-  console.log('mostRecentTimeStamp: ', mostRecentTimeStamp); 
+  console.log('mostRecentTimeStamp BEING USED FOR REDIS QUERY: ', mostRecentTimeStamp); 
   streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
 
   console.log('XREAD, response with reply transformer'); 
@@ -101,7 +101,7 @@ const readAndWriteToDB = async () => {
     queryText = queryText.slice(0, queryText.length - 1); 
     queryText += ';'; 
 
-    console.log('finalquerytext: ', queryText); 
+    // console.log('finalquerytext: ', queryText); 
   
     //Write to the database
     client.query(queryText, (err, result) => {
@@ -125,16 +125,16 @@ const readAndWriteToDB = async () => {
 
 try {
   setInterval(async () => { 
-    client.query('SELECT * FROM logs LIMIT 1;', (err, result) => {
+    await client.query('SELECT * FROM logs LIMIT 1;', (err, result) => {
       if(err){
         console.log(err); 
       } else {
         // console.log('result from limit 1 query: ',result); 
         mostRecentTimeStamp = result.rows[0].redis_timestamp; 
-        console.log('mostRecentTimeStamp: ', mostRecentTimeStamp); 
+        // console.log('mostRecentTimeStamp: ', mostRecentTimeStamp); 
+        readAndWriteToDB(); 
       }
     })
-    await readAndWriteToDB()
   }, PING_RATE); 
 } catch (e) {
   console.error(e); 
