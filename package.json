@@ -55,6 +55,7 @@
     "aws-sdk": "^2.828.0",
     "contentful": "^8.1.7",
     "ioredis": "^4.19.4",
+    "pg": "^8.5.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.14.1",

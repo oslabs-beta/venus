@@ -1,6 +1,7 @@
 const { read } = require('fs');
 const Redis = require('ioredis');
 const dynamodb = require('aws-sdk/clients/dynamodb');  
+const { Client } = require('pg'); 
 
 //Name of stream we are reading from
 const STREAM_KEY = 'venus'
@@ -20,7 +21,17 @@ const redis = new Redis({
   host: REDIS_HOST
 });
 
-const docClient = new dynamodb.DocumentClient({region: REGION}); 
+// const docClient = new dynamodb.DocumentClient({region: REGION}); 
+
+const client = new Client({
+  user: 'postgres', 
+  host: 'log-database-1.cluster-czysdiigcqcb.us-east-2.rds.amazonaws.com', 
+  database: 'log-database-1', 
+  password: 'NMnNA2IXwfuyJcyPyBen', 
+  port: 5432
+})
+
+await client.connect(); 
 
 
 console.log(`Reading the stream named ${STREAM_KEY}...`); 
@@ -32,7 +43,7 @@ const readAndWriteToDB = async () => {
   const endTime = startTime + INTERVAL; 
 
   //Transform xrange's output from two arrays of keys and value into one array of log objects
-  Redis.Command.setReplyTransformer('xrange', function (result) {
+  Redis.Command.setReplyTransformer('xread', function (result) {
     if(Array.isArray(result)){
       const newResult = []; 
       for(const r of result){
@@ -57,7 +68,7 @@ const readAndWriteToDB = async () => {
     return result; 
   }); 
 
-  streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
+  streamEntries = await redis.xread(STREAM_KEY, startTime, endTime); 
 
   console.log('XRANGE, response with reply transformer'); 
   //real-time entries should be sent for processing elsewhere 
