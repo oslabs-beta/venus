@@ -29,7 +29,7 @@ const redis = new Redis({
 const client = new Client({
   user: 'postgres', 
   host: 'log-database-1.cluster-czysdiigcqcb.us-east-2.rds.amazonaws.com', 
-  database: DB_NAME, 
+  database: 'postgres', 
   password: 'NMnNA2IXwfuyJcyPyBen', 
   port: 5432
 })
