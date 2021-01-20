@@ -128,7 +128,7 @@ const readAndWriteToDB = async () => {
       if(err){
         console.log(err); 
       } else {
-        console.log(`Read from DB...`); 
+        console.log(`Result of ${TABLE_NAME}:`, result); 
       }
     })
   }
