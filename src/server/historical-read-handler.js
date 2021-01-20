@@ -4,15 +4,18 @@ const dynamodb = require('aws-sdk/clients/dynamodb');
 const { Client } = require('pg'); 
 
 //Name of stream we are reading from
-const STREAM_KEY = 'venus'
+const STREAM_KEY = 'logstream'
 //Interval of the stream we are processing to write to the database
 const INTERVAL = 3000;
 //Rate at which we want to query the stream for data
 const PING_RATE = 3000; 
 //Where Redis is being hosted (either local machine or elasticache)
 const REDIS_HOST = 'venus-redis-micro.syohjt.ng.0001.use2.cache.amazonaws.com'
+// const REDIS_HOST = 'localhost'
 
 const DB_NAME = 'log-database-1'; 
+
+const TABLE_NAME = 'logs'
 
 const REGION = 'us-east-2'
 
@@ -31,8 +34,14 @@ const client = new Client({
   port: 5432
 })
 
-await client.connect(); 
+client.connect(); 
 
+// const dbconnection = async () => {
+//   await client.connect(); 
+//   console.log('Successfully connected to the database!'); 
+// }
+
+// dbconnection(); 
 
 console.log(`Reading the stream named ${STREAM_KEY}...`); 
 
@@ -43,7 +52,7 @@ const readAndWriteToDB = async () => {
   const endTime = startTime + INTERVAL; 
 
   //Transform xrange's output from two arrays of keys and value into one array of log objects
-  Redis.Command.setReplyTransformer('xread', function (result) {
+  Redis.Command.setReplyTransformer('xrange', function (result) {
     if(Array.isArray(result)){
       const newResult = []; 
       for(const r of result){
@@ -72,13 +81,13 @@ const readAndWriteToDB = async () => {
 
   //QUERY STREAM
 
-  streamEntries = await redis.xread(STREAM_KEY, startTime, endTime); 
+  streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
 
   console.log('XRANGE, response with reply transformer'); 
   //real-time entries should be sent for processing elsewhere 
   console.log(streamEntries); 
 
-  console.log(`Writing to table ${TABLE_NAME}...`); 
+  console.log(`Writing to table ${DB_NAME}...`); 
 
   // streamEntries.forEach( async (log) => {
 
@@ -92,7 +101,7 @@ const readAndWriteToDB = async () => {
 
   //WRITE TO THE DATABASE
 
-  let queryText = `INSERT INTO ${DB_NAME} (id, reqMethod, reqHost, reqPath, reqURL, resStatusCode, resMessage, cycleDuration) VALUES `; 
+  let queryText = `INSERT INTO ${TABLE_NAME} (id, req_method, req_host, req_path, req_URL, res_status_code, res_message, cycle_duration) VALUES `; 
 
   streamEntries.forEach( (log) => {
     queryText += `('${streamEntries[0].id}', '${streamEntries[0].reqMethod}', '${streamEntries[0].reqHost}', '${streamEntries[0].reqPath}', '${streamEntries[0].reqURL}', '${streamEntries[0].resStatusCode}', '${streamEntries[0].resMessage}', '${streamEntries[0].cycleDuration}'),`; 
