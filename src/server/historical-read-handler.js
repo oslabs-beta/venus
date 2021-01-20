@@ -96,6 +96,7 @@ const readAndWriteToDB = async () => {
 
   if(streamEntries){
     streamEntries.forEach( (log) => {
+      console.log('log: ', log); 
       queryText += `('${streamEntries[0].id}', '${streamEntries[0].reqMethod}', '${streamEntries[0].reqHost}', '${streamEntries[0].reqPath}', '${streamEntries[0].reqURL}', '${streamEntries[0].resStatusCode}', '${streamEntries[0].resMessage}', '${streamEntries[0].cycleDuration}'),`; 
     })
   
@@ -103,7 +104,7 @@ const readAndWriteToDB = async () => {
     queryText = queryText.slice(0, queryText.length - 1); 
     queryText += ';'; 
 
-    // console.log('finalquerytext: ', queryText); 
+    console.log('finalquerytext: ', queryText); 
   
     //Write to the database
     client.query(queryText, (err, result) => {
