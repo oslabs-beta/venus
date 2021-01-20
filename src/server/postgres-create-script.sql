@@ -1,7 +1,8 @@
 DROP TABLE logs CASCADE; 
 
 CREATE TABLE logs (
-    "id" varchar NOT NULL,
+    "id" serial NOT NULL,
+    "redis_timestamp" varchar NOT NULL,
     "req_method" varchar NOT NULL,
     "req_host" varchar NOT NULL,
     "req_path" varchar NOT NULL,
