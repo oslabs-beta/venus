@@ -54,7 +54,8 @@ const readAndWriteToDB = async () => {
     if(err){
       console.log(err); 
     } else {
-      mostRecentTimeStamp = result.rows[0].redis_timestamp; 
+      console.log('result from limit 1 query: ',result); 
+      // mostRecentTimeStamp = result.rows[0].redis_timestamp; 
     }
   })
 
