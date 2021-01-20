@@ -54,6 +54,7 @@
     "@types/react-dom": "^16.9.6",
     "aws-sdk": "^2.828.0",
     "contentful": "^8.1.7",
+    "dotenv": "^8.2.0",
     "ioredis": "^4.19.4",
     "pg": "^8.5.1",
     "react": "^16.13.1",
