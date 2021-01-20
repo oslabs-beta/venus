@@ -35,9 +35,6 @@ const client = new Client({
 
 client.connect(); 
 
-//Get the milliseconds for start and end time
-let mostRecentTimeStamp = '0-0'
-
 console.log(`Reading the stream named ${STREAM_KEY}...`); 
 
 const readAndWriteToDB = async () => {
