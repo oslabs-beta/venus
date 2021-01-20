@@ -52,7 +52,7 @@ const readAndWriteToDB = async () => {
   const endTime = startTime + INTERVAL; 
   let mostRecentTimeStamp = '0-0'; 
 
-  client.query('SELECT * FROM logs LIMIT 1 ORDER BY redis_timestamp', (err, result) => {
+  client.query('SELECT * FROM logs LIMIT 1;', (err, result) => {
     if(err){
       console.log(err); 
     } else {
