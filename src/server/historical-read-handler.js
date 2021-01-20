@@ -147,18 +147,7 @@ const readAndWriteToDB = async () => {
 }
 
 try {
-  setInterval(async () => { 
-    await client.query('SELECT * FROM logs LIMIT 1;', (err, result) => {
-      if(err){
-        console.log(err); 
-      } else {
-        // console.log('result from limit 1 query: ',result); 
-        mostRecentTimeStamp = result.rows[0].redis_timestamp; 
-        // console.log('mostRecentTimeStamp: ', mostRecentTimeStamp); 
-        readAndWriteToDB(); 
-      }
-    })
-  }, PING_RATE); 
+  setInterval(async () => { await readAndWriteToDB(); }, PING_RATE); 
 } catch (e) {
   console.error(e); 
 }
