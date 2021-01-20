@@ -5,11 +5,17 @@
   height:fit-content;
 }
 
-.MuiContainer-root {
-  padding-left: 0px;
-  padding-right: 0px;
-  margin: 0 auto;
+.addService {
+  width: 100%;
+  height: fit-content;
+  justify-content: center;
 }
+
+.title{
+  margin: 16px;
+}
+
+
 .site-layout .site-layout-background {
   background: #fff;
 }
@@ -43,7 +49,6 @@
 }
 
 .dataContainer {
-  padding: 10px 10px;
   border: 1px solid black;
   background-color: white;
   margin: 5px;
@@ -81,21 +86,16 @@
 }
 
 #dashboard {
+  padding: 10px;
   flex-grow: 10;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  padding: 10px;
- 
 }
 
 .serviceCard {
   background-color: rgb(79, 17, 138);
-}
-
-.chart {
-  background-color: coral;
 }
 
 .custom {

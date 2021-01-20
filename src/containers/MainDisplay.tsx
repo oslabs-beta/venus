@@ -8,12 +8,12 @@ import React, { Component, useContext } from "react";
 // import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { Dashboard } from "./Dashboard";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { AddService } from "./AddService";
+import { AddService } from "../components/AddService";
 import { ChartContainer } from "./ChartContainer";
 import { DependencyGraph } from "./DependencyGraph";
 import Button from "antd/es/button";
 import Typography from "antd/es/typography";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Space } from "antd";
 const { Title } = Typography;
 const { Header, Sider, Content} = Layout
 
@@ -26,10 +26,12 @@ function MainDisplay(): JSX.Element {
   return (
     <Router>
       <Switch>
-        <Layout className="custom" style={{minHeight:"100vh", minWidth: "100vw"}} hasSider={true} >
+        <Layout className="custom" style={{minHeight:"100vh", minWidth: "100vw"}} hasSider={true}>
           <Sider theme="light">
-          <div className="logo" />
-          <Title level={2}>VENUS</Title>
+          <Space>
+            <Title level={2} className="title">VENUS</Title>
+          </Space>
+          
           <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
               <Menu.Item key="1" >
                 <Link to="/">
@@ -52,14 +54,22 @@ function MainDisplay(): JSX.Element {
                   </div>
                 </Link>
               </Menu.Item>
-              <div>test</div>
             </Menu>
+            {/* <Button type="primary" shape="round" size={"large"}>
+              Add Service
+            </Button> */}
+            <div className="addService">
+              <AddService />
+            </div>
           </Sider>
+          <Layout>
+          <Header style={{backgroundColor: "#fff"}}/>
             <Content>
               <Route path="/" exact component={Dashboard} />
               <Route path="/historicalData" component={ChartContainer} />
               <Route path="/dependencyGraph" component={DependencyGraph} />
             </Content>
+            </Layout>
         </Layout>  
       </Switch>
     </Router>

@@ -9,7 +9,7 @@ import Typography from 'antd/es/typography';
 // import { CheckCircleFilled } from '@ant-design/icons';
 const { Title } = Typography
 
-function ServiceCard (props: { service: any }): JSX.Element{
+function ServiceCard (props: any): JSX.Element{
   const { urls } = useContext(myContext)
   const color: string = props.color
     return (
