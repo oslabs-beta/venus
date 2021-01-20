@@ -97,7 +97,7 @@ const readAndWriteToDB = async () => {
   if(streamEntries){
     streamEntries.forEach( (log) => {
       console.log('log: ', log); 
-      queryText += `('${log.id}', '${log.reqMethod}', '${log.reqHost}', '${log.reqPath}', '${log.reqURL}', '${log.resStatusCode}', '${log.resMessage}', '${log.cycleDuration}'),`; 
+      queryText += `('${streamEntries[0].id}', '${streamEntries[0].reqMethod}', '${streamEntries[0].reqHost}', '${streamEntries[0].reqPath}', '${streamEntries[0].reqURL}', '${streamEntries[0].resStatusCode}', '${streamEntries[0].resMessage}', '${streamEntries[0].cycleDuration}'),`; 
     })
   
     //Modify the last comma and replace with a semi-colon
