@@ -1,6 +1,8 @@
 const { read } = require('fs');
 const Redis = require('ioredis');
-const { Client, Pool } = require('pg'); 
+const { Client, Pool } = require('pg');
+require('dotenv').config(); 
+ 
 
 //Name of stream we are reading from
 const STREAM_KEY = process.env.STREAM_KEY; 
