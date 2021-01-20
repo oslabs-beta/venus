@@ -1,6 +1,6 @@
 const { read } = require('fs');
 const Redis = require('ioredis');
-const { Client } = require('pg'); 
+const { Client, Pool } = require('pg'); 
 
 //Name of stream we are reading from
 const STREAM_KEY = process.env.STREAM_KEY; 
@@ -26,7 +26,7 @@ const redis = new Redis({
 });
 
 //Boilerplate to set up postgres db (client) object
-const client = new Client({
+const pool = new Pool({
   user: DB_NAME, 
   host: REDIS_HOST, 
   database: DB_NAME, 
@@ -37,7 +37,7 @@ const client = new Client({
 //TODO: INTEGRATE POOL CONNECTIONS
 //TODO: CAPPED STREAM SIZES
 
-client.connect(); 
+pool.connect(); 
 
 console.log(`Reading the stream named ${STREAM_KEY}...`); 
 
@@ -98,7 +98,7 @@ const readAndWriteToDB = async () => {
     queryText += ';'; 
   
     //Write the actual query to the database
-    client.query(queryText, (err, result) => {
+    pool.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
