@@ -79,8 +79,6 @@ const readAndWriteToDB = async () => {
 
   //QUERY STREAM
 
-  console.log('mostRecentTimeStamp BEING USED FOR REDIS QUERY: ', mostRecentTimeStamp);
-
   // streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
   streamEntries = await redis.xread('BLOCK', PING_RATE, 'STREAMS', STREAM_KEY, '$'); 
 
