@@ -50,9 +50,18 @@ const readAndWriteToDB = async () => {
   //Get the milliseconds for start and end time
   const startTime = Date.now() - INTERVAL; 
   const endTime = startTime + INTERVAL; 
+  const mostRecentTimeStamp; 
+  
+
+  client.query('SELECT * FROM logs LIMIT 1 ORDER BY redis_timestamp;', (err, result) => {
+    if(err){
+      console.log(err); 
+    } else {
+      mostRecentTimeStamp = result[0].redis_timestamp; 
+  }
 
   //Transform xrange's output from two arrays of keys and value into one array of log objects
-  Redis.Command.setReplyTransformer('xrange', function (result) {
+  Redis.Command.setReplyTransformer('xread', function (result) {
     if(Array.isArray(result)){
       const newResult = []; 
       for(const r of result){
@@ -81,23 +90,13 @@ const readAndWriteToDB = async () => {
 
   //QUERY STREAM
 
-  streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
+  streamEntries = await redis.xread('STREAMS', STREAM_KEY, mostRecentTimeStamp); 
 
-  console.log('XRANGE, response with reply transformer'); 
+  console.log('XREAD, response with reply transformer'); 
   //real-time entries should be sent for processing elsewhere 
   console.log(streamEntries); 
 
   console.log(`Writing to table ${DB_NAME}...`); 
-
-  // streamEntries.forEach( async (log) => {
-
-  //   const params = {
-  //     TableName: TABLE_NAME, 
-  //     Item: log
-  //   }
-
-  //   await docClient.put(params).promise(); 
-  // })
 
   //WRITE TO THE DATABASE
 
