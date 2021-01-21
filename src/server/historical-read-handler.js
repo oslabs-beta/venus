@@ -13,6 +13,8 @@ const PING_RATE = process.env.PING_RATE;
 //DB table name you set up in config
 const TABLE_NAME = process.env.TABLE_NAME; 
 
+const DB_NAME = process.env.DB_NAME; 
+
 //Boilerplate to set up redis object
 const redis = new Redis({
   port: process.env.REDIS_PORT, 
