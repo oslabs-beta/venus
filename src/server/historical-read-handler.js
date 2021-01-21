@@ -29,10 +29,10 @@ const redis = new Redis({
 
 //Boilerplate to set up postgres db (client) object
 const client = new Client({
-  user: DB_NAME, 
-  host: REDIS_HOST, 
-  database: DB_NAME, 
-  password: DB_PASS, 
+  user: 'postgres', 
+  host: 'venus-redis-micro.syohjt.ng.0001.use2.cache.amazonaws.com', 
+  database: 'postgres', 
+  password: 'NMnNA2IXwfuyJcyPyBen', 
   port: 5432
 })
 
