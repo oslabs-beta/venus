@@ -19,7 +19,7 @@ export const liveData: dynamicState= {
 export const dynamicContext = React.createContext<dynamicState>(liveData)
 
 
-export const ContextProvider: React.FC = (props: any) => {
+export const dynamicProvider: React.FC = (props: any) => {
   
   const [services, setServices] = useState<any[]>([]);
 

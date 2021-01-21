@@ -12,6 +12,7 @@ import PieChart from "../charts/PieChart";
 import { Chart } from "../components/Chart";
 import Row from 'antd/es/row'
 import Col from 'antd/es/col'
+import Card from 'antd/es/card'
 
 
 function ChartContainer(): JSX.Element {
@@ -20,28 +21,28 @@ function ChartContainer(): JSX.Element {
     <div id="chartContainer">
       <CardDropDown /> 
         
-        <Row gutter={[16, 16]}>
+        <Row gutter={[32,32]}>
           <Col span={12}>
-            <div className="graphHolder">
+          <Card bordered={true} hoverable={true} style={{width: "400px"}}>
               <LineGraph />
-            </div>
+            </Card>
           </Col>
           <Col span={12}>
-            <div className="graphHolder" >
+          <Card bordered={true} hoverable={true} style={{width: "400px"}}>
               <AreaChart />
-            </div>
+            </Card>
           </Col>
         </Row>
-        <Row gutter={[16, 16]}>
-        <Col span={12}>
-            <div className="graphHolder">
+        <Row gutter={[32,32]}>
+          <Col span={12}>
+            <Card bordered={true} hoverable={true} style={{width: "400px"}}>
               <LineGraph />
-            </div>
+            </Card>
           </Col>
           <Col span={12}>
-            <div className="graphHolder">
+            <Card bordered={true} hoverable={true} style={{width: "400px"}}>
               <PieChart />
-            </div>
+            </Card>
           </Col>
         </Row>
     </div>

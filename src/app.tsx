@@ -12,7 +12,6 @@ const App: React.FC = () => {
     setUrls(['evan']);
   }, [])
 
-
   return (
     <div>
       <ContextProvider>

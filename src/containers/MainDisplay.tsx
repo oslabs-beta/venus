@@ -4,26 +4,37 @@
  **/
 
 //imports to be used in file
-import React, { Component, useContext } from "react";
+import React, { Component, useContext, useState } from "react";
 // import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import { Dashboard } from "./Dashboard";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { AddService } from "../components/AddService";
 import { ChartContainer } from "./ChartContainer";
-import { DependencyGraph } from "./DependencyGraph";
-import Button from "antd/es/button";
+import {  DependencyGraphContainer } from "./DependencyGraphContainer";
 import Typography from "antd/es/typography";
 import Menu from "antd/es/menu";
 import Layout from "antd/es/layout"
-import Space from "antd/es/space"
+// import Space from "antd/es/space"
+import Modal from 'antd/es/modal';
+import { InputForm } from "../components/InputForm"
 const { Title } = Typography;
-const { Header, Sider, Content} = Layout
-
-// import 'antd/dist/antd.less';
-
-
+const {Footer, Sider, Content} = Layout
+const { SubMenu } = Menu
 
 function MainDisplay(): JSX.Element {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   const large: any = "large";
   return (
     <Router>
@@ -46,26 +57,31 @@ function MainDisplay(): JSX.Element {
                   </div>
                </Link>
               </Menu.Item>
-              <Menu.Item key="3" >
+              <Menu.Item key="3">
                 <Link to="dependencyGraph">  
                   <div style={{width: "100%", height: "100%"}}>
                     Dependency Graph
                   </div>
                 </Link>
               </Menu.Item>
+              <Menu.Item>
+                <div style={{width: "100%", height: "100%"}} key="4" onClick={showModal}>
+                  Add Service
+                </div>
+                <Modal title="Add Dependency" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                  <InputForm />
+                </Modal>
+              </Menu.Item>
             </Menu>
-              <div className="addService">
-                <AddService />
-              </div>
             </Sider>
           <Layout>
-            <Header style={{backgroundColor: "#fff"}}/>
               <Content>
                 <Route path="/" exact component={Dashboard} />
+                <Route path="/dependencyGraph" component={DependencyGraphContainer} />
                 <Route path="/historicalData" component={ChartContainer} />
-                <Route path="/dependencyGraph" component={DependencyGraph} />
               </Content>
           </Layout>
+        {/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer> */}
         </Layout>  
       </Switch>
     </Router>
