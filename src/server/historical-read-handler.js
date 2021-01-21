@@ -2,7 +2,7 @@ const { read } = require('fs');
 const Redis = require('ioredis');
 const { Client, Pool } = require('pg');
 require('dotenv').config(); 
-const client = require('./db.js');
+const pool = require('./db.js');
 
 //Name of stream we are reading from
 const STREAM_KEY = process.env.STREAM_KEY; 
@@ -36,7 +36,7 @@ const redis = new Redis({
 //TODO: CAPPED STREAM SIZES
 
 //TEST READ TABLE FROM POSTGRES
-  client.query('SELECT * FROM logs; ', '', (err, result) => {
+  pool.query('SELECT * FROM logs; ', (err, result) => {
     if(err){
       console.log(err); 
     } else {
@@ -103,7 +103,7 @@ const redis = new Redis({
       queryText += ';'; 
     
       //Write the actual query to the database
-      client.query(queryText, '',(err, result) => {
+      pool.query(queryText,(err, result) => {
         if(err){
           console.log(err); 
         } else {
