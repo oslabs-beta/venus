@@ -37,9 +37,9 @@ function  Dashboard(): JSX.Element{
           ),
         },
         {
-          title: 'Uptime',
-          dataIndex: 'uptime',
-          key: 'uptime',
+          title: 'Availability',
+          dataIndex: 'availability',
+          key: 'availability',
         },
         {
           title: 'Latency',

@@ -41,9 +41,9 @@ function MainDisplay(): JSX.Element {
     <Router>
       <Switch>
         <Layout className="custom" hasSider={true}>
-          <Sider theme="light">
+          <Sider theme="light" style={{position: 'fixed'}}>
           <Title level={2} className="title">VENUS</Title>
-          <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
+          <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>          
               <Menu.Item key="1" >
                 <Link to="/">
                   <div style={{width: "100%", height: "100%"}}>
@@ -81,8 +81,8 @@ function MainDisplay(): JSX.Element {
                 </Link>
               </Menu.Item>
             </Menu>
-            </Sider>
-          <Layout>
+          </Sider>
+          <Layout style={{marginLeft: 200, minHeight: '100vh', height: 'fit-content',}}>
               <Content>
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/dependencyGraph" component={DependencyGraphContainer} />

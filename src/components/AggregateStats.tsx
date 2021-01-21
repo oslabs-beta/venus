@@ -12,38 +12,42 @@ import Col from 'antd/es/col'
 										
 function AggregateStats(): JSX.Element{
     return (
+		// <div className="parentCardContainer">
 			<Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-				<Col span={4}>
-					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
-						<Statistic
-							title="Title"
-							value="Codesmith"
-							precision={2}
-							valueStyle={{ color: '#3f8600' }}
-						/>
-					</Card>
-				</Col>
-				<Col span={4}>
-					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
-						<Statistic
-							title="Health"
-							value={"GOOD"}
-							precision={2}
-							valueStyle={{ color: '#3f8600' }}
-						/>
-					</Card>
-				</Col>
-				<Col span={4}>
-					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
-						<Statistic
-							title="Availability"
-							value={94.28}
-							precision={2}
-							valueStyle={{ color: '#3f8600' }}
-							suffix="%"
-						/>
-					</Card>
-				</Col>
+				{/* <div className="childCardContainer"> */}
+					<Col span={4}>
+						<Card bordered={true} bodyStyle={{width: 200}} hoverable={true}>
+							<Statistic
+								title="Title"
+								value="Codesmith"
+								precision={2}
+								valueStyle={{ color: '#3f8600' }}
+							/>
+						</Card>
+					</Col>
+					<Col span={4}>
+						<Card bordered={true} bodyStyle={{width: 200}} hoverable={true}>
+							<Statistic
+								title="Health"
+								value={"GOOD"}
+								precision={2}
+								valueStyle={{ color: '#3f8600' }}
+							/>
+						</Card>
+					</Col>
+					<Col span={4}>
+						<Card bordered={true} bodyStyle={{width: 200}} hoverable={true}>
+							<Statistic
+								title="Availability"
+								value={94.28}
+								precision={2}
+								valueStyle={{ color: '#3f8600' }}
+								suffix="%"
+							/>
+						</Card>
+					</Col>
+				{/* </div> */}
+				{/* <div className="childCardContainer"> */}
 				<Col span={4}>
 					<Card bordered={true} hoverable={true}>
 						<Statistic
@@ -61,7 +65,7 @@ function AggregateStats(): JSX.Element{
 							title="Load"
 							value={9.3}
 							precision={2}
-							valueStyle={{ color: '#cf1322' }}
+							valueStyle={{color: '#cf1322'}}
 							suffix="hpm"
 						/>
 					</Card>
@@ -77,7 +81,9 @@ function AggregateStats(): JSX.Element{
 						/>
 					</Card>
 				</Col>
+				{/* </div> */}
 			</Row>
+		// </div>
   )
 };
 
