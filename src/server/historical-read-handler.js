@@ -41,6 +41,16 @@ const pool = new Pool({
 
 pool.connect(); 
 
+//TEST READ TABLE FROM POSTGRES
+
+pool.query('SELECT * FROM logs; ', (err, result) => {
+  if(err){
+    console.log(err); 
+  } else {
+    console.log(`Read from table ${TABLE_NAME}...`, result); 
+  }
+})
+
 console.log(`Reading the stream named ${STREAM_KEY}...`); 
 
 const readAndWriteToDB = async () => {
