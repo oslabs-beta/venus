@@ -39,89 +39,97 @@ const pool = new Pool({
 //TODO: INTEGRATE POOL CONNECTIONS
 //TODO: CAPPED STREAM SIZES
 
-pool.connect(); 
 
 //TEST READ TABLE FROM POSTGRES
 
-pool.query('SELECT * FROM logs; ', (err, result) => {
-  if(err){
-    console.log(err); 
-  } else {
-    console.log(`Read from table ${TABLE_NAME}...`, result); 
-  }
-})
+const main = async () => {
 
-console.log(`Reading the stream named ${STREAM_KEY}...`); 
+  const client = await pool.connect(); 
 
-const readAndWriteToDB = async () => {
+  client.query('SELECT * FROM logs; ', (err, result) => {
+    if(err){
+      console.log(err); 
+    } else {
+      console.log(`Read from table ${TABLE_NAME}...`, result); 
+    }
+  })
 
-    //Transform xrange's output from two arrays of keys and value into one array of log objects
-    Redis.Command.setReplyTransformer('xrange', function (result) {
-      if(Array.isArray(result)){
-        const newResult = []; 
-        for(const r of result){
-          const obj = {
-            id: r[0]
-          }; 
-  
-          const fieldNamesValues = r[1]; 
-  
-          for(let i = 0; i < fieldNamesValues.length; i += 2){
-            const k = fieldNamesValues[i]; 
-            const v = fieldNamesValues[i + 1]; 
-            obj[k] = v; 
+  console.log(`Reading the stream named ${STREAM_KEY}...`); 
+
+  const readAndWriteToDB = async () => {
+
+      const client = await pool.connect();
+
+      //Transform xrange's output from two arrays of keys and value into one array of log objects
+      Redis.Command.setReplyTransformer('xrange', function (result) {
+        if(Array.isArray(result)){
+          const newResult = []; 
+          for(const r of result){
+            const obj = {
+              id: r[0]
+            }; 
+    
+            const fieldNamesValues = r[1]; 
+    
+            for(let i = 0; i < fieldNamesValues.length; i += 2){
+              const k = fieldNamesValues[i]; 
+              const v = fieldNamesValues[i + 1]; 
+              obj[k] = v; 
+            }
+    
+            newResult.push(obj); 
           }
-  
-          newResult.push(obj); 
+    
+          return newResult; 
         }
-  
-        return newResult; 
-      }
-  
-      return result; 
-    }); 
+    
+        return result; 
+      }); 
 
-  //Get the milliseconds for start and end time
-  const startTime = Date.now() - INTERVAL; 
-  const endTime = startTime + INTERVAL; 
+    //Get the milliseconds for start and end time
+    const startTime = Date.now() - INTERVAL; 
+    const endTime = startTime + INTERVAL; 
 
-  //QUERY STREAM
-  streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime);
+    //QUERY STREAM
+    streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime);
 
-  // //real-time entries should be sent for processing elsewhere 
-  console.log('XRANGE, response with reply transformer'); 
-  console.log(streamEntries); 
+    // //real-time entries should be sent for processing elsewhere 
+    console.log('XRANGE, response with reply transformer'); 
+    console.log(streamEntries); 
 
-  //WRITE TO THE DATABASE
-  let queryText = `INSERT INTO ${TABLE_NAME} (redis_timestamp, req_method, req_host, req_path, req_url, res_status_code, res_message, cycle_duration) VALUES `; 
+    //WRITE TO THE DATABASE
+    let queryText = `INSERT INTO ${TABLE_NAME} (redis_timestamp, req_method, req_host, req_path, req_url, res_status_code, res_message, cycle_duration) VALUES `; 
 
-  if(streamEntries.length !== 0){
+    if(streamEntries.length !== 0){
 
-    console.log(`Writing to table ${DB_NAME}...`); 
+      console.log(`Writing to table ${DB_NAME}...`); 
 
-    //Construct the query for all the new entries to the SQL table
-    //TODO: Consider using the built-in params feature or sequelize / other ORMs
-    streamEntries.forEach((log) => {
-      queryText += `('${log.id}', '${log.reqMethod}', '${log.reqHost}', '${log.reqPath}', '${log.reqURL}', '${log.resStatusCode}', '${log.resMessage}', '${log.cycleDuration}'),`; 
-    })
-  
-    //Modify the last comma and replace with a semi-colon
-    queryText = queryText.slice(0, queryText.length - 1); 
-    queryText += ';'; 
-  
-    //Write the actual query to the database
-    pool.query(queryText, (err, result) => {
-      if(err){
-        console.log(err); 
-      } else {
-        console.log(`Finished writing to ${DB_NAME}...`, result); 
-      }
-    })
+      //Construct the query for all the new entries to the SQL table
+      //TODO: Consider using the built-in params feature or sequelize / other ORMs
+      streamEntries.forEach((log) => {
+        queryText += `('${log.id}', '${log.reqMethod}', '${log.reqHost}', '${log.reqPath}', '${log.reqURL}', '${log.resStatusCode}', '${log.resMessage}', '${log.cycleDuration}'),`; 
+      })
+    
+      //Modify the last comma and replace with a semi-colon
+      queryText = queryText.slice(0, queryText.length - 1); 
+      queryText += ';'; 
+    
+      //Write the actual query to the database
+      client.query(queryText, (err, result) => {
+        if(err){
+          console.log(err); 
+        } else {
+          console.log(`Finished writing to ${DB_NAME}...`, result); 
+        }
+      })
+    }
+  }
+
+  try {
+    setInterval( async () => { await readAndWriteToDB() }, PING_RATE); 
+  } catch (e) {
+    console.error(e); 
   }
 }
 
-try {
-  setInterval( async () => { await readAndWriteToDB() }, PING_RATE); 
-} catch (e) {
-  console.error(e); 
-}
+main(); 
