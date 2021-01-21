@@ -38,6 +38,8 @@ const client = new Client({
 
 client.connect(); 
 
+console.log('client: ', client); 
+
 //TODO: INTEGRATE POOL CONNECTIONS
 //TODO: CAPPED STREAM SIZES
 
