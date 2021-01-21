@@ -55,8 +55,6 @@ client.connect();
 
   const readAndWriteToDB = async () => {
 
-      const client = await pool.connect();
-
       //Transform xrange's output from two arrays of keys and value into one array of log objects
       Redis.Command.setReplyTransformer('xrange', function (result) {
         if(Array.isArray(result)){
