@@ -36,7 +36,7 @@ const redis = new Redis({
 //TODO: CAPPED STREAM SIZES
 
 //TEST READ TABLE FROM POSTGRES
-  client.query('SELECT * FROM logs; ', (err, result) => {
+  client.query('SELECT * FROM logs; ', '', (err, result) => {
     if(err){
       console.log(err); 
     } else {
@@ -103,7 +103,7 @@ const redis = new Redis({
       queryText += ';'; 
     
       //Write the actual query to the database
-      client.query(queryText, (err, result) => {
+      client.query(queryText, '',(err, result) => {
         if(err){
           console.log(err); 
         } else {
