@@ -28,7 +28,7 @@ const redis = new Redis({
 });
 
 //Boilerplate to set up postgres db (client) object
-const pool = new Pool({
+const client = new Client({
   user: DB_NAME, 
   host: REDIS_HOST, 
   database: DB_NAME, 
@@ -36,16 +36,13 @@ const pool = new Pool({
   port: 5432
 })
 
+client.connect(); 
+
 //TODO: INTEGRATE POOL CONNECTIONS
 //TODO: CAPPED STREAM SIZES
 
 
 //TEST READ TABLE FROM POSTGRES
-
-const main = async () => {
-
-  const client = await pool.connect(); 
-
   client.query('SELECT * FROM logs; ', (err, result) => {
     if(err){
       console.log(err); 
@@ -130,6 +127,5 @@ const main = async () => {
   } catch (e) {
     console.error(e); 
   }
-}
 
-main(); 
+
