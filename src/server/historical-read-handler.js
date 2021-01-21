@@ -10,21 +10,13 @@ const STREAM_KEY = process.env.STREAM_KEY;
 const INTERVAL = process.env.INTERVAL;
 //Rate at which we want to query the stream for data
 const PING_RATE = process.env.PING_RATE; 
-//Where Redis is being hosted (either local machine or elasticache)
-const REDIS_HOST = process.env.REDIS_HOST; 
-//DB name is not DB instance name, technically it's the AWS user name
-const DB_NAME = process.env.DB_NAME; 
-//DB password 
-const DB_PASS = process.env.DB_PASS; 
 //DB table name you set up in config
 const TABLE_NAME = process.env.TABLE_NAME; 
-//AWS region that the DB instance is spun up in 
-const REGION = process.env.AWS_REGION; 
 
 //Boilerplate to set up redis object
 const redis = new Redis({
-  port: 6379, 
-  host: REDIS_HOST
+  port: process.env.REDIS_PORT, 
+  host: process.env.REDIS_HOST
 });
 
 //Boilerplate to set up postgres db (client) object
@@ -38,11 +30,8 @@ const client = new Client({
 
 client.connect(); 
 
-console.log('client: ', client); 
-
 //TODO: INTEGRATE POOL CONNECTIONS
 //TODO: CAPPED STREAM SIZES
-
 
 //TEST READ TABLE FROM POSTGRES
   client.query('SELECT * FROM logs; ', (err, result) => {
