@@ -12,7 +12,7 @@ const PING_RATE = process.env.RT_PING_RATE;
 const REDIS_HOST = process.env.REDIS_HOST; 
 
 const redis = new Redis({
-  port: 6379, 
+  port: REDIS_PORT, 
   host: REDIS_HOST
 });
 

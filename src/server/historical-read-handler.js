@@ -22,7 +22,7 @@ const redis = new Redis({
 //Boilerplate to set up postgres db (client) object
 const client = new Client({
   user: process.env.DB_NAME, 
-  host: process.env.DB_HOST, 
+  host: process.env.DB_PROXY, 
   database: process.env.DB_NAME, 
   password: process.env.DB_PASS, 
   port: process.env.DB_PORT
@@ -30,8 +30,7 @@ const client = new Client({
 
 client.connect(); 
 
-//TODO: INTEGRATE POOL CONNECTIONS
-//TODO: CAPPED STREAM SIZES
+//TODO: RDS PROXY AWS
 
 //TEST READ TABLE FROM POSTGRES
   client.query('SELECT * FROM logs; ', (err, result) => {
@@ -109,6 +108,8 @@ client.connect();
         }
       })
     }
+
+
   }
 
   try {
