@@ -12,14 +12,18 @@ import PieChart from "../charts/PieChart";
 import { Chart } from "../components/Chart";
 import Row from 'antd/es/row'
 import Col from 'antd/es/col'
+import { HistoricalProvider } from '../contexts/historicalContext'
 
 
-function ChartContainer(): JSX.Element {
+export default function ChartContainer(): JSX.Element {
+
+
+
   return (
    
     <div id="chartContainer">
+      <HistoricalProvider>
       <CardDropDown /> 
-        
         <Row gutter={[16, 16]}>
           <Col span={12}>
             <div className="graphHolder">
@@ -44,10 +48,7 @@ function ChartContainer(): JSX.Element {
             </div>
           </Col>
         </Row>
+        </HistoricalProvider>
     </div>
-
-// onChange={onChange} >> add for stat level sortability. 
-  );
+  )
 }
-
-export { ChartContainer };

@@ -9,7 +9,7 @@ import React, { Component, useContext } from "react";
 import { Dashboard } from "./Dashboard";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { AddService } from "../components/AddService";
-import { ChartContainer } from "./ChartContainer";
+import ChartContainer from "./ChartContainer";
 import { DependencyGraph } from "./DependencyGraph";
 import Button from "antd/es/button";
 import Typography from "antd/es/typography";
@@ -20,7 +20,7 @@ const { Title } = Typography;
 const { Header, Sider, Content} = Layout
 
 // import 'antd/dist/antd.less';
-
+// Will K is the bad boy of coding
 
 
 function MainDisplay(): JSX.Element {
