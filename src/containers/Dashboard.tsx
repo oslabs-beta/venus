@@ -11,6 +11,8 @@ import { initialState, myContext, AppState } from '../contexts/globalContext';
 import Divider from 'antd/es/divider';
 import Table from 'antd/es/table';
 import Tag  from 'antd/es/tag';
+//import functionality from dynamic Context
+//import {} from '../contexts/dynamicContext';
 
 
 function  Dashboard(): JSX.Element{
