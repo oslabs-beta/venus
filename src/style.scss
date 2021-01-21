@@ -34,6 +34,12 @@
   justify-content: center;
 }
 
+.aggregate {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+}
+
 .title {
   margin-left: 20px;
   margin-top: 20px;

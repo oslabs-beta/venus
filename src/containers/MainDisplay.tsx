@@ -43,22 +43,29 @@ function MainDisplay(): JSX.Element {
         <Layout className="custom" hasSider={true}>
           <Sider theme="light" style={{position: 'fixed'}}>
           <Title level={2} className="title">VENUS</Title>
-          <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>          
-              <Menu.Item key="1" >
+          <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}> 
+            <Menu.Item key="1">
+                <Link to="/signin">  
+                  <div style={{width: "100%", height: "100%"}}>
+                    Sign In
+                  </div>
+                </Link>
+              </Menu.Item>         
+              <Menu.Item key="2" >
                 <Link to="/">
                   <div style={{width: "100%", height: "100%"}}>
                     Current Status
                   </div>
                 </Link>
               </Menu.Item>
-              <Menu.Item key="2" >
+              <Menu.Item key="3" >
                 <Link to="/historicalData">
                 <div style={{width: "100%", height: "100%"}}>
                     Historical Status
                   </div>
                </Link>
               </Menu.Item>
-              <Menu.Item key="3">
+              <Menu.Item key="4">
                 <Link to="/dependencyGraph">  
                   <div style={{width: "100%", height: "100%"}}>
                     Dependency Graph
@@ -72,13 +79,6 @@ function MainDisplay(): JSX.Element {
                 <Modal title="Add Dependency" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                   <InputForm />
                 </Modal>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <Link to="/signin">  
-                  <div style={{width: "100%", height: "100%"}}>
-                    Sign In
-                  </div>
-                </Link>
               </Menu.Item>
             </Menu>
           </Sider>

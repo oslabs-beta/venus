@@ -11,68 +11,14 @@ import { initialState, myContext, AppState } from '../contexts/globalContext';
 import Divider from 'antd/es/divider';
 import Table from 'antd/es/table';
 import Tag  from 'antd/es/tag';
+import Form from 'antd/es/form';
+import Select from 'antd/es/select';
 import { dynamicContext } from '../contexts/dynamicContext';
+
 
 
 function  Dashboard(): JSX.Element{
 
-    const expandedRowRender: any = () => {
-      
-      const subColumns = [
-        { 
-          title: 'Path', 
-          dataIndex: 'path', 
-          key: 'path' },
-        { 
-          title: 'Method', 
-          dataIndex: 'method', 
-          key: 'method' 
-        },
-        {
-          title: 'Status',
-          dataIndex: 'status',
-          key: 'status',
-          render: () => (
-          <Tag color={'orange'} key={'test'}>FAIR</Tag> 
-          ),
-        },
-        {
-          title: 'Availability',
-          dataIndex: 'availability',
-          key: 'availability',
-        },
-        {
-          title: 'Latency',
-          dataIndex: 'latency',
-          key: 'latency',
-        },
-        {
-          title: 'Load',
-          dataIndex: 'load',
-          key: 'load',
-        },
-        {
-          title: 'Error',
-          dataIndex: 'error',
-          key: 'error',
-        },
-      ];
-  
-  
-      const subDataSource: any = [
-        {
-          path: '/WEATHER',
-          method: 'GET',
-          status: 'good',
-          uptime: '98%',      
-          latency: '300ms',
-          load: '1000hpm',
-          error: '2%'
-        }
-      ];
-      return <Table columns={subColumns} dataSource={subDataSource} pagination={false} />
-    }
-  
   const dataSource: any = [];
   const source: any = [ 
     {
@@ -141,6 +87,8 @@ function  Dashboard(): JSX.Element{
       
     },
   ];
+
+ 
   
   for (let i = 0; i < source.length; i++) {
     source[i].key = i;
@@ -162,6 +110,24 @@ function  Dashboard(): JSX.Element{
       key: 'status',
       render: () => (
       <Tag color={'green'} key={'test'}>GOOD</Tag>
+      ),
+    },
+    {
+      title: 'Method',
+      dataIndex: 'method',
+      key: 'method',
+      render: () => (
+        <Form>
+          <Form.Item>
+            <Select>
+              <Select.Option value="get">'GET'</Select.Option>
+              <Select.Option value="post">'POST'</Select.Option>
+              <Select.Option value="put">'PUT'</Select.Option>
+              <Select.Option value="delete">'DELETE'</Select.Option>
+            </Select>
+          </Form.Item>
+        </Form>
+
       ),
     },
     {
@@ -191,7 +157,7 @@ function  Dashboard(): JSX.Element{
       <div id="dashboard">          
         <AggregateStats />
         <Divider></Divider>
-        <Table columns={columns} dataSource={dataSource} pagination={false} expandable={{expandedRowRender}} style={{width: "100%"}} />
+        <Table columns={columns} dataSource={dataSource} pagination={false} style={{width: "100%"}} />
       </div>
   )
  };

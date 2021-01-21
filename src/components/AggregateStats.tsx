@@ -46,7 +46,7 @@ function AggregateStats(): JSX.Element{
 							/>
 						</Card>
 					</Col>
-				{/* </div> */}
+				{/* </div> */}																
 				{/* <div className="childCardContainer"> */}
 				<Col span={4}>
 					<Card bordered={true} hoverable={true}>
