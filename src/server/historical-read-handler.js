@@ -36,13 +36,11 @@ const redis = new Redis({
 //TODO: CAPPED STREAM SIZES
 
 //TEST READ TABLE FROM POSTGRES
-  pool.query('SELECT * FROM logs; ', (err, result) => {
-    if(err){
-      console.log(err); 
-    } else {
-      console.log(`Read from table ${TABLE_NAME}...`, result); 
-    }
-  })
+  pool.query('SELECT * FROM logs; ', []) (err, result)
+    .then((result) => {
+      console.log(`Read from table ${TABLE_NAME}...`, result);
+    })
+    .catch((err) => console.log(err))
 
   console.log(`Reading the stream named ${STREAM_KEY}...`); 
 
