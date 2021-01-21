@@ -17,4 +17,4 @@ const pool = new Pool(config);
 //   }
 // }
 
-module.exports = { pool }
+module.exports = pool;
