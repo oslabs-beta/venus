@@ -5,7 +5,7 @@ const config = {
   host: process.env.REDIS_HOST, 
   database: process.env.DB_NAME, 
   password: process.env.DB_PASS, 
-  port: 5432
+  port: process.env.DB_PORT
 }; 
 
 const pool = new Pool(config); 

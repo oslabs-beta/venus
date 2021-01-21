@@ -2,7 +2,7 @@ const { read } = require('fs');
 const Redis = require('ioredis');
 const { Client, Pool } = require('pg');
 require('dotenv').config(); 
- 
+const client = require('./db.js');
 
 //Name of stream we are reading from
 const STREAM_KEY = process.env.STREAM_KEY; 
@@ -22,15 +22,15 @@ const redis = new Redis({
 });
 
 //Boilerplate to set up postgres db (client) object
-const client = new Client({
-  user: process.env.DB_NAME, 
-  host: process.env.DB_HOST, 
-  database: process.env.DB_NAME, 
-  password: process.env.DB_PASS, 
-  port: process.env.DB_PORT
-})
+// const client = new Client({
+//   user: process.env.DB_NAME, 
+//   host: process.env.DB_HOST, 
+//   database: process.env.DB_NAME, 
+//   password: process.env.DB_PASS, 
+//   port: process.env.DB_PORT
+// })
 
-client.connect(); 
+// client.connect(); 
 
 //TODO: INTEGRATE POOL CONNECTIONS
 //TODO: CAPPED STREAM SIZES
