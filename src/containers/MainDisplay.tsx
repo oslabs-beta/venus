@@ -16,6 +16,7 @@ import Layout from "antd/es/layout"
 // import Space from "antd/es/space"
 import Modal from 'antd/es/modal';
 import { InputForm } from "../components/InputForm"
+import { SignIn } from "./SignInContainer";
 const { Title } = Typography;
 const {Footer, Sider, Content} = Layout
 const { SubMenu } = Menu
@@ -58,7 +59,7 @@ function MainDisplay(): JSX.Element {
                </Link>
               </Menu.Item>
               <Menu.Item key="3">
-                <Link to="dependencyGraph">  
+                <Link to="/dependencyGraph">  
                   <div style={{width: "100%", height: "100%"}}>
                     Dependency Graph
                   </div>
@@ -72,6 +73,13 @@ function MainDisplay(): JSX.Element {
                   <InputForm />
                 </Modal>
               </Menu.Item>
+              <Menu.Item key="5">
+                <Link to="/signin">  
+                  <div style={{width: "100%", height: "100%"}}>
+                    Sign In
+                  </div>
+                </Link>
+              </Menu.Item>
             </Menu>
             </Sider>
           <Layout>
@@ -79,6 +87,7 @@ function MainDisplay(): JSX.Element {
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/dependencyGraph" component={DependencyGraphContainer} />
                 <Route path="/historicalData" component={ChartContainer} />
+                <Route path="/signin" component={SignIn} />
               </Content>
           </Layout>
         {/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer> */}
