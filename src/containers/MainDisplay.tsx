@@ -40,7 +40,7 @@ function MainDisplay(): JSX.Element {
   return (
     <Router>
       <Switch>
-        <Layout className="custom" style={{minHeight:"100vh", minWidth: "100vw"}} hasSider={true}>
+        <Layout className="custom" hasSider={true}>
           <Sider theme="light">
           <Title level={2} className="title">VENUS</Title>
           <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}>
