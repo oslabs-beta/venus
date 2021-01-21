@@ -11,14 +11,13 @@ import { initialState, myContext, AppState } from '../contexts/globalContext';
 import Divider from 'antd/es/divider';
 import Table from 'antd/es/table';
 import Tag  from 'antd/es/tag';
-//import functionality from dynamic Context
-//import {} from '../contexts/dynamicContext';
+import { dynamicContext } from '../contexts/dynamicContext';
 
 
 function  Dashboard(): JSX.Element{
 
     const expandedRowRender: any = () => {
-  
+      
       const subColumns = [
         { 
           title: 'Path', 
@@ -34,7 +33,7 @@ function  Dashboard(): JSX.Element{
           dataIndex: 'status',
           key: 'status',
           render: () => (
-          <Tag color={'green'} key={'test'}>GOOD</Tag> 
+          <Tag color={'orange'} key={'test'}>FAIR</Tag> 
           ),
         },
         {
@@ -73,7 +72,6 @@ function  Dashboard(): JSX.Element{
       ];
       return <Table columns={subColumns} dataSource={subDataSource} pagination={false} />
     }
-  
   
   const dataSource: any = [];
   const source: any = [ 
@@ -140,6 +138,7 @@ function  Dashboard(): JSX.Element{
       latency: '300ms',
       load: '1000hpm',
       error: '2%'
+      
     },
   ];
   

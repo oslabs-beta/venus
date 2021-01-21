@@ -12,11 +12,31 @@ import Col from 'antd/es/col'
 										
 function AggregateStats(): JSX.Element{
     return (
-			<Row gutter={30}>
-				<Col span={6}>
-					<Card bordered={true} bodyStyle={{width: "200px"}}>
+			<Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+				<Col span={4}>
+					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
 						<Statistic
-							title="System Uptime"
+							title="Title"
+							value="Codesmith"
+							precision={2}
+							valueStyle={{ color: '#3f8600' }}
+						/>
+					</Card>
+				</Col>
+				<Col span={4}>
+					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
+						<Statistic
+							title="Health"
+							value={"GOOD"}
+							precision={2}
+							valueStyle={{ color: '#3f8600' }}
+						/>
+					</Card>
+				</Col>
+				<Col span={4}>
+					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
+						<Statistic
+							title="Availability"
 							value={94.28}
 							precision={2}
 							valueStyle={{ color: '#3f8600' }}
@@ -24,10 +44,10 @@ function AggregateStats(): JSX.Element{
 						/>
 					</Card>
 				</Col>
-				<Col span={6}>
-					<Card bordered={true}>
+				<Col span={4}>
+					<Card bordered={true} hoverable={true}>
 						<Statistic
-							title="System Latency"
+							title="Latency"
 							value={9.3}
 							precision={2}
 							valueStyle={{ color: '#cf1322' }}
@@ -35,10 +55,10 @@ function AggregateStats(): JSX.Element{
 						/>
 					</Card>
 				</Col>
-				<Col span={6}>
-					<Card>
+				<Col span={4}>
+					<Card hoverable={true}>
 						<Statistic
-							title="System Load"
+							title="Load"
 							value={9.3}
 							precision={2}
 							valueStyle={{ color: '#cf1322' }}
@@ -46,10 +66,10 @@ function AggregateStats(): JSX.Element{
 						/>
 					</Card>
 				</Col>
-				<Col span={6}>
-					<Card>
+				<Col span={4}>
+					<Card hoverable={true}>
 						<Statistic
-							title="System Error"
+							title="Response Error"
 							value={6.9}
 							precision={2}
 							valueStyle={{ color: '#cf1322' }}

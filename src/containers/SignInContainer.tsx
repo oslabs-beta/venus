@@ -1,4 +1,4 @@
-import { Layout } from 'antd';
+import Layout from 'antd/es/layout';
 const { Header, Footer, Sider, Content } = Layout;
 import React, { useContext, useState } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
@@ -6,6 +6,7 @@ import Form from 'antd/es/form';
 import Input from 'antd/es/input';
 import Button from 'antd/es/button';
 import Checkbox from 'antd/es/checkbox';
+import Card from 'antd/es/card';
 
 function SignIn():JSX.Element {
   
@@ -25,6 +26,7 @@ function SignIn():JSX.Element {
   };
 
   return (
+    <Card>
       <Form
         {...layout}
         name="basic"
@@ -45,7 +47,17 @@ function SignIn():JSX.Element {
         >
           <Input.Password />
         </Form.Item>
+
+        <Form.Item {...tailLayout}>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+      </Form.Item>
       </Form>
-  
+    </Card>
   )
 }
+
+export { SignIn }
+
+

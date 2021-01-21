@@ -14,13 +14,13 @@ import React, { useState } from 'react';
 
 
 type dynamicState = {
-  services: {
-    host: string,
-    port: string,
-    path: string, 
-    date: string, // potentially an int TBD.
-    statusCode: number, 
-    latency: number, 
+  services: { 
+    service: string,
+    status: string,
+    uptime: string,
+    load: string,
+    latency: string, 
+    error: string,
   }[];
   setServices: (input:any[]) => void;
 };

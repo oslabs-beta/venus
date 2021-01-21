@@ -9,43 +9,42 @@ import { AreaChart } from "../charts/AreaChart"
 import { CardDropDown } from "../components/CardDropDown";
 // import { TestChart } from "../charts/TestChart";
 import PieChart from "../charts/PieChart";
-import { Chart } from "../components/Chart";
 import Row from 'antd/es/row'
 import Col from 'antd/es/col'
 import { HistoricalProvider } from '../contexts/historicalContext'
+import Card from 'antd/es/card'
+import Divider from "antd/es/divider";
 
-
-export default function ChartContainer(): JSX.Element {
-
-
+export function ChartContainer(): JSX.Element {
 
   return (
    
     <div id="chartContainer">
       <HistoricalProvider>
       <CardDropDown /> 
-        <Row gutter={[16, 16]}>
+      <Divider></Divider>
+        <Row gutter={[32,32]}>
           <Col span={12}>
-            <div className="graphHolder">
+          <Card bordered={true} hoverable={true} style={{width: "500px"}}>
               <LineGraph />
-            </div>
+            </Card>
           </Col>
           <Col span={12}>
-            <div className="graphHolder" >
+          <Card bordered={true} hoverable={true} style={{width: "500px"}}>
               <AreaChart />
-            </div>
+            </Card>
           </Col>
         </Row>
-        <Row gutter={[16, 16]}>
-        <Col span={12}>
-            <div className="graphHolder">
+        <Row gutter={[32,32]}>
+          <Col span={12}>
+            <Card bordered={true} hoverable={true} style={{width: "500px"}}>
               <LineGraph />
-            </div>
+            </Card>
           </Col>
           <Col span={12}>
-            <div className="graphHolder">
+            <Card bordered={true} hoverable={true} style={{width: "500px"}}>
               <PieChart />
-            </div>
+            </Card>
           </Col>
         </Row>
         </HistoricalProvider>

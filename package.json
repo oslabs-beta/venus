@@ -58,6 +58,7 @@
     "@visx/scale": "^1.4.0",
     "@visx/shape": "^1.4.0",
     "antd": "^4.10.3",
+    "babel-plugin-import": "^1.13.3",
     "contentful": "^8.1.7",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
