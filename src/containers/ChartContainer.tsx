@@ -40,9 +40,9 @@ export function ChartContainer(): JSX.Element {
           </Col>
           <Col span={12}>
           <Card bordered={true} hoverable={true} style={{width: "500px"}}>
-		    <ParentSize>
+		    {/* <ParentSize>
               {({ width, height }) => <BrushChart width={400} height={360} />}
-        	</ParentSize> 
+        	</ParentSize>  */}
             </Card>
           </Col>
         </Row>

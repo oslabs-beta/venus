@@ -28,7 +28,7 @@ type dynamicState = {
 export const liveData: dynamicState= {
   services: [
     {
-      service: 'Google Weather API',
+      service: 'Googleee Weather API',
       status: 'good',
       uptime: '98%',      
       latency: '300ms',
