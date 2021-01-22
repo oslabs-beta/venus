@@ -127,8 +127,10 @@ export default withTooltip<AreaProps, TooltipData>(
             fill="url(#area-background-gradient)"
             rx={14}
           />
-          <LinearGradient id="area-background-gradient" from={background} to={background2} />
-          <LinearGradient id="area-gradient" from={accentColor} to={accentColor} toOpacity={0.1} />
+          {/* controls the background fade */}
+          <LinearGradient id="area-background-gradient" from={'white'} to={background2} />
+          {/* controls chart fade */}
+          <LinearGradient id="area-gradient" from={'red'} to={'orange'} toOpacity={0.1} />
           <GridRows
             left={margin.left}
             scale={stockValueScale}
@@ -153,7 +155,9 @@ export default withTooltip<AreaProps, TooltipData>(
             y={d => stockValueScale(getStockValue(d)) ?? 0}
             yScale={stockValueScale}
             strokeWidth={1}
+            // line of chart
             stroke="url(#area-gradient)"
+            // fill color
             fill="url(#area-gradient)"
             curve={curveMonotoneX}
           />
