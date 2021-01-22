@@ -16,7 +16,7 @@ export const myContext = React.createContext<AppState>(initialState)
 // create a new context with initialState as our state and IState as our type
 // export const myContext = React.createContext<IState>(initialState)
 
-export const ContextProvider: React.FC = (props: any) => {
+export const ContextProvider: JSX.Element = (props: any) => {
   
   const [urls, setUrls] = useState<string[]>([]);
 
