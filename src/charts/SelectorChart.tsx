@@ -1,6 +1,6 @@
 import React, { useMemo, useCallback } from 'react';
 import { AreaClosed, Line, Bar } from '@visx/shape';
-// import appleStock from '@visx/mock-data/lib/mocks/appleStock';
+import appleStock from '@visx/mock-data/lib/mocks/appleStock';
 import { curveMonotoneX } from '@visx/curve';
 import { GridRows, GridColumns } from '@visx/grid';
 import { scaleTime, scaleLinear } from '@visx/scale';
@@ -10,7 +10,7 @@ import { localPoint } from '@visx/event';
 import { LinearGradient } from '@visx/gradient';
 import { max, extent, bisector } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
-import appleStock, {AppleStock} from './DummyData'
+// import appleStock, {AppleStock} from './DummyData'
 
 //change 'close' to 'latency' or w/e you want
 // change 'AppleStock' to 'ILatency'
@@ -49,7 +49,7 @@ const formatDate = timeFormat("%b %d, '%y");
 
 // accessors
 const getDate = (d: AppleStock) => new Date(d.date);
-const getStockValue = (d: AppleStock) => d.latency;
+const getStockValue = (d: AppleStock) => d.close;
 const bisectDate = bisector<AppleStock, Date>(d => new Date(d.date)).left;
 
 export type AreaProps = {
