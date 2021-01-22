@@ -14,6 +14,7 @@ import Tag  from 'antd/es/tag';
 import Form from 'antd/es/form';
 import Select from 'antd/es/select';
 import { dynamicContext } from '../contexts/dynamicContext';
+import Title from 'antd/es/typography/Title';
 
 
 
@@ -117,9 +118,11 @@ function  Dashboard(): JSX.Element{
       dataIndex: 'method',
       key: 'method',
       render: () => (
+    
         <Form>
-          <Form.Item>
-            <Select>
+          <Form.Item initialValue="all">
+            <Select placeholder= "ALL METHODS" style={{ width: 140 }}>
+              <Select.Option value="all">'All METHODS'</Select.Option>
               <Select.Option value="get">'GET'</Select.Option>
               <Select.Option value="post">'POST'</Select.Option>
               <Select.Option value="put">'PUT'</Select.Option>
@@ -127,7 +130,7 @@ function  Dashboard(): JSX.Element{
             </Select>
           </Form.Item>
         </Form>
-
+      
       ),
     },
     {
@@ -156,7 +159,7 @@ function  Dashboard(): JSX.Element{
     return(
       <div id="dashboard">          
         <AggregateStats />
-        <Divider></Divider>
+        <Divider><Title level={3}>Current Status</Title></Divider>
         <Table columns={columns} dataSource={dataSource} pagination={false} style={{width: "100%"}} />
       </div>
   )

@@ -29,15 +29,16 @@ function SignIn():JSX.Element {
   return (
     <div className="loginContainer">
       <Card 
-        style={{height: 'fit-content', width: 600}}
+        style={{height: 'fit-content', width: 600, textAlign: 'center'}}
         bordered={true}
         title={<Title>VENUS</Title>}
+        hoverable={true}
         >
-        
         <Form
           {...layout}
           name="basic"
           initialValues={{ remember: true }}
+          style={{alignContent: 'center'}}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}>
           <Form.Item
