@@ -9,7 +9,6 @@ function DependencyGraphContainer(): JSX.Element{
         {/* <DependencyTree /> */}
         dependencyGraph will go here.
       </Card>
-
     </div>
   )
 };

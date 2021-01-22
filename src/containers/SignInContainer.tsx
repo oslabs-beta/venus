@@ -1,12 +1,13 @@
-import Layout from 'antd/es/layout';
+  import Layout from 'antd/es/layout';
 const { Header, Footer, Sider, Content } = Layout;
 import React, { useContext, useState } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import Form from 'antd/es/form';
 import Input from 'antd/es/input';
 import Button from 'antd/es/button';
-import Checkbox from 'antd/es/checkbox';
 import Card from 'antd/es/card';
+import Typography from "antd/es/typography";
+const { Title } = Typography
 
 function SignIn():JSX.Element {
   
@@ -26,35 +27,42 @@ function SignIn():JSX.Element {
   };
 
   return (
-    <Card>
-      <Form
-        {...layout}
-        name="basic"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}>
-        <Form.Item
-          label="Username"
-          name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
+    <div className="loginContainer">
+      <Card 
+        style={{height: 'fit-content', width: 600}}
+        bordered={true}
+        title={<Title>VENUS</Title>}
         >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Password"
-          name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
-        >
-          <Input.Password />
-        </Form.Item>
+        
+        <Form
+          {...layout}
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}>
+          <Form.Item
+            label="Server Address"
+            name="serverIP"
+            rules={[{ required: true, message: 'Please enter valid Server Address.' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Secret"
+            name="secret"
+            rules={[{ required: true, message: 'Please enter valid Secret.' }]}
+          >
+            <Input.Password />
+          </Form.Item>
 
-        <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
-            Submit
-          </Button>
-      </Form.Item>
-      </Form>
-    </Card>
+          <Form.Item {...tailLayout}>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+        </Form.Item>
+        </Form>
+      </Card>
+    </div>
   )
 }
 
