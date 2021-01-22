@@ -15,6 +15,7 @@ import { timeFormat } from 'd3-time-format';
 //change 'close' to 'latency' or w/e you want
 // change 'AppleStock' to 'ILatency'
 // change 'appleStock' to 'latency'
+// take out one "$" on line 212
 
 
 
