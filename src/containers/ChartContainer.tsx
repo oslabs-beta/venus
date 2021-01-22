@@ -17,6 +17,9 @@ import Divider from "antd/es/divider";
 import { AggregateStats } from "../components/AggregateStats";
 import Title from "antd/es/typography/Title";
 import Space from 'antd/es/space';
+import  ParentSize from "@visx/responsive/lib/components/ParentSize";
+import BrushChart from '../charts/CyclePerformanceChart'
+import WithTooltip from '../charts/SelectorChart'
 
 export function ChartContainer(): JSX.Element {
 
@@ -38,14 +41,18 @@ export function ChartContainer(): JSX.Element {
           </Col>
           <Col span={12}>
           <Card bordered={true} hoverable={true} style={{width: "500px"}}>
-              <AreaChart />
+		    <ParentSize>
+              {({ width, height }) => <BrushChart width={400} height={360} />}
+        	</ParentSize> 
             </Card>
           </Col>
         </Row>
         <Row gutter={[32,32]}>
           <Col span={12}>
             <Card bordered={true} hoverable={true} style={{width: "500px"}}>
-              <LineGraph />
+		    <ParentSize>
+              {({ width, height }) => <WithTooltip width={400} height={360} />}
+        	</ParentSize> 
             </Card>
           </Col>
           <Col span={12}>
