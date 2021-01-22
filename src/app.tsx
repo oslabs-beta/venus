@@ -1,30 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import ReactDom, { render} from 'react-dom';
+import ReactDom, { render } from 'react-dom';
 import './style.scss';
-// import Main Display
 import { MainDisplay } from './containers/MainDisplay'
-// make sure we can use our state and pass it into our main component
 import { ContextProvider } from './contexts/globalContext'
 // import { myContext } from './contexts/globalContext'
-import Container from '@material-ui/core/Container';
-
 import { BrowserRouter  } from 'react-router-dom';
 
 const App: React.FC = () => {
-
   const [urls, setUrls] = useState<string[]>([])
-
   useEffect(() => {
     setUrls(['evan']);
   }, [])
 
-
   return (
     <div>
       <ContextProvider>
-        <Container>
-          <MainDisplay/>
-        </Container>
+        <MainDisplay/>
       </ContextProvider>
     </div>
   )
