@@ -1,7 +1,7 @@
 import React, { useRef, useState, useMemo } from "react";
 import { scaleTime, scaleLinear } from "@visx/scale";
 // redeclare data
-import appleStock, { AppleStock } from "@visx/mock-data/lib/mocks/appleStock";
+import appleStock from "@visx/mock-data/lib/mocks/appleStock";
 // import { histData, historicalContext} from '../contexts/historicalContext' ; 
 import { Brush } from "@visx/brush";
 import { Bounds } from "@visx/brush/lib/types";
@@ -16,12 +16,12 @@ import { max, extent } from "d3-array";
 import AreaChartCycle from "./AreaChartCycle";
 
 // model of mockdata from applestock
-// export interface AppleStock {
-//   date: string;
-//   close: number;
-// }
+interface AppleStock {
+  date: string;
+  close: number;
+}
 
-// export const appleStock: AppleStock[] = [
+// const appleStock: AppleStock[] = [
 //   { date: '2007-04-24T07:00:00.000Z', close: 93.24 },
 //   { date: '2007-05-24T07:00:00.000Z', close: 93.24 },
 //   { date: '2007-06-24T07:00:00.000Z', close: 93.24 },
@@ -31,9 +31,9 @@ import AreaChartCycle from "./AreaChartCycle";
 // date is same i.e. time request was sent
 // becomes x axis
 // close becomes cycle duration i.e. 1136 ms and becomes y axis
-
+console.log(appleStock.slice(1000))
 // Initialize some variables
-const stock = appleStock;
+const stock = appleStock.slice(1000);
 const brushMargin = { top: 20, bottom: 5, left: 50, right: 20 };
 const chartSeparation = 30;
 const PATTERN_ID = "brush_pattern";
