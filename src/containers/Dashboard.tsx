@@ -6,21 +6,165 @@
 
  import React, {useContext, useEffect} from 'react';
 //  import TabContainer from './TabContainer'
-import  { ServiceContainer } from './ServiceContainer';
-import { ChartContainer } from './ChartContainer';
 import { AggregateStats } from '../components/AggregateStats';
-import { initialState, myContext, AppState } from '../contexts/globalContext'
+import { initialState, myContext, AppState } from '../contexts/globalContext';
+import Divider from 'antd/es/divider';
+import Table from 'antd/es/table';
+import Tag  from 'antd/es/tag';
+import Form from 'antd/es/form';
+import Select from 'antd/es/select';
+import { dynamicContext } from '../contexts/dynamicContext';
+import Title from 'antd/es/typography/Title';
+
+
 
 function  Dashboard(): JSX.Element{
+
+  const dataSource: any = [];
+  const source: any = [ 
+    {
+      service: 'Google Weather API',
+      status: 'good',
+      uptime: '98%',      
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Surfline API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Stripe API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Surfline API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Unemployment API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'AWS API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Codesmith API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+    },
+    {
+      service: 'Plaid API',
+      status: 'good',
+      uptime: "98%",
+      latency: '300ms',
+      load: '1000hpm',
+      error: '2%'
+      
+    },
+  ];
+
+ 
   
+  for (let i = 0; i < source.length; i++) {
+    source[i].key = i;
+    dataSource.push(source[i])
+  }
+  const columns: any = [
+    {
+      title: 'Service',
+      dataIndex: 'service',
+      key: 'service',
+      // sorter: {
+      //   compare: (a:any, b:any) => a.title.length - b.title.length,
+      //   multiple: 1,
+      // }
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      key: 'status',
+      render: () => (
+      <Tag color={'green'} key={'test'}>GOOD</Tag>
+      ),
+    },
+    {
+      title: 'Method',
+      dataIndex: 'method',
+      key: 'method',
+      render: () => (
+    
+        <Form>
+          <Form.Item initialValue="all">
+            <Select placeholder= "ALL METHODS" style={{ width: 140 }}>
+              <Select.Option value="all">'All METHODS'</Select.Option>
+              <Select.Option value="get">'GET'</Select.Option>
+              <Select.Option value="post">'POST'</Select.Option>
+              <Select.Option value="put">'PUT'</Select.Option>
+              <Select.Option value="delete">'DELETE'</Select.Option>
+            </Select>
+          </Form.Item>
+        </Form>
+      
+      ),
+    },
+    {
+      title: 'Uptime',
+      dataIndex: 'uptime',
+      key: 'uptime',
+    },
+    {
+      title: 'Latency',
+      dataIndex: 'latency',
+      key: 'latency',
+    },
+    {
+      title: 'Load',
+      dataIndex: 'load',
+      key: 'load',
+    },
+    {
+      title: 'Error',
+      dataIndex: 'error',
+      key: 'error',
+    },
+  ];
+  
+
     return(
-      <div id="dashboard">
-        <h1>Dashboard Container</h1>             
+      <div id="dashboard">          
         <AggregateStats />
-        <ServiceContainer />
+        <Divider><Title level={3}>Current Status</Title></Divider>
+        <Table columns={columns} dataSource={dataSource} pagination={false} style={{width: "100%"}} />
       </div>
-    )
- }
+  )
+ };
 
  export { Dashboard };
  // exports to MainContainer
+ 
