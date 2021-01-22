@@ -1,8 +1,8 @@
 import React, { useRef, useState, useMemo } from "react";
 import { scaleTime, scaleLinear } from "@visx/scale";
 // redeclare data
-// import appleStock, { AppleStock } from "@visx/mock-data/lib/mocks/appleStock";
-import { histData, historicalContext} from '../contexts/historicalContext' ; 
+import appleStock, { AppleStock } from "@visx/mock-data/lib/mocks/appleStock";
+// import { histData, historicalContext} from '../contexts/historicalContext' ; 
 import { Brush } from "@visx/brush";
 import { Bounds } from "@visx/brush/lib/types";
 import BaseBrush, {
@@ -16,17 +16,17 @@ import { max, extent } from "d3-array";
 import AreaChartCycle from "./AreaChartCycle";
 
 // model of mockdata from applestock
-export interface AppleStock {
-  date: string;
-  close: number;
-}
+// export interface AppleStock {
+//   date: string;
+//   close: number;
+// }
 
-export const appleStock: AppleStock[] = [
-  { date: '2007-04-24T07:00:00.000Z', close: 93.24 },
-  { date: '2007-05-24T07:00:00.000Z', close: 93.24 },
-  { date: '2007-06-24T07:00:00.000Z', close: 93.24 },
-  { date: '2007-07-24T07:00:00.000Z', close: 93.24 }
-];
+// export const appleStock: AppleStock[] = [
+//   { date: '2007-04-24T07:00:00.000Z', close: 93.24 },
+//   { date: '2007-05-24T07:00:00.000Z', close: 93.24 },
+//   { date: '2007-06-24T07:00:00.000Z', close: 93.24 },
+//   { date: '2007-07-24T07:00:00.000Z', close: 93.24 }
+// ];
 
 // date is same i.e. time request was sent
 // becomes x axis
@@ -176,7 +176,7 @@ function BrushChart({
     }
   };
 
-  console.log('let lowercase, then uppercase ', appleStock, AppleStock, 'live data freq ', histData.historical)
+//   console.log('let lowercase, then uppercase ', appleStock, AppleStock, 'live data freq ', histData.historical)
 
   return (
     <div>

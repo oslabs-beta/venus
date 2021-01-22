@@ -5,7 +5,7 @@ import { AxisLeft, AxisBottom, AxisScale } from '@visx/axis';
 import { LinearGradient } from '@visx/gradient';
 import { curveMonotoneX } from '@visx/curve';
 import { appleStock, AppleStock } from './CyclePerformanceChart';
-import { histData, historicalContext, dynamicState } from '../contexts/historicalContext' ; 
+// import { histData, historicalContext, dynamicState } from '../contexts/historicalContext' ; 
 
 // Initialize some variables
 const axisColor = '#fff';
