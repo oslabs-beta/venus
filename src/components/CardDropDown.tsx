@@ -41,6 +41,8 @@ function CardDropDown (): JSX.Element{
     <Option value="GoogleWeather">Google Weather API</Option>
     <Option value="surfline">Surfline API</Option>
     <Option value="codesmith">Codesmith API</Option>
+    <Option value="one">Rotating Value</Option>
+    {/* this option has connect to each api available on current status page */}
   </Select>
   )
 }

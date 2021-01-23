@@ -44,14 +44,14 @@ function MainDisplay(): JSX.Element {
           <Sider theme="light" style={{position: 'fixed'}}>
           <Title level={2} className="title">VENUS</Title>
           <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}> 
-            <Menu.Item key="1">
+            {/* <Menu.Item key="1">
                 <Link to="/signin">  
                   <div style={{width: "100%", height: "100%"}}>
                     Sign In
                   </div>
                 </Link>
-              </Menu.Item>         
-              <Menu.Item key="2" >
+              </Menu.Item>          */}
+              <Menu.Item key="2">
                 <Link to="/">
                   <div style={{width: "100%", height: "100%"}}>
                     Current Status
@@ -87,7 +87,7 @@ function MainDisplay(): JSX.Element {
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/dependencyGraph" component={DependencyGraphContainer} />
                 <Route path="/historicalData" component={ChartContainer} />
-                <Route path="/signin" component={SignIn} />
+                {/* <Route path="/signin" component={SignIn} /> */}
               </Content>
           </Layout>
         {/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer> */}
