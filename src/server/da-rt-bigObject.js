@@ -5,6 +5,9 @@ const dfd = require("danfojs-node");
 // const { streamName } = require('./redis-stream');
 const PATH_BREAKDOWN = true;
 
+// time drame of real-time data at any point in time (in minutes)
+const STREAM_WINDOW = 3;
+
 // // also requires running npm i @tensorflow/tfjs-node
 
 const responseData = [
@@ -99,22 +102,10 @@ const responseData = [
 // console.log(uniqueHosts);
 
 const rtData = (data) => {
-  // data at the service level 
-  // start adding calculated columns 
-    // error rate -- already exists 
-    // Availability 
-  // Average latency -- .mean()
-  // load -- .count() / 3 (dynamic value tied to stream time window)
-
   
   const dataframes = []; // create an array of dataframes to work with 
-  let df = new dfd.DataFrame(data);
-  // df.print(); 
-
-
   
-  // const topLevelObj = analyzer(df);
-  // dataframes.push(topLevelObj); 
+  let df = new dfd.DataFrame(data);
 
   const dfGroup = df.groupby(['reqHost']);
   // const dfNew = new dfd.DataFrame(dfGroup.data);
@@ -178,19 +169,134 @@ const rtData = (data) => {
   outputTable.data.forEach((row) => {
     const outputObj = {}; 
 
-    outputObj['Service'] = row[0];
-    outputObj['Load'] = row[1];
-    outputObj['Latency'] = row[2];
-    outputObj['Error_Percentage'] = row[3];
-    outputObj['Availability_Percentage'] = row[4]; 
+    outputObj.service = row[0];
+    outputObj.status = 'good'; 
+    outputObj.load = row[1] + ' hpm';
+    outputObj.response_time = row[2];
+    outputObj.error = row[3];
+    outputObj.availability = row[4]; 
     
     consolidatedObj.services.push(outputObj); 
   });
 
+  // console.log(consolidatedObj); 
+
+  // df.print();  
+  
+
+  //FOR OVERALL AGGREGATE STATISTICS
+
+  consolidatedObj.aggregate = {}; 
+
+  const errorResRowsTotal = df.query({ column: 'resStatusCode', is: ">=", to: 400 }); 
+  
+  const newErrorDFTotal = errorResRowsTotal['resStatusCode'].count(); 
+  const totalRequests = df['reqHost'].count(); 
+  const totalResponses = df['resStatusCode'].count(); 
+  consolidatedObj.aggregate.status = 'good';
+  consolidatedObj.aggregate.load = (totalRequests / STREAM_WINDOW) + ' hpm';
+  consolidatedObj.aggregate.response_time = Math.round(df['cycleDuration'].mean());
+  consolidatedObj.aggregate.error = (newErrorDFTotal / totalResponses) * 100;
+  consolidatedObj.aggregate.availability = Math.round((totalResponses / totalRequests) * 100);
+  
+
   console.log(consolidatedObj); 
 
-  df.print();  
+  const uniqueHosts = df["reqHost"].unique().data;
+
+  uniqueHosts.forEach(host => {
+    
+  })
+
+  // newErrorDFTotal.print();
+
+  // const totalErrors = errorResRowsTotal.count().data;
+  // totalErrors.print()
   
+  // dfNew.print();
+
+  // let finalTable = dfd.merge({ left: dfNew, right: newErrorDF, on:['reqHost'], how: 'left' });
+
+  // const latencyDF = dfGroup.col(['cycleDuration']).mean(); 
+  
+
+  // finalTable = dfd.merge({ left: finalTable, right: latencyDF, on:['reqHost'], how: 'left' });
+
+  // const availabilityDF = dfGroup.col(['resStatusCode']).count();
+  // // availabilityDF.print()
+  // finalTable = dfd.merge({ left: finalTable, right: availabilityDF, on:['reqHost'], how: 'left' });
+
+  // finalTable.fillna({ values: [0], inplace: true }); 
+
+  // //   const totalResponses = finalTable.loc({ columns: ['resStatusCode_1'] }); 
+  // //   const errorResponses = finalTable.loc({ columns: ['resStatusCode'] }); 
+  
+  // const errorRateCol = finalTable[`resStatusCode_count`].div(finalTable[`resStatusCode_count_1`]).mul(100);
+  
+  // //   const errorRate = errorRequests.div(totalRequests).mul(100);
+  // //   // console.log(errorRate);
+  // finalTable.addColumn({
+  //   column: "Error (%)",
+  //   value: errorRateCol.col_data[0],
+  // });
+
+    
+  // // console.log(finalTable); 
+  
+  // const availabilityCol = finalTable[`resStatusCode_count_1`].div(finalTable[`reqHost_count`]).mul(100);
+  
+  // // availabilityCol.print();
+  // finalTable.addColumn({
+  //   column: 'Availability (%)',
+  //   value: availabilityCol.col_data[0],
+  // });
+
+  // let outputTable = finalTable.loc({ columns: ['reqHost', 'reqHost_count', 'cycleDuration_mean', 'Error (%)', 'Availability (%)'] });
+
+  // outputTable[`reqHost_count`] = outputTable[`reqHost_count`].div(3);
+
+  // console.log('Final Table: ', outputTable); 
+  // outputTable.print(); 
+  
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   
   
