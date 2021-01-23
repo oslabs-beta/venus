@@ -154,7 +154,6 @@ function  Dashboard(): JSX.Element{
       key: 'error',
     },
   ];
-  
 
     return(
       <div id="dashboard">          
