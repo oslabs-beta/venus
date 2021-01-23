@@ -9,7 +9,17 @@ import Statistic from 'antd/es/statistic'
 import Card from 'antd/es/card'
 import Row from 'antd/es/row'
 import Col from 'antd/es/col'
-										
+
+type colors = {
+	good: string
+	fair: string
+	bad: string
+}
+const color: colors = {
+	good: '#52c41a',
+	fair: '#fa8c16',
+	bad: '#f5222d'
+}
 function AggregateStats(): JSX.Element{
     return (
 		
@@ -21,7 +31,7 @@ function AggregateStats(): JSX.Element{
 							title="Title"
 							value="Codesmith"
 							precision={2}
-							valueStyle={{ color: '#3f8600' }}
+							valueStyle={{ color: color.good }}
 						/>
 					</Card>
 			</div>
@@ -34,7 +44,7 @@ function AggregateStats(): JSX.Element{
 							title="Health"
 							value={"GOOD"}
 							precision={2}
-							valueStyle={{ color: '#3f8600' }}
+							valueStyle={{ color: color.bad }}
 						/>
 					</Card>
 					</div>
@@ -46,8 +56,9 @@ function AggregateStats(): JSX.Element{
 							title="Availability"
 							value={94.28}
 							precision={2}
-							valueStyle={{ color: '#3f8600' }}
+							valueStyle={{ color: color.good }}
 							suffix="%"
+		
 						/>
 					</Card>
 					</div>
@@ -59,7 +70,7 @@ function AggregateStats(): JSX.Element{
 							title="Latency"
 							value={9.3}
 							precision={2}
-							valueStyle={{ color: '#cf1322' }}
+							valueStyle={{ color: color.fair }}
 							suffix="ms"
 						/>
 					</Card>
@@ -72,7 +83,7 @@ function AggregateStats(): JSX.Element{
 							title="Load"
 							value={9.3}
 							precision={2}
-							valueStyle={{ color: '#cf1322' }}
+							valueStyle={{ color: color.fair }}
 							suffix="hpm"
 						/>
 					</Card>
@@ -85,7 +96,7 @@ function AggregateStats(): JSX.Element{
 							title="Response Error"
 							value={6.9}
 							precision={2}
-							valueStyle={{ color: '#cf1322' }}
+							valueStyle={{ color: color.fair }}
 							suffix="%"
 						/>
 					</Card>

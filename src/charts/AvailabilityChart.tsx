@@ -9,7 +9,9 @@ const Availability: React.FC = () => {
   const asyncFetch = () => {
     fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
       .then((response) => response.json())
-      .then((json) => setData(json))
+      .then((json) => { 
+        console.log(json)
+        return setData(json)})
       .catch((error) => {
         console.log('fetch data failed', error);
       });

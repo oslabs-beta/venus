@@ -22,12 +22,12 @@ function  Dashboard(): JSX.Element{
 
   const dataSource: any = [];
   const source: any = [ 
-    {
+   {
       service: 'Google Weather API',
       status: 'good',
       uptime: '98%',      
       latency: '300ms',
-      load: '1000hpm',
+      load:  '1000hpm',
       error: '2%'
     },
     {

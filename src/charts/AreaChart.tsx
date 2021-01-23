@@ -5,7 +5,9 @@ function AreaChart(): JSX.Element {
   useEffect(()=>{  
     fetch('https://gw.alipayobjects.com/os/bmw-prod/67ef5751-b228-417c-810a-962f978af3e7.json')
       .then((response)=> response.json()) 
-      .then((json)=>setData(json))  
+      .then((json)=>{
+        console.log(json)
+        return setData(json)})  
       .catch((error)=>{  
         console.log('fetch data failed', error);
       })
