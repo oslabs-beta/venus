@@ -15,12 +15,12 @@ import React, { useState } from 'react';
 
 type dynamicState = {
   services: { 
-    service: string,
     status: string,
-    uptime: string,
+    service: string,
     load: string,
-    latency: string, 
+    reponse_time: number, 
     error: string,
+   availability: number,
   }[];
   setServices: (input:any[]) => void;
 };
@@ -37,54 +37,6 @@ export const liveData: dynamicState= {
     },
     {
       service: 'Surfline API',
-      status: 'good',
-      uptime: "98%",
-      latency: '300ms',
-      load: '1000hpm',
-      error: '2%'
-    },
-    {
-      service: 'Stripe API',
-      status: 'good',
-      uptime: "98%",
-      latency: '300ms',
-      load: '1000hpm',
-      error: '2%'
-    },
-    {
-      service: 'Surfline API',
-      status: 'good',
-      uptime: "98%",
-      latency: '300ms',
-      load: '1000hpm',
-      error: '2%'
-    },
-    {
-      service: 'Unemployment API',
-      status: 'good',
-      uptime: "98%",
-      latency: '300ms',
-      load: '1000hpm',
-      error: '2%'
-    },
-    {
-      service: 'AWS API',
-      status: 'good',
-      uptime: "98%",
-      latency: '300ms',
-      load: '1000hpm',
-      error: '2%'
-    },
-    {
-      service: 'Codesmith API',
-      status: 'good',
-      uptime: "98%",
-      latency: '300ms',
-      load: '1000hpm',
-      error: '2%'
-    },
-    {
-      service: 'Plaid API',
       status: 'good',
       uptime: "98%",
       latency: '300ms',

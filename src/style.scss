@@ -19,6 +19,15 @@ h1 {
  background: linear-gradient(45deg, hsla(0, 0%, 0%, 1) 24%, hsla(332, 71%, 47%, 1) 100%);
 }
 
+// .threeCard {
+//    display: flex;
+//    flex-direction: row;
+// }
+
+.cardRow{
+  width: 100%
+}
+
 .childCardContainer {
   display: flex;
   flex-direction: row;
@@ -84,7 +93,7 @@ h1 {
   padding: 20px 20px;
   flex-grow: 10;
   display: flex;
-  justify-content: flex-start;
+  // justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 }

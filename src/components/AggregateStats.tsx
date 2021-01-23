@@ -22,8 +22,8 @@ const color: colors = {
 }
 function AggregateStats(): JSX.Element{
     return (
-		
-			<Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+	<div className="cardRow">
+	<Row gutter={32}>
 				<Col span={4}>
 			<div className="aggregate">
 					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
@@ -63,7 +63,7 @@ function AggregateStats(): JSX.Element{
 					</Card>
 					</div>
 				</Col>
-				<Col span={4}>
+		<Col span={4}>
 				<div className="aggregate">
 					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
 						<Statistic
@@ -103,7 +103,7 @@ function AggregateStats(): JSX.Element{
 					</div>
 				</Col>
 			</Row>
-		
+	</div>
   )
 };
 
