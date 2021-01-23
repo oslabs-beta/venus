@@ -10,9 +10,8 @@ function DependencyGraphContainer(): JSX.Element{
     <div id="dashboard">
       <Card hoverable={true}>
         <ParentSize>
-          {({ width, height }) => <DependencyGraph width={950} height={900} />}
+          {({ width, height }) => <DependencyGraph width={1200} height={800} />}
         </ParentSize>
-        dependencyGraph will go here.
       </Card>
     </div>
   )

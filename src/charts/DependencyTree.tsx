@@ -4,6 +4,7 @@ import { Group } from "@visx/group";
 import { hierarchy, Tree } from "@visx/hierarchy";
 import { LinearGradient } from "@visx/gradient";
 import { pointRadial } from "d3-shape";
+import { AggregateStats } from '../components/AggregateStats';
 
 import { Select } from "antd";
 
@@ -176,6 +177,7 @@ function getLinkComponent({
 // this is the kind of type of the tree node
 interface TreeNode {
   name: string;
+  status: string;
   isExpanded?: boolean;
   children?: TreeNode[];
 }
@@ -183,43 +185,69 @@ interface TreeNode {
 // THIS IS OUR DUMMY DATA FOR THE TREE
 
 const data: TreeNode = {
-  name: "T",
+  name: "CodeSmith",
+  status: "good",
   children: [
     {
-      name: "A",
+      name: "Google API",
+      status: "good",
       children: [
-        { name: "A1" },
-        { name: "A2" },
-        { name: "A3" },
-        {
-          name: "C",
-          children: [
-            {
-              name: "C1"
-            },
-            {
-              name: "D",
-              children: [
-                {
-                  name: "D1"
-                },
-                {
-                  name: "D2"
-                },
-                {
-                  name: "D3"
-                }
-              ]
-            }
-          ]
-        }
-      ]
+        { name: "GET",
+        status: "bad"},
+        { name: "POST",
+        status: "good" },
+        { name: "PUT",
+        status: "fair" },
+        { name: "DELETE",
+        status: "good" },
+        ]
     },
-    { name: "Z" },
     {
-      name: "B",
-      children: [{ name: "B1" }, { name: "B2" }, { name: "B3" }]
-    }
+      name: "Plaid API",
+      status: "good",
+      children: [
+        { name: "PUT",
+        status: "good" },
+        { name: "DELETE",
+        status: "good"},
+        ]
+    },
+    {
+      name: "Solarwinds API",
+      status: "fair",
+      children: [
+        { name: "GET",
+        status: "good" }
+        ]
+    },
+    {
+      name: "Surfline API",
+        status: "good",
+      children: [
+        { name: "GET",
+        status: "good" },
+        { name: "POST",
+        status: "good" },
+        { name: "PUT",
+        status: "good" },
+        { name: "DELETE",
+        status: "good" },
+        ]
+    },
+    {
+      name: "Yelp API",
+      status: "good",
+      children: [
+        { name: "GET",
+        status: "good" },
+        { name: "POST",
+        status: "good" },
+        { name: "PUT",
+        status: "good" },
+        { name: "DELETE",
+        status: "good" },
+        ]
+    },
   ]
 };
 
@@ -276,6 +304,8 @@ function DependencyGraph({
 // can modify components here i.e. color, stroke size
   return totalWidth < 10 ? null : (
     <div>
+      <AggregateStats/>
+      <br />
       <LinkControls
         layout={layout}
         orientation={orientation}
@@ -309,7 +339,7 @@ function DependencyGraph({
                     fill="none"
                   />
                 ))}
-// settings for children of tree graph
+              // settings for children of tree graph
                 {tree.descendants().map((node, key) => {
                   const width = 80;
                   const height = 20;
@@ -347,6 +377,7 @@ function DependencyGraph({
                           width={width}
                           y={-height / 2}
                           x={-width / 2}
+                          // fill of individual node boxes
                           fill="#272b4d"
                           stroke={node.data.children ? "#03c0dc" : "#26deb0"}
                           strokeWidth={2.25}
@@ -368,7 +399,7 @@ function DependencyGraph({
                         style={{ pointerEvents: "none" }}
                         fill={
                           node.depth === 0
-                            ? "#71248e"
+                            ? "#505050"
                             : node.children
                             ? "white"
                             : "#7FFF00"
@@ -385,6 +416,7 @@ function DependencyGraph({
         </Group>
       </svg>
     </div>
+
   );
 }
 
