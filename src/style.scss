@@ -5,15 +5,49 @@ h1 {
   color:green;
 }
 
-h2 {
-  color:green;
-  text-align: "center";
+.parentCardContainer {
+  display: flex;
+  flex-direction: row;
 }
 
-.app {
-  color: green;
-  font-size: x-large;
-  border: 1px black dotted;
+.loginContainer {
+ display: flex;
+ flex-direction: column;
+ height: 100vh;
+ justify-content: center;
+ align-items: center;
+}
+
+.childCardContainer {
+  display: flex;
+  flex-direction: row;
+}
+.graphHolder {
+  width: fit-content;
+  height: fit-content;
+}
+
+.ant-menu-inline {
+  width: 100%;
+  height: 100vh;
+}
+
+.addService {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+.aggregate {
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+}
+
+.title {
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 #serviceContainer {
@@ -27,27 +61,12 @@ h2 {
 }
 
 .dataContainer {
-  padding: 10px 10px;
   border: 1px solid black;
   background-color: white;
   margin: 5px;
   align-items: center;
   justify-content: center;
   align-self: center
-}
-.icon {
-  background-Color: yellow;
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  border: 1px solid black;
-
-}
-
-.allStats {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
 }
 
 #chartContainer {
@@ -56,86 +75,18 @@ h2 {
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  padding: 10px;
-  border: 3px solid grey;
-  background-color: black;
-  
-}
-
-// styling for navBar and dashboard
-#mainDisplay {
-  display: flex;
-  flex-direction: row;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-
-}
-
-#navBar {
-  display: flex;
-  justify-content: center;
-  flex-grow: 1;
-  padding: 10px;
-  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
-}
-
-.navButtonsContainer {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  border-spacing: 1em
-}
-
-.navbarbuttons {
-  margin: 5px 5px; 
-}
-
-.navbarbuttons:focus {
-  // background-color: blue;
+  padding: 20px 20px;
+  height: 100%;
 }
 
 #dashboard {
+  padding: 20px 20px;
   flex-grow: 10;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  padding: 10px;
-  border: 3px solid grey;
-  background-color: black;
 }
 
-.serviceCard {
-  background-color: black;
-}
 
-.chart {
-  background-color: black;
-  color: black;
-}
 
-.tab {
-  background-color: blue
-}
-
-.aggregateStats {
-  border: 1px solid black;
-  display: flex;
-  flex-direction: row;
-  height: fit-content;
-  width: 100%;
-  align-items: center;
-  justify-content: space-around;
-}
-
-.cardDrop {
-  background-color: rgb(255, 115, 0)
-}
-
-.show {
-  background-color: red;
-}
