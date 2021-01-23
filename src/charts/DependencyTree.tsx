@@ -1,8 +1,12 @@
+
 import React, { useState } from "react";
 import { Group } from "@visx/group";
 import { hierarchy, Tree } from "@visx/hierarchy";
 import { LinearGradient } from "@visx/gradient";
 import { pointRadial } from "d3-shape";
+
+import { Select } from "antd";
+
 // import useForceUpdate from "./useForceUpdate";
 import {
   LinkHorizontal,
@@ -18,8 +22,10 @@ import {
   LinkVerticalLine,
   LinkRadialLine
 } from "@visx/shape";
-// font size for top
-const controlStyles = { fontSize: 22 };
+
+const { Option } = Select;
+
+const controlStyles = { fontSize: 18 };
 type Props = {
   layout: string;
   orientation: string;
@@ -30,7 +36,7 @@ type Props = {
   setLinkType: (linkType: string) => void;
   setStepPercent: (percent: number) => void;
 };
-// the controls at the top
+
 function LinkControls({
   layout,
   orientation,
@@ -41,40 +47,66 @@ function LinkControls({
   setLinkType,
   setStepPercent
 }: Props) {
+  function handleChangeLayout(value) {
+    setLayout(value);
+  }
+  function LayoutSelect(): any {
+    return (
+      <Select
+        defaultValue="Polar"
+        style={{ width: 120 }}
+        onChange={handleChangeLayout}
+      >
+        <Option value="polar">Polar</Option>
+        <Option value="cartesian">Cartesian</Option>
+      </Select>
+    );
+  }
+
+  function handleChangeOrientation(value) {
+    setOrientation(value);
+  }
+  function OrientationSelect(): any {
+    return (
+      <Select
+        defaultValue="Horizontal"
+        style={{ width: 120 }}
+        onChange={handleChangeOrientation}
+      >
+        <Option value="horizontal">Horizontal</Option>
+        <Option value="vertical">Vertical</Option>
+      </Select>
+    );
+  }
+
+  function handleChangeLinkType(value) {
+    setLinkType(value);
+  }
+  function LinkTypeSelect(): any {
+    return (
+      <Select
+        defaultValue="Step"
+        style={{ width: 120 }}
+        onChange={handleChangeLinkType}
+      >
+        <Option value="diagonal">Diagonal</Option>
+        <Option value="step">Step</Option>
+        <Option value="curve">Curve</Option>
+        <Option value="line">Line</Option>
+      </Select>
+    );
+  }
   return (
     <div style={controlStyles}>
-      <label>layout:</label>&nbsp;
-      <select
-        onClick={(e) => e.stopPropagation()}
-        onChange={(e) => setLayout(e.target.value)}
-        value={layout}
-      >
-        <option value="cartesian">cartesian</option>
-        <option value="polar">polar</option>
-      </select>
+      <div style={controlStyles}></div>
+      <label>layout: </label>&nbsp;
+      <LayoutSelect />
       &nbsp;&nbsp;
-      <label>orientation:</label>&nbsp;
-      <select
-        onClick={(e) => e.stopPropagation()}
-        onChange={(e) => setOrientation(e.target.value)}
-        value={orientation}
-        disabled={layout === "polar"}
-      >
-        <option value="vertical">vertical</option>
-        <option value="horizontal">horizontal</option>
-      </select>
+      <label>orientation: </label>&nbsp;
+      <OrientationSelect />
       &nbsp;&nbsp;
-      <label>link:</label>&nbsp;
-      <select
-        onClick={(e) => e.stopPropagation()}
-        onChange={(e) => setLinkType(e.target.value)}
-        value={linkType}
-      >
-        <option value="diagonal">diagonal</option>
-        <option value="step">step</option>
-        <option value="curve">curve</option>
-        <option value="line">line</option>
-      </select>
+      <label>link: </label>&nbsp;
+      <LinkTypeSelect />
       {linkType === "step" && layout !== "polar" && (
         <>
           &nbsp;&nbsp;
@@ -91,6 +123,7 @@ function LinkControls({
           />
         </>
       )}
+      <br />
     </div>
   );
 }
@@ -257,7 +290,7 @@ function DependencyGraph({
       <svg width={totalWidth} height={totalHeight}>
         <LinearGradient id="links-gradient" from="#fd9b93" to="#fe6e9e" />
         // can change rectangle color
-        <rect width={totalWidth} height={totalHeight} rx={14} fill="#272b4d" />
+        <rect width={totalWidth} height={totalHeight} rx={14} fill="#f5f5f5" />
         <Group top={margin.top} left={margin.left}>
           <Tree
             root={hierarchy(data, (d) => (d.isExpanded ? null : d.children))}
@@ -271,7 +304,7 @@ function DependencyGraph({
                     key={i}
                     data={link}
                     percent={stepPercent}
-                    stroke="rgb(254,110,158,0.6)"
+                    stroke="#FF7F50"
                     strokeWidth="1.75"
                     fill="none"
                   />
@@ -338,7 +371,7 @@ function DependencyGraph({
                             ? "#71248e"
                             : node.children
                             ? "white"
-                            : "#26deb0"
+                            : "#7FFF00"
                         }
                       >
                         {node.data.name}
