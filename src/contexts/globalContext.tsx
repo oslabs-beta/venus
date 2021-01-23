@@ -1,13 +1,13 @@
 import React, { useState } from 'react'; 
 
 export type AppState = {
-  urls: string[];
-  setUrls: (urls: string[]) => void;
+  verification: boolean;
+  setVerfication: (verfied:boolean ) => void;
 };
 
 export const initialState: AppState = {
-  urls: [],
-  setUrls: () => {}
+  verification: false,
+  setVerfication: () => {}
 };
 
 export const myContext = React.createContext<AppState>(initialState)
@@ -18,9 +18,9 @@ export const myContext = React.createContext<AppState>(initialState)
 
 export const ContextProvider: React.FC = (props: any) => {
   
-  const [urls, setUrls] = useState<string[]>([]);
+  const [verification, setVerfication] = useState<boolean>(false);
 
-  return <myContext.Provider value={{urls, setUrls}}>{props.children}</myContext.Provider>
+  return <myContext.Provider value={{verification, setVerfication}}>{props.children}</myContext.Provider>
 
 }
 

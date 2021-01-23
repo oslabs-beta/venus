@@ -1,6 +1,7 @@
   import Layout from 'antd/es/layout';
 const { Header, Footer, Sider, Content } = Layout;
 import React, { useContext, useState } from "react";
+import { myContext } from '../contexts/globalContext' 
 import { Redirect } from "react-router-dom";
 import { MainDisplay } from '../containers/MainDisplay'
 import Form from 'antd/es/form';
@@ -25,6 +26,14 @@ export default function SignIn():JSX.Element {
   const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
   };
+
+  const { verification, setVerfication } = useContext(myContext)
+
+  const setContext = () => {
+    if (verification === false){
+      setVerfication(true)
+    }
+  }
   //RETURN <MainDisplay/> WHEN SERVER ADDRESS AND SECRET ARE BOTH CORRECT
   return (
     <div className="loginContainer">
@@ -58,7 +67,7 @@ export default function SignIn():JSX.Element {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit" onSubmit={<Redirect to="/dashboard"/>}>
+            <Button type="primary" htmlType="submit" onClick={setContext}>
               Submit
             </Button>
         </Form.Item>

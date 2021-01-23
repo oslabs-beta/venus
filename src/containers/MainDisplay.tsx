@@ -13,10 +13,11 @@ import {  DependencyGraphContainer } from "./DependencyGraphContainer";
 import Typography from "antd/es/typography";
 import Menu from "antd/es/menu";
 import Layout from "antd/es/layout"
-// import Space from "antd/es/space"
 import Modal from 'antd/es/modal';
 import { InputForm } from "../components/InputForm"
 import { SignIn } from "./SignInContainer";
+import { myContext } from '../contexts/globalContext';
+
 const { Title } = Typography;
 const {Footer, Sider, Content} = Layout
 const { SubMenu } = Menu
@@ -36,7 +37,14 @@ function MainDisplay(): JSX.Element {
     setIsModalVisible(false);
   };
 
+  const { verification } = useContext(myContext);
+
   const large: any = "large";
+
+
+  if (verification === false){
+    return <SignIn />
+  } else {
   return (
     <Router>
       <Switch>
@@ -95,6 +103,7 @@ function MainDisplay(): JSX.Element {
       </Switch>
     </Router>
   );
+}
 }
 
 export { MainDisplay };
