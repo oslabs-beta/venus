@@ -76,7 +76,7 @@ function MainDisplay(): JSX.Element {
                 <div style={{width: "100%", height: "100%"}} key="4" onClick={showModal}>
                   Add Service
                 </div>
-                <Modal title="Add Dependency" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
+                <Modal title="Add Service" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
                   <InputForm />
                 </Modal>
               </Menu.Item>

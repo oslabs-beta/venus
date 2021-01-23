@@ -23,8 +23,11 @@ function InputForm(): JSX.Element {
 
   return (
     <Form form={form} name="dynamic_form_nest_item" onFinish={onFinish} autoComplete="off">
-      <Form.Item name="Base URL" label="URL" rules={[{ required: true, message: 'Missing URL' }]}> 
-        <Input name="URL"  ></Input>
+      <Form.Item name="Name" label="Name" rules={[{ required: true, message: 'Missing Name' }]}> 
+        <Input name="Name"></Input>
+      </Form.Item>
+      <Form.Item name="URL" label="URL" rules={[{ required: true, message: 'Missing URL' }]}> 
+        <Input name="URL"></Input>
       </Form.Item>
       <Form.List name="sights">
         {(fields, { add, remove }) => (
@@ -50,21 +53,10 @@ function InputForm(): JSX.Element {
                         <Option value="POST">'POST'</Option>
                         <Option value="PUT">'PUT'</Option>
                         <Option value="DELETE">'DELETE'</Option>
-                        <Option value="PATCH">'PATCH'</Option>
                       </Select>
                     </Form.Item>
                   )}
                 </Form.Item>
-                <Form.Item
-                  {...field}
-                  label="Path"
-                  name={[field.name, 'path']}
-                  fieldKey={[field.fieldKey, 'path']}
-                  rules={[{ required: true, message: 'Missing path' }]}
-                >
-                  <Input />
-                </Form.Item>
-
                 <MinusCircleOutlined onClick={() => remove(field.name)} />
               </Space>
             ))}
