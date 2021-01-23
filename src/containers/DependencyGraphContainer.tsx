@@ -6,8 +6,7 @@ function DependencyGraphContainer(): JSX.Element{
   return(
     <div id="dashboard">
       <Card hoverable={true}>
-        <DependencyTree />
-        dependencyGraph will go here.
+        {/* <DependencyTree /> */}
       </Card>
     </div>
   )

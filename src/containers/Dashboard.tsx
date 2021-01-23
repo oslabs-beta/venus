@@ -122,11 +122,11 @@ function  Dashboard(): JSX.Element{
         <Form>
           <Form.Item initialValue="all">
             <Select placeholder= "ALL METHODS" style={{ width: 140 }}>
-              <Select.Option value="all">'All METHODS'</Select.Option>
-              <Select.Option value="get">'GET'</Select.Option>
-              <Select.Option value="post">'POST'</Select.Option>
-              <Select.Option value="put">'PUT'</Select.Option>
-              <Select.Option value="delete">'DELETE'</Select.Option>
+              <Select.Option value="all">All METHODS</Select.Option>
+              <Select.Option value="get">GET</Select.Option>
+              <Select.Option value="post">POST</Select.Option>
+              <Select.Option value="put">PUT</Select.Option>
+              <Select.Option value="delete">DELETE</Select.Option>
             </Select>
           </Form.Item>
         </Form>
