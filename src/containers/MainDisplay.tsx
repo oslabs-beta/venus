@@ -37,12 +37,12 @@ function MainDisplay(): JSX.Element {
     setIsModalVisible(false);
   };
 
-  const { verification } = useContext(myContext);
+  const { verification} = useContext(myContext);
 
   const large: any = "large";
 
 
-  if (verification === false){
+  if (false){
     return <SignIn />
   } else {
   return (
@@ -55,7 +55,7 @@ function MainDisplay(): JSX.Element {
             {/* <Menu.Item key="1">
                 <Link to="/signin">  
                   <div style={{width: "100%", height: "100%"}}>
-                    Sign In
+                    Sign Out
                   </div>
                 </Link>
               </Menu.Item>          */}

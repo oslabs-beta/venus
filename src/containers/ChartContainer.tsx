@@ -8,7 +8,6 @@ import { LineGraph } from "../charts/LineGraph"
 import { AreaChart } from "../charts/AreaChart"
 import { CardDropDown } from "../components/CardDropDown";
 // import { TestChart } from "../charts/TestChart";
-import PieChart from "../charts/PieChart";
 import Row from 'antd/es/row';
 import Col from 'antd/es/col';
 import Card from 'antd/es/card';
@@ -17,6 +16,8 @@ import { AggregateStats } from "../components/AggregateStats";
 import Title from "antd/es/typography/Title";
 import Space from 'antd/es/space';
 import { HistoricalProvider } from "../contexts/historicalContext";
+import { Availability } from "../charts/AvailabilityChart";
+import { LoadChart } from "../charts/LoadChart";
 
 export function ChartContainer(): JSX.Element {
 
@@ -31,25 +32,29 @@ export function ChartContainer(): JSX.Element {
       </div>
         <Row gutter={[32,32]}>
           <Col span={12}>
-          <Card bordered={true} hoverable={true} style={{width: "500px"}}>
-              <LineGraph />
+            <Title level={5}>Availability</Title>
+            <Card bordered={true} hoverable={true} style={{width: "500px"}}>
+              <Availability />
             </Card>
           </Col>
           <Col span={12}>
-          <Card bordered={true} hoverable={true} style={{width: "500px"}}>
-              <AreaChart />
+            <Title level={5}>Latency</Title>
+            <Card bordered={true} hoverable={true} style={{width: "500px"}}>
+              <LineGraph />
             </Card>
           </Col>
         </Row>
         <Row gutter={[32,32]}>
           <Col span={12}>
+            <Title level={5}>Error Rate</Title>
             <Card bordered={true} hoverable={true} style={{width: "500px"}}>
-              <LineGraph />
+              <AreaChart />
             </Card>
           </Col>
           <Col span={12}>
+          <Title level={5}>Load</Title>
             <Card bordered={true} hoverable={true} style={{width: "500px"}}>
-              <PieChart />
+              <LoadChart />
             </Card>
           </Col>
         </Row>
