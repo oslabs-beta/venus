@@ -120,7 +120,7 @@ function  Dashboard(): JSX.Element{
       render: () => (
     
         <Form>
-          <Form.Item initialValue="all">
+          <Form.Item className="apiMethod" initialValue="all">
             <Select placeholder= "ALL METHODS" style={{ width: 140 }}>
               <Select.Option value="all">All METHODS</Select.Option>
               <Select.Option value="get">GET</Select.Option>

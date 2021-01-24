@@ -29,11 +29,15 @@
   height: 100vh;
 }
 
-.cardRow {
+.apiMethod {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-bottom: .5rem;
+  flex-direction: column;
+  height: 5px;
+}
+
+.cardRow{
+  display: flex;
+  flex-direction: row;
   width: 100%;
 }
 
@@ -45,25 +49,9 @@
 
 .aggregate {
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  margin-bottom: .5rem;
+  flex-direction: row;
 }
 
-.threeCard {
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-
-}
-
-.stats {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-wrap: wrap;
-}
 
 .title {
   margin-left: 20px;
@@ -102,10 +90,12 @@ justify-content: space-between;
 
 #dashboard {
   padding: 20px 20px;
+  flex-grow: 10;
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
   flex-direction: column;
-  flex-wrap: wrap;
-  // flex-grow: 10;
-  //justify-content: flex-start;
-  // align-items: center;
 }
+
+
+
