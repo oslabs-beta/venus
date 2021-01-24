@@ -10,6 +10,8 @@ const INTERVAL = process.env.RT_INTERVAL;
 const PING_RATE = process.env.RT_PING_RATE; 
 //Where Redis is being hosted (either local machine or elasticache)
 const REDIS_HOST = process.env.REDIS_HOST; 
+//Which port Redis is connected to - usually 6379
+const REDIS_PORT = process.env.REDIS_PORT; 
 
 const redis = new Redis({
   port: REDIS_PORT, 
@@ -54,13 +56,17 @@ const readRedisStream = async () => {
 
   //TODO: SEND TO PROCESSING ELSEWHERE 
   //real-time entries should be sent for processing elsewhere 
-  console.log('XRANGE, response with reply transformer'); 
-  console.log(streamEntries); 
+  // console.log('XRANGE, response with reply transformer'); 
+  // console.log(streamEntries); 
+
+  return streamEntries; 
 
 }
 
-try {
-  setInterval(async () => { await readRedisStream()}, PING_RATE); 
-} catch (e) {
-  console.error(e); 
-}
+exports.readRedisStream = readRedisStream; 
+
+// try {
+//   setInterval(async () => { await readRedisStream()}, PING_RATE); 
+// } catch (e) {
+//   console.error(e); 
+// }
