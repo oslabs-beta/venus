@@ -342,8 +342,8 @@ function DependencyGraph({
                 ))}
               // settings for children of tree graph
                 {tree.descendants().map((node, key) => {
-                  const width = 120;
-                  const height = 20;
+                  const width = 160;
+                  const height = 30;
 
                   let top: number;
                   let left: number;
@@ -361,7 +361,7 @@ function DependencyGraph({
                   }
                   // node.data.children.map( el => { (el.status === 'good')})
                   // const changeChildren = (node.data.children) ? console.log('children', node.data.children) : colorChange
-                  const colorChange = (node.data.status === 'good') ? "#7FFF00" : (node.data.status === 'fair') ? '#fa8c16' : (node.data.status === 'bad') ? '#FF2400' : (node.data.status)
+                  const colorChange = (node.data.status === 'good') ? "#AAF683" : (node.data.status === 'fair') ? '#ffa62b' : (node.data.status === 'bad') ? '#fe5f55' : (node.data.status)
                   const changeChildren = (node.data.children) ? colorChange : colorChange
                   
                   return (
@@ -369,7 +369,7 @@ function DependencyGraph({
                       {node.depth === 0 && (
                         <circle
                           r={12}
-                          fill="url('#links-gradient')"
+                          fill="white"
                           onClick={() => {
                             node.data.isExpanded = !node.data.isExpanded;
                             console.log(node);
@@ -403,7 +403,7 @@ function DependencyGraph({
                       )}
                       <text
                         dy=".33em"
-                        fontSize={18}
+                        fontSize={22}
                         fontFamily="Sans-Sarif"
                         textAnchor="middle"
                         style={{ pointerEvents: "none" }}
