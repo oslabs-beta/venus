@@ -17,7 +17,7 @@ import Modal from 'antd/es/modal';
 import { InputForm } from "../components/InputForm"
 import { SignIn } from "./SignInContainer";
 import { myContext } from '../contexts/globalContext';
-
+import { DynamicProvider } from '../contexts/dynamicContext';
 const { Title } = Typography;
 const {Footer, Sider, Content} = Layout
 const { SubMenu } = Menu
@@ -46,6 +46,7 @@ function MainDisplay(): JSX.Element {
     return <SignIn />
   } else {
   return (
+    <DynamicProvider>
     <Router>
       <Switch>
         <Layout className="custom" hasSider={true}>
@@ -102,6 +103,7 @@ function MainDisplay(): JSX.Element {
         </Layout>  
       </Switch>
     </Router>
+  </DynamicProvider>
   );
 }
 }

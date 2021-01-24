@@ -3,12 +3,12 @@
  * @desc Child of Dashboard (no children), Indiviual Service Card showing aggregate stats of 
  * particular service
  */
-import { PageHeader } from 'antd'
 import React from 'react'
 import Statistic from 'antd/es/statistic'
 import Card from 'antd/es/card'
 import Row from 'antd/es/row'
 import Col from 'antd/es/col'
+
 
 type colors = {
 	good: string
@@ -20,7 +20,10 @@ const color: colors = {
 	fair: '#fa8c16',
 	bad: '#f5222d'
 }
-function AggregateStats(): JSX.Element{
+
+
+
+function AggregateStats(props: any): JSX.Element{
     return (
 	<div className="cardRow">
 	<Row gutter={32}>
@@ -40,9 +43,8 @@ function AggregateStats(): JSX.Element{
 				<div className="aggregate">
 					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
 						<Statistic
-							className="aggregateCards1"
 							title="Health"
-							value={"GOOD"}
+							value={'GOOD'}
 							precision={2}
 							valueStyle={{ color: color.bad }}
 						/>
@@ -54,7 +56,7 @@ function AggregateStats(): JSX.Element{
 					<Card className="aggregateCards" bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
 						<Statistic
 							title="Availability"
-							value={94.28}
+							value={props.availability}
 							precision={2}
 							valueStyle={{ color: color.good }}
 							suffix="%"
@@ -67,8 +69,8 @@ function AggregateStats(): JSX.Element{
 				<div className="aggregate">
 					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
 						<Statistic
-							title="Latency"
-							value={9.3}
+							title="Response Time"
+							value={props.response_time}
 							precision={2}
 							valueStyle={{ color: color.fair }}
 							suffix="ms"
@@ -81,7 +83,7 @@ function AggregateStats(): JSX.Element{
 					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
 						<Statistic
 							title="Load"
-							value={9.3}
+							value={props.load}
 							precision={2}
 							valueStyle={{ color: color.fair }}
 							suffix="hpm"
@@ -94,7 +96,7 @@ function AggregateStats(): JSX.Element{
 					<Card bodyStyle={{width: "200px"}} hoverable={true}>
 						<Statistic
 							title="Response Error"
-							value={6.9}
+							value={props.error}
 							precision={2}
 							valueStyle={{ color: color.fair }}
 							suffix="%"

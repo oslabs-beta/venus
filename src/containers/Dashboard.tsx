@@ -17,83 +17,53 @@ import { dynamicContext } from '../contexts/dynamicContext';
 import Title from 'antd/es/typography/Title';
 
 
-
 function  Dashboard(): JSX.Element{
 
-  const dataSource: any = [];
-  const source: any = [ 
-   {
-      service: 'Google Weather API',
-      status: 'good',
-      uptime: '98%',      
-      latency: '300ms',
-      load:  '1000hpm',
-      error: '2%'
-    },
-    {
-      service: 'Surfline API',
-      status: 'good',
-      uptime: "98%",
-      latency: '300ms',
-      load: '1000hpm',
-      error: '2%'
-    },
-    {
-      service: 'Stripe API',
-      status: 'good',
-      uptime: "98%",
-      latency: '300ms',
-      load: '1000hpm',
-      error: '2%'
-    },
-    {
-      service: 'Surfline API',
-      status: 'good',
-      uptime: "98%",
-      latency: '300ms',
-      load: '1000hpm',
-      error: '2%'
-    },
-    {
-      service: 'Unemployment API',
-      status: 'good',
-      uptime: "98%",
-      latency: '300ms',
-      load: '1000hpm',
-      error: '2%'
-    },
-    {
-      service: 'AWS API',
-      status: 'good',
-      uptime: "98%",
-      latency: '300ms',
-      load: '1000hpm',
-      error: '2%'
-    },
-    {
-      service: 'Codesmith API',
-      status: 'good',
-      uptime: "98%",
-      latency: '300ms',
-      load: '1000hpm',
-      error: '2%'
-    },
-    {
-      service: 'Plaid API',
-      status: 'good',
-      uptime: "98%",
-      latency: '300ms',
-      load: '1000hpm',
-      error: '2%'
-      
-    },
-  ];
+   const { services, setServices, aggregate, setAggregate } = useContext(dynamicContext)
+ 
 
+  const dataSource: any = [];
+  useEffect( () => {
+    setServices([
+      {
+        service: 'curriculum-api.codesmith.io',
+        status: 'good',
+        load: '0.6666666865348816 hpm',
+        response_time: 1266,
+        error: 50,
+        availability: 100
+      },
+      {
+        service: 'finance.yahoo.com',
+        status: 'good',
+        load: '0.6666666865348816 hpm',
+        response_time: 1417.5,
+        error: 50,
+        availability: 100
+      },
+      {
+        service: 'weather.google.com',
+        status: 'good',
+        load: '0.6666666865348816 hpm',
+        response_time: 1150,
+        error: 0,
+        availability: 50
+      }
+    ])
+    setAggregate({
+      error: 40,
+      response_time: 1278,
+      load: '2hpm',
+      availability: 83,
+      status: 'good'
+    })
+    }, [])
+  
  
   
-  for (let i = 0; i < source.length; i++) {
-    source[i].key = i;
-    dataSource.push(source[i])
+  for (let i = 0; i < services.length; i++) {
+    services[i].key = i;
+    dataSource.push(services[i])
   }
   const columns: any = [
     {
@@ -121,7 +91,7 @@ function  Dashboard(): JSX.Element{
     
         <Form>
           <Form.Item initialValue="all">
-            <Select placeholder= "ALL METHODS" style={{ width: 140 }}>
+            <Select className="apiMethod" placeholder= "ALL METHODS" style={{ width: 140 }}>
               <Select.Option value="all">All METHODS</Select.Option>
               <Select.Option value="get">GET</Select.Option>
               <Select.Option value="post">POST</Select.Option>
@@ -134,14 +104,14 @@ function  Dashboard(): JSX.Element{
       ),
     },
     {
-      title: 'Uptime',
-      dataIndex: 'uptime',
-      key: 'uptime',
+      title: 'Availability',
+      dataIndex: 'availability',
+      key: 'availability',
     },
     {
-      title: 'Latency',
-      dataIndex: 'latency',
-      key: 'latency',
+      title: 'Response Time',
+      dataIndex: 'response_time',
+      key: 'response_time',
     },
     {
       title: 'Load',
@@ -157,7 +127,7 @@ function  Dashboard(): JSX.Element{
 
     return(
       <div id="dashboard">          
-        <AggregateStats />
+        <AggregateStats error={aggregate.error} response_time={aggregate.response_time} load={aggregate.load} availability={aggregate.availability} />
         <Divider><Title level={3}>Current Status</Title></Divider>
         <Table columns={columns} dataSource={dataSource} pagination={false} style={{width: "100%"}} />
       </div>
