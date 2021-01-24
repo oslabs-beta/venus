@@ -220,7 +220,7 @@ const rtData = (data) => {
     (totalResponses / totalRequests) * 100 
   );
 
-  return consolidatedObj; 
+  return JSON.stringify(consolidatedObj); 
 
   // const uniqueHosts = df['reqHost'].unique().data;
 

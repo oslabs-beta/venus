@@ -84,7 +84,7 @@ io.sockets.on('connection', (socket) => {
 
 async function sendData(socket){
 
-  // const streamData = redis.readRedisStream();
+  const streamData = redis.readRedisStream();
   const output = data.rtData(responseData); 
   socket.emit(output); 
   console.log(`Output is ${output}`); 
@@ -94,5 +94,13 @@ async function sendData(socket){
   }, 3000); 
 }
 
-const output = data.rtData(responseData);  
-console.log(`Output is ${output}`);
+// const streamData = await redis.readRedisStream();
+
+const streamData = async () => {
+  const streamOutput =  await redis.readRedisStream();  
+  console.log('stream Data: ', streamOutput); 
+  const output = data.rtData(streamData);  
+  console.log(`Output is ${output}`); 
+}
+
+streamData(); 
