@@ -184,7 +184,7 @@ interface TreeNode {
 
 // THIS IS OUR DUMMY DATA FOR THE TREE
 
-const data: TreeNode = {
+const treeData: TreeNode = {
   name: "CodeSmith",
   status: "good",
   children: [
@@ -222,24 +222,24 @@ const data: TreeNode = {
     },
     {
       name: "Surfline API",
-        status: "good",
+        status: "fair",
       children: [
         { name: "GET",
-        status: "good" },
+        status: "bad" },
         { name: "POST",
-        status: "good" },
+        status: "fair" },
         { name: "PUT",
         status: "good" },
         { name: "DELETE",
-        status: "good" },
+        status: "fair" },
         ]
     },
     {
       name: "Yelp API",
-      status: "good",
+      status: "bad",
       children: [
         { name: "GET",
-        status: "good" },
+        status: "bad" },
         { name: "POST",
         status: "good" },
         { name: "PUT",
@@ -281,7 +281,7 @@ function DependencyGraph({
 // sets chart point origin
   if (layout === "polar") {
     // modifies margin for "polar" layout
-    margin = { top: 150, left: 110, right: 110, bottom: 110 }
+    margin = { top: 250, left: 110, right: 110, bottom: 110 }
     origin = {
       x: innerWidth / 2,
       y: innerHeight / 4
@@ -303,7 +303,7 @@ function DependencyGraph({
   const LinkComponent = getLinkComponent({ layout, linkType, orientation });
 // can modify components here i.e. color, stroke size
   return totalWidth < 10 ? null : (
-    <div>
+    <>
       <AggregateStats/>
       <br />
       <LinkControls
@@ -323,7 +323,8 @@ function DependencyGraph({
         <rect width={totalWidth} height={totalHeight} rx={14} fill="#f5f5f5" />
         <Group top={margin.top} left={margin.left}>
           <Tree
-            root={hierarchy(data, (d) => (d.isExpanded ? null : d.children))}
+          // put our data variable in place of treeData
+            root={hierarchy(treeData, (d) => (d.isExpanded ? null : d.children))}
             size={[sizeWidth, sizeHeight]}
             separation={(a, b) => (a.parent === b.parent ? 1 : 0.5) / a.depth}
           >
@@ -334,18 +335,19 @@ function DependencyGraph({
                     key={i}
                     data={link}
                     percent={stepPercent}
-                    stroke="#FF7F50"
+                    stroke="#03c0dc"
                     strokeWidth="1.75"
                     fill="none"
                   />
                 ))}
               // settings for children of tree graph
                 {tree.descendants().map((node, key) => {
-                  const width = 80;
+                  const width = 120;
                   const height = 20;
 
                   let top: number;
                   let left: number;
+                  // if (node.data.status === 'good'){ console.log('node', node)}
                   if (layout === "polar") {
                     const [radialX, radialY] = pointRadial(node.x, node.y);
                     top = radialY;
@@ -357,7 +359,11 @@ function DependencyGraph({
                     top = node.x;
                     left = node.y;
                   }
-
+                  // node.data.children.map( el => { (el.status === 'good')})
+                  // const changeChildren = (node.data.children) ? console.log('children', node.data.children) : colorChange
+                  const colorChange = (node.data.status === 'good') ? "#7FFF00" : (node.data.status === 'fair') ? '#fa8c16' : (node.data.status === 'bad') ? '#FF2400' : (node.data.status)
+                  const changeChildren = (node.data.children) ? colorChange : colorChange
+                  
                   return (
                     <Group top={top} left={left} key={key}>
                       {node.depth === 0 && (
@@ -378,9 +384,13 @@ function DependencyGraph({
                           y={-height / 2}
                           x={-width / 2}
                           // fill of individual node boxes
-                          fill="#272b4d"
+                          // {node.data.children ? "#03c0dc" : "#26deb0"}
+                          // {node.data.status === 'good' ? "#272b4d" : "#26deb0"}
+                          fill={changeChildren}
                           stroke={node.data.children ? "#03c0dc" : "#26deb0"}
-                          strokeWidth={2.25}
+                          // stroke= {changeChildren}
+                          // stroke={(node.data.children) ? "green" : 'yellow'}
+                          strokeWidth={1.75}
                           strokeDasharray={node.data.children ? "0" : "2,2"}
                           strokeOpacity={node.data.children ? 1 : 0.6}
                           rx={node.data.children ? 0 : 10}
@@ -393,16 +403,16 @@ function DependencyGraph({
                       )}
                       <text
                         dy=".33em"
-                        fontSize={14}
-                        fontFamily="Arial"
+                        fontSize={18}
+                        fontFamily="Sans-Sarif"
                         textAnchor="middle"
                         style={{ pointerEvents: "none" }}
                         fill={
                           node.depth === 0
-                            ? "#505050"
+                            ? "black"
                             : node.children
-                            ? "white"
-                            : "#7FFF00"
+                            ? "black"
+                            : "black"
                         }
                       >
                         {node.data.name}
@@ -415,7 +425,7 @@ function DependencyGraph({
           </Tree>
         </Group>
       </svg>
-    </div>
+    </>
 
   );
 }
