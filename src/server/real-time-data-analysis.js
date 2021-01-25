@@ -68,6 +68,9 @@ const responseData = [
 
 
 const rtData = (data) => {
+
+  console.log('Data sent: ', data); 
+
   let df = new dfd.DataFrame(data);
   // df.ctypes.print();
 

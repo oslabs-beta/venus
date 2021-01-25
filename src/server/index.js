@@ -2,7 +2,7 @@ const express = require('express');
 const socket = require('socket.io'); 
 const bodyParser = require('body-parser'); 
 const cors = require('cors'); 
-const data = require('./rt-data-analysis.js'); 
+const data = require('./real-time-data-analysis.js'); 
 const redis = require('./real-time-read-handler.js'); 
 
 const SOCKET_PORT = 8080; 
@@ -93,7 +93,7 @@ async function sendData(socket){
 
   setTimeout(() => {
     sendData(socket); 
-  }, 3000); 
+  }, 5000); 
 }
 
 // const streamData = await redis.readRedisStream();
