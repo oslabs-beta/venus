@@ -1,11 +1,7 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
-const { TFEOpAttr } = require("@tensorflow/tfjs-node/dist/tfjs_binding");
 const dfd = require("danfojs-node");
-// const { streamName } = require('./redis-stream');
-const PATH_BREAKDOWN = true;
 
-// time drame of real-time data at any point in time (in minutes)
 const STREAM_WINDOW = 3;
 
 // // also requires running npm i @tensorflow/tfjs-node
@@ -340,117 +336,6 @@ const rtData = (data) => {
     }
   });
 
-  // newErrorDFTotal.print();
-
-  // const totalErrors = errorResRowsTotal.count().data;
-  // totalErrors.print()
-
-  // dfNew.print();
-
-  // let finalTable = dfd.merge({ left: dfNew, right: newErrorDF, on:['reqHost'], how: 'left' });
-
-  // const latencyDF = dfGroup.col(['cycleDuration']).mean();
-
-  // finalTable = dfd.merge({ left: finalTable, right: latencyDF, on:['reqHost'], how: 'left' });
-
-  // const availabilityDF = dfGroup.col(['resStatusCode']).count();
-  // // availabilityDF.print()
-  // finalTable = dfd.merge({ left: finalTable, right: availabilityDF, on:['reqHost'], how: 'left' });
-
-  // finalTable.fillna({ values: [0], inplace: true });
-
-  // //   const totalResponses = finalTable.loc({ columns: ['resStatusCode_1'] });
-  // //   const errorResponses = finalTable.loc({ columns: ['resStatusCode'] });
-
-  // const errorRateCol = finalTable[`resStatusCode_count`].div(finalTable[`resStatusCode_count_1`]).mul(100);
-
-  // //   const errorRate = errorRequests.div(totalRequests).mul(100);
-  // //   // console.log(errorRate);
-  // finalTable.addColumn({
-  //   column: "Error (%)",
-  //   value: errorRateCol.col_data[0],
-  // });
-
-  // // console.log(finalTable);
-
-  // const availabilityCol = finalTable[`resStatusCode_count_1`].div(finalTable[`reqHost_count`]).mul(100);
-
-  // // availabilityCol.print();
-  // finalTable.addColumn({
-  //   column: 'Availability (%)',
-  //   value: availabilityCol.col_data[0],
-  // });
-
-  // let outputTable = finalTable.loc({ columns: ['reqHost', 'reqHost_count', 'cycleDuration_mean', 'Error (%)', 'Availability (%)'] });
-
-  // outputTable[`reqHost_count`] = outputTable[`reqHost_count`].div(3);
-
-  // console.log('Final Table: ', outputTable);
-  // outputTable.print();
-
-  // console.log(dfNew);
-
-  // console.log(dfGroup);
-  // dfGroup.print()
-  // dfGroup.col(['resStatusCode']).count().print();
-
-  // dfGroup.print();
-
-  // df.print();
-  // group by host
-  // const uniqueHosts = df["reqHost"].unique().data;
-
-  // uniqueHosts.forEach((host) => {
-  //   const dfHost = df.query({ column: "reqHost", is: "==", to: host }); //creates dataframe for each service
-  //   const newObj = analyzer(dfHost);
-  //   dataframes.push(newObj);
-  // });
-
-  // hostRows.print();
-  // function analyzer(dfHost) {
-
-  //   const errorResRows = dfHost.query({ column: 'resStatusCode', is: ">=", to: 400 }); //creates dataframe for each service
-  //   // errorTest.print()
-
-  //   // const groupErrorByHost = errorResRows.groupby(['reqHost', 'reqMethod']);
-  //   // groupErrorByHost.col(['reqHost']).count().print();
-  //   // console.log(groupErrorByHost);
-  //   // const groupErrorTable = new dfd.DataFrame(groupErrorByHost.data);
-  //   // groupErrorTable.print();
-
-  //   const groupErrorByMethod = errorResRows.groupby(['reqMethod']);
-  //   const rightTable = groupErrorByMethod.col(['reqMethod']).count();
-
-  //   const groupByMethod = dfHost.groupby(['reqMethod']);
-  //   const leftTable = groupByMethod.col(['reqMethod']).count();
-
-  //   // leftTable.print();
-
-  //   const finalTable = dfd.merge({ left: leftTable, right: rightTable, on:['reqMethod'], how: 'left' });
-
-  //   finalTable.fillna({ values: [0], inplace: true });
-
-  //   // finalTable.print();
-
-  //   const reqMethods = finalTable.loc({ columns: ['reqMethod'] });
-  //   const totalRequests = finalTable.loc({ columns: ['reqMethod_count'] });
-  //   const errorRequests = finalTable.loc({ columns: ['reqMethod_count_1'] });
-
-  //   const errorRate = errorRequests.div(totalRequests).mul(100);
-  //   // console.log(errorRate);
-  //   reqMethods.addColumn({
-  //     column: "errorPercentage",
-  //     value: errorRate.col_data[0],
-  //   });
-
-  //   // console.log(finalTableFilled);
-  //   reqMethods.print();
-
-  //   // const json = reqMethods.to_json({ orient: 'records' });
-  //   reqMethods.to_json({ orient: 'records' })
-  //     .then(json => json)
-  //     .catch(err => console.log('Json error', err));
-  // }
 };
 
 rtData(responseData);
