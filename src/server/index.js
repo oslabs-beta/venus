@@ -15,8 +15,8 @@ const responseData = [
     reqHost: 'curriculum-api.codesmith.io',
     reqPath: '/messages',
     reqUrl: 'https://curriculum-api.codesmith.io/messages',
-    resStatusCode: 200,
-    cycleDuration: 1232,
+    resStatusCode: Math.floor(Math.random() * 400),
+    cycleDuration: Math.floor(Math.random() * 1000),
     resMessage: 'OK',
   },
   {
@@ -24,8 +24,8 @@ const responseData = [
     reqHost: 'curriculum-api.codesmith.io',
     reqPath: '/messages',
     reqUrl: 'https://curriculum-api.codesmith.io/messages',
-    resStatusCode: 400,
-    cycleDuration: 1300,
+    resStatusCode: Math.floor(Math.random() * 400),
+    cycleDuration: Math.floor(Math.random() * 1000),
     resMessage: 'OK',
   },
   {
@@ -33,8 +33,8 @@ const responseData = [
     reqHost: 'finance.yahoo.com',
     reqPath: '/TSLA',
     reqUrl: 'https://finance.yahoo.com/TSLA',
-    resStatusCode: 400,
-    cycleDuration: 1500,
+    resStatusCode: Math.floor(Math.random() * 400),
+    cycleDuration: Math.floor(Math.random() * 1000),
     resMessage: 'OK',
   },
   {
@@ -42,8 +42,8 @@ const responseData = [
     reqHost: 'finance.yahoo.com',
     reqPath: '/AAPL',
     reqUrl: 'https://finance.yahoo.com/AAPL',
-    resStatusCode: 200,
-    cycleDuration: 1335,
+    resStatusCode: Math.floor(Math.random() * 400),
+    cycleDuration: Math.floor(Math.random() * 1000),
     resMessage: 'OK',
   },
   {
@@ -51,8 +51,8 @@ const responseData = [
     reqHost: 'weather.google.com',
     reqPath: '/California/LA',
     reqUrl: 'https://weather.google.com/California/LA',
-    resStatusCode: 200,
-    cycleDuration: 1200,
+    resStatusCode: Math.floor(Math.random() * 400),
+    cycleDuration: Math.floor(Math.random() * 1000),
     resMessage: 'OK',
   },
   {
@@ -61,7 +61,7 @@ const responseData = [
     reqPath: '/California/SF',
     reqUrl: 'https://weather.google.com/California/SF',
     resStatusCode: NaN,
-    cycleDuration: 1100,
+    cycleDuration: Math.floor(Math.random() * 1000),
     resMessage: 'OK',
   },
 ];
@@ -88,7 +88,7 @@ async function sendData(socket){
   console.log('Send Data Invoked!')
   const index = Math.floor(Math.random() * 5); 
   const streamData = await redis.readRedisStream();
-  const output = data.rtData(responseData[index]); 
+  const output = data.rtData(responseData); 
   socket.emit('real-time-object', output); 
   console.log(`Output is ${output}`); 
 
