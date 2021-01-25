@@ -90,6 +90,7 @@ function override(module) {
      * Modify request event emitter by adding a listener to the end of the response event.
      * The listener is only invoked if the boolean is true (request URL is within configuration scope)
      */
+    req.on('error', err => console.log('REQUEST ERROR LISTENER:', err));
     req.emit = function (eventName, response) {
       switch (eventName) {
       case 'response': {
@@ -98,9 +99,19 @@ function override(module) {
             fullLog.resStatusCode = response.statusCode;
             fullLog.resMessage = response.statusMessage;
           });
+          response.on('error', () => {
+            console.log('EYY RESPONSE ERROR FAM')
+          })
         }
       }
       }
+      req.on('socket', socket => {
+        socket.on('lookup', () => console.log('socket lookup...'))
+        socket.on('error', () => console.log('socket ERROR...'))
+        socket.on('connect', () => console.log('socket connect...'))
+        // console.log('REQUEST ERROR', err);
+      });
+
       
       /**
        * Return the event emitter with original argument and execution context.
@@ -112,6 +123,7 @@ function override(module) {
      * return the original request object
      */ 
     logger(outgoing);
+    
     return req;
   }
 
@@ -134,6 +146,7 @@ function override(module) {
     fullLog.reqPath = req.pathname || req.path || '/';
     fullLog.reqUrl = reqUrl;
     endpointMatch = true;
+    // console.log(fullLog);
     return true;
   }
   
