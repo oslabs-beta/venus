@@ -74,6 +74,9 @@ const rtData = (data) => {
   let df = new dfd.DataFrame(data);
   // df.ctypes.print();
 
+  console.log('Dataframe created:');
+  df.print();  
+
   const dfGroup = df.groupby(["reqHost"]);
   const dfNew = dfGroup.col(["reqHost"]).count();
 

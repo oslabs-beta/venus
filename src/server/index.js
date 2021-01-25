@@ -87,7 +87,7 @@ async function sendData(socket){
 
   console.log('Send Data Invoked!')
   const streamData = await redis.readRedisStream();
-  const output = data.rtData(streamData); 
+  const output = data.rtData(responseData); 
   socket.emit('real-time-object', output); 
   console.log(`Output is ${output}`); 
 
