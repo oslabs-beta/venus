@@ -3,7 +3,7 @@
  * @desc Right-hand side of the Main Display.  Dashboard that displays services and corresponding data.
  * The parent container for Aggregate Data, Service Container, and Chart Container.
  */
-
+import { io } from 'socket.io-client';
  import React, {useContext, useEffect} from 'react';
 //  import TabContainer from './TabContainer'
 import { AggregateStats } from '../components/AggregateStats';
@@ -15,49 +15,69 @@ import Form from 'antd/es/form';
 import Select from 'antd/es/select';
 import { dynamicContext } from '../contexts/dynamicContext';
 import Title from 'antd/es/typography/Title';
-
-
+// take this information from the login. 
 function  Dashboard(): JSX.Element{
+  
+  const { services, setServices, aggregate, setAggregate } = useContext(dynamicContext)
+  
 
-   const { services, setServices, aggregate, setAggregate } = useContext(dynamicContext)
- 
+// socket.on('real-time-object', (output: any) => {
+//   const newData  = JSON.parse(output);
+//   setAggregate(newData.aggregate)
+//   setServices(newData.services)
+// })
+
 
   const dataSource: any = [];
-  useEffect( () => {
-    setServices([
-      {
-        service: 'curriculum-api.codesmith.io',
-        status: 'good',
-        load: '0.6666666865348816 hpm',
-        response_time: 1266,
-        error: 50,
-        availability: 100
-      },
-      {
-        service: 'finance.yahoo.com',
-        status: 'good',
-        load: '0.6666666865348816 hpm',
-        response_time: 1417.5,
-        error: 50,
-        availability: 100
-      },
-      {
-        service: 'weather.google.com',
-        status: 'good',
-        load: '0.6666666865348816 hpm',
-        response_time: 1150,
-        error: 0,
-        availability: 50
-      }
-    ])
-    setAggregate({
-      error: 40,
-      response_time: 1278,
-      load: '2hpm',
-      availability: 83,
-      status: 'good'
+  useEffect(() => {
+    const socket = io('ec2-13-58-114-75.us-east-2.compute.amazonaws.com:8080', {transports: ['websocket']});
+    // socket.on('connection', () => {
+    //   console.log(socket.id)
+    // });
+    socket.on('real-time-object', (output: any) => {
+      const newData  = JSON.parse(output);
+      setAggregate(newData.aggregate)
+      setServices(newData.services)
     })
-    }, [])
+    console.log('called')
+
+    // setServices([
+    //   {
+    //     service: 'curriculum-api.codesmith.io',
+    //     status: 'good',
+    //     load: '0.6666666865348816 hpm',
+    //     response_time: 1266,
+    //     error: 50,
+    //     availability: 100
+    //   },
+    //   {
+    //     service: 'finance.yahoo.com',
+    //     status: 'good',
+    //     load: '0.6666666865348816 hpm',
+    //     response_time: 1417.5,
+    //     error: 50,
+    //     availability: 100
+    //   },
+    //   {
+    //     service: 'weather.google.com',
+    //     status: 'good',
+    //     load: '0.6666666865348816 hpm',
+    //     response_time: 1150,
+    //     error: 0,
+    //     availability: 50
+    //   }
+    // ])
+    // setAggregate({
+    //   error: 40,
+    //   response_time: 1278,
+    //   load: '2hpm',
+    //   availability: 83,
+    //   status: 'good'
+    // })
+
+    return () => socket.disconnect(); 
+
+  }, []);
   
  
   
