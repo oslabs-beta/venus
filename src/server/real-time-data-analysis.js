@@ -148,7 +148,7 @@ const rtData = (data) => {
   outputTable["reqHost_count"] = outputTable["reqHost_count"].div(3);
 
   console.log("Final Table: ", outputTable);
-  outputTable.print();
+  // outputTable.print();
 
   const consolidatedObj = {};
   consolidatedObj.services = [];
@@ -286,7 +286,7 @@ const rtData = (data) => {
       ].div(3);
 
       console.log("Final Table: ", outputTableMethod);
-      outputTableMethod.print();
+      // outputTableMethod.print();
 
       outputTableMethod.data.forEach((row, i) => {
         consolidatedObj.services[i].byMethod = {};
