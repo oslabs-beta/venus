@@ -86,7 +86,7 @@ io.sockets.on('connection', (socket) => {
 async function sendData(socket){
 
   const streamData = await redis.readRedisStream();
-  const output = data.rtData(responseData); 
+  const output = data.rtData(streamData); 
   socket.emit('real-time-object', output); 
   console.log(`Output is ${output}`); 
 
