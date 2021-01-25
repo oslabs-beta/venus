@@ -2,10 +2,11 @@ const express = require('express');
 const socket = require('socket.io'); 
 const bodyParser = require('body-parser'); 
 const cors = require('cors'); 
-const data = require('./rt-data-analysis.js'); 
+const data = require('./real-time-data-analysis.js'); 
 const redis = require('./real-time-read-handler.js'); 
 
-const SOCKET_PORT = 3000; 
+const SOCKET_PORT = 8080; 
+const EC2_HOST = process.env.EC2_HOST; 
 
 
 const responseData = [
@@ -71,7 +72,7 @@ app.use(cors({origin: '*'}));
 app.use(bodyParser); 
 
 
-const server = app.listen(SOCKET_PORT, () => {
+const server = app.listen(SOCKET_PORT, EC2_HOST, () => {
   console.log(`Listening in ${SOCKET_PORT}`); 
 }); 
 
@@ -84,9 +85,9 @@ io.sockets.on('connection', (socket) => {
 
 async function sendData(socket){
 
-  const streamData = redis.readRedisStream();
+  const streamData = await redis.readRedisStream();
   const output = data.rtData(responseData); 
-  socket.emit(output); 
+  socket.emit('real-time-object', output); 
   console.log(`Output is ${output}`); 
 
   setTimeout(() => {
@@ -96,11 +97,11 @@ async function sendData(socket){
 
 // const streamData = await redis.readRedisStream();
 
-const streamData = async () => {
-  const streamOutput =  await redis.readRedisStream();  
-  console.log('stream Data: ', streamOutput); 
-  const output = data.rtData(streamData);  
-  console.log(`Output is ${output}`); 
-}
+// const streamData = async () => {
+//   const streamOutput =  await redis.readRedisStream();  
+//   console.log('stream Data: ', streamOutput); 
+//   const output = data.rtData(streamData);  
+//   console.log(`Output is ${output}`); 
+// }
 
-streamData(); 
+// streamData(); 
