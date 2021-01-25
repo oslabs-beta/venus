@@ -56,8 +56,8 @@ const readRedisStream = async () => {
 
   //TODO: SEND TO PROCESSING ELSEWHERE 
   //real-time entries should be sent for processing elsewhere 
-  // console.log('XRANGE, response with reply transformer'); 
-  // console.log(streamEntries); 
+  console.log('XRANGE, response with reply transformer'); 
+  console.log(streamEntries); 
 
   return streamEntries; 
 
