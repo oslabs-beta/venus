@@ -9,62 +9,62 @@ const SOCKET_PORT = 8080;
 const EC2_HOST = process.env.EC2_HOST; 
 
 
-const responseData = [
-  {
-    reqMethod: 'GET',
-    reqHost: 'curriculum-api.codesmith.io',
-    reqPath: '/messages',
-    reqUrl: 'https://curriculum-api.codesmith.io/messages',
-    resStatusCode: 200,
-    cycleDuration: Math.floor(Math.random() * 1000),
-    resMessage: 'OK',
-  },
-  {
-    reqMethod: 'POST',
-    reqHost: 'curriculum-api.codesmith.io',
-    reqPath: '/messages',
-    reqUrl: 'https://curriculum-api.codesmith.io/messages',
-    resStatusCode: 400,
-    cycleDuration: Math.floor(Math.random() * 1000),
-    resMessage: 'OK',
-  },
-  {
-    reqMethod: 'GET',
-    reqHost: 'finance.yahoo.com',
-    reqPath: '/TSLA',
-    reqUrl: 'https://finance.yahoo.com/TSLA',
-    resStatusCode: 400,
-    cycleDuration: Math.floor(Math.random() * 1000),
-    resMessage: 'OK',
-  },
-  {
-    reqMethod: 'DELETE',
-    reqHost: 'finance.yahoo.com',
-    reqPath: '/AAPL',
-    reqUrl: 'https://finance.yahoo.com/AAPL',
-    resStatusCode: 200,
-    cycleDuration: Math.floor(Math.random() * 1000),
-    resMessage: 'OK',
-  },
-  {
-    reqMethod: 'GET',
-    reqHost: 'weather.google.com',
-    reqPath: '/California/LA',
-    reqUrl: 'https://weather.google.com/California/LA',
-    resStatusCode: 200,
-    cycleDuration: Math.floor(Math.random() * 1000),
-    resMessage: 'OK',
-  },
-  {
-    reqMethod: 'PATCH',
-    reqHost: 'weather.google.com',
-    reqPath: '/California/SF',
-    reqUrl: 'https://weather.google.com/California/SF',
-    resStatusCode: NaN,
-    cycleDuration: Math.floor(Math.random() * 1000),
-    resMessage: 'OK',
-  },
-];
+// const responseData = [
+//   {
+//     reqMethod: 'GET',
+//     reqHost: 'curriculum-api.codesmith.io',
+//     reqPath: '/messages',
+//     reqUrl: 'https://curriculum-api.codesmith.io/messages',
+//     resStatusCode: 200,
+//     cycleDuration: Math.floor(Math.random() * 1000),
+//     resMessage: 'OK',
+//   },
+//   {
+//     reqMethod: 'POST',
+//     reqHost: 'curriculum-api.codesmith.io',
+//     reqPath: '/messages',
+//     reqUrl: 'https://curriculum-api.codesmith.io/messages',
+//     resStatusCode: 400,
+//     cycleDuration: Math.floor(Math.random() * 1000),
+//     resMessage: 'OK',
+//   },
+//   {
+//     reqMethod: 'GET',
+//     reqHost: 'finance.yahoo.com',
+//     reqPath: '/TSLA',
+//     reqUrl: 'https://finance.yahoo.com/TSLA',
+//     resStatusCode: 400,
+//     cycleDuration: Math.floor(Math.random() * 1000),
+//     resMessage: 'OK',
+//   },
+//   {
+//     reqMethod: 'DELETE',
+//     reqHost: 'finance.yahoo.com',
+//     reqPath: '/AAPL',
+//     reqUrl: 'https://finance.yahoo.com/AAPL',
+//     resStatusCode: 200,
+//     cycleDuration: Math.floor(Math.random() * 1000),
+//     resMessage: 'OK',
+//   },
+//   {
+//     reqMethod: 'GET',
+//     reqHost: 'weather.google.com',
+//     reqPath: '/California/LA',
+//     reqUrl: 'https://weather.google.com/California/LA',
+//     resStatusCode: 200,
+//     cycleDuration: Math.floor(Math.random() * 1000),
+//     resMessage: 'OK',
+//   },
+//   {
+//     reqMethod: 'PATCH',
+//     reqHost: 'weather.google.com',
+//     reqPath: '/California/SF',
+//     reqUrl: 'https://weather.google.com/California/SF',
+//     resStatusCode: NaN,
+//     cycleDuration: Math.floor(Math.random() * 1000),
+//     resMessage: 'OK',
+//   },
+// ];
 
 
 const app = express(); 
@@ -84,6 +84,63 @@ io.sockets.on('connection', (socket) => {
 })
 
 async function sendData(socket){
+
+  const responseData = [
+    {
+      reqMethod: 'GET',
+      reqHost: 'curriculum-api.codesmith.io',
+      reqPath: '/messages',
+      reqUrl: 'https://curriculum-api.codesmith.io/messages',
+      resStatusCode: 200,
+      cycleDuration: Math.floor(Math.random() * 1000),
+      resMessage: 'OK',
+    },
+    {
+      reqMethod: 'POST',
+      reqHost: 'curriculum-api.codesmith.io',
+      reqPath: '/messages',
+      reqUrl: 'https://curriculum-api.codesmith.io/messages',
+      resStatusCode: 400,
+      cycleDuration: Math.floor(Math.random() * 1000),
+      resMessage: 'OK',
+    },
+    {
+      reqMethod: 'GET',
+      reqHost: 'finance.yahoo.com',
+      reqPath: '/TSLA',
+      reqUrl: 'https://finance.yahoo.com/TSLA',
+      resStatusCode: 400,
+      cycleDuration: Math.floor(Math.random() * 1000),
+      resMessage: 'OK',
+    },
+    {
+      reqMethod: 'DELETE',
+      reqHost: 'finance.yahoo.com',
+      reqPath: '/AAPL',
+      reqUrl: 'https://finance.yahoo.com/AAPL',
+      resStatusCode: 200,
+      cycleDuration: Math.floor(Math.random() * 1000),
+      resMessage: 'OK',
+    },
+    {
+      reqMethod: 'GET',
+      reqHost: 'weather.google.com',
+      reqPath: '/California/LA',
+      reqUrl: 'https://weather.google.com/California/LA',
+      resStatusCode: 200,
+      cycleDuration: Math.floor(Math.random() * 1000),
+      resMessage: 'OK',
+    },
+    {
+      reqMethod: 'PATCH',
+      reqHost: 'weather.google.com',
+      reqPath: '/California/SF',
+      reqUrl: 'https://weather.google.com/California/SF',
+      resStatusCode: NaN,
+      cycleDuration: Math.floor(Math.random() * 1000),
+      resMessage: 'OK',
+    },
+  ];
 
   console.log('Send Data Invoked!')
   // const index = Math.floor(Math.random() * 5); 
