@@ -3,4 +3,3 @@ pack-lock.json
 dist/.gitignore
 package-lock.json
 dist/
-.env
