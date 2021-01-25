@@ -16,7 +16,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const path = require("path");
 
-const venus = require('./wrapper');
+const venus = require('../wrapper/wrapper');
 venus();
 
 //#region 
@@ -129,8 +129,8 @@ venus();
 // app.use(morgan('combined'));
 //#endregion
 
-
-app.use(express.static(path.join(__dirname, '../test-client/'))); //serves the index.html
+console.log(path.join(__dirname, "./"))
+app.use(express.static(path.join(__dirname, "./"))); //serves the index.html
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

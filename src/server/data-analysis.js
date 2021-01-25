@@ -97,11 +97,9 @@ const responseData = [
 
 // console.log(uniqueHosts);
 
-
-
-
 const rtData = (data) => {
   const df = new dfd.DataFrame(data);
+  df.print();
   const uniqueHosts = df["reqHost"].unique().data;
   const output = {};
   uniqueHosts.forEach((host) => {
@@ -109,78 +107,82 @@ const rtData = (data) => {
   });
   return output;
 
+  function hostConstruct(host) {
+    const dataObj = {};
+    // assign table with host-specific entries to constant
+    const dfHost = df.query({ column: "reqHost", is: "==", to: host });
+    dfHost.print();
+    dataObj.host = host;
+    // total number of requests = entries in host table
+    // const requests = dfHost.count({ axis: 1 }).size; //?
 
-function hostConstruct(host) {
-  const dataObj = {};
-  // assign table with host-specific entries to constant
-  const dfHost = df.query({ column: "reqHost", is: "==", to: host });
-  dataObj.host = host;
-  // total number of requests = entries in host table
-  // const requests = dfHost.count({ axis: 1 }).size; //?
+    // total requests
+    dataObj.reqCount = dfHost["reqMethod"].count();
+    // console.log(reqCount);
 
-  // total requests
-  dataObj.reqCount = dfHost["reqMethod"].count();
-  // console.log(reqCount);
+    // total responses
+    dataObj.resCount = dfHost["resStatusCode"].count();
+    // console.log(resCount);
 
-  // total responses
-  dataObj.resCount = dfHost["resStatusCode"].count();
-  // console.log(resCount);
+    // successful responses = query values in resStatusCode column < 400.
+    // Number of rows = number of entries that match the query
+    dataObj.successRes = 0;
 
-  // successful responses = query values in resStatusCode column < 400.
-  // Number of rows = number of entries that match the query
-  dataObj.successRes = 0;
+    // dfHost['resStatusCode'].apply(n => {
+    //   if (Number(n) < 400) dataObj.successRess++;
+    // });
 
-  // dfHost['resStatusCode'].apply(n => {
-  //   if (Number(n) < 400) dataObj.successRess++;
-  // });
+    const codes = dfHost["resStatusCode"].values; //?
+    // console.log(codes);
+    codes.forEach((code) =>
+      code < 400 ? dataObj.successRes++ : dataObj.successRes
+    );
 
-  const codes = dfHost["resStatusCode"].values; //?
-  // console.log(codes);
-  codes.forEach((code) =>
-    code < 400 ? dataObj.successRes++ : dataObj.successRes
-  );
+    // calculate availability (aka uptime) responses received / requests sent
+    dataObj.availability = (dataObj.resCount / dataObj.reqCount) * 100 + "%";
 
-  // calculate availability (aka uptime) responses received / requests sent
-  dataObj.availability = (dataObj.resCount / dataObj.reqCount) * 100 + "%";
+    // calculate successRate -> responses with status code < 400 / total responses
+    dataObj.successRate = (dataObj.successRes / dataObj.resCount) * 100 + "%";
 
-  // calculate successRate -> responses with status code < 400 / total responses
-  dataObj.successRate = (dataObj.successRes / dataObj.resCount) * 100 + "%";
+    // calculate average cycle duration by indexing into cycleDuration column and invoking mean method
+    // axis-->column
+    dataObj.avgDuration = dfHost[`cycleDuration`].mean(1);
+    // console.log(dataObj.avgDuration);
 
-  // calculate average cycle duration by indexing into cycleDuration column and invoking mean method
-  // axis-->column
-  dataObj.avgDuration = dfHost[`cycleDuration`].mean(1);
-  // console.log(dataObj.avgDuration);
+    // empty object which will contain {method:count} key:vals for each request method
+    const reqMethodCount = {
+      GET: 0,
+      POST: 0,
+      PUT: 0,
+      DELETE: 0,
+      PATCH: 0,
+    };
 
-  // empty object which will contain {method:count} key:vals for each request method
-  const reqMethodCount = {
-    GET: 0,
-    POST: 0,
-    PUT: 0,
-    DELETE: 0,
-    PATCH: 0,
-  };
+    // increment each respective reqMethodCount property by iterating thru reqMethod column
+    dfHost["reqMethod"].apply((method) => reqMethodCount[method]++);
+    // console.log(dataObj.reqMethodCount);
 
-  // increment each respective reqMethodCount property by iterating thru reqMethod column
-  dfHost["reqMethod"].apply((method) => reqMethodCount[method]++);
-  // console.log(dataObj.reqMethodCount);
+    // calculate request method percentage breakdown
+    dataObj.reqMethodBreakdown = {
+      GET: (reqMethodCount.GET / dataObj.resCount) * 100 + "%",
+      POST: (reqMethodCount.POST / dataObj.resCount) * 100 + "%",
+      PUT: (reqMethodCount.PUT / dataObj.resCount) * 100 + "%",
+      DELETE: (reqMethodCount.DELETE / dataObj.resCount) * 100 + "%",
+      PATCH: (reqMethodCount.PATCH / dataObj.resCount) * 100 + "%",
+    };
 
-  // calculate request method percentage breakdown
-  dataObj.reqMethodBreakdown = {
-    GET: (reqMethodCount.GET / dataObj.resCount) * 100 + "%",
-    POST: (reqMethodCount.POST / dataObj.resCount) * 100 + "%",
-    PUT: (reqMethodCount.PUT / dataObj.resCount) * 100 + "%",
-    DELETE: (reqMethodCount.DELETE / dataObj.resCount) * 100 + "%",
-    PATCH: (reqMethodCount.PATCH / dataObj.resCount) * 100 + "%",
-  };
-
-  // console.log(dataObj.reqMethodBreakdown);
-  dataObj.paths = dfHost["reqPath"].unique().data;
-  dataObj.pathData = {};
-  // dataObj.paths.forEach((path) => {
-  //   dataObj.pathData[path] = pathConstruct(path);
-  // });
-  return dataObj;
-}
+    // console.log(dataObj.reqMethodBreakdown);
+    dataObj.paths = dfHost["reqPath"].unique().data;
+    dataObj.pathData = {};
+    // dataObj.paths.forEach((path) => {
+    //   dataObj.pathData[path] = pathConstruct(path);
+    // });
+    
+    
+    
+    
+    return dataObj;
+  }
 };
 
 //#region
@@ -251,7 +253,9 @@ function hostConstruct(host) {
 //#endregion
 
 // add column for hierarchy array
+//#region 
 const pathHierarchy = (dataFrame) => {
+  
   // TODO better way to count rows
   const rows = dataFrame["reqMethod"].count(); //?
   let hierarchyIncrCol = [];
@@ -294,6 +298,8 @@ const pathHierarchy = (dataFrame) => {
   });
   return dataFrame;
 };
+//#endregion
+
 
 const outputData = rtData(responseData);
 console.log(outputData);
@@ -350,6 +356,3 @@ console.log(outputData);
 //     data.duration.reduce((sum, val) => (sum += val)) / data.duration.length; //?
 // }
 //#endregion
-
-
-
