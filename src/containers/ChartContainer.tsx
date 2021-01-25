@@ -14,6 +14,7 @@ import Card from 'antd/es/card';
 import Divider from "antd/es/divider";
 import { AggregateStats } from "../components/AggregateStats";
 import Title from "antd/es/typography/Title";
+import Text from "antd/es/typography/Text"
 import Space from 'antd/es/space';
 import { HistoricalProvider } from "../contexts/historicalContext";
 import { Availability } from "../charts/AvailabilityChart";
@@ -29,6 +30,10 @@ export function ChartContainer(): JSX.Element {
       <Divider><Title level={3}>Historical Status</Title></Divider>
       <div style={{marginBottom: 20}}>
         <CardDropDown /> 
+        <Text strong={true}>1 hour</Text>
+        <Text strong={true}>1 day</Text>
+        <Text strong={true}>1 week</Text>
+        <Text strong={true}>1 month</Text>
       </div>
         <Row gutter={[32,32]}>
           <Col span={12}>
@@ -40,7 +45,8 @@ export function ChartContainer(): JSX.Element {
           <Col span={12}>
             <Title level={5}>Latency</Title>
             <Card bordered={true} hoverable={true} style={{width: "500px"}}>
-              <LineGraph />
+              {/* <LineGraph /> */}
+              <Availability />
             </Card>
           </Col>
         </Row>

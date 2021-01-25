@@ -10,6 +10,7 @@ import { Dashboard } from "./Dashboard";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { ChartContainer } from "./ChartContainer";
 import {  DependencyGraphContainer } from "./DependencyGraphContainer";
+import { SettingsContainer } from './ServiceSettingsContainer'
 import Typography from "antd/es/typography";
 import Menu from "antd/es/menu";
 import Layout from "antd/es/layout"
@@ -37,12 +38,12 @@ function MainDisplay(): JSX.Element {
     setIsModalVisible(false);
   };
 
-  const { verification} = useContext(myContext);
+  const { verification } = useContext(myContext);
 
   const large: any = "large";
 
 
-  if (false){
+  if (verification){
     return <SignIn />
   } else {
   return (
@@ -53,36 +54,37 @@ function MainDisplay(): JSX.Element {
           <Sider theme="light" style={{position: 'fixed'}}>
           <Title level={2} className="title">VENUS</Title>
           <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}> 
-            {/* <Menu.Item key="1">
-                <Link to="/signin">  
-                  <div style={{width: "100%", height: "100%"}}>
-                    Sign Out
-                  </div>
-                </Link>
-              </Menu.Item>          */}
-              <Menu.Item key="2">
+
+              <Menu.Item key="1">
                 <Link to="/">
                   <div style={{width: "100%", height: "100%"}}>
                     Current Status
                   </div>
                 </Link>
               </Menu.Item>
-              <Menu.Item key="3" >
+              <Menu.Item key="2" >
                 <Link to="/historicalData">
                 <div style={{width: "100%", height: "100%"}}>
                     Historical Status
                   </div>
                </Link>
               </Menu.Item>
-              <Menu.Item key="4">
+              <Menu.Item key="3">
                 <Link to="/dependencyGraph">  
                   <div style={{width: "100%", height: "100%"}}>
                     Dependency Graph
                   </div>
                 </Link>
               </Menu.Item>
+              <Menu.Item key="4">
+                <Link to="/settings">  
+                  <div style={{width: "100%", height: "100%"}}>
+                     Service Settings
+                  </div>
+                </Link>
+              </Menu.Item>
               <Menu.Item>
-                <div style={{width: "100%", height: "100%"}} key="4" onClick={showModal}>
+                <div style={{width: "100%", height: "100%"}} key="5" onClick={showModal}>
                   Add Service
                 </div>
                 <Modal title="Add Service" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
@@ -96,7 +98,7 @@ function MainDisplay(): JSX.Element {
                 <Route path="/" exact component={Dashboard} />
                 <Route path="/dependencyGraph" component={DependencyGraphContainer} />
                 <Route path="/historicalData" component={ChartContainer} />
-                {/* <Route path="/signin" component={SignIn} /> */}
+                <Route path="/settings" component={SettingsContainer} />
               </Content>
           </Layout>
         {/* <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer> */}

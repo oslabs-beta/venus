@@ -30,16 +30,18 @@ function  Dashboard(): JSX.Element{
 
   const dataSource: any = [];
   useEffect(() => {
-    const socket = io('ec2-13-58-114-75.us-east-2.compute.amazonaws.com:8080', {transports: ['websocket']});
+    const socket = io('SERVER URL', {transports: ['websocket']});
     // socket.on('connection', () => {
     //   console.log(socket.id)
     // });
     socket.on('real-time-object', (output: any) => {
+      console.log('new update')
+
       const newData  = JSON.parse(output);
       setAggregate(newData.aggregate)
       setServices(newData.services)
+      console.log(newData.aggregate)
     })
-    console.log('called')
 
     // setServices([
     //   {
@@ -74,9 +76,7 @@ function  Dashboard(): JSX.Element{
     //   availability: 83,
     //   status: 'good'
     // })
-
     return () => socket.disconnect(); 
-
   }, []);
   
  
@@ -154,6 +154,4 @@ function  Dashboard(): JSX.Element{
   )
  };
 
- export { Dashboard };
- // exports to MainContainer
- 
+ export { Dashboard }; 
