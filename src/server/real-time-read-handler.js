@@ -22,6 +22,8 @@ console.log(`Reading the stream named ${STREAM_KEY}...`);
 
 const readRedisStream = async () => {
 
+  console.log('Invoked readredisstream function'); 
+
   //Get the milliseconds for start and end time
   const startTime = Date.now() - INTERVAL; 
   const endTime = startTime + INTERVAL;  
