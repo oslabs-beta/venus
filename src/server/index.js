@@ -15,7 +15,7 @@ const responseData = [
     reqHost: 'curriculum-api.codesmith.io',
     reqPath: '/messages',
     reqUrl: 'https://curriculum-api.codesmith.io/messages',
-    resStatusCode: Math.floor(Math.random() * 400),
+    resStatusCode: 200,
     cycleDuration: Math.floor(Math.random() * 1000),
     resMessage: 'OK',
   },
@@ -24,7 +24,7 @@ const responseData = [
     reqHost: 'curriculum-api.codesmith.io',
     reqPath: '/messages',
     reqUrl: 'https://curriculum-api.codesmith.io/messages',
-    resStatusCode: Math.floor(Math.random() * 400),
+    resStatusCode: 400,
     cycleDuration: Math.floor(Math.random() * 1000),
     resMessage: 'OK',
   },
@@ -33,7 +33,7 @@ const responseData = [
     reqHost: 'finance.yahoo.com',
     reqPath: '/TSLA',
     reqUrl: 'https://finance.yahoo.com/TSLA',
-    resStatusCode: Math.floor(Math.random() * 400),
+    resStatusCode: 400,
     cycleDuration: Math.floor(Math.random() * 1000),
     resMessage: 'OK',
   },
@@ -42,7 +42,7 @@ const responseData = [
     reqHost: 'finance.yahoo.com',
     reqPath: '/AAPL',
     reqUrl: 'https://finance.yahoo.com/AAPL',
-    resStatusCode: Math.floor(Math.random() * 400),
+    resStatusCode: 200,
     cycleDuration: Math.floor(Math.random() * 1000),
     resMessage: 'OK',
   },
@@ -51,7 +51,7 @@ const responseData = [
     reqHost: 'weather.google.com',
     reqPath: '/California/LA',
     reqUrl: 'https://weather.google.com/California/LA',
-    resStatusCode: Math.floor(Math.random() * 400),
+    resStatusCode: 200,
     cycleDuration: Math.floor(Math.random() * 1000),
     resMessage: 'OK',
   },
@@ -86,7 +86,7 @@ io.sockets.on('connection', (socket) => {
 async function sendData(socket){
 
   console.log('Send Data Invoked!')
-  const index = Math.floor(Math.random() * 5); 
+  // const index = Math.floor(Math.random() * 5); 
   const streamData = await redis.readRedisStream();
   const output = data.rtData(responseData); 
   socket.emit('real-time-object', output); 
