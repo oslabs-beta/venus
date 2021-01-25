@@ -17,6 +17,6 @@ module.exports = {
     dnsLookup: (address, callback) => callback(null, address),
   },
   redisStream: {
-    REDIS_STREAM_NAME: 'venus',
+    REDIS_STREAM_NAME: 'logstream',
   },
 }
