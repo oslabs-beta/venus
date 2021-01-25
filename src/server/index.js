@@ -2,7 +2,7 @@ const express = require('express');
 const socket = require('socket.io'); 
 const bodyParser = require('body-parser'); 
 const cors = require('cors'); 
-const data = require('./real-time-data-analysis.js'); 
+const data = require('./rt-data-analysis.js'); 
 const redis = require('./real-time-read-handler.js'); 
 
 const SOCKET_PORT = 8080; 
@@ -85,6 +85,7 @@ io.sockets.on('connection', (socket) => {
 
 async function sendData(socket){
 
+  console.log('Send Data Invoked!')
   const streamData = await redis.readRedisStream();
   const output = data.rtData(streamData); 
   socket.emit('real-time-object', output); 
