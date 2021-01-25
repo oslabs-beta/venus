@@ -306,7 +306,7 @@ const rtData = (data) => {
   return JSON.stringify(consolidatedObj);
 };
 
-module.exports = rtData;
-
+// module.exports = rtData;
+exports.rtData = rtData; 
 // rtData(responseData);
 
