@@ -23,13 +23,9 @@ console.log(`Reading the stream named ${STREAM_KEY}...`);
   
 const readRedisStream = async () => {
 
-  console.log('Invoked readredisstream function'); 
-
   //Get the milliseconds for start and end time
   const startTime = Date.now() - INTERVAL; 
   const endTime = startTime + INTERVAL;  
-
-  
 
   //Transform xrange's output from two arrays of keys and value into one array of log objects
   // Redis.Command.setReplyTransformer('xrange', function (result) {
@@ -56,6 +52,60 @@ const readRedisStream = async () => {
 
   //   return result; 
   // }); 
+
+  // Transform xrange's output from two arrays of keys and value into one array of log objects
+  Redis.Command.setReplyTransformer('xrange', function (result) {
+    if(Array.isArray(result)){
+      const newResult = []; 
+      for(const r of result){
+        const obj = {
+          id: r[0]
+        }; 
+
+        const fieldNamesValues = r[1]; 
+
+        // for(let i = 0; i < fieldNamesValues.length; i += 2){
+        //   const k = fieldNamesValues[i]; 
+        //   const v = fieldNamesValues[i + 1]; 
+        //   obj[k] = v; 
+        // }
+
+        const reqMethod = fieldNamesValues.indexOf('reqMethod'); 
+        const reqMethodValue = reqMethod + 1;
+        obj['reqMethod'] = r[reqMethodValue]; 
+        
+        const reqHost = fieldNamesValues.indexOf('reqHost'); 
+        const reqHostValue = reqHost + 1;
+        obj['reqHost'] = r[reqHostValue];
+
+        const reqUrl = fieldNamesValues.indexOf('reqUrl'); 
+        const reqUrlValue = reqUrl + 1;
+        obj['reqUrl'] = r[reqUrlValue];
+
+        const reqPath = fieldNamesValues.indexOf('reqPath'); 
+        const reqPathValue = reqPath + 1;
+        obj['reqPath'] = r[reqPathValue];
+
+        const resStatusCode = fieldNamesValues.indexOf('resStatusCode'); 
+        const resStatusCodeValue = resStatusCode + 1;
+        obj['resStatusCode'] = r[resStatusCodeValue];
+
+        const resMessage = fieldNamesValues.indexOf('resMessage'); 
+        const resMessageValue = resMessage + 1;
+        obj['resMessage'] = r[resMessageValue];
+
+        const cycleDuration = fieldNamesValues.indexOf('cycleDuration'); 
+        const cycleDurationValue = cycleDuration + 1;
+        obj['cycleDuration'] = r[cycleDurationValue];
+
+        newResult.push(obj); 
+      }
+
+      return newResult; 
+    }
+
+    return result; 
+  });
 
   streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
 
