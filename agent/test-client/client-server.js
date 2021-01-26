@@ -136,6 +136,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //     return next();
 // }
 
+
+
 setInterval(() => {
   axios("http://localhost:8126/chat")
     .then(({ data }) => {

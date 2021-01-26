@@ -15,6 +15,7 @@ const responseData = [
     cycleDuration: '1232',
     resMessage: 'OK',
   },
+  //#region 
   // {
   //   reqMethod: 'POST',
   //   reqHost: 'curriculum-api.codesmith.io',
@@ -70,6 +71,7 @@ const responseData = [
   //   resMessage: 'OK',
   //   cycleDuration: '1105.248547'
   // },
+  //#endregion
   {
     id: '1611550577793-1',
     reqMethod: 'GET',
@@ -105,15 +107,15 @@ const responseData = [
 // })
 
 
-// responseData.forEach((obj) => {
-//   if (!obj.id) obj.id = `${Date.now()}-0`;
-//   if (!obj.reqMethod) obj.reqMethod = 'GET';
-//   if (!obj.reqHost) obj.reqHost = 'Other';
-//   if (!obj.reqPath) obj.reqPath = '/';
-//   if (!obj.resStatusCode) obj.resStatusCode = NaN;
-//   if (!obj.resMessage) obj.resMessage = 'No message';
-//   if (!obj.cycleDuration) obj.cycleDuration = NaN;
-// })
+responseData.forEach((obj) => {
+  if (!obj.id) obj.id = `${Date.now()}-0`;
+  if (!obj.reqMethod) obj.reqMethod = 'GET';
+  if (!obj.reqHost) obj.reqHost = 'Other';
+  if (!obj.reqPath) obj.reqPath = '/';
+  if (!obj.resStatusCode) obj.resStatusCode = NaN;
+  if (!obj.resMessage) obj.resMessage = 'No message';
+  if (!obj.cycleDuration) obj.cycleDuration = NaN;
+})
 
 //  
 
@@ -122,11 +124,21 @@ console.log(responseData);
 const rtData = (data) => {
   // hacky code to try conforming the objects in case one is missing a property
   
-  const df = new dfd.DataFrame(data);
+  const df = new dfd.DataFrame(data
+  //   , columns: [{
+  //   "reqMethod": []}
+  //   {"reqHost" : []},
+  //   {"reqPath" : []},
+  //   {"resStatusCode": []},
+  //   {"cycleDuration": []},
+  //   {"reqHost": []},
+  // }
+  // ]}
+  );
   df.ctypes.print();
   df.print()
   df['cycleDuration'] = df['cycleDuration'].astype('int32')
-  df['cycleDuration'] = df['resStatusCode'].astype('int32')
+  df['resStatusCode'] = df['resStatusCode'].astype('int32')
   df.ctypes.print();
   df.print()
 
