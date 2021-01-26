@@ -104,11 +104,17 @@ io.sockets.on('connection', (socket) => {
 // const streamData = await redis.readRedisStream();
 
 const streamData = async () => {
-  const streamOutput =  await redis.readRedisStream();  
-  console.log('stream Data: ', streamOutput); 
-  const output = data.rtData(streamData);  
-  console.log(`Output is ${output}`); 
 
+  const streamOutput =  await redis.readRedisStream();  
+  
+  if(streamOutput.length !== 0){
+    console.log('stream Data: ', streamOutput); 
+    const output = data.rtData(streamData);  
+    console.log(`Output is ${output}`);
+  } else {
+    console.log('No usable data from the stream.')
+  }
+     
   setTimeout(() => {
     streamData(); 
   }, 1000)
