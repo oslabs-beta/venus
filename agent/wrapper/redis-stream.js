@@ -18,11 +18,6 @@ redis.on('connect', () => {
 });
 
 
-
-
-
-
-
 const redisStream = {};
 
 // assign stream name from config file to module property
