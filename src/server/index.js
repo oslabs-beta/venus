@@ -109,7 +109,7 @@ const streamData = async () => {
   
   if(streamOutput.length !== 0){
     console.log('stream Data: ', streamOutput); 
-    const output = data.rtData(streamData);  
+    const output = data.rtData(streamOutput);  
     console.log(`Output is ${output}`);
   } else {
     console.log('No usable data from the stream.')
