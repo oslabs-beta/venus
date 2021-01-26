@@ -20,12 +20,7 @@ const redis = new Redis({
 
 console.log(`Reading the stream named ${STREAM_KEY}...`); 
 
-streamEntries = redis.xrange(STREAM_KEY, startTime, endTime).promise(); 
-
-  console.log('XRANGE, response without reply transformer'); 
-  console.log(streamEntries); 
-
-
+  
 const readRedisStream = async () => {
 
   console.log('Invoked readredisstream function'); 
@@ -37,30 +32,30 @@ const readRedisStream = async () => {
   
 
   //Transform xrange's output from two arrays of keys and value into one array of log objects
-  Redis.Command.setReplyTransformer('xrange', function (result) {
-    if(Array.isArray(result)){
-      const newResult = []; 
-      for(const r of result){
-        const obj = {
-          id: r[0]
-        }; 
+  // Redis.Command.setReplyTransformer('xrange', function (result) {
+  //   if(Array.isArray(result)){
+  //     const newResult = []; 
+  //     for(const r of result){
+  //       const obj = {
+  //         id: r[0]
+  //       }; 
 
-        const fieldNamesValues = r[1]; 
+  //       const fieldNamesValues = r[1]; 
 
-        for(let i = 0; i < fieldNamesValues.length; i += 2){
-          const k = fieldNamesValues[i]; 
-          const v = fieldNamesValues[i + 1]; 
-          obj[k] = v; 
-        }
+  //       for(let i = 0; i < fieldNamesValues.length; i += 2){
+  //         const k = fieldNamesValues[i]; 
+  //         const v = fieldNamesValues[i + 1]; 
+  //         obj[k] = v; 
+  //       }
 
-        newResult.push(obj); 
-      }
+  //       newResult.push(obj); 
+  //     }
 
-      return newResult; 
-    }
+  //     return newResult; 
+  //   }
 
-    return result; 
-  }); 
+  //   return result; 
+  // }); 
 
   streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
 
