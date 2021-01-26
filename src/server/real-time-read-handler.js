@@ -74,31 +74,31 @@ const readRedisStream = async () => {
 
         const reqMethod = fieldNamesValues.indexOf('reqMethod'); 
         const reqMethodValue = reqMethod + 1;
-        obj['reqMethod'] = r[reqMethodValue]; 
+        obj['reqMethod'] = fieldNamesValues[reqMethodValue]; 
         
         const reqHost = fieldNamesValues.indexOf('reqHost'); 
         const reqHostValue = reqHost + 1;
-        obj['reqHost'] = r[reqHostValue];
+        obj['reqHost'] = fieldNamesValues[reqHostValue];
 
         const reqUrl = fieldNamesValues.indexOf('reqUrl'); 
         const reqUrlValue = reqUrl + 1;
-        obj['reqUrl'] = r[reqUrlValue];
+        obj['reqUrl'] = fieldNamesValues[reqUrlValue];
 
         const reqPath = fieldNamesValues.indexOf('reqPath'); 
         const reqPathValue = reqPath + 1;
-        obj['reqPath'] = r[reqPathValue];
+        obj['reqPath'] = fieldNamesValues[reqPathValue];
 
         const resStatusCode = fieldNamesValues.indexOf('resStatusCode'); 
         const resStatusCodeValue = resStatusCode + 1;
-        obj['resStatusCode'] = r[resStatusCodeValue];
+        obj['resStatusCode'] = fieldNamesValues[resStatusCodeValue];
 
         const resMessage = fieldNamesValues.indexOf('resMessage'); 
         const resMessageValue = resMessage + 1;
-        obj['resMessage'] = r[resMessageValue];
+        obj['resMessage'] = fieldNamesValues[resMessageValue];
 
         const cycleDuration = fieldNamesValues.indexOf('cycleDuration'); 
         const cycleDurationValue = cycleDuration + 1;
-        obj['cycleDuration'] = r[cycleDurationValue];
+        obj['cycleDuration'] = fieldNamesValues[cycleDurationValue];
 
         newResult.push(obj); 
       }
