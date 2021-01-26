@@ -5,105 +5,113 @@ const dfd = require('danfojs-node');
 const STREAM_WINDOW = 3;
 
 // #region 
-const responseData = [
-  // {
-  //   reqMethod: 'GET',
-  //   reqHost: 'curriculum-api.codesmith.io',
-  //   reqPath: '/messages',
-  //   reqUrl: 'https://curriculum-api.codesmith.io/messages',
-  //   resStatusCode: '200',
-  //   cycleDuration: '1232',
-  //   resMessage: 'OK',
-  // },
-  // {
-  //   reqMethod: 'POST',
-  //   reqHost: 'curriculum-api.codesmith.io',
-  //   reqPath: '/messages',
-  //   reqUrl: 'https://curriculum-api.codesmith.io/messages',
-  //   resStatusCode: '400',
-  //   cycleDuration: '1300',
-  //   resMessage: 'OK',
-  // },
-  // {
-  //   reqMethod: 'GET',
-  //   reqHost: 'finance.yahoo.com',
-  //   reqPath: '/TSLA',
-  //   reqUrl: 'https://finance.yahoo.com/TSLA',
-  //   resStatusCode: '400',
-  //   cycleDuration: '1500',
-  //   resMessage: 'OK',
-  // },
-  // {
-  //   reqMethod: 'DELETE',
-  //   reqHost: 'finance.yahoo.com',
-  //   reqPath: '/AAPL',
-  //   reqUrl: 'https://finance.yahoo.com/AAPL',
-  //   resStatusCode: '200',
-  //   cycleDuration: '1335',
-  //   resMessage: 'OK',
-  // },
-  // {
-  //   reqMethod: 'GET',
-  //   reqHost: 'weather.google.com',
-  //   reqPath: '/California/LA',
-  //   reqUrl: 'https://weather.google.com/California/LA',
-  //   resStatusCode: '200',
-  //   cycleDuration: '1200',
-  //   resMessage: 'OK',
-  // },
-  // {
-  //   reqMethod: 'PATCH',
-  //   reqHost: 'weather.google.com',
-  //   reqPath: '/California/SF',
-  //   reqUrl: 'https://weather.google.com/California/SF',
-  //   resStatusCode: NaN,
-  //   cycleDuration: '1100',
-  //   resMessage: 'OK',
-  // },
-  {
-    id: '1611550577793-1',
-    reqMethod: 'GET',
-    reqHost: 'curriculum-api.codesmith.io',
-    reqPath: '/messages/',
-    reqUrl: 'https://curriculum-api.codesmith.io/messages/',
-    resStatusCode: '200',
-    resMessage: 'OK',
-    cycleDuration: '1105.248547'
-  },
-  {
-    id: '1611550577793-1',
-    reqMethod: 'GET',
-    reqHost: 'weather.google.com',
-    reqPath: '/messages/',
-    reqUrl: 'https://curriculum-api.codesmith.io/messages/',
-    resStatusCode: '200',
-    resMessage: 'OK',
-    cycleDuration: '1105.248547'
-  },
-  {
-    id: '1611550577793-1',
-    reqMethod: 'GET',
-    reqHost: 'finance.yahoo.com',
-    reqPath: '/messages/',
-    reqUrl: 'https://curriculum-api.codesmith.io/messages/',
-    resStatusCode: '200',
-    resMessage: 'OK',
-    cycleDuration: '1105.248547'
-  },
-];
+// const responseData = [
+//   // {
+//   //   reqMethod: 'GET',
+//   //   reqHost: 'curriculum-api.codesmith.io',
+//   //   reqPath: '/messages',
+//   //   reqUrl: 'https://curriculum-api.codesmith.io/messages',
+//   //   resStatusCode: '200',
+//   //   cycleDuration: '1232',
+//   //   resMessage: 'OK',
+//   // },
+//   // {
+//   //   reqMethod: 'POST',
+//   //   reqHost: 'curriculum-api.codesmith.io',
+//   //   reqPath: '/messages',
+//   //   reqUrl: 'https://curriculum-api.codesmith.io/messages',
+//   //   resStatusCode: '400',
+//   //   cycleDuration: '1300',
+//   //   resMessage: 'OK',
+//   // },
+//   // {
+//   //   reqMethod: 'GET',
+//   //   reqHost: 'finance.yahoo.com',
+//   //   reqPath: '/TSLA',
+//   //   reqUrl: 'https://finance.yahoo.com/TSLA',
+//   //   resStatusCode: '400',
+//   //   cycleDuration: '1500',
+//   //   resMessage: 'OK',
+//   // },
+//   // {
+//   //   reqMethod: 'DELETE',
+//   //   reqHost: 'finance.yahoo.com',
+//   //   reqPath: '/AAPL',
+//   //   reqUrl: 'https://finance.yahoo.com/AAPL',
+//   //   resStatusCode: '200',
+//   //   cycleDuration: '1335',
+//   //   resMessage: 'OK',
+//   // },
+//   // {
+//   //   reqMethod: 'GET',
+//   //   reqHost: 'weather.google.com',
+//   //   reqPath: '/California/LA',
+//   //   reqUrl: 'https://weather.google.com/California/LA',
+//   //   resStatusCode: '200',
+//   //   cycleDuration: '1200',
+//   //   resMessage: 'OK',
+//   // },
+//   // {
+//   //   reqMethod: 'PATCH',
+//   //   reqHost: 'weather.google.com',
+//   //   reqPath: '/California/SF',
+//   //   reqUrl: 'https://weather.google.com/California/SF',
+//   //   resStatusCode: NaN,
+//   //   cycleDuration: '1100',
+//   //   resMessage: 'OK',
+//   // },
+//   {
+//     id: '1611550577793-1',
+//     reqMethod: 'GET',
+//     reqHost: 'curriculum-api.codesmith.io',
+//     reqPath: '/messages/',
+//     reqUrl: 'https://curriculum-api.codesmith.io/messages/',
+//     resStatusCode: '200',
+//     resMessage: 'OK',
+//     cycleDuration: '1105.248547'
+//   },
+//   {
+//     id: '1611550577793-1',
+//     reqMethod: 'GET',
+//     reqHost: 'weather.google.com',
+//     reqPath: '/messages/',
+//     reqUrl: 'https://curriculum-api.codesmith.io/messages/',
+//     resStatusCode: '200',
+//     resMessage: 'OK',
+//     cycleDuration: '1105.248547'
+//   },
+//   {
+//     id: '1611550577793-1',
+//     reqMethod: 'GET',
+//     reqHost: 'finance.yahoo.com',
+//     reqPath: '/messages/',
+//     reqUrl: 'https://curriculum-api.codesmith.io/messages/',
+//     resStatusCode: '200',
+//     resMessage: 'OK',
+//     cycleDuration: '1105.248547'
+//   },
+// ];
 // #endregion
 
 // FIXME update logic (this file and wrapper) to properly handle no response
 
 const rtData = (data) => {
+  // hacky code to try conforming the objects in case one is missing a property
+  
   const df = new dfd.DataFrame(data);
-  // df.ctypes.print();
+  df.ctypes.print();
+  df.print()
+  df['cycleDuration'] = df['cycleDuration'].astype('int32')
+  df['cycleDuration'] = df['resStatusCode'].astype('int32')
+  df.ctypes.print();
+  df.print()
 
   const dfGroup = df.groupby(['reqHost']);
   const dfNew = dfGroup.col(['reqHost']).count();
 
   let finalTable;
   const consolidatedObj = {};
+  
   try {
     const errorResRows = df.query({ column: 'resStatusCode', is: '>=', to: 400 });
     const errorDF = errorResRows.groupby(['reqHost']);
@@ -119,6 +127,7 @@ const rtData = (data) => {
       how: 'left',
     });
 
+    console.log(finalTable);
     const errorRateCol = finalTable.resStatusCode_count
       .div(finalTable.resStatusCode_count_1)
       .mul(100);
@@ -159,7 +168,7 @@ const rtData = (data) => {
 
   // console.log(finalTable);
 
-  console.log(finalTable)
+  // console.log(finalTable)
   const availabilityCol = finalTable.resStatusCode_count_1
     .div(finalTable.reqHost_count)
     .mul(100);
@@ -182,7 +191,7 @@ const rtData = (data) => {
 
   outputTable.reqHost_count = outputTable.reqHost_count.div(3);
 
-  console.log('Final Table: ', outputTable);
+  // console.log('Final Table: ', outputTable);
   outputTable.print();
 
   
@@ -205,6 +214,7 @@ const rtData = (data) => {
     console.log('CATCH BLOCK FAM')
     finalTable = dfNew;
     const latencyDF = dfGroup.col(['cycleDuration']).mean();
+    console.log('latency catch', latencyDF);
 
     finalTable = dfd.merge({
       left: finalTable,
@@ -212,6 +222,8 @@ const rtData = (data) => {
       on: ['reqHost'],
       how: 'left',
     });
+
+    finalTable.print()
   
     const availabilityDF = dfGroup.col(['resStatusCode']).count();
     // availabilityDF.print()
@@ -224,7 +236,7 @@ const rtData = (data) => {
   
     finalTable.fillna({ values: [0], inplace: true });
   
-    console.log(finalTable)
+    // console.log(finalTable)
     const availabilityCol = finalTable.resStatusCode_count
       .div(finalTable.reqHost_count)
       .mul(100);
@@ -246,21 +258,20 @@ const rtData = (data) => {
   
     outputTable.reqHost_count = outputTable.reqHost_count.div(3);
   
-    console.log('Final Table: ', outputTable);
+    // console.log('Final Table: ', outputTable);
     outputTable.print();
   
     consolidatedObj.services = [];
   
     outputTable.data.forEach((row) => {
       const outputObj = {};
-  
       outputObj.service = row[0];
       outputObj.status = 'good';
       outputObj.load = `${row[1].toFixed(2)  } hpm`;
       outputObj.response_time = row[2];
       // hardcode 0 as the error given that this is part of the catch block 
       outputObj.error = 0;
-      outputObj.availability = row[4];
+      outputObj.availability = row[3];
   
       consolidatedObj.services.push(outputObj);
     });
@@ -285,7 +296,7 @@ const rtData = (data) => {
   const totalRequests = df.reqHost.count();
   const totalResponses = df.resStatusCode.count();
   consolidatedObj.aggregate.status = 'good';
-  consolidatedObj.aggregate.load = `${totalRequests / STREAM_WINDOW  } hpm`;
+  consolidatedObj.aggregate.load = `${(totalRequests / STREAM_WINDOW).toFixed(2) } hpm`;
   consolidatedObj.aggregate.response_time = Math.round(
     df.cycleDuration.mean(),
   );
@@ -381,10 +392,11 @@ const rtData = (data) => {
 
       outputTableMethod.reqMethod_count = outputTableMethod.reqMethod_count.div(3);
 
-      console.log('Final Table: ', outputTableMethod);
+      // console.log('Final Table: ', outputTableMethod);
       outputTableMethod.print();
 
       outputTableMethod.data.forEach((row, i) => {
+        console.log('ROW', row)
         consolidatedObj.services[i].byMethod = {};
         consolidatedObj.services[i].byMethod.method = row[0];
         consolidatedObj.services[i].byMethod.status = 'good';
@@ -454,6 +466,7 @@ const rtData = (data) => {
       outputTableMethod.print();
 
       outputTableMethod.data.forEach((row, i) => {
+        console.log('ROW', row)
         consolidatedObj.services[i].byMethod = {};
         consolidatedObj.services[i].byMethod.method = row[0];
         consolidatedObj.services[i].byMethod.status = 'good';
@@ -463,15 +476,13 @@ const rtData = (data) => {
         consolidatedObj.services[i].byMethod.availability = row[4];
       });
 
-      console.log('FINAL OBJECT', consolidatedObj);
+      // console.log('FINAL OBJECT', consolidatedObj);
     }
   });
-  console.log(JSON.stringify(consolidatedObj));
+  // console.log(JSON.stringify(consolidatedObj));
+  console.log(consolidatedObj.services[0].byMethod);
   return JSON.stringify(consolidatedObj);
 };
 
-// rtData(responseData); 
-
-// module.exports = rtData;
 exports.rtData = rtData; 
 
