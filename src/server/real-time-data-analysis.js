@@ -98,7 +98,7 @@ const responseData = [
 const rtData = (data) => {
   // hacky code to try conforming the objects in case one is missing a property
   
-  const df = new dfd.DataFrame(data, { columns: ['id', 'reqMethod', 'reqHost', 'reqPath', 'reqUrl', 'resStatusCode', 'resMessage', 'cycleDuration'] });
+  const df = new dfd.DataFrame(data);
   df.ctypes.print();
   df.print()
   df['cycleDuration'] = df['cycleDuration'].astype('int32')
