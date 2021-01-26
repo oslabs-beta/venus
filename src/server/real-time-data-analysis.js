@@ -102,7 +102,7 @@ const rtData = (data) => {
   df.ctypes.print();
   df.print()
   df['cycleDuration'] = df['cycleDuration'].astype('int32')
-  df['cycleDuration'] = df['resStatusCode'].astype('int32')
+  df['resStatusCode'] = df['resStatusCode'].astype('int32')
   df.ctypes.print();
   df.print()
 
