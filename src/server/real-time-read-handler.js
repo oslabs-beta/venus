@@ -20,7 +20,7 @@ const redis = new Redis({
 
 console.log(`Reading the stream named ${STREAM_KEY}...`); 
 
-streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
+streamEntries = redis.xrange(STREAM_KEY, startTime, endTime).promise(); 
 
   console.log('XRANGE, response without reply transformer'); 
   console.log(streamEntries); 
