@@ -5,92 +5,92 @@ const dfd = require('danfojs-node');
 const STREAM_WINDOW = 3;
 
 // #region 
-// const responseData = [
-//   // {
-//   //   reqMethod: 'GET',
-//   //   reqHost: 'curriculum-api.codesmith.io',
-//   //   reqPath: '/messages',
-//   //   reqUrl: 'https://curriculum-api.codesmith.io/messages',
-//   //   resStatusCode: '200',
-//   //   cycleDuration: '1232',
-//   //   resMessage: 'OK',
-//   // },
-//   // {
-//   //   reqMethod: 'POST',
-//   //   reqHost: 'curriculum-api.codesmith.io',
-//   //   reqPath: '/messages',
-//   //   reqUrl: 'https://curriculum-api.codesmith.io/messages',
-//   //   resStatusCode: '400',
-//   //   cycleDuration: '1300',
-//   //   resMessage: 'OK',
-//   // },
-//   // {
-//   //   reqMethod: 'GET',
-//   //   reqHost: 'finance.yahoo.com',
-//   //   reqPath: '/TSLA',
-//   //   reqUrl: 'https://finance.yahoo.com/TSLA',
-//   //   resStatusCode: '400',
-//   //   cycleDuration: '1500',
-//   //   resMessage: 'OK',
-//   // },
-//   // {
-//   //   reqMethod: 'DELETE',
-//   //   reqHost: 'finance.yahoo.com',
-//   //   reqPath: '/AAPL',
-//   //   reqUrl: 'https://finance.yahoo.com/AAPL',
-//   //   resStatusCode: '200',
-//   //   cycleDuration: '1335',
-//   //   resMessage: 'OK',
-//   // },
-//   // {
-//   //   reqMethod: 'GET',
-//   //   reqHost: 'weather.google.com',
-//   //   reqPath: '/California/LA',
-//   //   reqUrl: 'https://weather.google.com/California/LA',
-//   //   resStatusCode: '200',
-//   //   cycleDuration: '1200',
-//   //   resMessage: 'OK',
-//   // },
-//   // {
-//   //   reqMethod: 'PATCH',
-//   //   reqHost: 'weather.google.com',
-//   //   reqPath: '/California/SF',
-//   //   reqUrl: 'https://weather.google.com/California/SF',
-//   //   resStatusCode: NaN,
-//   //   cycleDuration: '1100',
-//   //   resMessage: 'OK',
-//   // },
-//   {
-//     id: '1611550577793-1',
-//     reqMethod: 'GET',
-//     reqHost: 'curriculum-api.codesmith.io',
-//     reqPath: '/messages/',
-//     reqUrl: 'https://curriculum-api.codesmith.io/messages/',
-//     resStatusCode: '200',
-//     resMessage: 'OK',
-//     cycleDuration: '1105.248547'
-//   },
-//   {
-//     id: '1611550577793-1',
-//     reqMethod: 'GET',
-//     reqHost: 'weather.google.com',
-//     reqPath: '/messages/',
-//     reqUrl: 'https://curriculum-api.codesmith.io/messages/',
-//     resStatusCode: '200',
-//     resMessage: 'OK',
-//     cycleDuration: '1105.248547'
-//   },
-//   {
-//     id: '1611550577793-1',
-//     reqMethod: 'GET',
-//     reqHost: 'finance.yahoo.com',
-//     reqPath: '/messages/',
-//     reqUrl: 'https://curriculum-api.codesmith.io/messages/',
-//     resStatusCode: '200',
-//     resMessage: 'OK',
-//     cycleDuration: '1105.248547'
-//   },
-// ];
+const responseData = [
+  // {
+  //   reqMethod: 'GET',
+  //   reqHost: 'curriculum-api.codesmith.io',
+  //   reqPath: '/messages',
+  //   reqUrl: 'https://curriculum-api.codesmith.io/messages',
+  //   resStatusCode: '200',
+  //   cycleDuration: '1232',
+  //   resMessage: 'OK',
+  // },
+  // {
+  //   reqMethod: 'POST',
+  //   reqHost: 'curriculum-api.codesmith.io',
+  //   reqPath: '/messages',
+  //   reqUrl: 'https://curriculum-api.codesmith.io/messages',
+  //   resStatusCode: '400',
+  //   cycleDuration: '1300',
+  //   resMessage: 'OK',
+  // },
+  // {
+  //   reqMethod: 'GET',
+  //   reqHost: 'finance.yahoo.com',
+  //   reqPath: '/TSLA',
+  //   reqUrl: 'https://finance.yahoo.com/TSLA',
+  //   resStatusCode: '400',
+  //   cycleDuration: '1500',
+  //   resMessage: 'OK',
+  // },
+  // {
+  //   reqMethod: 'DELETE',
+  //   reqHost: 'finance.yahoo.com',
+  //   reqPath: '/AAPL',
+  //   reqUrl: 'https://finance.yahoo.com/AAPL',
+  //   resStatusCode: '200',
+  //   cycleDuration: '1335',
+  //   resMessage: 'OK',
+  // },
+  // {
+  //   reqMethod: 'GET',
+  //   reqHost: 'weather.google.com',
+  //   reqPath: '/California/LA',
+  //   reqUrl: 'https://weather.google.com/California/LA',
+  //   resStatusCode: '200',
+  //   cycleDuration: '1200',
+  //   resMessage: 'OK',
+  // },
+  // {
+  //   reqMethod: 'PATCH',
+  //   reqHost: 'weather.google.com',
+  //   reqPath: '/California/SF',
+  //   reqUrl: 'https://weather.google.com/California/SF',
+  //   resStatusCode: NaN,
+  //   cycleDuration: '1100',
+  //   resMessage: 'OK',
+  // },
+  {
+    id: '1611550577793-1',
+    reqMethod: 'GET',
+    reqHost: 'curriculum-api.codesmith.io',
+    reqPath: '/messages/',
+    reqUrl: 'https://curriculum-api.codesmith.io/messages/',
+    resStatusCode: '200',
+    resMessage: 'OK',
+    cycleDuration: '1105.248547'
+  },
+  {
+    id: '1611550577793-1',
+    reqMethod: 'GET',
+    reqHost: 'weather.google.com',
+    reqPath: '/messages/',
+    reqUrl: 'https://curriculum-api.codesmith.io/messages/',
+    resStatusCode: '200',
+    resMessage: 'OK',
+    cycleDuration: '1105.248547'
+  },
+  {
+    id: '1611550577793-1',
+    reqMethod: 'GET',
+    reqHost: 'finance.yahoo.com',
+    reqPath: '/messages/',
+    reqUrl: 'https://curriculum-api.codesmith.io/messages/',
+    cycleDuration: '1105.248547',
+    resStatusCode: '200',
+    resMessage: 'OK'
+  },
+];
 // #endregion
 
 // FIXME update logic (this file and wrapper) to properly handle no response
@@ -98,7 +98,7 @@ const STREAM_WINDOW = 3;
 const rtData = (data) => {
   // hacky code to try conforming the objects in case one is missing a property
   
-  const df = new dfd.DataFrame(data);
+  const df = new dfd.DataFrame(data, { columns: ['id', 'reqMethod', 'reqHost', 'reqPath', 'reqUrl', 'resStatusCode', 'resMessage', 'cycleDuration'] });
   df.ctypes.print();
   df.print()
   df['cycleDuration'] = df['cycleDuration'].astype('int32')
@@ -470,8 +470,8 @@ const rtData = (data) => {
         consolidatedObj.services[i].byMethod = {};
         consolidatedObj.services[i].byMethod.method = row[0];
         consolidatedObj.services[i].byMethod.status = 'good';
-        consolidatedObj.services[i].byMethod.load = `${row[1].toFixed(2)  }hpm`;
-        consolidatedObj.services[i].byMethod.response_time = row[2];
+        consolidatedObj.services[i].byMethod.load = `${Math.round(row[1].toFixed(2))  }hpm`;
+        consolidatedObj.services[i].byMethod.response_time = Math.round(row[2]);
         consolidatedObj.services[i].byMethod.error = 0;
         consolidatedObj.services[i].byMethod.availability = row[4];
       });
@@ -484,5 +484,6 @@ const rtData = (data) => {
   return JSON.stringify(consolidatedObj);
 };
 
+rtData(responseData); 
 exports.rtData = rtData; 
 
