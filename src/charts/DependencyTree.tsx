@@ -198,7 +198,7 @@ const treeData: TreeNode = {
         status: "good" },
         { name: "PUT",
         status: "fair" },
-        { name: "DELETE",
+        { name: "DEL",
         status: "good" },
         ]
     },
@@ -208,7 +208,7 @@ const treeData: TreeNode = {
       children: [
         { name: "PUT",
         status: "good" },
-        { name: "DELETE",
+        { name: "DEL",
         status: "good"},
         ]
     },
@@ -230,7 +230,7 @@ const treeData: TreeNode = {
         status: "fair" },
         { name: "PUT",
         status: "good" },
-        { name: "DELETE",
+        { name: "DEL",
         status: "fair" },
         ]
     },
@@ -244,7 +244,7 @@ const treeData: TreeNode = {
         status: "good" },
         { name: "PUT",
         status: "good" },
-        { name: "DELETE",
+        { name: "DEL",
         status: "good" },
         ]
     },
@@ -326,7 +326,7 @@ function DependencyGraph({
           // put our data variable in place of treeData
             root={hierarchy(treeData, (d) => (d.isExpanded ? null : d.children))}
             size={[sizeWidth, sizeHeight]}
-            separation={(a, b) => (a.parent === b.parent ? 1 : 0.5) / a.depth}
+            separation={(a, b) => (a.parent === b.parent ? .75 : 2) / a.depth}
           >
             {(tree) => (
               <Group top={origin.y} left={origin.x}>
@@ -380,9 +380,9 @@ function DependencyGraph({
                       {node.depth !== 0 && (
                         <rect
                           height={height}
-                          width={width}
+                          width={node.data.children ? "12%" : "5%"}
                           y={-height / 2}
-                          x={-width / 2}
+                          x={node.data.children ? -(width-16) / 2 : -(width-95) / 2}
                           // fill of individual node boxes
                           // {node.data.children ? "#03c0dc" : "#26deb0"}
                           // {node.data.status === 'good' ? "#272b4d" : "#26deb0"}
@@ -403,7 +403,7 @@ function DependencyGraph({
                       )}
                       <text
                         dy=".33em"
-                        fontSize={22}
+                        fontSize={20}
                         fontFamily="Sans-Sarif"
                         textAnchor="middle"
                         style={{ pointerEvents: "none" }}
