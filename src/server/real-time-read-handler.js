@@ -20,6 +20,12 @@ const redis = new Redis({
 
 console.log(`Reading the stream named ${STREAM_KEY}...`); 
 
+streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
+
+  console.log('XRANGE, response without reply transformer'); 
+  console.log(streamEntries); 
+
+
 const readRedisStream = async () => {
 
   console.log('Invoked readredisstream function'); 
@@ -28,10 +34,7 @@ const readRedisStream = async () => {
   const startTime = Date.now() - INTERVAL; 
   const endTime = startTime + INTERVAL;  
 
-  streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
-
-  console.log('XRANGE, response without reply transformer'); 
-  console.log(streamEntries); 
+  
 
   //Transform xrange's output from two arrays of keys and value into one array of log objects
   Redis.Command.setReplyTransformer('xrange', function (result) {
