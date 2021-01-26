@@ -360,7 +360,7 @@ function DependencyGraph({
                     left = node.y;
                   }
                   // THIS LINE OF CODE IS THE EQUATION FOR CHANGING COLOR BASED ON NODE HEALTH
-                  const colorChange = (node.data.status === 'good') ? "#AAF683" : (node.data.status === 'fair') ? '#ffa62b' : (node.data.status === 'bad') ? '#fe5f55' : (node.data.status)
+                  const colorChange = (node.data.status === 'good') ? "#52C41A" : (node.data.status === 'fair') ? '#FA8C16' : (node.data.status === 'bad') ? '#F5222D' : (node.data.status)
                   const changeChildren = (node.data.children) ? colorChange : colorChange
                   
                   return (
