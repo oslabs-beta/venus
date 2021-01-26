@@ -95,8 +95,6 @@ const responseData = [
 
 // FIXME update logic (this file and wrapper) to properly handle no response
 
-
-
 const rtData = (data) => {
   const df = new dfd.DataFrame(data);
   // df.ctypes.print();

@@ -145,9 +145,14 @@ async function sendData(socket){
   console.log('Send Data Invoked!')
   // const index = Math.floor(Math.random() * 5); 
   const streamData = await redis.readRedisStream();
-  const output = data.rtData(streamData); 
-  socket.emit('real-time-object', output); 
-  console.log(`Output is ${output}`); 
+
+  if(streamData.length !== 0){
+    const output = data.rtData(streamData); 
+    socket.emit('real-time-object', output); 
+    console.log(`Output is ${output}`);
+  } else {
+    console.log('No usable data from the stream. ')
+  }
 
   setTimeout(() => {
     sendData(socket); 
