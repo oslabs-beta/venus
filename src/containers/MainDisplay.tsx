@@ -15,6 +15,7 @@ import Typography from "antd/es/typography";
 import Menu from "antd/es/menu";
 import Layout from "antd/es/layout"
 import Modal from 'antd/es/modal';
+import Button from 'antd/es/button';
 import { InputForm } from "../components/InputForm"
 import { SignIn } from "./SignInContainer";
 import { myContext } from '../contexts/globalContext';
@@ -85,10 +86,22 @@ function MainDisplay(): JSX.Element {
               </Menu.Item>
               <Menu.Item>
                 <div style={{width: "100%", height: "100%"}} key="5" onClick={showModal}>
-                  Add Service
+                  Sign Out
                 </div>
-                <Modal title="Add Service" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                  <InputForm />
+                <Modal 
+                title="Sign Out"
+                visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={[
+                  <Button key="back" onClick={handleCancel}>
+                    Return
+                  </Button>,
+                  <Button key="submit" type="primary" onClick={handleOk}>
+                    Sign Out
+                  </Button>,
+                ]} >
+                 
+                  Are you sure you want to end this session? 
+                  <br></br>
+                  All unsaved session configurations will be lost. 
                 </Modal>
               </Menu.Item>
             </Menu>

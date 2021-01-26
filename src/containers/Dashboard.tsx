@@ -20,17 +20,17 @@ function  Dashboard(): JSX.Element{
   
   const { services, setServices, aggregate, setAggregate } = useContext(dynamicContext)
   
-
+  
 // socket.on('real-time-object', (output: any) => {
-//   const newData  = JSON.parse(output);
-//   setAggregate(newData.aggregate)
-//   setServices(newData.services)
-// })
-
-
+  //   const newData  = JSON.parse(output);
+  //   setAggregate(newData.aggregate)
+  //   setServices(newData.services)
+  // })
+  
+  
   const dataSource: any = [];
   useEffect(() => {
-    const socket = io('SERVER URL', {transports: ['websocket']});
+    const socket = io('ec2-3-15-29-241.us-east-2.compute.amazonaws.com:8080', {transports: ['websocket']});
     // socket.on('connection', () => {
     //   console.log(socket.id)
     // });
