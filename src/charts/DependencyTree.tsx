@@ -359,8 +359,7 @@ function DependencyGraph({
                     top = node.x;
                     left = node.y;
                   }
-                  // node.data.children.map( el => { (el.status === 'good')})
-                  // const changeChildren = (node.data.children) ? console.log('children', node.data.children) : colorChange
+                  // THIS LINE OF CODE IS THE EQUATION FOR CHANGING COLOR BASED ON NODE HEALTH
                   const colorChange = (node.data.status === 'good') ? "#AAF683" : (node.data.status === 'fair') ? '#ffa62b' : (node.data.status === 'bad') ? '#fe5f55' : (node.data.status)
                   const changeChildren = (node.data.children) ? colorChange : colorChange
                   
@@ -382,7 +381,7 @@ function DependencyGraph({
                           height={height}
                           width={node.data.children ? "12%" : "5%"}
                           y={-height / 2}
-                          x={node.data.children ? -(width-16) / 2 : -(width-95) / 2}
+                          x={node.data.children ? -(width-16) / 2 : -(width-101) / 2}
                           // fill of individual node boxes
                           // {node.data.children ? "#03c0dc" : "#26deb0"}
                           // {node.data.status === 'good' ? "#272b4d" : "#26deb0"}
@@ -404,7 +403,7 @@ function DependencyGraph({
                       <text
                         dy=".33em"
                         fontSize={20}
-                        fontFamily="Sans-Sarif"
+                        fontFamily= 'Roboto'
                         textAnchor="middle"
                         style={{ pointerEvents: "none" }}
                         fill={
