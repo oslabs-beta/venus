@@ -484,6 +484,6 @@ const rtData = (data) => {
   return JSON.stringify(consolidatedObj);
 };
 
-rtData(responseData); 
+// rtData(responseData); 
 exports.rtData = rtData; 
 
