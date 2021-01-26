@@ -144,8 +144,9 @@ function override(module) {
      */
     const endpoints = config.get('venus.endpoints');
     if (endpoints[reqUrl]) return false;
-    if (!req.host && !req.hostname) return false;
+    const localReg = /locahost/gi;
     fullLog.reqHost = req.host || req.hostname;
+    if (localReg.test(fullLog.reqHost)) return false;
     fullLog.reqMethod = req.method || 'GET';
     fullLog.reqPath = req.pathname || req.path || '/';
     fullLog.reqUrl = reqUrl;
