@@ -70,8 +70,6 @@ const readRedisStream = async () => {
         //   obj[k] = v; 
         // }
 
-        console.log('fieldNamesValues: ', fieldNamesValues); 
-
         const reqMethod = fieldNamesValues.indexOf('reqMethod'); 
         const reqMethodValue = reqMethod + 1;
         obj['reqMethod'] = fieldNamesValues[reqMethodValue]; 
