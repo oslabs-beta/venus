@@ -191,7 +191,7 @@ const rtData = (data) => {
 
   outputTable.reqHost_count = outputTable.reqHost_count.div(3);
 
-  // console.log('Final Table: ', outputTable);
+  console.log('Final Table: ', outputTable);
   outputTable.print();
 
   
@@ -392,7 +392,7 @@ const rtData = (data) => {
 
       outputTableMethod.reqMethod_count = outputTableMethod.reqMethod_count.div(3);
 
-      // console.log('Final Table: ', outputTableMethod);
+      console.log('Final Table: ', outputTableMethod);
       outputTableMethod.print();
 
       outputTableMethod.data.forEach((row, i) => {
