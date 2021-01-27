@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 
 export type AppState = {
   verification: boolean;
-  setVerfication: (verfied:boolean ) => void;
+  setVerification: (verfied:boolean ) => void;
 };
 
 export const initialState: AppState = {
   verification: false,
-  setVerfication: () => {}
+  setVerification: () => {}
 };
 
 export const myContext = React.createContext<AppState>(initialState)
@@ -18,9 +18,9 @@ export const myContext = React.createContext<AppState>(initialState)
 
 export const ContextProvider: React.FC = (props: any) => {
   
-  const [verification, setVerfication] = useState<boolean>(false);
+  const [verification, setVerification] = useState<boolean>(false);
 
-  return <myContext.Provider value={{verification, setVerfication}}>{props.children}</myContext.Provider>
+  return <myContext.Provider value={{verification, setVerification}}>{props.children}</myContext.Provider>
 
 }
 

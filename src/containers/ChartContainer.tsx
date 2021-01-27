@@ -15,24 +15,27 @@ import Divider from "antd/es/divider";
 import { AggregateStats } from "../components/AggregateStats";
 import Title from "antd/es/typography/Title";
 import Text from "antd/es/typography/Text"
-import Space from 'antd/es/space';
 import { HistoricalProvider } from "../contexts/historicalContext";
 import { Availability } from "../charts/AvailabilityChart";
 import { LoadChart } from "../charts/LoadChart";
 
 export function ChartContainer(): JSX.Element {
 
+  const getData = () => {
+
+  }
+
   return (
     <div id="chartContainer">
     <HistoricalProvider>
       <AggregateStats />
       <Divider><Title level={3}>Historical Status</Title></Divider>
-      <div style={{marginBottom: 20}}>
+      <div className="rangeSelectorContainer">
         <CardDropDown /> 
-        <Text strong={true}>1 hour</Text>
-        <Text strong={true}>1 day</Text>
-        <Text strong={true}>1 week</Text>
-        <Text strong={true}>1 month</Text>
+        <Text className="rangeSelector" strong={true}>1 hour</Text>
+        <Text className="rangeSelector" strong={true}>1 day</Text>
+        <Text className="rangeSelector" strong={true}>1 week</Text>
+        <Text className="rangeSelector" strong={true}>1 month</Text>
       </div>
         <Row gutter={[32,32]}>
           <Col span={12}>

@@ -11,6 +11,24 @@
  align-items: center;
  background: linear-gradient(45deg, hsla(0, 0%, 0%, 1) 24%, hsla(332, 71%, 47%, 1) 100%);
 }
+
+.rangeSelectorContainer {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.rangeSelector {
+  margin-left: 10px;
+}
+
+.rangeSelector:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .childCardContainer {
   display: flex;
   flex-direction: row;

@@ -12,11 +12,11 @@ const { Title } = Typography;
 
 function SignIn():JSX.Element {
   console.log(data)
-  const { verification, setVerfication } = useContext(myContext)
+  const { verification, setVerification } = useContext(myContext)
   const onFinish = (values: any) => {
     console.log(values)
     if(data[values.serverIP]){
-      setVerfication(true)
+      setVerification(true)
     } else {
       const newInstance = values.serverIP 
       data[newInstance] = {}
