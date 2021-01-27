@@ -98,7 +98,7 @@ async function sendData(socket){
 
   setTimeout(() => {
     sendData(socket); 
-  }, 3000); 
+  }, 1000); 
 }
 
 // const streamData = await redis.readRedisStream();
