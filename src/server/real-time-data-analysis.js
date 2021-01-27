@@ -202,8 +202,8 @@ const rtData = (data) => {
 
     outputObj.service = row[0];
     outputObj.status = 'good';
-    outputObj.load = `${row[1].toFixed(2)  } hpm`;
-    outputObj.response_time = row[2];
+    outputObj.load = `${row[1].toFixed(2)  }`;
+    outputObj.response_time = row[2].toFixed(2);
     outputObj.error = row[3];
     outputObj.availability = row[4];
 
