@@ -375,7 +375,7 @@ function DependencyGraph({
                       {node.depth === 0 && (
                         <circle
                           r={12}
-                          fill="white"
+                          fill="#f5f5f5"
                           onClick={() => {
                             node.data.isExpanded = !node.data.isExpanded;
                             console.log(node);
