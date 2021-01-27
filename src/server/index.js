@@ -83,41 +83,41 @@ io.sockets.on('connection', (socket) => {
   sendData(socket); 
 })
 
-// async function sendData(socket){
+async function sendData(socket){
 
-//   console.log('Send Data Invoked!')
-//   const streamData = await redis.readRedisStream();
+  console.log('Send Data Invoked!')
+  const streamData = await redis.readRedisStream();
 
-//   if(streamData.length !== 0){
-//     const output = data.rtData(streamData); 
-//     socket.emit('real-time-object', output); 
-//     console.log(`Output is ${output}`);
-//   } else {
-//     console.log('No usable data from the stream. ')
-//   }
+  if(streamData.length !== 0){
+    const output = data.rtData(streamData); 
+    socket.emit('real-time-object', output); 
+    console.log(`Output is ${output}`);
+  } else {
+    console.log('No usable data from the stream. ')
+  }
 
-//   setTimeout(() => {
-//     sendData(socket); 
-//   }, 1000); 
-// }
+  setTimeout(() => {
+    sendData(socket); 
+  }, 1000); 
+}
 
 // const streamData = await redis.readRedisStream();
 
-const streamData = async () => {
+// const streamData = async () => {
 
-  const streamOutput =  await redis.readRedisStream();  
+//   const streamOutput =  await redis.readRedisStream();  
   
-  if(streamOutput.length !== 0){
-    console.log('stream Data: ', streamOutput); 
-    const output = data.rtData(streamOutput);  
-    console.log(`Output is ${output}`);
-  } else {
-    console.log('No usable data from the stream.')
-  }
+//   if(streamOutput.length !== 0){
+//     console.log('stream Data: ', streamOutput); 
+//     const output = data.rtData(streamOutput);  
+//     console.log(`Output is ${output}`);
+//   } else {
+//     console.log('No usable data from the stream.')
+//   }
      
-  setTimeout(() => {
-    streamData(); 
-  }, 1000)
-}
+//   setTimeout(() => {
+//     streamData(); 
+//   }, 1000)
+// }
 
-streamData(); 
+// streamData(); 
