@@ -23,7 +23,6 @@ import { LoadChart } from "../charts/LoadChart";
 export function ChartContainer(): JSX.Element {
 
   return (
-   
     <div id="chartContainer">
     <HistoricalProvider>
       <AggregateStats />

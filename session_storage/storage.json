@@ -1,0 +1,12 @@
+{
+  "IP_ADDRESS": {
+    "secret": 12354,
+    "token": 12345678,
+    "thresholds":{}
+  },
+  "Test": {
+    "secret": 12354,
+    "token": 12345678,
+    "thresholds":{}
+  }
+}

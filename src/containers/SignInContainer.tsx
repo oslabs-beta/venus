@@ -1,20 +1,28 @@
-  import Layout from 'antd/es/layout';
-const { Header, Footer, Sider, Content } = Layout;
+import Layout from 'antd/es/layout';
 import React, { useContext, useState } from "react";
+import data from '../../session_storage/storage.json'
 import { myContext } from '../contexts/globalContext' 
-import { Redirect } from "react-router-dom";
-import { MainDisplay } from '../containers/MainDisplay'
 import Form from 'antd/es/form';
 import Input from 'antd/es/input';
 import Button from 'antd/es/button';
 import Card from 'antd/es/card';
 import Typography from "antd/es/typography";
-const { Title } = Typography
+const { Title } = Typography;
 
-export default function SignIn():JSX.Element {
-  
+
+function SignIn():JSX.Element {
+  console.log(data)
+  const { verification, setVerfication } = useContext(myContext)
   const onFinish = (values: any) => {
-    console.log('Success:', values);
+    console.log(values)
+    if(data[values.serverIP]){
+      setVerfication(true)
+    } else {
+      const newInstance = values.serverIP 
+      data[newInstance] = {}
+      data.newInstance.test = 'test'
+      console.log(data)
+    } 
   }
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
@@ -27,14 +35,25 @@ export default function SignIn():JSX.Element {
     wrapperCol: { offset: 8, span: 16 },
   };
 
-  const { verification, setVerfication } = useContext(myContext)
+  const Demo = () => {
+    const [ form ] = Form.useForm();
 
-  const setContext = () => {
-    if (verification === false){
-      setVerfication(true)
+    const onServerInput = (value: string) => {
+
     }
+
   }
-  //RETURN <MainDisplay/> WHEN SERVER ADDRESS AND SECRET ARE BOTH CORRECT
+  
+  const test = () => {
+    console.log('test')
+  }
+
+  // const setContext = () => {
+  //   if (verification === false){
+  //     setVerfication(true)
+  //   }
+  // }
+
   return (
     <div className="loginContainer">
 
@@ -46,17 +65,17 @@ export default function SignIn():JSX.Element {
         >
         <Form
           {...layout}
-          name="basic"
+          name="Login"
           initialValues={{ remember: true }}
-          style={{alignContent: 'center'}}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}>
           <Form.Item
             label="Server Address"
             name="serverIP"
+            // getValueFromEvent={any}
             rules={[{ required: true, message: 'Please enter valid Server Address.' }]}
           >
-            <Input placeholder="Enter Address"/>
+            <Input placeholder="Enter Server Address"/>
           </Form.Item>
           <Form.Item
             label="Secret"
@@ -67,8 +86,8 @@ export default function SignIn():JSX.Element {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit" onClick={setContext}>
-              Submit
+            <Button type="primary" htmlType="submit" onClick={test}>
+              Sign In
             </Button>
         </Form.Item>
         </Form>
@@ -77,6 +96,6 @@ export default function SignIn():JSX.Element {
   )
 }
 
-export { SignIn }
+export { SignIn };
 
 

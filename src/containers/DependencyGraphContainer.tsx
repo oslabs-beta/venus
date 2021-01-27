@@ -14,9 +14,9 @@ function DependencyGraphContainer(): JSX.Element{
         <AggregateStats />
          <Divider><Title level={3}>Dependency graph</Title></Divider>
           <Card hoverable={true} style={{width: 'fit-content'}}>
-            {/* <ParentSize> */}
+  
                <DependencyGraph width={600} height={600} />
-            {/* </ParentSize> */}
+           
           </Card>
     </div>
   )

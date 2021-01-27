@@ -16,7 +16,6 @@ import Menu from "antd/es/menu";
 import Layout from "antd/es/layout"
 import Modal from 'antd/es/modal';
 import Button from 'antd/es/button';
-import { InputForm } from "../components/InputForm"
 import { SignIn } from "./SignInContainer";
 import { myContext } from '../contexts/globalContext';
 import { DynamicProvider } from '../contexts/dynamicContext';
@@ -44,7 +43,7 @@ function MainDisplay(): JSX.Element {
   const large: any = "large";
 
 
-  if (verification){
+  if (false){
     return <SignIn />
   } else {
   return (
@@ -97,8 +96,7 @@ function MainDisplay(): JSX.Element {
                   <Button key="submit" type="primary" onClick={handleOk}>
                     Sign Out
                   </Button>,
-                ]} >
-                 
+                ]}>
                   Are you sure you want to end this session? 
                   <br></br>
                   All unsaved session configurations will be lost. 

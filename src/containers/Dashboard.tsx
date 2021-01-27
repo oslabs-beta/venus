@@ -1,11 +1,12 @@
 /**
  * @name Dashboard
  * @desc Right-hand side of the Main Display.  Dashboard that displays services and corresponding data.
- * The parent container for Aggregate Data, Service Container, and Chart Container.
+ * The parent container for Aggregate Data and Chart Container.
  */
-import { io } from 'socket.io-client';
+
+ import { io } from 'socket.io-client';
  import React, {useContext, useEffect} from 'react';
-//  import TabContainer from './TabContainer'
+
 import { AggregateStats } from '../components/AggregateStats';
 import { initialState, myContext, AppState } from '../contexts/globalContext';
 import Divider from 'antd/es/divider';
@@ -15,25 +16,18 @@ import Form from 'antd/es/form';
 import Select from 'antd/es/select';
 import { dynamicContext } from '../contexts/dynamicContext';
 import Title from 'antd/es/typography/Title';
-// take this information from the login. 
+
+
 function  Dashboard(): JSX.Element{
   
   const { services, setServices, aggregate, setAggregate } = useContext(dynamicContext)
   
-  
-// socket.on('real-time-object', (output: any) => {
-  //   const newData  = JSON.parse(output);
-  //   setAggregate(newData.aggregate)
-  //   setServices(newData.services)
-  // })
-  
-  
   const dataSource: any = [];
   useEffect(() => {
     const socket = io('ec2-3-15-29-241.us-east-2.compute.amazonaws.com:8080', {transports: ['websocket']});
-    // socket.on('connection', () => {
-    //   console.log(socket.id)
-    // });
+    socket.on('connection', () => {
+      console.log(socket.id)
+    });
     socket.on('real-time-object', (output: any) => {
       console.log('new update')
 
@@ -41,6 +35,7 @@ function  Dashboard(): JSX.Element{
       setAggregate(newData.aggregate)
       setServices(newData.services)
       console.log(newData.aggregate)
+      console.log(newData.services)
     })
 
     // setServices([
