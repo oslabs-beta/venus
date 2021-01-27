@@ -296,7 +296,7 @@ const rtData = (data) => {
   const totalRequests = df.reqHost.count();
   const totalResponses = df.resStatusCode.count();
   consolidatedObj.aggregate.status = 'good';
-  consolidatedObj.aggregate.load = `${(totalRequests / STREAM_WINDOW).toFixed(2) } hpm`;
+  consolidatedObj.aggregate.load = `${(totalRequests / STREAM_WINDOW).toFixed(2) }`;
   consolidatedObj.aggregate.response_time = Math.round(
     df.cycleDuration.mean(),
   );
