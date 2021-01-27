@@ -43,7 +43,7 @@ function MainDisplay(): JSX.Element {
   const large: any = "large";
 
 
-  if (false){
+  if (verification){
     return <SignIn />
   } else {
   return (
