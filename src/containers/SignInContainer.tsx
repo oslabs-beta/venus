@@ -1,7 +1,7 @@
 import Layout from 'antd/es/layout';
 import React, { useContext, useState } from "react";
 import data from '../../session_storage/storage.json'
-import { myContext } from '../contexts/globalContext' 
+import { globalContext } from '../contexts/globalContext' 
 import Form from 'antd/es/form';
 import Input from 'antd/es/input';
 import Button from 'antd/es/button';
@@ -12,7 +12,7 @@ const { Title } = Typography;
 
 function SignIn():JSX.Element {
   console.log(data)
-  const { verification, setVerification } = useContext(myContext)
+  const { verification, setVerification } = useContext(globalContext)
   const onFinish = (values: any) => {
     console.log(values)
     if(data[values.serverIP]){
@@ -48,11 +48,6 @@ function SignIn():JSX.Element {
     console.log('test')
   }
 
-  // const setContext = () => {
-  //   if (verification === false){
-  //     setVerfication(true)
-  //   }
-  // }
 
   return (
     <div className="loginContainer">

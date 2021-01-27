@@ -3,7 +3,7 @@
  * @desc Child of Dashboard, Parent container that holds and displays each Chart
  */
 
-import React from "react";
+import React, { useContext, useEffect} from "react";
 import { LineGraph } from "../charts/LineGraph"
 import { AreaChart } from "../charts/AreaChart"
 import { CardDropDown } from "../components/CardDropDown";
@@ -12,23 +12,40 @@ import Row from 'antd/es/row';
 import Col from 'antd/es/col';
 import Card from 'antd/es/card';
 import Divider from "antd/es/divider";
+import { historicalContext } from "../contexts/historicalContext"
 import { AggregateStats } from "../components/AggregateStats";
 import Title from "antd/es/typography/Title";
 import Text from "antd/es/typography/Text"
-import { HistoricalProvider } from "../contexts/historicalContext";
+
 import { Availability } from "../charts/AvailabilityChart";
 import { LoadChart } from "../charts/LoadChart";
 
-export function ChartContainer(): JSX.Element {
 
+
+export function ChartContainer(): JSX.Element {
+  const { aggregate, setAggregate } = useContext(historicalContext)
+  const test: any = {
+    status: 'hello',
+    load: 12,
+    response_time: 12, 
+    error: 12,
+    availability: 12,
+  }
+  useEffect(() => {
+    setAggregate(test)
+  },[])
   const getData = () => {
 
   }
 
   return (
     <div id="chartContainer">
-    <HistoricalProvider>
-      <AggregateStats />
+      <AggregateStats
+      error={aggregate.error}
+      response_time={aggregate.response_time}
+      load={aggregate.load}
+      availability={aggregate.availability}
+      />
       <Divider><Title level={3}>Historical Status</Title></Divider>
       <div className="rangeSelectorContainer">
         <CardDropDown /> 
@@ -47,7 +64,6 @@ export function ChartContainer(): JSX.Element {
           <Col span={12}>
             <Title level={5}>Latency</Title>
             <Card bordered={true} hoverable={true} style={{width: "500px"}}>
-              {/* <LineGraph /> */}
               <Availability />
             </Card>
           </Col>
@@ -66,7 +82,6 @@ export function ChartContainer(): JSX.Element {
             </Card>
           </Col>
         </Row>
-        </HistoricalProvider>
     </div>
   )
 }

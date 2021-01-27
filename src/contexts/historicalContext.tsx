@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 type historicalState = {
     aggregate: {
       status: string,
-      load: string,
+      load: number,
       response_time: number, 
       error: number,
       availability: number,
@@ -15,7 +15,7 @@ type historicalState = {
 export const historicalData: historicalState = {
   aggregate: {
     status: '',
-    load: '',
+    load: 0,
     response_time: 0, 
     error: 0,
     availability: 0,

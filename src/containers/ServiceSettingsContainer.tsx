@@ -7,7 +7,7 @@ import { io } from "socket.io-client";
 import React, { useContext, useEffect } from "react";
 //  import TabContainer from './TabContainer'
 import { AggregateStats } from "../components/AggregateStats";
-import { initialState, myContext, AppState } from "../contexts/globalContext";
+import { globalContext } from "../contexts/globalContext";
 import Divider from "antd/es/divider";
 import Table from "antd/es/table";
 import Input from "antd/es/input";

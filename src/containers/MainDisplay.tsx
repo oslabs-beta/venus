@@ -11,7 +11,8 @@ import { DependencyGraphContainer } from "./DependencyGraphContainer";
 import { SettingsContainer } from "./ServiceSettingsContainer";
 import { SignIn } from "./SignInContainer";
 // import { EditableTable } from "./ThresholdsTest";
-import { myContext } from "../contexts/globalContext";
+import { globalContext } from "../contexts/globalContext";
+import { HistoricalProvider } from "../contexts/historicalContext";
 import { DynamicProvider } from "../contexts/dynamicContext";
 
 import Typography from "antd/es/typography";
@@ -25,7 +26,7 @@ const { SubMenu } = Menu;
 
 function MainDisplay(): JSX.Element {
 
-  const { verification, setVerification } = useContext(myContext)
+  const { verification, setVerification } = useContext(globalContext)
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -46,10 +47,11 @@ function MainDisplay(): JSX.Element {
 
   const large: any = "large";
 
-  if (!verification) {
+  if (verification) {
     return <SignIn />;
   } else {
     return (
+    <HistoricalProvider>
       <DynamicProvider>
         <Router>
           <Switch>
@@ -134,6 +136,7 @@ function MainDisplay(): JSX.Element {
           </Switch>
         </Router>
       </DynamicProvider>
+    </HistoricalProvider>
     );
   }
 }

@@ -8,7 +8,6 @@ import { io } from "socket.io-client";
 import React, { useContext, useEffect } from "react";
 
 import { AggregateStats } from "../components/AggregateStats";
-import { initialState, myContext, AppState } from "../contexts/globalContext";
 import Divider from "antd/es/divider";
 import Table from "antd/es/table";
 import Tag from "antd/es/tag";
@@ -68,13 +67,13 @@ function Dashboard(): JSX.Element {
         availability: 100,
       },
     ]);
-    // setAggregate({
-    //   error: 40,
-    //   response_time: 1278,
-    //   load: '2hpm',
-    //   availability: 83,
-    //   status: 'good'
-    // })
+    setAggregate({
+      error: 40,
+      response_time: 1278,
+      load: 2,
+      availability: 83,
+      status: 'good'
+    })
     return () => socket.disconnect();
   }, []);
 

@@ -21,7 +21,6 @@ function createWindow() {
     // and set allowRunningInsecureContent to true if this options has not been set by user. Default is true.
       webSecurity: false,
       // stops console from opening upon load
-      devTools: false,
     },
   });
 
