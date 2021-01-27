@@ -326,7 +326,7 @@ function DependencyGraph({
           // put our data variable in place of treeData
             root={hierarchy(treeData, (d) => (d.isExpanded ? null : d.children))}
             size={[sizeWidth, sizeHeight]}
-            separation={(a, b) => (a.parent === b.parent ? .75 : 2) / a.depth}
+            separation={(a, b) => (a.parent === b.parent ? .7 : 3) / a.depth}
           >
             {(tree) => (
               <Group top={origin.y} left={origin.x}>
@@ -360,9 +360,16 @@ function DependencyGraph({
                     left = node.y;
                   }
                   // THIS LINE OF CODE IS THE EQUATION FOR CHANGING COLOR BASED ON NODE HEALTH
-                  const colorChange = (node.data.status === 'good') ? "#52C41A" : (node.data.status === 'fair') ? '#FA8C16' : (node.data.status === 'bad') ? '#F5222D' : (node.data.status)
+                  const colorChange = (node.data.status === 'good') ? "#F6FFED" : (node.data.status === 'fair') ? '#FFF7E6' : (node.data.status === 'bad') ? '#FFF1F0' : (node.data.status)
                   const changeChildren = (node.data.children) ? colorChange : colorChange
                   
+                  const colorChangeText = (node.data.status === 'good') ? "#52C41A" : (node.data.status === 'fair') ? '#FA8C16' : (node.data.status === 'bad') ? '#F5222D' : (node.data.status)
+                  const changeChildrenText = (node.data.children) ? colorChangeText : colorChangeText
+                  
+                  const colorChangeBorder = (node.data.status === 'good') ? "#B7EB8F" : (node.data.status === 'fair') ? '#FFD591' : (node.data.status === 'bad') ? '#FFA39E' : (node.data.status)
+                  const changeChildrenBorder = (node.data.children) ? colorChangeBorder : colorChangeBorder
+                  
+
                   return (
                     <Group top={top} left={left} key={key}>
                       {node.depth === 0 && (
@@ -386,8 +393,9 @@ function DependencyGraph({
                           // {node.data.children ? "#03c0dc" : "#26deb0"}
                           // {node.data.status === 'good' ? "#272b4d" : "#26deb0"}
                           fill={changeChildren}
-                          stroke={node.data.children ? "#03c0dc" : "#26deb0"}
-                          // stroke= {changeChildren}
+                          // change border here ------------
+                          // stroke={node.data.children ? "#03c0dc" : "#26deb0"}
+                          stroke= {colorChangeBorder}
                           // stroke={(node.data.children) ? "green" : 'yellow'}
                           strokeWidth={1.75}
                           strokeDasharray={node.data.children ? "0" : "2,2"}
@@ -406,13 +414,14 @@ function DependencyGraph({
                         fontFamily= 'Roboto'
                         textAnchor="middle"
                         style={{ pointerEvents: "none" }}
-                        fill={
-                          node.depth === 0
-                            ? "black"
-                            : node.children
-                            ? "black"
-                            : "black"
-                        }
+                        // fill={
+                        //   node.depth === 0
+                        //     ? "black"
+                        //     : node.children
+                        //     ? "black"
+                        //     : "black"
+                        // }
+                        fill={colorChangeText}
                       >
                         {node.data.name}
                       </text>
