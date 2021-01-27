@@ -267,8 +267,8 @@ const rtData = (data) => {
       const outputObj = {};
       outputObj.service = row[0];
       outputObj.status = 'good';
-      outputObj.load = `${row[1].toFixed(2)  } hpm`;
-      outputObj.response_time = row[2];
+      outputObj.load = `${row[1].toFixed(2)  }`;
+      outputObj.response_time = row[2].toFixed(2);
       // hardcode 0 as the error given that this is part of the catch block 
       outputObj.error = 0;
       outputObj.availability = row[3];
