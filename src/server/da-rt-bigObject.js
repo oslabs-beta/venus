@@ -268,7 +268,7 @@ const rtData = (data) => {
   );
   
   const totalServerErrors = newServerErrorDF.col_data[0].length;
-  consolidatedObj.aggregate.availability = Math.round(
+  consolidatedObj.aggregate.availability = Math.round( 100 -
     (totalServerErrors / totalRequests) * 100
   );
 
