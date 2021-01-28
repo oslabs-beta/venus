@@ -48,7 +48,7 @@ function LinkControls({
   setLinkType,
   setStepPercent
 }: Props) {
-  function handleChangeLayout(value) {
+  function handleChangeLayout(value: string) {
     setLayout(value);
   }
   function LayoutSelect(): any {
@@ -64,7 +64,7 @@ function LinkControls({
     );
   }
 
-  function handleChangeOrientation(value) {
+  function handleChangeOrientation(value: string) {
     setOrientation(value);
   }
   function OrientationSelect(): any {
@@ -80,7 +80,7 @@ function LinkControls({
     );
   }
 
-  function handleChangeLinkType(value) {
+  function handleChangeLinkType(value: string) {
     setLinkType(value);
   }
   function LinkTypeSelect(): any {

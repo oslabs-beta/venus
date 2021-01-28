@@ -114,6 +114,7 @@ function changeChildArr(arr: IService[]){
 interface TreeNode {
     service: string;
     status: string;
+    isExpanded?: boolean;
     children?: TreeNode[];
   }
 // input Object (obj)
