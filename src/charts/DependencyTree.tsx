@@ -54,7 +54,7 @@ function LinkControls({
   function LayoutSelect(): any {
     return (
       <Select
-        defaultValue="Polar"
+        defaultValue={layout}
         style={{ width: 120 }}
         onChange={handleChangeLayout}
       >
@@ -70,7 +70,7 @@ function LinkControls({
   function OrientationSelect(): any {
     return (
       <Select
-        defaultValue="Horizontal"
+        defaultValue={orientation}
         style={{ width: 120 }}
         onChange={handleChangeOrientation}
       >
@@ -86,7 +86,7 @@ function LinkControls({
   function LinkTypeSelect(): any {
     return (
       <Select
-        defaultValue="Step"
+        defaultValue={linkType}
         style={{ width: 120 }}
         onChange={handleChangeLinkType}
       >
@@ -386,9 +386,9 @@ function DependencyGraph({
                       {node.depth !== 0 && (
                         <rect
                           height={height}
-                          width={node.data.children ? "12%" : "5%"}
+                          width={node.data.children ? "20%" : "10%"}
                           y={-height / 2}
-                          x={node.data.children ? -(width-16) / 2 : -(width-101) / 2}
+                          x={node.data.children ? -(width-40) / 2 : -(width-100) / 2}
                           // fill of individual node boxes
                           // {node.data.children ? "#03c0dc" : "#26deb0"}
                           // {node.data.status === 'good' ? "#272b4d" : "#26deb0"}
