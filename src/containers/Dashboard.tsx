@@ -44,7 +44,7 @@ function Dashboard(): JSX.Element {
 
     setServices([
       {
-        service: "curriculum-api.codesmith.io",
+        service: "abc",
         status: "good",
         load: "0.6666666865348816 hpm",
         response_time: 1266,
@@ -52,7 +52,7 @@ function Dashboard(): JSX.Element {
         availability: 100,
       },
       {
-        service: "curriculum-api.codesmith.io",
+        service: "bcd",
         status: "fair",
         load: "0.6666666865348816 hpm",
         response_time: 1266,
@@ -60,7 +60,7 @@ function Dashboard(): JSX.Element {
         availability: 100,
       },
       {
-        service: "curriculum-api.codesmith.io",
+        service: "cde",
         status: "poor",
         load: "0.6666666865348816 hpm",
         response_time: 1266,
@@ -68,7 +68,7 @@ function Dashboard(): JSX.Element {
         availability: 100,
       },
       {
-        service: "curriculum-api.codesmith.io",
+        service: "def",
         status: "good",
         load: "0.6666666865348816 hpm",
         response_time: 1266,
@@ -76,7 +76,7 @@ function Dashboard(): JSX.Element {
         availability: 100,
       },
       {
-        service: "curriculum-api.codesmith.io",
+        service: "efg",
         status: "fair",
         load: "0.6666666865348816 hpm",
         response_time: 1266,
@@ -84,7 +84,7 @@ function Dashboard(): JSX.Element {
         availability: 100,
       },
       {
-        service: "curriculum-api.codesmith.io",
+        service: "fgh",
         status: "poor",
         load: "0.6666666865348816 hpm",
         response_time: 1266,
@@ -92,7 +92,7 @@ function Dashboard(): JSX.Element {
         availability: 100,
       },
       {
-        service: "curriculum-api.codesmith.io",
+        service: "ghi",
         status: "good",
         load: "0.6666666865348816 hpm",
         response_time: 1266,
@@ -100,7 +100,7 @@ function Dashboard(): JSX.Element {
         availability: 100,
       },
       {
-        service: "curriculum-api.codesmith.io",
+        service: "hij",
         status: "fair",
         load: "0.6666666865348816 hpm",
         response_time: 1266,
@@ -108,7 +108,7 @@ function Dashboard(): JSX.Element {
         availability: 100,
       },
       {
-        service: "curriculum-api.codesmith.io",
+        service: "ijk",
         status: "poor",
         load: "0.6666666865348816 hpm",
         response_time: 1266,
@@ -116,7 +116,7 @@ function Dashboard(): JSX.Element {
         availability: 100,
       },
       {
-        service: "curriculum-api.codesmith.io",
+        service: "jkl",
         status: "good",
         load: "0.6666666865348816 hpm",
         response_time: 1266,
@@ -124,7 +124,7 @@ function Dashboard(): JSX.Element {
         availability: 100,
       },
       {
-        service: "curriculum-api.codesmith.io",
+        service: "klm",
         status: "fair",
         load: "0.6666666865348816 hpm",
         response_time: 1266,
@@ -132,7 +132,7 @@ function Dashboard(): JSX.Element {
         availability: 100,
       },
       {
-        service: "curriculum-api.codesmith.io",
+        service: "lmnopqrstuvwx",
         status: "poor",
         load: "0.6666666865348816 hpm",
         response_time: 1266,
@@ -140,24 +140,8 @@ function Dashboard(): JSX.Element {
         availability: 100,
       },
       {
-        service: "curriculum-api.codesmith.io",
+        service: "mnopqrstuvwxyz",
         status: "good",
-        load: "0.6666666865348816 hpm",
-        response_time: 1266,
-        error: 50,
-        availability: 100,
-      },
-      {
-        service: "curriculum-api.codesmith.io",
-        status: "fair",
-        load: "0.6666666865348816 hpm",
-        response_time: 1266,
-        error: 50,
-        availability: 100,
-      },
-      {
-        service: "curriculum-api.codesmith.io",
-        status: "poor",
         load: "0.6666666865348816 hpm",
         response_time: 1266,
         error: 50,
@@ -184,6 +168,7 @@ function Dashboard(): JSX.Element {
       title: "Service",
       dataIndex: "service",
       key: "service",
+      sorter: (a, b) => a.service.length - b.service.length
     },
     {
       title: "Status",
@@ -256,6 +241,8 @@ function Dashboard(): JSX.Element {
         <Title level={3}>Current Status</Title>
       </Divider>
       <Table
+
+        scroll={{y: "67vh"}}
         columns={columns}
         dataSource={dataSource}
         pagination={false}

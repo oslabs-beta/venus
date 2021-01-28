@@ -54,7 +54,6 @@ function MainDisplay(): JSX.Element {
           <Sider theme="light" style={{position: 'fixed'}}>
           <Title level={2} className="title">VENUS</Title>
           <Menu theme="light" mode="inline" defaultSelectedKeys={['1']}> 
-
               <Menu.Item key="1">
                 <Link to="/">
                   <div style={{width: "100%", height: "100%"}}>

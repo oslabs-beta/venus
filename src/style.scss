@@ -74,10 +74,10 @@
   height: 100%;
 }
 #dashboard {
-  padding: 20px 20px;
-  flex-grow: 10;
+  //flex-grow: 10;
+  // justify-content: stretch;
+  // align-items: stretch;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   flex-direction: column;
+  padding: 20px 20px;
 }
