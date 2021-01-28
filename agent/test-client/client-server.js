@@ -16,12 +16,10 @@ const bodyParser = require("body-parser");
 const app = express();
 const path = require("path");
 
-const venus = require('./wrapper');
+const venus = require("../wrapper/wrapper");
 venus();
 
-//#region 
-
-
+//#region
 
 // import moesif module
 // const moesif = require("moesif-nodejs");
@@ -36,7 +34,6 @@ venus();
 // // initialize middleware object with options
 // const moesifMware = moesif(moesifOpts);
 // moesifMware.startCaptureOutgoing();
-
 
 // const ogHttpReq = http.request;
 // http.request = (req) => {
@@ -94,25 +91,14 @@ venus();
 //   }
 
 // reqLogger(require("https"));
-    
-    // hook.enable()
-    
-    
-    
-    
-    
-    // hook.disable();
-  
-  
+
+// hook.enable()
+
+// hook.disable();
+
 // when buffered is set to false, callback is invoked after each entry instance
-  
-  
-  
-    // console.log(options)
-    
-  
 
-
+// console.log(options)
 
 // Import the datadog apm tracing lib
 // const datadogTracer = require("dd-trace").init({
@@ -129,8 +115,8 @@ venus();
 // app.use(morgan('combined'));
 //#endregion
 
-
-app.use(express.static(path.join(__dirname, '../test-client/'))); //serves the index.html
+console.log(path.join(__dirname, "./"));
+app.use(express.static(path.join(__dirname, "./"))); //serves the index.html
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -141,8 +127,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //   console.log(`${req.method} ${req.url} ${time}`);
 // }))
 
-
- 
 // function msgSend (req, res, next) {
 //   console.log('msgSend working')
 //   axios("https://curriculum-api.codesmith.io/messages")
@@ -154,13 +138,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-
-
+// setInterval(() => {
+//   axios("http://localhost:8126/chat")
+//     .then(({ data }) => {
+//       console.log('Automated Front-End Request Worked!');
+//     })
+//     .catch((err) => console.log("front end get error", err));
+// }, 1000);
 
 app.get("/chat", (req, res) => {
-  axios("https://curriculum-api.codesmith.io/messages/")
+  axios('https://curriculum-api.codesmith.io/messages/')
     // .then(res => console.log('GET RES', res.config.url))
-    .then((response) => res.status(200).json(response.data));
+    .then((response) => res.status(200).json(response.data))
+    .catch((err) => console.log(`Get error: ${err}`));
 });
 
 app.post("/chat", (req, res) => {
@@ -181,4 +171,4 @@ app.post("/chat", (req, res) => {
 
 // PORT is 8126 for purposes of testing datadog
 const PORT = 8126;
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`)); 
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
