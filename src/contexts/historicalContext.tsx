@@ -1,42 +1,40 @@
 import React, { useState } from 'react'; 
 
-type dynamicState = {
-    // declare a historical type of state inside the dynamic state
-    // a state type within a state type
-  historical: {
-    uptime: string,
-    latency: number,
-    load: string, 
-    error: string, // potentially an int TBD.
-  }[];
-  setHistorical: (input:any[]) => void;
+type historicalState = {
+    aggregate: {
+      status: string,
+      load: number,
+      response_time: number, 
+      error: number,
+      availability: number,
+    };
+    service:string;
+    setAggregate: (input:any) => void;
+
+    setService: (input:string) => void;
 };
 
-export const liveData: dynamicState= {
-  historical: [
-		{
-		uptime: '40 days',
-		latency: 20,
-		load: 'string1', 
-		error: 'string1', 
-    },
-    {
-		uptime: '30 days',
-		latency: 10,
-		load: 'string', 
-		error: 'string', 
-	}
-],
-  setHistorical: () => {}
+export const historicalData: historicalState = {
+  aggregate: {
+    status: '',
+    load: 0,
+    response_time: 0, 
+    error: 0,
+    availability: 0,
+  },
+  service: '',
+  setAggregate: () => {},
+  setService: () => {}
 };
 
-export const historicalContext = React.createContext<dynamicState>(liveData)
+export const historicalContext = React.createContext<historicalState>(historicalData)
 
 
 export const HistoricalProvider: React.FC = (props: any) => {
   
-  const [historical, setHistorical] = useState<any[]>([]);
+  const [aggregate, setAggregate] = useState<any>({});
+  const [ service, setService] = useState<any>('')
 
-  return <historicalContext.Provider value={{historical, setHistorical}}>{props.children}</historicalContext.Provider>
+  return <historicalContext.Provider value={{ aggregate, setAggregate, service, setService}}>{props.children}</historicalContext.Provider>
 
 }

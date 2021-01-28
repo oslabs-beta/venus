@@ -1,26 +1,36 @@
 import React, { useState } from 'react'; 
 
-export type AppState = {
-  urls: string[];
-  setUrls: (urls: string[]) => void;
+export type GlobalState = {
+  verification: boolean;
+  serverAddress: string;
+  token: string;
+  setVerification: (verfied:boolean ) => void;
+  setServerAddress: (address:string ) => void;
+  setToken: (token: string) => void;
 };
 
-export const initialState: AppState = {
-  urls: [],
-  setUrls: () => {}
+export const initialState: GlobalState = {
+  verification: false,
+  serverAddress: '',
+  token: '',
+  setVerification: () => {},
+  setServerAddress: () => {},
+  setToken: () => {},
 };
 
-export const myContext = React.createContext<AppState>(initialState)
+export const globalContext = React.createContext<GlobalState>(initialState)
 
 
 // create a new context with initialState as our state and IState as our type
 // export const myContext = React.createContext<IState>(initialState)
 
-export const ContextProvider: JSX.Element = (props: any) => {
+export const ContextProvider: React.FC = (props: any) => {
   
-  const [urls, setUrls] = useState<string[]>([]);
+  const [verification, setVerification] = useState<boolean>(false);
+  const [serverAddress, setServerAddress] = useState<string>('ec2-3-15-29-241.us-east-2.compute.amazonaws.com:8080');
+  const [token, setToken] = useState<string>('fake token');
 
-  return <myContext.Provider value={{urls, setUrls}}>{props.children}</myContext.Provider>
+  return <globalContext.Provider value={{verification, setVerification, serverAddress, setServerAddress, token, setToken}}>{props.children}</globalContext.Provider>
 
 }
 

@@ -4,7 +4,7 @@ import { Group } from "@visx/group";
 import { hierarchy, Tree } from "@visx/hierarchy";
 import { LinearGradient } from "@visx/gradient";
 import { pointRadial } from "d3-shape";
-import { AggregateStats } from '../components/AggregateStats';
+
 
 import { Select } from "antd";
 
@@ -98,8 +98,8 @@ function LinkControls({
     );
   }
   return (
-    <div style={controlStyles}>
-      <div style={controlStyles}></div>
+    <div>
+      {/* <div style={controlStyles}></div> */}
       <label>layout: </label>&nbsp;
       <LayoutSelect />
       &nbsp;&nbsp;
@@ -303,8 +303,7 @@ function DependencyGraph({
   const LinkComponent = getLinkComponent({ layout, linkType, orientation });
 // can modify components here i.e. color, stroke size
   return totalWidth < 10 ? null : (
-    <>
-      <AggregateStats/>
+    <div>
       <br />
       <LinkControls
         layout={layout}
@@ -317,7 +316,7 @@ function DependencyGraph({
         setStepPercent={setStepPercent}
       />
       <br/>
-      <svg width={totalWidth} height={totalHeight}>
+      <svg width={600} height={600}>
         <LinearGradient id="links-gradient" from="#fd9b93" to="#fe6e9e" />
         // can change rectangle color
         <rect width={totalWidth} height={totalHeight} rx={14} fill="#f5f5f5" />
@@ -433,8 +432,7 @@ function DependencyGraph({
           </Tree>
         </Group>
       </svg>
-    </>
-
+    </div>
   );
 }
 

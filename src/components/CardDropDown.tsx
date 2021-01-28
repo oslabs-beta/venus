@@ -3,15 +3,28 @@
  * @desc Child of ChartContainer, Displays drop down on 2nd page
 **/
 
-import React from 'react'
+import React, { useContext } from 'react'
 import Select from 'antd/es/select';
+import { historicalContext } from '../contexts/historicalContext';
+
+const options: any[] = [
+  'curriculum-api.codesmith.io', 'google.com', 'surfline.com'
+];
+const dropDownOptions: any[] =[];
+for (let i = 0; i < options.length; i++){
+  dropDownOptions.push(
+    <Select.Option value={options[i]} key={i}>{options[i]}</Select.Option>
+  )
+}
 
 function CardDropDown (): JSX.Element{
 
-  const { Option } = Select;
+  const { setService } = useContext(historicalContext)
 
-	function onChange(value:any) {
-		console.log(`selected ${value}`);
+	function onChange(value:string) {
+    console.log(value)
+    setService(value)
+    
 		}
 
 	function onBlur() {
@@ -37,10 +50,8 @@ function CardDropDown (): JSX.Element{
     onBlur={onBlur}
     onSearch={onSearch}
     filterOption={(input:any, option:any) =>
-      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}>
-    <Option value="GoogleWeather">Google Weather API</Option>
-    <Option value="surfline">Surfline API</Option>
-    <Option value="codesmith">Codesmith API</Option>
+      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}> 
+    {dropDownOptions}
   </Select>
   )
 }
