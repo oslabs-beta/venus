@@ -1,5 +1,4 @@
 import React, { Component, useContext, useEffect, useState } from 'react';
-import { DependencyTree } from '../charts/DependencyTree'
 import Card from 'antd/es/card';
 import { DependencyGraph} from '../charts/DependencyTree'
 import ParentSize from "@visx/responsive/lib/components/ParentSize";

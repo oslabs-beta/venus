@@ -5,7 +5,7 @@ import { hierarchy, Tree } from "@visx/hierarchy";
 import { LinearGradient } from "@visx/gradient";
 import { pointRadial } from "d3-shape";
 import { AggregateStats } from '../components/AggregateStats';
-
+import { changeChildArr, changeData, test, treeData} from './DataFuncDepGraph'
 import { Select } from "antd";
 
 // import useForceUpdate from "./useForceUpdate";
@@ -175,81 +175,82 @@ function getLinkComponent({
 }
 
 // this is the kind of type of the tree node
-interface TreeNode {
-  name: string;
-  status: string;
-  isExpanded?: boolean;
-  children?: TreeNode[];
-}
+// interface TreeNode {
+//   service: string;
+//   status: string;
+//   isExpanded?: boolean;
+//   children?: TreeNode[];
+// }
 
 // THIS IS OUR DUMMY DATA FOR THE TREE
 
-const treeData: TreeNode = {
-  name: "CodeSmith",
-  status: "good",
-  children: [
-    {
-      name: "Google API",
-      status: "good",
-      children: [
-        { name: "GET",
-        status: "bad"},
-        { name: "POST",
-        status: "good" },
-        { name: "PUT",
-        status: "fair" },
-        { name: "DEL",
-        status: "good" },
-        ]
-    },
-    {
-      name: "Plaid API",
-      status: "good",
-      children: [
-        { name: "PUT",
-        status: "good" },
-        { name: "DEL",
-        status: "good"},
-        ]
-    },
-    {
-      name: "Solarwinds API",
-      status: "fair",
-      children: [
-        { name: "GET",
-        status: "good" }
-        ]
-    },
-    {
-      name: "Surfline API",
-        status: "fair",
-      children: [
-        { name: "GET",
-        status: "bad" },
-        { name: "POST",
-        status: "fair" },
-        { name: "PUT",
-        status: "good" },
-        { name: "DEL",
-        status: "fair" },
-        ]
-    },
-    {
-      name: "Yelp API",
-      status: "bad",
-      children: [
-        { name: "GET",
-        status: "bad" },
-        { name: "POST",
-        status: "good" },
-        { name: "PUT",
-        status: "good" },
-        { name: "DEL",
-        status: "good" },
-        ]
-    },
-  ]
-};
+
+// const treeData: TreeNode = {
+//   service: "CodeSmith",
+//   status: "good",
+//   children: [
+//     {
+//       service: "Google API",
+//       status: "good",
+//       children: [
+//         { service: "GET",
+//         status: "bad"},
+//         { service: "POST",
+//         status: "good" },
+//         { service: "PUT",
+//         status: "fair" },
+//         { service: "DEL",
+//         status: "good" },
+//         ]
+//     },
+//     {
+//       service: "Plaid API",
+//       status: "good",
+//       children: [
+//         { service: "PUT",
+//         status: "good" },
+//         { service: "DEL",
+//         status: "good"},
+//         ]
+//     },
+//     {
+//       service: "Solarwinds API",
+//       status: "fair",
+//       children: [
+//         { service: "GET",
+//         status: "good" }
+//         ]
+//     },
+//     {
+//       service: "Surfline API",
+//         status: "fair",
+//       children: [
+//         { service: "GET",
+//         status: "bad" },
+//         { service: "POST",
+//         status: "fair" },
+//         { service: "PUT",
+//         status: "good" },
+//         { service: "DEL",
+//         status: "fair" },
+//         ]
+//     },
+//     {
+//       service: "Yelp API",
+//       status: "bad",
+//       children: [
+//         { service: "GET",
+//         status: "bad" },
+//         { service: "POST",
+//         status: "good" },
+//         { service: "PUT",
+//         status: "good" },
+//         { service: "DEL",
+//         status: "good" },
+//         ]
+//     },
+//   ]
+// };
 
 // margin from chart to the sides 
 const defaultMargin = { top: 110, left: 110, right: 110, bottom: 110 };
@@ -423,7 +424,7 @@ function DependencyGraph({
                         // }
                         fill={colorChangeText}
                       >
-                        {node.data.name}
+                        {node.data.service}
                       </text>
                     </Group>
                   );
