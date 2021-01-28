@@ -27,7 +27,7 @@ export const globalContext = React.createContext<GlobalState>(initialState)
 export const ContextProvider: React.FC = (props: any) => {
   
   const [verification, setVerification] = useState<boolean>(false);
-  const [serverAddress, setServerAddress] = useState<string>('holder Address');
+  const [serverAddress, setServerAddress] = useState<string>('ec2-3-15-29-241.us-east-2.compute.amazonaws.com:8080');
   const [token, setToken] = useState<string>('fake token');
 
   return <globalContext.Provider value={{verification, setVerification, serverAddress, setServerAddress, token, setToken}}>{props.children}</globalContext.Provider>

@@ -13,19 +13,20 @@ import Table from "antd/es/table";
 import Tag from "antd/es/tag";
 import Form from "antd/es/form";
 import Select from "antd/es/select";
+import { globalContext } from "../contexts/globalContext"
 import { dynamicContext } from "../contexts/dynamicContext";
 import Title from "antd/es/typography/Title";
 
 const variable: string = "oliver";
 
 function Dashboard(): JSX.Element {
-  const { services, setServices, aggregate, setAggregate } = useContext(
-    dynamicContext
-  );
+  const { services, setServices, aggregate, setAggregate } = useContext(dynamicContext);
+  const { serverAddress } = useContext(globalContext)
 
   const dataSource: any = [];
   useEffect(() => {
-    const socket = io("ec2-3-15-29-241.us-east-2.compute.amazonaws.com:8080", {
+    console.log(serverAddress)
+    const socket:any = io(serverAddress, {
       transports: ["websocket"],
     });
     socket.on("connection", () => {

@@ -12,16 +12,15 @@ const { Title } = Typography;
 
 function SignIn():JSX.Element {
   console.log(data)
-  const { verification, setVerification } = useContext(globalContext)
+  const { verification, setVerification, setServerAddress, } = useContext(globalContext)
   const onFinish = (values: any) => {
-    console.log(values)
+
+    // create get request here to ratify the tokenization process. 
+    // currently compares to a local json file. 
+    // commmit token to local state.
     if(data[values.serverIP]){
+      setServerAddress(values.serverIP)
       setVerification(true)
-    } else {
-      const newInstance = values.serverIP 
-      data[newInstance] = {}
-      data.newInstance.test = 'test'
-      console.log(data)
     } 
   }
   const onFinishFailed = (errorInfo: any) => {
@@ -34,20 +33,6 @@ function SignIn():JSX.Element {
   const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
   };
-
-  const Demo = () => {
-    const [ form ] = Form.useForm();
-
-    const onServerInput = (value: string) => {
-
-    }
-
-  }
-  
-  const test = () => {
-    console.log('test')
-  }
-
 
   return (
     <div className="loginContainer">
@@ -67,7 +52,6 @@ function SignIn():JSX.Element {
           <Form.Item
             label="Server Address"
             name="serverIP"
-            // getValueFromEvent={any}
             rules={[{ required: true, message: 'Please enter valid Server Address.' }]}
           >
             <Input placeholder="Enter Server Address"/>
@@ -81,7 +65,7 @@ function SignIn():JSX.Element {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit" onClick={test}>
+            <Button type="primary" htmlType="submit">
               Sign In
             </Button>
         </Form.Item>
