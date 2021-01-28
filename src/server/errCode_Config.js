@@ -345,4 +345,12 @@ const serverErrCodes = {
    * Interrupted connection between Cloudflare and the origin server's Railfun server.
    *   */ 
   527: true,
-}
+};
+
+module.exports = {
+  clientErrCodes,
+  serverErrCodes,
+};
+
+
+
