@@ -176,13 +176,13 @@ function Dashboard(): JSX.Element {
       key: "status",
       render: (status: string) => {
         if (status === "good") {
-          return <Tag color={"green"}>GOOD</Tag>;
+          return <Tag color={"green"} style={{fontWeight: 'bold'}}>GOOD</Tag>;
         }
         if (status === "fair") {
-          return <Tag color={"orange"}>FAIR</Tag>;
+          return <Tag color={"orange"}  style={{fontWeight: 'bold'}}>FAIR</Tag>;
         }
         if (status === "poor") {
-          return <Tag color={"red"}>POOR</Tag>;
+          return <Tag color={"red"} style={{fontWeight: 'bold'}}>POOR</Tag>;
         }
       },
     },
@@ -195,8 +195,7 @@ function Dashboard(): JSX.Element {
           <Form.Item className="apiMethod" initialValue="all">
             <Select
               placeholder="ALL METHODS"
-              style={{ width: 140 }}
-            >
+              style={{ width: 120 }}>
               <Select.Option value="all">All METHODS</Select.Option>
               <Select.Option value="get">GET</Select.Option>
               <Select.Option value="post">POST</Select.Option>

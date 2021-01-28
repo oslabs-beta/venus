@@ -25,7 +25,6 @@ function DependencyGraphContainer(): JSX.Element{
         />
          <Divider><Title level={3}>Dependency graph</Title></Divider>
           <Card hoverable={true} style={{width: 'fit-content'}}>
-  
                <DependencyGraph width={600} height={600} />
           </Card>
     </div>
