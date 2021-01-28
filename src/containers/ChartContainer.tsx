@@ -2,37 +2,70 @@
  * @name ChartContainer
  * @desc Child of Dashboard, Parent container that holds and displays each Chart
  */
-
-import React from "react";
-import { LineGraph } from "../charts/LineGraph"
+import React, { useContext, useEffect} from "react";
 import { AreaChart } from "../charts/AreaChart"
 import { CardDropDown } from "../components/CardDropDown";
-// import { TestChart } from "../charts/TestChart";
+import { historicalContext } from "../contexts/historicalContext"
+import { AggregateStats } from "../components/AggregateStats";
+import { Availability } from "../charts/AvailabilityChart";
+import { LoadChart } from "../charts/LoadChart";
 import Row from 'antd/es/row';
 import Col from 'antd/es/col';
 import Card from 'antd/es/card';
 import Divider from "antd/es/divider";
-import { AggregateStats } from "../components/AggregateStats";
 import Title from "antd/es/typography/Title";
-import Text from "antd/es/typography/Text"
-import Space from 'antd/es/space';
-import { HistoricalProvider } from "../contexts/historicalContext";
-import { Availability } from "../charts/AvailabilityChart";
-import { LoadChart } from "../charts/LoadChart";
+import Button from "antd/es/button";
+import Radio from 'antd/es/radio'
 
-export function ChartContainer(): JSX.Element {
+
+
+function ChartContainer(): JSX.Element {
+  const [value, setValue] = React.useState(1);
+  const { aggregate, setAggregate, service, } = useContext(historicalContext)
+  let filter = aggregate;
+  const test: any = {
+    status: 'hello',
+    load: 12,
+    response_time: 12, 
+    error: 12,
+    availability: 12,
+  }
+  useEffect(() => {
+    setAggregate(test)
+    // fetch('localhost:3000/get/historicdata').then(
+    //   response => response.json()
+    // ).then(
+    //   data => console.log(data)
+    // )
+  },[])
+  
+  const options = [
+    { label: 'Last Hour', value: 'lastHour' },
+    { label: 'Last Day', value: 'lastDay' },
+    { label: 'Last Week', value: 'lastWeek' },
+    { label: 'Last Month', value: 'lastMonth' },
+  ];
+
+
+  const filterData = (e:any) => {
+    console.log('radio checked', e.target.value);
+    setValue(e.target.value);
+  };
 
   return (
     <div id="chartContainer">
-    <HistoricalProvider>
-      <AggregateStats />
+      <AggregateStats
+      error={aggregate.error}
+      response_time={aggregate.response_time}
+      load={aggregate.load}
+      availability={aggregate.availability}
+      />
       <Divider><Title level={3}>Historical Status</Title></Divider>
-      <div style={{marginBottom: 20}}>
-        <CardDropDown /> 
-        <Text strong={true}>1 hour</Text>
-        <Text strong={true}>1 day</Text>
-        <Text strong={true}>1 week</Text>
-        <Text strong={true}>1 month</Text>
+      <div className="rangeSelectorContainer">
+        <CardDropDown  />
+        <div className="">
+          <Radio.Group optionType="button"  onChange={filterData} options={options}/>
+        </div>
       </div>
         <Row gutter={[32,32]}>
           <Col span={12}>
@@ -44,7 +77,6 @@ export function ChartContainer(): JSX.Element {
           <Col span={12}>
             <Title level={5}>Latency</Title>
             <Card bordered={true} hoverable={true} style={{width: "500px"}}>
-              {/* <LineGraph /> */}
               <Availability />
             </Card>
           </Col>
@@ -63,7 +95,8 @@ export function ChartContainer(): JSX.Element {
             </Card>
           </Col>
         </Row>
-        </HistoricalProvider>
     </div>
   )
 }
+
+export { ChartContainer }

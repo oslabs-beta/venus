@@ -1,7 +1,7 @@
 import Layout from 'antd/es/layout';
 import React, { useContext, useState } from "react";
 import data from '../../session_storage/storage.json'
-import { myContext } from '../contexts/globalContext' 
+import { globalContext } from '../contexts/globalContext' 
 import Form from 'antd/es/form';
 import Input from 'antd/es/input';
 import Button from 'antd/es/button';
@@ -12,16 +12,15 @@ const { Title } = Typography;
 
 function SignIn():JSX.Element {
   console.log(data)
-  const { verification, setVerfication } = useContext(myContext)
+  const { verification, setVerification, setServerAddress, } = useContext(globalContext)
   const onFinish = (values: any) => {
-    console.log(values)
+
+    // create get request here to ratify the tokenization process. 
+    // currently compares to a local json file. 
+    // commmit token to local state.
     if(data[values.serverIP]){
-      setVerfication(true)
-    } else {
-      const newInstance = values.serverIP 
-      data[newInstance] = {}
-      data.newInstance.test = 'test'
-      console.log(data)
+      setServerAddress(values.serverIP)
+      setVerification(true)
     } 
   }
   const onFinishFailed = (errorInfo: any) => {
@@ -34,25 +33,6 @@ function SignIn():JSX.Element {
   const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
   };
-
-  const Demo = () => {
-    const [ form ] = Form.useForm();
-
-    const onServerInput = (value: string) => {
-
-    }
-
-  }
-  
-  const test = () => {
-    console.log('test')
-  }
-
-  // const setContext = () => {
-  //   if (verification === false){
-  //     setVerfication(true)
-  //   }
-  // }
 
   return (
     <div className="loginContainer">
@@ -72,7 +52,6 @@ function SignIn():JSX.Element {
           <Form.Item
             label="Server Address"
             name="serverIP"
-            // getValueFromEvent={any}
             rules={[{ required: true, message: 'Please enter valid Server Address.' }]}
           >
             <Input placeholder="Enter Server Address"/>
@@ -86,7 +65,7 @@ function SignIn():JSX.Element {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit" onClick={test}>
+            <Button type="primary" htmlType="submit">
               Sign In
             </Button>
         </Form.Item>
