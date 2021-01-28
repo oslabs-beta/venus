@@ -67,6 +67,103 @@ function Dashboard(): JSX.Element {
         error: 50,
         availability: 100,
       },
+      {
+        service: "curriculum-api.codesmith.io",
+        status: "good",
+        load: "0.6666666865348816 hpm",
+        response_time: 1266,
+        error: 50,
+        availability: 100,
+      },
+      {
+        service: "curriculum-api.codesmith.io",
+        status: "fair",
+        load: "0.6666666865348816 hpm",
+        response_time: 1266,
+        error: 50,
+        availability: 100,
+      },
+      {
+        service: "curriculum-api.codesmith.io",
+        status: "poor",
+        load: "0.6666666865348816 hpm",
+        response_time: 1266,
+        error: 50,
+        availability: 100,
+      },
+      {
+        service: "curriculum-api.codesmith.io",
+        status: "good",
+        load: "0.6666666865348816 hpm",
+        response_time: 1266,
+        error: 50,
+        availability: 100,
+      },
+      {
+        service: "curriculum-api.codesmith.io",
+        status: "fair",
+        load: "0.6666666865348816 hpm",
+        response_time: 1266,
+        error: 50,
+        availability: 100,
+      },
+      {
+        service: "curriculum-api.codesmith.io",
+        status: "poor",
+        load: "0.6666666865348816 hpm",
+        response_time: 1266,
+        error: 50,
+        availability: 100,
+      },
+      {
+        service: "curriculum-api.codesmith.io",
+        status: "good",
+        load: "0.6666666865348816 hpm",
+        response_time: 1266,
+        error: 50,
+        availability: 100,
+      },
+      {
+        service: "curriculum-api.codesmith.io",
+        status: "fair",
+        load: "0.6666666865348816 hpm",
+        response_time: 1266,
+        error: 50,
+        availability: 100,
+      },
+      {
+        service: "curriculum-api.codesmith.io",
+        status: "poor",
+        load: "0.6666666865348816 hpm",
+        response_time: 1266,
+        error: 50,
+        availability: 100,
+      },
+      {
+        service: "curriculum-api.codesmith.io",
+        status: "good",
+        load: "0.6666666865348816 hpm",
+        response_time: 1266,
+        error: 50,
+        availability: 100,
+      },
+      {
+        service: "curriculum-api.codesmith.io",
+        status: "fair",
+        load: "0.6666666865348816 hpm",
+        response_time: 1266,
+        error: 50,
+        availability: 100,
+      },
+      {
+        service: "curriculum-api.codesmith.io",
+        status: "poor",
+        load: "0.6666666865348816 hpm",
+        response_time: 1266,
+        error: 50,
+        availability: 100,
+      },
+      
     ]);
     // setAggregate({
     //   error: 40,
@@ -110,9 +207,8 @@ function Dashboard(): JSX.Element {
       key: "method",
       render: () => (
         <Form>
-          <Form.Item initialValue="all">
+          <Form.Item className="apiMethod" initialValue="all">
             <Select
-              className="apiMethod"
               placeholder="ALL METHODS"
               style={{ width: 140 }}
             >
