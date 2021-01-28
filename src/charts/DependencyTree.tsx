@@ -303,12 +303,7 @@ function DependencyGraph({
   const LinkComponent = getLinkComponent({ layout, linkType, orientation });
 // can modify components here i.e. color, stroke size
   return totalWidth < 10 ? null : (
-<<<<<<< HEAD
     <div>
-=======
-    <>
-      <AggregateStats/>
->>>>>>> f61b1492e1f49fc3ab8e828c44a1cdbe979c6f57
       <br />
       <LinkControls
         layout={layout}
@@ -437,8 +432,7 @@ function DependencyGraph({
           </Tree>
         </Group>
       </svg>
-    </>
-
+    </div>
   );
 }
 

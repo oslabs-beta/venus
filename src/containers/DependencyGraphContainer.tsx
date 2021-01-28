@@ -5,6 +5,7 @@ import { AggregateStats } from '../components/AggregateStats';
 import { dynamicContext } from '../contexts/dynamicContext';
 import Divider from 'antd/es/divider';
 import Title from 'antd/es/typography/Title';
+import ParentSize from "@visx/responsive/lib/components/ParentSize";
 
 
 function DependencyGraphContainer(): JSX.Element{
@@ -15,7 +16,6 @@ function DependencyGraphContainer(): JSX.Element{
   },[])
 
   return(
-<<<<<<< HEAD
     <div id="chartContainer">
         <AggregateStats 
         error={aggregate.error}
@@ -27,16 +27,7 @@ function DependencyGraphContainer(): JSX.Element{
           <Card hoverable={true} style={{width: 'fit-content'}}>
   
                <DependencyGraph width={600} height={600} />
-           
           </Card>
-=======
-    <div id="dashboard">
-      <Card hoverable={true} >
-        <ParentSize>
-          {({ width, height }) => <DependencyGraph width={1200} height={800} />}
-        </ParentSize>
-      </Card>
->>>>>>> f61b1492e1f49fc3ab8e828c44a1cdbe979c6f57
     </div>
   )
 };
