@@ -7,6 +7,7 @@ const STREAM_WINDOW = 3;
 // #region 
 const responseData = [
   {
+    id: '1611550512393-1',
     reqMethod: 'GET',
     reqHost: 'curriculum-api.codesmith.io',
     reqPath: '/messages',
@@ -15,66 +16,69 @@ const responseData = [
     cycleDuration: '1232',
     resMessage: 'OK',
   },
-  //#region 
-  // {
-  //   reqMethod: 'POST',
-  //   reqHost: 'curriculum-api.codesmith.io',
-  //   reqPath: '/messages',
-  //   reqUrl: 'https://curriculum-api.codesmith.io/messages',
-  //   resStatusCode: '400',
-  //   cycleDuration: '1300',
-  //   resMessage: 'OK',
-  // },
-  // {
-  //   reqMethod: 'GET',
-  //   reqHost: 'finance.yahoo.com',
-  //   reqPath: '/TSLA',
-  //   reqUrl: 'https://finance.yahoo.com/TSLA',
-  //   resStatusCode: '400',
-  //   cycleDuration: '1500',
-  //   resMessage: 'OK',
-  // },
-  // {
-  //   reqMethod: 'DELETE',
-  //   reqHost: 'finance.yahoo.com',
-  //   reqPath: '/AAPL',
-  //   reqUrl: 'https://finance.yahoo.com/AAPL',
-  //   resStatusCode: '200',
-  //   cycleDuration: '1335',
-  //   resMessage: 'OK',
-  // },
-  // {
-  //   reqMethod: 'GET',
-  //   reqHost: 'weather.google.com',
-  //   reqPath: '/California/LA',
-  //   reqUrl: 'https://weather.google.com/California/LA',
-  //   resStatusCode: '200',
-  //   cycleDuration: '1200',
-  //   resMessage: 'OK',
-  // },
-  // {
-  //   reqMethod: 'PATCH',
-  //   reqHost: 'weather.google.com',
-  //   reqPath: '/California/SF',
-  //   reqUrl: 'https://weather.google.com/California/SF',
-  //   resStatusCode: NaN,
-  //   cycleDuration: '1100',
-  //   resMessage: 'OK',
-  // },
-  // {
-  //   id: '1611550577793-1',
-  //   reqMethod: 'GET',
-  //   reqHost: 'curriculum-api.codesmith.io',
-  //   reqPath: '/messages/',
-  //   reqUrl: 'https://curriculum-api.codesmith.io/messages/',
-  //   resStatusCode: '200',
-  //   resMessage: 'OK',
-  //   cycleDuration: '1105.248547'
-  // },
-  //#endregion
+  {
+    id: '1144550577793-1',
+    reqMethod: 'POST',
+    reqHost: 'curriculum-api.codesmith.io',
+    reqPath: '/messages',
+    reqUrl: 'https://curriculum-api.codesmith.io/messages',
+    resStatusCode: '400',
+    cycleDuration: '1300',
+    resMessage: 'OK',
+  },
+  {
+    id: '1611550514493-1',
+    reqMethod: 'GET',
+    reqHost: 'finance.yahoo.com',
+    reqPath: '/TSLA',
+    reqUrl: 'https://finance.yahoo.com/TSLA',
+    resStatusCode: '400',
+    cycleDuration: '1500',
+    resMessage: 'OK',
+  },
+  {
+    id: '1611550514593-1',
+    reqMethod: 'DELETE',
+    reqHost: 'finance.yahoo.com',
+    reqPath: '/AAPL',
+    reqUrl: 'https://finance.yahoo.com/AAPL',
+    resStatusCode: '200',
+    cycleDuration: '1335',
+    resMessage: 'OK',
+  },
+  {
+    id: '1611550514593-1',
+    reqMethod: 'GET',
+    reqHost: 'weather.google.com',
+    reqPath: '/California/LA',
+    reqUrl: 'https://weather.google.com/California/LA',
+    resStatusCode: '200',
+    cycleDuration: '1200',
+    resMessage: 'OK',
+  },
+  {
+    id: '1611550598793-1',
+    reqMethod: 'PATCH',
+    reqHost: 'weather.google.com',
+    reqPath: '/California/SF',
+    reqUrl: 'https://weather.google.com/California/SF',
+    resStatusCode: NaN,
+    cycleDuration: '1100',
+    resMessage: 'OK',
+  },
   {
     id: '1611550577793-1',
     reqMethod: 'GET',
+    reqHost: 'curriculum-api.codesmith.io',
+    reqPath: '/messages/',
+    reqUrl: 'https://curriculum-api.codesmith.io/messages/',
+    resStatusCode: '200',
+    resMessage: 'OK',
+    cycleDuration: '1105.248547'
+  },
+  {
+    id: '1611550577793-1',
+    reqMethod: 'POST',
     reqHost: 'weather.google.com',
     reqPath: '/messages/',
     reqUrl: 'https://curriculum-api.codesmith.io/messages/',
@@ -84,7 +88,7 @@ const responseData = [
   },
   {
     id: '1611550577793-1',
-    reqMethod: 'GET',
+    reqMethod: 'PUT',
     reqHost: 'finance.yahoo.com',
     reqPath: '/messages/',
     reqUrl: 'https://curriculum-api.codesmith.io/messages/',
@@ -119,7 +123,7 @@ responseData.forEach((obj) => {
 
 //  
 
-console.log(responseData);
+// console.log(responseData);
 
 const rtData = (data) => {
   // hacky code to try conforming the objects in case one is missing a property
@@ -135,12 +139,12 @@ const rtData = (data) => {
   // }
   // ]}
   );
-  df.ctypes.print();
-  df.print()
+  // df.ctypes.print();
+  // df.print()
   df['cycleDuration'] = df['cycleDuration'].astype('int32')
   df['resStatusCode'] = df['resStatusCode'].astype('int32')
-  df.ctypes.print();
-  df.print()
+  // df.ctypes.print();
+  // df.print()
 
   const dfGroup = df.groupby(['reqHost']);
   const dfNew = dfGroup.col(['reqHost']).count();
@@ -163,7 +167,7 @@ const rtData = (data) => {
       how: 'left',
     });
 
-    console.log(finalTable);
+    // console.log(finalTable);
     const errorRateCol = finalTable.resStatusCode_count
       .div(finalTable.resStatusCode_count_1)
       .mul(100);
@@ -228,7 +232,7 @@ const rtData = (data) => {
   outputTable.reqHost_count = outputTable.reqHost_count.div(3);
 
   // console.log('Final Table: ', outputTable);
-  outputTable.print();
+  // outputTable.print();
 
   
   consolidatedObj.services = [];
@@ -247,10 +251,10 @@ const rtData = (data) => {
   });
 
   } catch (err) {
-    console.log('CATCH BLOCK FAM')
+    // console.log('CATCH BLOCK FAM')
     finalTable = dfNew;
     const latencyDF = dfGroup.col(['cycleDuration']).mean();
-    console.log('latency catch', latencyDF);
+    // console.log('latency catch', latencyDF);
 
     finalTable = dfd.merge({
       left: finalTable,
@@ -259,7 +263,7 @@ const rtData = (data) => {
       how: 'left',
     });
 
-    finalTable.print()
+    // finalTable.print()
   
     const availabilityDF = dfGroup.col(['resStatusCode']).count();
     // availabilityDF.print()
@@ -295,7 +299,7 @@ const rtData = (data) => {
     outputTable.reqHost_count = outputTable.reqHost_count.div(3);
   
     // console.log('Final Table: ', outputTable);
-    outputTable.print();
+    // outputTable.print();
   
     consolidatedObj.services = [];
   
@@ -332,6 +336,7 @@ const rtData = (data) => {
   const totalRequests = df.reqHost.count();
   const totalResponses = df.resStatusCode.count();
   consolidatedObj.aggregate.status = 'good';
+  // total
   consolidatedObj.aggregate.load = `${(totalRequests / STREAM_WINDOW).toFixed(2) } hpm`;
   consolidatedObj.aggregate.response_time = Math.round(
     df.cycleDuration.mean(),
@@ -429,20 +434,21 @@ const rtData = (data) => {
       outputTableMethod.reqMethod_count = outputTableMethod.reqMethod_count.div(3);
 
       // console.log('Final Table: ', outputTableMethod);
-      outputTableMethod.print();
+      // outputTableMethod.print();
 
       outputTableMethod.data.forEach((row, i) => {
-        console.log('ROW', row)
+        // console.log('ROW', row)
         consolidatedObj.services[i].byMethod = {};
-        consolidatedObj.services[i].byMethod.method = row[0];
-        consolidatedObj.services[i].byMethod.status = 'good';
-        consolidatedObj.services[i].byMethod.load = `${row[1].toFixed(2)  }hpm`;
-        consolidatedObj.services[i].byMethod.response_time = row[2];
-        consolidatedObj.services[i].byMethod.error = row[3];
-        consolidatedObj.services[i].byMethod.availability = row[4];
+        const method = row[0];
+        consolidatedObj.services[i].byMethod[method] = {};
+        consolidatedObj.services[i].byMethod[method].status = 'good';
+        consolidatedObj.services[i].byMethod[method].load = `${row[1].toFixed(2)  }hpm`;
+        consolidatedObj.services[i].byMethod[method].response_time = row[2];
+        consolidatedObj.services[i].byMethod[method].error = row[3];
+        consolidatedObj.services[i].byMethod[method].availability = row[4];
       });
 
-      console.log('FINAL OBJECT', consolidatedObj);
+      // console.log('FINAL OBJECT', consolidatedObj);
     } catch (e) {
       finalTableMethod = dfNewMethod;
 
@@ -498,25 +504,29 @@ const rtData = (data) => {
 
       outputTableMethod.reqMethod_count = outputTableMethod.reqMethod_count.div(3);
 
-      console.log('Final Table: ', outputTableMethod);
-      outputTableMethod.print();
+      // console.log('Final Table: ', outputTableMethod);
+      // outputTableMethod.print();
 
+      // each method is a property with the subset data as a nested object
+      console.log(outputTableMethod.data)
       outputTableMethod.data.forEach((row, i) => {
-        console.log('ROW', row)
+        // console.log('ROW', row)
         consolidatedObj.services[i].byMethod = {};
-        consolidatedObj.services[i].byMethod.method = row[0];
-        consolidatedObj.services[i].byMethod.status = 'good';
-        consolidatedObj.services[i].byMethod.load = `${row[1].toFixed(2)  }hpm`;
-        consolidatedObj.services[i].byMethod.response_time = row[2];
-        consolidatedObj.services[i].byMethod.error = 0;
-        consolidatedObj.services[i].byMethod.availability = row[4];
+        const method = row[0];
+        consolidatedObj.services[i].byMethod[method] = {};
+        consolidatedObj.services[i].byMethod[method].status = 'good';
+        consolidatedObj.services[i].byMethod[method].load = `${row[1].toFixed(2)  }hpm`;
+        consolidatedObj.services[i].byMethod[method].response_time = row[2];
+        consolidatedObj.services[i].byMethod[method].error = 0;
+        consolidatedObj.services[i].byMethod[method].availability = row[3];
       });
 
       // console.log('FINAL OBJECT', consolidatedObj);
     }
   });
   // console.log(JSON.stringify(consolidatedObj));
-  console.log(consolidatedObj.services[0].byMethod);
+  console.log(consolidatedObj);
+  console.log(consolidatedObj.services[0]);
   return JSON.stringify(consolidatedObj);
 };
 

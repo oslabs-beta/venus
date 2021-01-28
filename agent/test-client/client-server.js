@@ -138,16 +138,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-setInterval(() => {
-  axios("http://localhost:8126/chat")
-    .then(({ data }) => {
-      console.log('Automated Front-End Request Worked!');
-    })
-    .catch((err) => console.log("front end get error", err));
-}, 1000);
+// setInterval(() => {
+//   axios("http://localhost:8126/chat")
+//     .then(({ data }) => {
+//       console.log('Automated Front-End Request Worked!');
+//     })
+//     .catch((err) => console.log("front end get error", err));
+// }, 1000);
 
 app.get("/chat", (req, res) => {
-  axios("https://curriculum-api.codesmith.io/messages/")
+  axios('https://curriculum-api.codesmith.io/messages/')
     // .then(res => console.log('GET RES', res.config.url))
     .then((response) => res.status(200).json(response.data))
     .catch((err) => console.log(`Get error: ${err}`));
