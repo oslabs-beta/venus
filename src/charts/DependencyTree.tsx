@@ -4,8 +4,8 @@ import { Group } from "@visx/group";
 import { hierarchy, Tree } from "@visx/hierarchy";
 import { LinearGradient } from "@visx/gradient";
 import { pointRadial } from "d3-shape";
-
-
+import { AggregateStats } from '../components/AggregateStats';
+import { changeChildArr, changeData, test, treeData} from './DataFuncDepGraph'
 import { Select } from "antd";
 
 // import useForceUpdate from "./useForceUpdate";
@@ -48,13 +48,13 @@ function LinkControls({
   setLinkType,
   setStepPercent
 }: Props) {
-  function handleChangeLayout(value) {
+  function handleChangeLayout(value: string) {
     setLayout(value);
   }
   function LayoutSelect(): any {
     return (
       <Select
-        defaultValue="Polar"
+        defaultValue={layout}
         style={{ width: 120 }}
         onChange={handleChangeLayout}
       >
@@ -64,13 +64,13 @@ function LinkControls({
     );
   }
 
-  function handleChangeOrientation(value) {
+  function handleChangeOrientation(value: string) {
     setOrientation(value);
   }
   function OrientationSelect(): any {
     return (
       <Select
-        defaultValue="Horizontal"
+        defaultValue={orientation}
         style={{ width: 120 }}
         onChange={handleChangeOrientation}
       >
@@ -80,13 +80,13 @@ function LinkControls({
     );
   }
 
-  function handleChangeLinkType(value) {
+  function handleChangeLinkType(value: string) {
     setLinkType(value);
   }
   function LinkTypeSelect(): any {
     return (
       <Select
-        defaultValue="Step"
+        defaultValue={linkType}
         style={{ width: 120 }}
         onChange={handleChangeLinkType}
       >
@@ -175,81 +175,82 @@ function getLinkComponent({
 }
 
 // this is the kind of type of the tree node
-interface TreeNode {
-  name: string;
-  status: string;
-  isExpanded?: boolean;
-  children?: TreeNode[];
-}
+// interface TreeNode {
+//   service: string;
+//   status: string;
+//   isExpanded?: boolean;
+//   children?: TreeNode[];
+// }
 
 // THIS IS OUR DUMMY DATA FOR THE TREE
 
-const treeData: TreeNode = {
-  name: "CodeSmith",
-  status: "good",
-  children: [
-    {
-      name: "Google API",
-      status: "good",
-      children: [
-        { name: "GET",
-        status: "bad"},
-        { name: "POST",
-        status: "good" },
-        { name: "PUT",
-        status: "fair" },
-        { name: "DEL",
-        status: "good" },
-        ]
-    },
-    {
-      name: "Plaid API",
-      status: "good",
-      children: [
-        { name: "PUT",
-        status: "good" },
-        { name: "DEL",
-        status: "good"},
-        ]
-    },
-    {
-      name: "Solarwinds API",
-      status: "fair",
-      children: [
-        { name: "GET",
-        status: "good" }
-        ]
-    },
-    {
-      name: "Surfline API",
-        status: "fair",
-      children: [
-        { name: "GET",
-        status: "bad" },
-        { name: "POST",
-        status: "fair" },
-        { name: "PUT",
-        status: "good" },
-        { name: "DEL",
-        status: "fair" },
-        ]
-    },
-    {
-      name: "Yelp API",
-      status: "bad",
-      children: [
-        { name: "GET",
-        status: "bad" },
-        { name: "POST",
-        status: "good" },
-        { name: "PUT",
-        status: "good" },
-        { name: "DEL",
-        status: "good" },
-        ]
-    },
-  ]
-};
+
+// const treeData: TreeNode = {
+//   service: "CodeSmith",
+//   status: "good",
+//   children: [
+//     {
+//       service: "Google API",
+//       status: "good",
+//       children: [
+//         { service: "GET",
+//         status: "bad"},
+//         { service: "POST",
+//         status: "good" },
+//         { service: "PUT",
+//         status: "fair" },
+//         { service: "DEL",
+//         status: "good" },
+//         ]
+//     },
+//     {
+//       service: "Plaid API",
+//       status: "good",
+//       children: [
+//         { service: "PUT",
+//         status: "good" },
+//         { service: "DEL",
+//         status: "good"},
+//         ]
+//     },
+//     {
+//       service: "Solarwinds API",
+//       status: "fair",
+//       children: [
+//         { service: "GET",
+//         status: "good" }
+//         ]
+//     },
+//     {
+//       service: "Surfline API",
+//         status: "fair",
+//       children: [
+//         { service: "GET",
+//         status: "bad" },
+//         { service: "POST",
+//         status: "fair" },
+//         { service: "PUT",
+//         status: "good" },
+//         { service: "DEL",
+//         status: "fair" },
+//         ]
+//     },
+//     {
+//       service: "Yelp API",
+//       status: "bad",
+//       children: [
+//         { service: "GET",
+//         status: "bad" },
+//         { service: "POST",
+//         status: "good" },
+//         { service: "PUT",
+//         status: "good" },
+//         { service: "DEL",
+//         status: "good" },
+//         ]
+//     },
+//   ]
+// };
 
 // margin from chart to the sides 
 const defaultMargin = { top: 110, left: 110, right: 110, bottom: 110 };
@@ -385,9 +386,9 @@ function DependencyGraph({
                       {node.depth !== 0 && (
                         <rect
                           height={height}
-                          width={node.data.children ? "12%" : "5%"}
+                          width={node.data.children ? "20%" : "10%"}
                           y={-height / 2}
-                          x={node.data.children ? -(width-16) / 2 : -(width-101) / 2}
+                          x={node.data.children ? -(width-40) / 2 : -(width-100) / 2}
                           // fill of individual node boxes
                           // {node.data.children ? "#03c0dc" : "#26deb0"}
                           // {node.data.status === 'good' ? "#272b4d" : "#26deb0"}
@@ -422,7 +423,7 @@ function DependencyGraph({
                         // }
                         fill={colorChangeText}
                       >
-                        {node.data.name}
+                        {node.data.service}
                       </text>
                     </Group>
                   );

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect,} from 'react';
+import React, { Component, useContext, useEffect, useState } from 'react';
 import Card from 'antd/es/card';
 import { DependencyGraph} from '../charts/DependencyTree'
 import { AggregateStats } from '../components/AggregateStats';
