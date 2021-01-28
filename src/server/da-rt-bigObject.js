@@ -1,9 +1,13 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 const dfd = require('danfojs-node');
+
+// config objects descerning between client and server errors 
 const { clientErrCodes, serverErrCodes} = require('./errCode_Config');
 
 const STREAM_WINDOW = 3;
+
+// FIXME add status to venus listener 
 
 // #region 
 const responseData = [
@@ -134,6 +138,8 @@ const rtData = (data) => {
       column: "status",
       value: errorCategory,
     })
+
+  df.print();
 
   df['cycleDuration'] = df['cycleDuration'].astype('int32')
   df['resStatusCode'] = df['resStatusCode'].astype('int32')
