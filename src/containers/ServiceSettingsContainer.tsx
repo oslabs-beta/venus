@@ -27,7 +27,7 @@ function SettingsContainer(): JSX.Element {
         load: "0.6666666865348816 hpm",
         response_time: 1266,
         error: 50,
-        availability: 100,
+        availability: 96,
       },
       {
         service: "finance.yahoo.com",
@@ -64,15 +64,19 @@ function SettingsContainer(): JSX.Element {
       title: "Service",
       dataIndex: "service",
       key: "service",
-      // sorter: {
-      //   compare: (a:any, b:any) => a.title.length - b.title.length,
-      //   multiple: 1,
-      // }
+      sorter: {
+        compare: (a:any, b:any) => a.title.length - b.title.length,
+        // multiple: 1,
+      }
     },
     {
       title: "Availability Threshold",
       dataIndex: "availability",
       key: "availability",
+      sorter: {
+        compare: (a:any, b:any) => a.availability - b.availability,
+        // multiple: 1,
+      }
     },
     {
       title: "Response Time Threshold",

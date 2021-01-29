@@ -11,6 +11,7 @@ import { AggregateStats } from "../components/AggregateStats";
 import Divider from "antd/es/divider";
 import Table from "antd/es/table";
 import Tag from "antd/es/tag";
+import { FormDropDown } from '../components/FormDropDown';
 import Form from "antd/es/form";
 import Select from "antd/es/select";
 import { globalContext } from "../contexts/globalContext"
@@ -20,11 +21,14 @@ import Title from "antd/es/typography/Title";
 const variable: string = "oliver";
 
 function Dashboard(): JSX.Element {
-  const { services, setServices, aggregate, setAggregate } = useContext(dynamicContext);
+  const { services, setServices, aggregate, setAggregate, filter, setFilter } = useContext(dynamicContext);
   const { serverAddress } = useContext(globalContext)
 
   const dataSource: any = [];
+
   useEffect(() => {
+    filter['abc'] = "GET"
+    setFilter(filter)
     console.log(serverAddress)
     const socket:any = io(serverAddress, {
       transports: ["websocket"],
@@ -44,109 +48,91 @@ function Dashboard(): JSX.Element {
 
     setServices([
       {
-        service: "abc",
+        service: "a",
         status: "good",
-        load: "0.6666666865348816 hpm",
+        load: 4,
         response_time: 1266,
-        error: 50,
-        availability: 100,
+        error: 3,
+        availability: 1,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: "0.6666666865348816 hpm",
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
       },
       {
-        service: "bcd",
+        service: "b",
         status: "fair",
-        load: "0.6666666865348816 hpm",
+        load: 0,
         response_time: 1266,
         error: 50,
         availability: 100,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: 2,
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
       },
       {
-        service: "cde",
+        service: "c",
         status: "poor",
-        load: "0.6666666865348816 hpm",
+        load: 1,
         response_time: 1266,
-        error: 50,
-        availability: 100,
+        error: 5,
+        availability: 152,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: "0.6666666865348816 hpm",
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
       },
       {
-        service: "def",
-        status: "good",
-        load: "0.6666666865348816 hpm",
-        response_time: 1266,
-        error: 50,
-        availability: 100,
-      },
-      {
-        service: "efg",
+        service: "d",
         status: "fair",
-        load: "0.6666666865348816 hpm",
+        load: 123,
         response_time: 1266,
-        error: 50,
-        availability: 100,
+        error: 30,
+        availability: 10,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: "0.6666666865348816 hpm",
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
       },
       {
-        service: "fgh",
+        service: "fsdc",
         status: "poor",
-        load: "0.6666666865348816 hpm",
+        load: 100,
         response_time: 1266,
-        error: 50,
-        availability: 100,
+        error: 20,
+        availability: 99,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: "0.6666666865348816 hpm",
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
       },
-      {
-        service: "ghi",
-        status: "good",
-        load: "0.6666666865348816 hpm",
-        response_time: 1266,
-        error: 50,
-        availability: 100,
-      },
-      {
-        service: "hij",
-        status: "fair",
-        load: "0.6666666865348816 hpm",
-        response_time: 1266,
-        error: 50,
-        availability: 100,
-      },
-      {
-        service: "ijk",
-        status: "poor",
-        load: "0.6666666865348816 hpm",
-        response_time: 1266,
-        error: 50,
-        availability: 100,
-      },
-      {
-        service: "jkl",
-        status: "good",
-        load: "0.6666666865348816 hpm",
-        response_time: 1266,
-        error: 50,
-        availability: 100,
-      },
-      {
-        service: "klm",
-        status: "fair",
-        load: "0.6666666865348816 hpm",
-        response_time: 1266,
-        error: 50,
-        availability: 100,
-      },
-      {
-        service: "lmnopqrstuvwx",
-        status: "poor",
-        load: "0.6666666865348816 hpm",
-        response_time: 1266,
-        error: 50,
-        availability: 100,
-      },
-      {
-        service: "mnopqrstuvwxyz",
-        status: "good",
-        load: "0.6666666865348816 hpm",
-        response_time: 1266,
-        error: 50,
-        availability: 100,
-      },
+
       
     ]);
     setAggregate({
@@ -161,7 +147,13 @@ function Dashboard(): JSX.Element {
 
   for (let i = 0; i < services.length; i++) {
     services[i].key = i;
-    dataSource.push(services[i]);
+    if (filter[services[i].service]){
+      const holder = filter[services[i].service]
+      dataSource.push(services[i].byMethod[holder]);
+    } else {
+      dataSource.push(services[i]);
+    }
+    
   }
   const columns: any = [
     {
@@ -185,46 +177,48 @@ function Dashboard(): JSX.Element {
           return <Tag color={"red"} style={{fontWeight: 'bold'}}>POOR</Tag>;
         }
       },
+      sorter:{
+        compare: (a:any, b:any) => a.status.length - b.status.length,
+      }
     },
     {
       title: "Method",
       dataIndex: "method",
       key: "method",
-      render: () => (
-        <Form>
-          <Form.Item className="apiMethod" initialValue="all">
-            <Select
-              placeholder="ALL METHODS"
-              style={{ width: 120 }}>
-              <Select.Option value="all">All METHODS</Select.Option>
-              <Select.Option value="get">GET</Select.Option>
-              <Select.Option value="post">POST</Select.Option>
-              <Select.Option value="put">PUT</Select.Option>
-              <Select.Option value="delete">DELETE</Select.Option>
-            </Select>
-          </Form.Item>
-        </Form>
-      ),
+      render: (text:string, record:any,) => (<FormDropDown record={record} />),
     },
     {
       title: "Availability",
       dataIndex: "availability",
       key: "availability",
+      sorter:{
+        compare: (a:any, b:any) => a.availability - b.availability,
+      }
+
     },
     {
       title: "Response Time",
       dataIndex: "response_time",
       key: "response_time",
+      sorter:{
+        compare: (a:any, b:any) => a.response_time - b.response_time,
+      }
     },
     {
       title: "Load",
       dataIndex: "load",
       key: "load",
+      sorter:{
+        compare: (a:any, b:any) => a.load - b.load,
+      }
     },
     {
       title: "Error",
       dataIndex: "error",
       key: "error",
+      sorter:{
+        compare: (a:any, b:any) => a.error - b.error,
+      }
     },
   ];
 

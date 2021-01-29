@@ -7,8 +7,9 @@ type dynamicState = {
     load: string,
     response_time: number, 
     error: number,
-   availability: number,
-   key?: number,
+    availability: number,
+    key?: number,
+    byMethod: any
   }[],
   aggregate: {
     status: string,
@@ -22,9 +23,13 @@ type dynamicState = {
     status: string,
     children: any[]
   };
+  filter: any,
+  
   setServices: (input:any[]) => void;
   setAggregate: (input:any) => void;
-  setDependencyGraph: (input:any) => void
+  setDependencyGraph: (input:any) => void;
+  setFilter: (input:any) => void;
+
 };
 
 export const liveData: dynamicState = {
@@ -35,23 +40,8 @@ export const liveData: dynamicState = {
       load: '0.6666666865348816hpm',
       response_time: 1266,
       error: 50,
-      availability: 100
-    },
-    {
-      status: 'good',
-      service: 'finance.yahoo.com',
-      load: '0.6666666865348816hpm',
-      response_time: 1417.5,
-      error: 50,
-      availability: 100
-    },
-    {
-      status: 'good',
-      service: 'weather.google.com',
-      load: '0.6666666865348816hpm',
-      response_time: 1150,
-      error: 0,
-      availability: 50
+      availability: 100,
+      byMethod: {},
     }
   ],
   aggregate: {
@@ -80,9 +70,11 @@ export const liveData: dynamicState = {
           ]
       }]
   },
+  filter: {},
   setServices: () => {},
   setAggregate: () => {},
-  setDependencyGraph: () => {}
+  setDependencyGraph: () => {},
+  setFilter:() => {},
 };
 
 export const dynamicContext = React.createContext<dynamicState>(liveData)
@@ -92,7 +84,8 @@ export const DynamicProvider: React.FC = (props: any) => {
   const [services, setServices] = useState<any[]>([]);
   const [aggregate, setAggregate] = useState<any>({});
   const [dependencyGraph, setDependencyGraph ] = useState<any>({});
+  const [filter, setFilter] = useState<any>({})
 
-return <dynamicContext.Provider value={{services, setServices, aggregate, setAggregate, dependencyGraph, setDependencyGraph}}>{props.children}</dynamicContext.Provider>
+return <dynamicContext.Provider value={{services, setServices, aggregate, setAggregate, dependencyGraph, setDependencyGraph, filter, setFilter}}>{props.children}</dynamicContext.Provider>
 
 }

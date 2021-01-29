@@ -5,10 +5,10 @@
 
 import React, { useContext } from 'react'
 import Select from 'antd/es/select';
-import { historicalContext } from '../contexts/historicalContext';
+import { dynamicContext } from '../contexts/dynamicContext';
 
 const options: any[] = [
-  'GET', 'POST', 'PATCH', 'DELETE'
+  'ALL METHODS','GET', 'POST', 'PATCH', 'DELETE', 
 ];
 const dropDownOptions: any[] =[];
 for (let i = 0; i < options.length; i++){
@@ -17,15 +17,21 @@ for (let i = 0; i < options.length; i++){
   )
 }
 
-function CardDropDown (): JSX.Element{
+function FormDropDown (props:any): JSX.Element{
 
-  const { setService } = useContext(historicalContext)
-
-	function onChange(value:string) {
-    console.log(value)
-    setService(value)
-    
-		}
+  const { filter, setFilter } = useContext(dynamicContext)
+  
+	function onChange(value:string ) {
+    if (value === 'ALL METHODS' && filter[props.record.service]){
+      delete filter[props.record.service]
+      setFilter(filter)
+      console.log(filter)
+    } else {
+    filter[props.record.service] = value
+    setFilter(filter)
+    console.log(filter)
+    }
+	}
 
 	function onBlur() {
 		console.log('blur');
@@ -42,7 +48,7 @@ function CardDropDown (): JSX.Element{
   return (
   <Select
     showSearch
-    style={{ width: 300}}
+    style={{ width: 120}}
     placeholder="All Methods"
     optionFilterProp="children"
     onChange={onChange}
@@ -56,7 +62,7 @@ function CardDropDown (): JSX.Element{
   )
 }
 
-export { CardDropDown };
+export { FormDropDown };
 
 
 
