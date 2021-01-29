@@ -7,6 +7,7 @@ const express = require("express");
 // const responseTime = require('response-time');
 // const morgan = require('morgan');
 const globalLog = require("global-request-logger");
+
 globalLog.initialize();
 
 const bodyParser = require("body-parser");

@@ -7,6 +7,8 @@ require('dotenv').config();
 const config = require('config');
 const redisStream = require('./redis-stream');
 
+const { clientErrCodes, serverErrCodes} = require('./errCode_Config');
+
 /**
  * Monkey patch 'http' / 'https' modules to track relevant properties of the reques / response objects
  * without modifying the original events
@@ -54,8 +56,6 @@ function override(module) {
     if (endpointMatch) {
       fullLog.cycleDuration = perfEntry.duration;
       // FIXME this is hardcoded logic for test purposes. Should fix when implementing response object edge cases
-      if (!fullLog.resStatusCode) fullLog.resStatusCode = 200;
-      if (!fullLog.resMessage) fullLog.resMessage = 'OK';
       console.log(fullLog);
       return redisStream.writeRedisStream(redisStream.streamName, fullLog);
     }
@@ -101,38 +101,58 @@ function override(module) {
         console.log(endpointMatch)
         if (endpointMatch) {
           // response.on('error', () => console.log('RESPONSE ERROR'));
-          // response.on('end', () => {
-            if (response.statusCode >= 400) {
-              fullLog.resStatusCode = response.statusCode || NaN;
+          response.on('end', () => {
+              const statusCode = response.statusCode || 404;
+              fullLog.resStatusCode = statusCode;
+              if (clientErrCodes[statusCode]) {
+                fullLog.clientError = 1;
+                fullLog.serverError = 0;
+                fullLog.noError = 0;
+              } else if (serverErrCodes[statusCode]) {
+                fullLog.clientError = 0;
+                fullLog.serverError = 1;
+                fullLog.noError = 0;
+              } else {
+                fullLog.clientError = 0;
+                fullLog.serverError = 0;
+                fullLog.noError = 1;
+              }
               fullLog.resMessage = response.statusMessage || 'No message';
-            }
-            console.log(fullLog);
-          // });
+              return;
+            })
+            const statusCode = response.statusCode || 404;
+              fullLog.resStatusCode = statusCode;
+              if (clientErrCodes[statusCode]) {
+                fullLog.clientError = 1;
+                fullLog.serverError = 0;
+                fullLog.noError = 0;
+              } else if (serverErrCodes[statusCode]) {
+                fullLog.clientError = 0;
+                fullLog.serverError = 1;
+                fullLog.noError = 0;
+              } else {
+                fullLog.clientError = 0;
+                fullLog.serverError = 0;
+                fullLog.noError = 1;
+              }
+              fullLog.resMessage = response.statusMessage || 'No message';
+              fullLog.cycleDuration = NaN;
+              return redisStream.writeRedisStream(redisStream.streamName, fullLog);
+          };
         }
       }
-        // default:
-        //   console.log('error in securing a response');
-      }
-      // req.on('socket', socket => {
-      //   socket.on('lookup', () => console.log('socket lookup...'))
-      //   socket.on('error', () => console.log('socket ERROR...'))
-      //   socket.on('connect', () => console.log('socket connect...'))
-      //   // console.log('REQUEST ERROR', err);
-      // });
-
+    }
+    return emit.apply(this, arguments);
       /**
        * Return the event emitter with original argument and execution context.
        */
-      return emit.apply(this, arguments);
-    };
+  };
 
     /**
      * return the original request object
      */
-
-    logger(outgoing);
-
-    return req;
+  logger(outgoing);
+  return req;
   }
 
   /**
