@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the dummy data is correct 1`] = `
+Object {
+  "services": Array [
+    Object {
+      "availability": 100,
+      "byMethod": Object {
+        "GET": Object {
+          "availability": 100,
+          "error": 0,
+          "load": "0.33 hpm",
+          "response_time": 1200,
+          "status": "good",
+        },
+      },
+      "error": 0,
+      "load": "1.00 hpm",
+      "response_time": 1266,
+      "service": "gogle api",
+      "status": "good",
+    },
+    Object {
+      "availability": 100,
+      "byMethod": Object {
+        "GET": Object {
+          "availability": 100,
+          "error": 0,
+          "load": "0.33 hpm",
+          "response_time": 1200,
+          "status": "bad",
+        },
+        "POST": Object {
+          "availability": 100,
+          "error": 0,
+          "load": "0.33 hpm",
+          "response_time": 1200,
+          "status": "bad",
+        },
+      },
+      "error": 0,
+      "load": "1.00 hpm",
+      "response_time": 1266,
+      "service": "wizard api",
+      "status": "fair",
+    },
+  ],
+}
+`;
