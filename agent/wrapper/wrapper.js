@@ -1,14 +1,17 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable default-case */
 /* eslint-disable max-len */
-const http = require('http');
-const https = require('https');
-const { PerformanceObserver } = require('perf_hooks');
-require('dotenv').config();
-const config = require('config');
-const redisStream = require('./redis-stream');
+const http = require("http");
+const https = require("https");
+const { PerformanceObserver } = require("perf_hooks");
+require("dotenv").config();
+const config = require("config");
+const redisStream = require("./redis-stream");
+
+const { clientErrCodes, serverErrCodes } = require("../config/errCode_Config");
 
 /**
- * Monkey patch 'http' / 'https' modules to track relevant properties of the reques / response objects
+ * Monkey patch 'http' / 'https' modules to track relevant properties of the request / response objects
  * without modifying the original events
  */
 function venus() {
@@ -28,7 +31,6 @@ function override(module) {
   /**
    * Will store all the relevant properties of req/res objects before writing to Redis stream.
    */
-
   const fullLog = {};
 
   /**
@@ -50,13 +52,10 @@ function override(module) {
      * endpointMatch conditional insures that only relevant http requests are updated
      * with the cycleDuration property and written to Redis stream.
      */
+
     const perfEntry = items.getEntries()[0];
     if (endpointMatch) {
       fullLog.cycleDuration = perfEntry.duration;
-      // FIXME this is hardcoded logic for test purposes. Should fix when implementing response object edge cases
-      if (!fullLog.resStatusCode) fullLog.resStatusCode = 200;
-      if (!fullLog.resMessage) fullLog.resMessage = 'OK';
-      console.log(fullLog);
       return redisStream.writeRedisStream(redisStream.streamName, fullLog);
     }
   });
@@ -67,7 +66,7 @@ function override(module) {
    */
 
   perfObserver.observe({
-    entryTypes: ['http'],
+    entryTypes: ["http"],
   });
 
   /**
@@ -90,81 +89,85 @@ function override(module) {
     /**
      * Modify request event emitter by adding a listener to the end of the response event.
      * The listener is only invoked if the boolean is true (request URL is within configuration scope)
+     * If the response object includes a statusCode value that is categorized as a clientError or serverError
+     * (as configured in errCode_Config.js), cycleDuration is hardcoded as NaN given that the PerformanceObserver
+     * will not register a response end, the function returns an invokation of the redisStream write logic
+     * Depending on statusCode, the appropriate property (clientError, serverError, noError) is given a value of 1
+     * for the purposes of later calculation (see rt-data-helperFunctions.js)
      */
-    req.on('error', (err) => console.log('REQUEST ERROR LISTENER:', err));
-    req.on('timeout', (err) => console.log('REQUEST TIMEOUT LISTENER:', err));
-    req.on('abort', (err) => console.log('REQUEST ABORT LISTENER:', err));
     req.emit = function (eventName, response) {
       switch (eventName) {
-      case 'response': {
-        // console.log('WE GOT RESPONSE FAM', response)
-        console.log(endpointMatch)
+      case "response": {
         if (endpointMatch) {
-          // response.on('error', () => console.log('RESPONSE ERROR'));
-          // response.on('end', () => {
-            if (response.statusCode >= 400) {
-              fullLog.resStatusCode = response.statusCode || NaN;
-              fullLog.resMessage = response.statusMessage || 'No message';
-            }
-            console.log(fullLog);
-          // });
+          const statusCode = response.statusCode || 404;
+          fullLog.resStatusCode = statusCode;
+          if (clientErrCodes[statusCode]) {
+            fullLog.clientError = 1;
+            fullLog.serverError = 0;
+            fullLog.noError = 0;
+            fullLog.resMessage = response.statusMessage || "No message";
+            fullLog.cycleDuration = NaN;
+            return redisStream.writeRedisStream(
+              redisStream.streamName,
+              fullLog,
+            );
+          }
+          if (serverErrCodes[statusCode]) {
+            fullLog.clientError = 0;
+            fullLog.serverError = 1;
+            fullLog.noError = 0;
+            fullLog.resMessage = response.statusMessage || "No message";
+            fullLog.cycleDuration = NaN;
+            return redisStream.writeRedisStream(
+              redisStream.streamName,
+              fullLog
+            );
+          }
+          fullLog.clientError = 0;
+          fullLog.serverError = 0;
+          fullLog.noError = 1;
+          fullLog.resMessage = response.statusMessage || "No message";
         }
       }
-        // default:
-        //   console.log('error in securing a response');
       }
-      // req.on('socket', socket => {
-      //   socket.on('lookup', () => console.log('socket lookup...'))
-      //   socket.on('error', () => console.log('socket ERROR...'))
-      //   socket.on('connect', () => console.log('socket connect...'))
-      //   // console.log('REQUEST ERROR', err);
-      // });
-
-      /**
-       * Return the event emitter with original argument and execution context.
-       */
+      
+      /* emit the original event */  
       return emit.apply(this, arguments);
     };
-
-    /**
-     * return the original request object
-     */
-
-    logger(outgoing);
-
+    reqLogger(outgoing);
+    
+    /* return the original request object */
     return req;
   }
 
+
   /**
+   * request object logger function
    * @param req: request object
    * reqUrl is either the value of a nested property in the request object
    * or can be constructed with `protocol` + `//` + `hostname` + `path`
    * */
 
-  function logger(req) {
-    console.log('METHOD', req.method)
+  function reqLogger(req) {
     const reqUrl = req.uri
       ? req.uri.Url.href
       : `${req.protocol}//${req.host || req.hostname}${req.path}`;
     /**
      * endpoints to be EXCLUDED based on configuration file, otherwise all are included by default
      */
-    const endpoints = config.get('venus.endpoints');
+    const endpoints = config.get("venus.endpointsExcluded");
     if (endpoints[reqUrl]) return false;
     const localReg = /localhost/gi;
     fullLog.reqHost = req.host || req.hostname;
     if (localReg.test(fullLog.reqHost)) return false;
-    // fullLog.reqMethod = req.method || 'GET';
-    fullLog.reqMethod = req.method;
-    fullLog.reqPath = req.pathname || req.path || '/';
+    fullLog.reqMethod = req.method || 'GET';
+    fullLog.reqPath = req.pathname || req.path || "/";
     fullLog.reqUrl = reqUrl;
     endpointMatch = true;
-    // console.log(fullLog);
     return true;
   }
-
   /**
-   * update request object with the updated wrapper function
+   * assign new wrapper function to the request object
    */
   module.request = wrapper;
 }
