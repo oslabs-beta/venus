@@ -155,7 +155,7 @@ function override(module) {
     /**
      * endpoints to be EXCLUDED based on configuration file, otherwise all are included by default
      */
-    const endpoints = config.get("venus.endpoints");
+    const endpoints = config.get("venus.endpointsExcluded");
     if (endpoints[reqUrl]) return false;
     const localReg = /localhost/gi;
     fullLog.reqHost = req.host || req.hostname;
