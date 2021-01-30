@@ -4,8 +4,8 @@
 
 const axios = require("axios");
 const express = require("express");
-// const responseTime = require('response-time');
-// const morgan = require('morgan');
+// info for global-request-logger: https://www.npmjs.com/package/global-request-logger
+// logs requests & responses
 const globalLog = require("global-request-logger");
 globalLog.initialize();
 

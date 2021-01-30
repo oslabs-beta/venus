@@ -13,17 +13,17 @@ if (process.platform === 'win32') {
     electronPath += '.cmd';
 }
 
-var appPath = path.join(__dirname, '..');
+var appPath = path.join(__dirname, '..', '..');
 
 var app = new Application({
             path: electronPath,
             args: [appPath]
         });
 
-      //   global.before(function () {
-      //     chai.should();
-      //     chai.use(chaiAsPromised);
-      // });
+        global.before(function () {
+          chai.should();
+          chai.use(chaiAsPromised);
+      });
     //   before(function () {
     //     chaiAsPromised.transferPromiseness = app.transferPromiseness;
     //     return app.start();      
@@ -40,14 +40,21 @@ var app = new Application({
             return app.stop();
         });
       
+        
         it('opens a window', function () {
           return app.client.waitUntilWindowLoaded()
             .getWindowCount().should.eventually.equal(1);
         });
-      
-        it('tests the title', function () {
-          return app.client.waitUntilWindowLoaded()
-            .getTitle().should.eventually.equal('Hello World!');
+
+        it('Shows an initial window', async () => {
+          await app.client.waitUntilWindowLoaded();
+          const count = await app.client.getWindowCount();
+          assert.equal(count, 1);
         });
+      
+        // it('tests the title', function () {
+        //   return app.client.waitUntilWindowLoaded()
+        //     .getTitle().should.eventually.equal('Hello World!');
+        // });
       
       });

@@ -14,7 +14,7 @@
     "hist": "node src/server/historical-read-handler.js",
     "rt": "node src/server/real-time-read-handler.js",
     "test": "jest",
-    "test:e2e": "./node_modules/mocha/bin/mocha --timeout 20000 src/tests/spectronTest.js"
+    "test:e2e": "./node_modules/mocha/bin/mocha src/tests/spectronTest.js"
   },
   "keywords": [],
   "author": "elisealcala",

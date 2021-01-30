@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the dummy data matches the snapshot 1`] = `
+exports[`snapshot testing the dependency chart component matches the snapshot 1`] = `[Function]`;
+
+exports[`snapshot testing the dummy data matches the snapshot 1`] = `
 Object {
   "services": Array [
     Object {

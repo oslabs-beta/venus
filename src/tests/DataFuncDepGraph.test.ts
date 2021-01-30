@@ -1,26 +1,38 @@
 // import { ipcRenderer } from "electron"
 import { changeChildArr, changeData, IDataNode, test, IService, TreeNode} from "../charts/DataFuncDepGraph"
 import { treeData } from '../charts/DependencyTree'
-
+import { DependencyGraph} from '../charts/DependencyTree';
+import { Dashboard} from '../containers/Dashboard'
 // describes what the test is
 describe('hitting test files', () => {
   // testData: IDataNode;
   // what the specific test is
-  it('hits the jest testing', () => {
-    // what is expected
-    expect(true).toBeTruthy();
+    it('hits the jest testing', () => {
+      // what is expected
+      expect(true).toBeTruthy();
+    })
+  }) 
+
+  describe('snapshot testing', () => {
+    it('the dummy data matches the snapshot', () => {
+    // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
+      expect(test).toMatchSnapshot();
+    })
+
+    it('the dependency chart component matches the snapshot', () => {
+      // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
+      expect(DependencyGraph).toMatchSnapshot();
+    })
   })
-}) 
-
-it('the dummy data matches the snapshot', () => {
- // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
-  expect(test).toMatchSnapshot();
-})
-
-it('Data from /charts/DataFuncDepGraph matches treeData from /charts/DependencyGraph', () => {
-  expect(changeData(test)).toEqual(treeData)
-})
-
+  //  it('the Dashboard chart component matches the snapshot', () => {
+  //   // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
+  //    expect(Dashboard).toMatchSnapshot();
+  //  })
+  describe('data flow testing', () => {
+    it('Dummy data from /charts/DataFuncDepGraph matches treeData from /charts/DependencyGraph', () => {
+      expect(changeData(test)).toEqual(treeData)
+    })
+  })
 
 
 
