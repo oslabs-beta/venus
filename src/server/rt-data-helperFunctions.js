@@ -7,8 +7,8 @@ const STREAM_WINDOW = 3;
 
 /**
  * This function will be invoked when analyzing data by service and by method.
- * @param df -> danfo.js DataFrame object.
- * @param category -> log object property / DataFrame column by which the data will be grouped -
+ * @param {object (Danfo.js DataFrame)} df -> danfo.js DataFrame object.
+ * @param {string} category -> log object property / DataFrame column by which the data will be grouped -
  *  Currently either 'reqHost' or 'reqMethod'.
  * @returns outputTable DataFrame object, with each row including the calculated statistics by
  *  the category passed in.
@@ -134,8 +134,8 @@ function rtDataByCategory(df, category) {
 
 /**
  * Function to convert a row in a Danfo.js DataFrame to an object
- * @param row -> Danfo.js DataFrame row
- * @param service (optional) -> passed in when constructing service-level object and 
+ * @param {array} row -> Danfo.js DataFrame row
+ * @param {string} service (optional) -> passed in when constructing service-level object and 
  * appends a service key:value pair with the service host (e.g. finance.google.com)
  */
 function rowToObj(row, service = false) {
@@ -154,8 +154,8 @@ function rowToObj(row, service = false) {
  * Note: while the conversion from JavaScript native data structure to Danfo back to JavaScript may
  * seem redundant, vectorization with Pandas series (underlying methodology in Danfo.js) is ~400x
  * more runtime efficient on average than native JS looping
- * @param row -> Danfo.js DataFrame row
- * @param service (optional) -> passed in when constructing service-level object and 
+ * @param {array} row -> Danfo.js DataFrame row
+ * @param {string} service (optional) -> passed in when constructing service-level object and 
  * appends a service key:value pair with the service host (e.g. finance.google.com)
  */
 function aggregateStatsToObj(df) {

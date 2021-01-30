@@ -127,7 +127,7 @@ const responseData = [
 ];
 
 /**
- * @param data -> array of log objects
+ * @param {array} data -> array of log objects
  * @returns single nested object with two properties: 'services' and 'aggregate'
   * Value of 'services' property is an array of objects. Each object includes consolidated metrics by service, as well as a byMethod property. 
     * Value of 'byMethod' property is a nested object, where each key represents a request method (GET / POST / PUT / DELETE / PATCH), 
