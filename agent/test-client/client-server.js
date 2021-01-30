@@ -148,7 +148,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // }, 1000);
 
 app.get("/chat", (req, res) => {
-  axios('https://curriculum-api.codesmith.io/messages/')
+  axios('https://curriculum-api.codesmith.io/messagez/')
     // .then(res => console.log('GET RES', res.config.url))
     .then((response) => res.status(200).json(response.data))
     .catch((err) => console.log(`Get error: ${err}`));
@@ -157,7 +157,7 @@ app.get("/chat", (req, res) => {
 app.post("/chat", (req, res) => {
   const { created_by, message } = req.body;
   axios
-    .post("https://curriculum-api.codesmith.io/messages", {
+    .post('https://curriculum-api.codesmith.io/messages', {
       created_by,
       message,
     })
