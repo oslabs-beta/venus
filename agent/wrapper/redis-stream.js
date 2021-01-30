@@ -3,12 +3,8 @@
 const config = require('config');
 const Redis = require('ioredis');
 
-// const venus = require('./wrapper');
-
-// venus();
 
 
-// console.log(process.env.NODE_ENV);
 const redisConfig = config.get('redisConnect');
 console.log('REDIS CONFIG', redisConfig, process.env.NODE_ENV);
 const redis = new Redis(redisConfig);
@@ -59,7 +55,8 @@ redisStream.writeRedisStream = (streamName, logObj) => {
     .catch(err => console.log(`Error writing to Redis stream: ${err}`));
 };
 
-//#region 
+
+// FIXME for testing purposes only. delete before shipping to production
 function readRedisStream(streamName, min, max) {
   console.log(`invoked with id ${min} and streamName ${streamName}`)
   // deconstruct tuple array back to js object 
@@ -89,11 +86,9 @@ function readRedisStream(streamName, min, max) {
   redis.xrange(streamName, min, max)
     .then(log => {
       console.log('READING LATEST REDIS STREAM', log);
-      console.log('LOG DURATION', log[0].reqResDuration);
       // console.log(`Successfully read from Redis stream -- ${streamName}: ${parsedLog}`)
     })
     .catch(err => console.log(`Error reading from Redis stream: ${err}`));
 };
-//#endregion
 
 module.exports = redisStream;
