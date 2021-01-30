@@ -13,7 +13,8 @@
     "dist": "electron-builder",
     "hist": "node src/server/historical-read-handler.js",
     "rt": "node src/server/real-time-read-handler.js",
-    "test": "jest"
+    "test": "jest",
+    "mocha": "NODE_ENV=test mocha"
   },
   "keywords": [],
   "author": "elisealcala",
@@ -89,6 +90,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "ioredis": "^4.19.4",
+    "mocha": "^8.2.1",
     "nodemon": "^2.0.7",
     "pg": "^8.5.1",
     "react": "^16.13.1",
