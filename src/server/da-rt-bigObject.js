@@ -1,13 +1,9 @@
+/* eslint-disable dot-notation */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 const dfd = require('danfojs-node');
+const { rtDataByCategory, rowToObj, aggregateStatsToObj } = require('./rt-data-helperFunctions');
 
-
-const STREAM_WINDOW = 3;
-
-// FIXME add status to venus listener 
-
-// #region 
 const responseData = [
   {
     id: '1611550512393-1',
@@ -19,7 +15,7 @@ const responseData = [
     clientError: '1',
     serverError: '0',
     noError: '0',
-    resMessage: 'OK',
+    resMessage: 'Forbidden',
     cycleDuration: '1232',
   },
   {
@@ -32,60 +28,8 @@ const responseData = [
     clientError: '1',
     serverError: '0',
     noError: '0',
-    resMessage: 'OK',
+    resMessage: 'Bad request',
     cycleDuration: '1300',
-  },
-  {
-    id: '1611550514493-1',
-    reqHost: 'finance.yahoo.com',
-    reqMethod: 'GET',
-    reqPath: '/TSLA',
-    reqUrl: 'https://finance.yahoo.com/TSLA',
-    resStatusCode: '500',
-    clientError: '0',
-    serverError: '1',
-    noError: '0',
-    resMessage: 'OK',
-    cycleDuration: '1500',
-  },
-  {
-    id: '1611550514593-1',
-    reqHost: 'finance.yahoo.com',
-    reqMethod: 'DELETE',
-    reqPath: '/AAPL',
-    reqUrl: 'https://finance.yahoo.com/AAPL',
-    resStatusCode: '200',
-    clientError: '0',
-    serverError: '0',
-    noError: '1',
-    resMessage: 'OK',
-    cycleDuration: '1335',
-  },
-  {
-    id: '1611550514593-1',
-    reqHost: 'weather.google.com',
-    reqMethod: 'GET',
-    reqPath: '/California/LA',
-    reqUrl: 'https://weather.google.com/California/LA',
-    resStatusCode: '200',
-    clientError: '0',
-    serverError: '0',
-    noError: '1',
-    resMessage: 'OK',
-    cycleDuration: '1200',
-  },
-  {
-    id: '1611550598793-1',
-    reqHost: 'weather.google.com',
-    reqMethod: 'PATCH',
-    reqPath: '/California/SF',
-    reqUrl: 'https://weather.google.com/California/SF',
-    resStatusCode: '200',
-    clientError: '0',
-    serverError: '0',
-    noError: '1',
-    resMessage: 'OK',
-    cycleDuration: '1100',
   },
   {
     id: '1611550577793-1',
@@ -101,11 +45,37 @@ const responseData = [
     cycleDuration: '1105.248547',
   },
   {
+    id: '1611550514493-1',
+    reqHost: 'finance.yahoo.com',
+    reqMethod: 'GET',
+    reqPath: '/TSLA',
+    reqUrl: 'https://finance.yahoo.com/TSLA',
+    resStatusCode: '500',
+    clientError: '0',
+    serverError: '1',
+    noError: '0',
+    resMessage: 'Internal server error',
+    cycleDuration: 'NaN',
+  },
+  {
+    id: '1611550514593-1',
+    reqHost: 'finance.yahoo.com',
+    reqMethod: 'DELETE',
+    reqPath: '/AAPL',
+    reqUrl: 'https://finance.yahoo.com/AAPL',
+    resStatusCode: '400',
+    clientError: '1',
+    serverError: '0',
+    noError: '0',
+    resMessage: 'Bad request',
+    cycleDuration: '1335',
+  },
+  {
     id: '1611550577793-1',
-    reqHost: 'weather.google.com',
-    reqMethod: 'POST',
-    reqPath: '/messages/',
-    reqUrl: 'https://curriculum-api.codesmith.io/messages/',
+    reqHost: 'finance.yahoo.com',
+    reqMethod: 'PUT',
+    reqPath: '/TSLA/',
+    reqUrl: 'https://finance.yahoo.com/TSLA/',
     resStatusCode: '200',
     clientError: '0',
     serverError: '0',
@@ -114,11 +84,38 @@ const responseData = [
     cycleDuration: '1105.248547',
   },
   {
+    id: '1611550514593-1',
+    reqHost: 'weather.google.com',
+    reqMethod: 'GET',
+    reqPath: '/California/LA',
+    reqUrl: 'https://weather.google.com/california/la',
+    resStatusCode: '200',
+    clientError: '0',
+    serverError: '0',
+    noError: '1',
+    resMessage: 'OK',
+    cycleDuration: '1200',
+  },
+  {
+    id: '1611550598793-1',
+    reqHost: 'weather.google.com',
+    reqMethod: 'PATCH',
+    reqPath: '/California/SF',
+    reqUrl: 'https://weather.google.com/california/sf',
+    resStatusCode: '200',
+    clientError: '0',
+    serverError: '0',
+    noError: '1',
+    resMessage: 'OK',
+    cycleDuration: '1100',
+  },
+  
+  {
     id: '1611550577793-1',
-    reqHost: 'finance.yahoo.com',
-    reqMethod: 'PUT',
-    reqPath: '/messages/',
-    reqUrl: 'https://curriculum-api.codesmith.io/messages/',
+    reqHost: 'weather.google.com',
+    reqMethod: 'POST',
+    reqPath: '/venice/',
+    reqUrl: 'https://weather.google.com/california/venice/',
     resStatusCode: '200',
     clientError: '0',
     serverError: '0',
@@ -126,268 +123,74 @@ const responseData = [
     resMessage: 'OK',
     cycleDuration: '1105.248547',
   },
+  
 ];
 
+/**
+ * @param data -> array of log objects
+ * @returns single nested object with two properties: 'services' and 'aggregate'
+  * Value of 'services' property is an array of objects. Each object includes consolidated metrics by service, as well as a byMethod property. 
+    * Value of 'byMethod' property is a nested object, where each key represents a request method (GET / POST / PUT / DELETE / PATCH), 
+    * and the value is an object with consolidated metrics at that request level
+  * Value of 'aggregate' property is an object with aggregate stats for the entire data set, as well as a byMethod property,
+  * with an identical structure to one mentioned above.
+  */ 
+
 const rtData = (data) => {
-  // hacky code to try conforming the objects in case one is missing a property
-  function rtDataByCategory (df, category) {
-    const dfGroupMethod = df.groupby([`${category}`]);
-    const dfNewMethod = dfGroupMethod.col([`${category}`]).count();
-
-    let finalTableMethod;      
-
-    const resTimeDFMethod = dfGroupMethod.col(['cycleDuration']).mean();
-
-    finalTableMethod = dfd.merge({
-      left: dfNewMethod,
-      right: resTimeDFMethod,
-      on: [`${category}`],
-      how: 'left',
-      });
-
-    const clientErrorDFMethod = dfGroupMethod.col(['clientError']).sum();
-    clientErrorDFMethod.columns[1] = 'client_err_count';
-
-    finalTableMethod = dfd.merge({
-      left: finalTableMethod,
-      right: clientErrorDFMethod,
-      on: [`${category}`],
-      how: 'left',
-    });
-
-    finalTableMethod.fillna({ values: [0], inplace: true });
-
-    const clientErrorRateColMethod = finalTableMethod.client_err_count
-      .div(finalTableMethod.reqMethod_count)
-      .mul(100);
-    
-    finalTableMethod.addColumn({
-      column: 'Client Error (%)',
-      value: clientErrorRateColMethod.col_data[0],
-    }); 
-
-    const serverErrorDFMethod = dfGroupMethod.col(['serverError']).sum();
-    serverErrorDFMethod.columns[1] = 'server_err_count';
-    // availabilityDF.print()
-    finalTableMethod = dfd.merge({
-      left: finalTableMethod,
-      right: serverErrorDFMethod,
-      on: [`${category}`],
-      how: 'left',
-    });
-
-    finalTableMethod.fillna({ values: [0], inplace: true });
-    
-    
-    const serverErrColMethod = finalTableMethod.server_err_count
-      .div(finalTableMethod.reqMethod_count)
-      .mul(100);
-
-
-    // availabilityCol.print();
-    finalTableMethod.addColumn({
-      column: 'Server Error (%)',
-      value: serverErrColMethod.col_data[0],
-    });
-    
-    console.log('FINAL TABLE METHOD')
-    finalTableMethod.print()
-  // finalTableMethod.print();
-  // console.log(finalTableMethod);
-
-  const outputTableMethod = finalTableMethod.loc({
-    columns: [
-      'reqMethod',
-      'reqMethod_count',
-      'cycleDuration_mean',
-      'Client Error (%)',
-      'Server Error (%)',
-    ],
-  });
-  return outputTableMethod
-}
-  
-  
-
-  const df = new dfd.DataFrame(data);
-  df['cycleDuration'] = df['cycleDuration'].astype('int32')
-  df['resStatusCode'] = df['resStatusCode'].astype('int32')
-  df['clientError'] = df['clientError'].astype('int32')
-  df['serverError'] = df['serverError'].astype('int32')
-  df['noError'] = df['noError'].astype('int32')
-
-  const dfGroup = df.groupby(['reqHost']);
-  const dfNew = dfGroup.col(['reqHost']).count();
-
-  let finalTable;
   const consolidatedObj = {};
-  
-  const resTimeDF = dfGroup.col(['cycleDuration']).mean();
 
-  finalTable = dfd.merge({
-    left: dfNew,
-    right: resTimeDF,
-    on: ['reqHost'],
-    how: 'left',
-  });
-  
-    // declaring outside of conditional scope for aggregate reference
-    // if (clientErrExists) {
-      // const clientErrorResRows = df.query({ column: 'status', is: '==', to: 'client-error' });
-      
-      // const clientTest = df.groupby(['reqHost']);
-      const clientErrorDF = dfGroup.col(['clientError']).sum();
-      // let newClientErrorDF = df.col(['clientError']).count();
-      // console.log('new client error DF', newClientErrorDF);
-      clientErrorDF.columns[1] = 'client_err_count';
+  /**
+   * convert array of objects to data frame and cast the numeric variables (currently in string format) to integers
+   */
+  const df = new dfd.DataFrame(data);
+  df['cycleDuration'] = df['cycleDuration'].astype('int32');
+  df['resStatusCode'] = df['resStatusCode'].astype('int32');
+  df['clientError'] = df['clientError'].astype('int32');
+  df['serverError'] = df['serverError'].astype('int32');
+  df['noError'] = df['noError'].astype('int32');
 
-      finalTable = dfd.merge({
-        left: finalTable,
-        right: clientErrorDF,
-        on: ['reqHost'],
-        how: 'left',
-      });
-
-      finalTable.fillna({ values: [0], inplace: true });
-
-
-      // console.log(finalTable);
-      // finalTable.print();
-      const clientErrorRateCol = finalTable.client_err_count
-        .div(finalTable.reqHost_count)
-        .mul(100);
-      
-      finalTable.addColumn({
-        column: 'Client Error (%)',
-        value: clientErrorRateCol.col_data[0],
-      });
-    // } 
-
-    // declaring outside of conditional scope for aggregate reference
-    // let newServerErrorDF;
-    // if (serverErrExists) {
-      // const serverErrorResRows = df.query({ column: 'status', is: '==', to: 'server-error' });
-      // const serverErrorDF = serverErrorResRows.groupby(['reqHost']);
-      const serverErrorDF = dfGroup.col(['serverError']).sum();
-      serverErrorDF.columns[1] = 'server_err_count';
-      // availabilityDF.print()
-      finalTable = dfd.merge({
-        left: finalTable,
-        right: serverErrorDF,
-        on: ['reqHost'],
-        how: 'left',
-      });
-
-      finalTable.fillna({ values: [0], inplace: true });
-      
-      const serverErrCol = finalTable.server_err_count
-        .div(finalTable.reqHost_count)
-        .mul(100);
-
-      // availabilityCol.print();
-      finalTable.addColumn({
-        column: 'Server Error (%)',
-        value: serverErrCol.col_data[0],
-      });
-    // } 
-  
-  // console.log(finalTable);
-
-  const outputTable = finalTable.loc({
-    columns: [
-      'reqHost',
-      'reqHost_count',
-      'cycleDuration_mean',
-      'Client Error (%)',
-      'Server Error (%)',
-    ],
-  });
-
-  outputTable.reqHost_count = outputTable.reqHost_count.div(STREAM_WINDOW);
-
-  // console.log('Final Table: ', outputTable);
-  // outputTable.print();
 
   
+  const outputTable = rtDataByCategory(df, 'reqHost');
+  
+  /**
+   * Each row in the outputTable includes consolidated metrics by service.
+   * Iterate through each row and construct the service-level object to be pushed to the array ('services' key: value)
+   */
   consolidatedObj.services = [];
-
   outputTable.data.forEach((row) => {
-    const outputObj = {};
-    outputObj.service = row[0];
-    outputObj.status = 'good';
-    outputObj.load = `${Math.ceil(row[1])  } hpm`;
-    outputObj.response_time = Math.round(row[2]);
-    outputObj.error = Math.round(row[3]);
-    outputObj.availability = Math.round(100 - row[4]);
-
+    const service = row[0];
+    const outputObj = rowToObj(row, service);
     consolidatedObj.services.push(outputObj);
   });
 
+  /**
+   * Invoke similar function to the above to construct the aggregate object ('aggregate' key: value)
+   */
+  consolidatedObj.aggregate = aggregateStatsToObj(df);
 
-  // FOR OVERALL AGGREGATE STATISTICS
-
-  consolidatedObj.aggregate = {};
-
-  const totalRequests = df.reqHost.count();
-  const totalResponses = df.resStatusCode.count();
-  const totalClientErrors = clientErrorDF.col_data[0].length;
-  consolidatedObj.aggregate.error = Math.round(totalClientErrors / totalResponses * 100)
-
-  consolidatedObj.aggregate.status = 'good';
-  // total
-  consolidatedObj.aggregate.load = `${Math.ceil(totalRequests / STREAM_WINDOW) } hpm`;
-  consolidatedObj.aggregate.response_time = Math.round(
-    df.cycleDuration.mean(),
-  );
-  
-  const totalServerErrors = serverErrorDF.col_data[0].length;
-  consolidatedObj.aggregate.availability = Math.round( 100 -
-    (totalServerErrors / totalRequests) * 100
-  );
-
-  const aggregateOutputTable = rtDataByCategory(df, 'reqMethod');
-  consolidatedObj.aggregate.byMethod = {};
-    // iterate through each method
-    aggregateOutputTable.data.forEach((row) => {
-      const method = row[0];
-      consolidatedObj.aggregate.byMethod[method] = {};
-      consolidatedObj.aggregate.byMethod[method].status = 'good';
-      consolidatedObj.aggregate.byMethod[method].load = `${Math.ceil(row[1])} hpm`;
-      consolidatedObj.aggregate.byMethod[method].response_time = Math.round(row[2]);
-      consolidatedObj.aggregate.byMethod[method].error = Math.round(row[3]);
-      consolidatedObj.aggregate.byMethod[method].availability = Math.round(100 - row[4]);
-    });
-
-    console.log(consolidatedObj.aggregate.byMethod)
-  
-
+  /** array of host values */
   const uniqueHosts = df.reqHost.unique().data;
 
-  
-  // iterate through each host
+  /* iterate through each host (aka service) value in order to fill in service-level data */
   uniqueHosts.forEach((host, hostIndex) => {
     const dfHost = df.query({ column: 'reqHost', is: '==', to: host });
-    const outputTable = rtDataByCategory(dfHost, 'reqMethod');
-    outputTable.reqMethod_count = outputTable.reqMethod_count.div(STREAM_WINDOW);
+    const outputTableByMethod = rtDataByCategory(dfHost, 'reqMethod');
     consolidatedObj.services[hostIndex].byMethod = {};
-    // iterate through each method
-    outputTable.data.forEach((row) => {
+    
+    /* iterate through each request method in order to fill in method-level data */
+    outputTableByMethod.data.forEach((row) => {
       const method = row[0];
-      consolidatedObj.services[hostIndex].byMethod[method] = {};
-      consolidatedObj.services[hostIndex].byMethod[method].status = 'good';
-      consolidatedObj.services[hostIndex].byMethod[method].load = `${Math.ceil(row[1])} hpm`;
-      consolidatedObj.services[hostIndex].byMethod[method].response_time = Math.round(row[2]);
-      consolidatedObj.services[hostIndex].byMethod[method].error = Math.round(row[3]);
-      consolidatedObj.services[hostIndex].byMethod[method].availability = Math.round(100 - row[4]);
+      consolidatedObj.services[hostIndex].byMethod[method] = rowToObj(row);
     });
   });
-  // console.log(JSON.stringify(consolidatedObj));
+  // FIXME delete console.log before shipping
   console.log(consolidatedObj);
-  console.log(consolidatedObj.services[0]);
+  console.log(consolidatedObj.services[1]);
   return JSON.stringify(consolidatedObj);
-}
+};
 
+// FIXME uncomment below before shipping
 // module.exports = rtData;
 
 rtData(responseData);
-
