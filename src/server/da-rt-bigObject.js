@@ -130,10 +130,86 @@ const responseData = [
 
 const rtData = (data) => {
   // hacky code to try conforming the objects in case one is missing a property
+  function rtDataByCategory (df, category) {
+    const dfGroupMethod = df.groupby([`${category}`]);
+    const dfNewMethod = dfGroupMethod.col([`${category}`]).count();
+
+    let finalTableMethod;      
+
+    const resTimeDFMethod = dfGroupMethod.col(['cycleDuration']).mean();
+
+    finalTableMethod = dfd.merge({
+      left: dfNewMethod,
+      right: resTimeDFMethod,
+      on: [`${category}`],
+      how: 'left',
+      });
+
+    const clientErrorDFMethod = dfGroupMethod.col(['clientError']).sum();
+    clientErrorDFMethod.columns[1] = 'client_err_count';
+
+    finalTableMethod = dfd.merge({
+      left: finalTableMethod,
+      right: clientErrorDFMethod,
+      on: [`${category}`],
+      how: 'left',
+    });
+
+    finalTableMethod.fillna({ values: [0], inplace: true });
+
+    const clientErrorRateColMethod = finalTableMethod.client_err_count
+      .div(finalTableMethod.reqMethod_count)
+      .mul(100);
+    
+    finalTableMethod.addColumn({
+      column: 'Client Error (%)',
+      value: clientErrorRateColMethod.col_data[0],
+    }); 
+
+    const serverErrorDFMethod = dfGroupMethod.col(['serverError']).sum();
+    serverErrorDFMethod.columns[1] = 'server_err_count';
+    // availabilityDF.print()
+    finalTableMethod = dfd.merge({
+      left: finalTableMethod,
+      right: serverErrorDFMethod,
+      on: [`${category}`],
+      how: 'left',
+    });
+
+    finalTableMethod.fillna({ values: [0], inplace: true });
+    
+    
+    const serverErrColMethod = finalTableMethod.server_err_count
+      .div(finalTableMethod.reqMethod_count)
+      .mul(100);
+
+
+    // availabilityCol.print();
+    finalTableMethod.addColumn({
+      column: 'Server Error (%)',
+      value: serverErrColMethod.col_data[0],
+    });
+    
+    console.log('FINAL TABLE METHOD')
+    finalTableMethod.print()
+  // finalTableMethod.print();
+  // console.log(finalTableMethod);
+
+  const outputTableMethod = finalTableMethod.loc({
+    columns: [
+      'reqMethod',
+      'reqMethod_count',
+      'cycleDuration_mean',
+      'Client Error (%)',
+      'Server Error (%)',
+    ],
+  });
+  return outputTableMethod
+}
   
+  
+
   const df = new dfd.DataFrame(data);
-
-
   df['cycleDuration'] = df['cycleDuration'].astype('int32')
   df['resStatusCode'] = df['resStatusCode'].astype('int32')
   df['clientError'] = df['clientError'].astype('int32')
@@ -269,7 +345,7 @@ const rtData = (data) => {
     (totalServerErrors / totalRequests) * 100
   );
 
-  const aggregateOutputTable = rtDataByMethod(df);
+  const aggregateOutputTable = rtDataByCategory(df, 'reqMethod');
   consolidatedObj.aggregate.byMethod = {};
     // iterate through each method
     aggregateOutputTable.data.forEach((row) => {
@@ -287,85 +363,11 @@ const rtData = (data) => {
 
   const uniqueHosts = df.reqHost.unique().data;
 
-  function rtDataByMethod (dfMethod) {
-    const dfGroupMethod = dfMethod.groupby(['reqMethod']);
-    const dfNewMethod = dfGroupMethod.col(['reqMethod']).count();
-
-    let finalTableMethod;      
-
-    const resTimeDFMethod = dfGroupMethod.col(['cycleDuration']).mean();
-
-    finalTableMethod = dfd.merge({
-      left: dfNewMethod,
-      right: resTimeDFMethod,
-      on: ['reqMethod'],
-      how: 'left',
-      });
-
-    const clientErrorDFMethod = dfGroupMethod.col(['clientError']).sum();
-    clientErrorDFMethod.columns[1] = 'client_err_count';
-
-    finalTableMethod = dfd.merge({
-      left: finalTableMethod,
-      right: clientErrorDFMethod,
-      on: ['reqMethod'],
-      how: 'left',
-    });
-
-    finalTableMethod.fillna({ values: [0], inplace: true });
-
-    const clientErrorRateColMethod = finalTableMethod.client_err_count
-      .div(finalTableMethod.reqMethod_count)
-      .mul(100);
-    
-    finalTableMethod.addColumn({
-      column: 'Client Error (%)',
-      value: clientErrorRateColMethod.col_data[0],
-    }); 
-
-    const serverErrorDFMethod = dfGroupMethod.col(['serverError']).sum();
-    serverErrorDFMethod.columns[1] = 'server_err_count';
-    // availabilityDF.print()
-    finalTableMethod = dfd.merge({
-      left: finalTableMethod,
-      right: serverErrorDFMethod,
-      on: ['reqMethod'],
-      how: 'left',
-    });
-
-    finalTableMethod.fillna({ values: [0], inplace: true });
-    
-    
-    const serverErrColMethod = finalTableMethod.server_err_count
-      .div(finalTableMethod.reqMethod_count)
-      .mul(100);
-
-
-    // availabilityCol.print();
-    finalTableMethod.addColumn({
-      column: 'Server Error (%)',
-      value: serverErrColMethod.col_data[0],
-    });
-    
   
-  // finalTableMethod.print();
-  // console.log(finalTableMethod);
-
-  const outputTableMethod = finalTableMethod.loc({
-    columns: [
-      'reqMethod',
-      'reqMethod_count',
-      'cycleDuration_mean',
-      'Client Error (%)',
-      'Server Error (%)',
-    ],
-  });
-  return outputTableMethod
-}
   // iterate through each host
   uniqueHosts.forEach((host, hostIndex) => {
     const dfHost = df.query({ column: 'reqHost', is: '==', to: host });
-    const outputTable = rtDataByMethod(dfHost);
+    const outputTable = rtDataByCategory(dfHost, 'reqMethod');
     outputTable.reqMethod_count = outputTable.reqMethod_count.div(STREAM_WINDOW);
     consolidatedObj.services[hostIndex].byMethod = {};
     // iterate through each method
