@@ -12,7 +12,7 @@ const EditableCell = ({
   children,
   ...restProps
 }) => {
-  const inputNode = inputType === 'number' ? <InputNumber /> : <Input />;
+  const inputNode = <InputNumber />;
   return (
     <td {...restProps}>
       {editing ? (
@@ -21,12 +21,6 @@ const EditableCell = ({
           style={{
             margin: 0,
           }}
-          rules={[
-            {
-              required: true,
-              message: `Please Input ${title}!`,
-            },
-          ]}
         >
           {inputNode}
         </Form.Item>
@@ -38,7 +32,7 @@ const EditableCell = ({
 };
 
 const EditableTable = () => {
-  const originData = [];
+  const originData: any = [];
   const { serviceThresholds, setServiceThresholds } = useContext(dynamicContext)
   for (let i = 0; i < serviceThresholds.length; i++) {
     if (serviceThresholds[i].availability_threshold){
@@ -107,7 +101,7 @@ const EditableTable = () => {
       key: "service",
       sorter: {
         compare: (a:any, b:any) => a.service.length - b.service.length,
-        // multiple: 1,
+       
       }
     },
     {
@@ -117,7 +111,7 @@ const EditableTable = () => {
       editable: true,
       sorter: {
         compare: (a:any, b:any) => a.availability - b.availability,
-        // multiple: 1,
+        
       }
     },
     {
@@ -125,6 +119,9 @@ const EditableTable = () => {
       dataIndex: "response_time_threshold",
       key: "response_time",
       editable: true,
+      sorter: {
+        compare: (a:any, b:any) => a.response_time - b.response_time,
+      }
     },
     {
       title: "Load Threshold (hpm)",

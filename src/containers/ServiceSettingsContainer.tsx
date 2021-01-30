@@ -8,11 +8,8 @@ import React, { useContext, useEffect, useState } from "react";
 //  import TabContainer from './TabContainer'
 import { AggregateStats } from "../components/AggregateStats";
 import { dynamicContext } from "../contexts/dynamicContext";
-import { globalContext } from "../contexts/globalContext";
 import Divider from "antd/es/divider";
-import Table from "antd/es/table";
 import Title from "antd/es/typography/Title";
-import { Input, InputNumber, Popconfirm, Form, Typography } from 'antd'
 import { EditableTable } from './TestServiceSettings'
 
 function SettingsContainer(): JSX.Element {
@@ -51,7 +48,7 @@ function SettingsContainer(): JSX.Element {
     setAggregate({
       error: 40,
       response_time: 1278,
-      load: "2hpm",
+      load: 2,
       availability: 83,
       status: "good",
     });

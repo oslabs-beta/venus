@@ -21,15 +21,13 @@ const color: colors = {
 	bad: '#f5222d'
 }
 
-
-
 function AggregateStats(props: any): JSX.Element{
     return (
 	<div className="cardRow">
 	<Row gutter={32}>
 				<Col span={4}>
 			<div className="aggregate">
-					<Card bordered={true} bodyStyle={{width: "250px"}} hoverable={true}>
+					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
 						<Statistic
 							className="stats"
 							title="Title"
@@ -42,7 +40,7 @@ function AggregateStats(props: any): JSX.Element{
 				</Col>
 				<Col span={4}>
 				<div className="aggregate">
-					<Card bordered={true} bodyStyle={{width: "250px"}} hoverable={true}>
+					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
 						<Statistic
 							title="Health"
 							value={'GOOD'}
@@ -54,7 +52,7 @@ function AggregateStats(props: any): JSX.Element{
 				</Col>
 				<Col span={4}>
 				<div className="aggregate">
-					<Card className="aggregateCards" bordered={true} bodyStyle={{width: "250px"}} hoverable={true}>
+					<Card className="aggregateCards" bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
 						<Statistic
 							className="stats"
 							title="Availability"
@@ -69,7 +67,7 @@ function AggregateStats(props: any): JSX.Element{
 				</Col>
 		<Col span={4}>
 				<div className="aggregate">
-					<Card bordered={true} bodyStyle={{width: "250px"}} hoverable={true}>
+					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
 						<Statistic
 							title="Response Time"
 							value={props.response_time}
@@ -82,7 +80,7 @@ function AggregateStats(props: any): JSX.Element{
 				</Col>
 				<Col span={4}>
 				<div className="aggregate">
-					<Card bordered={true} bodyStyle={{width: "250px"}} hoverable={true}>
+					<Card bordered={true} bodyStyle={{width: "200px"}} hoverable={true}>
 						<Statistic
 							className="stats"
 							title="Load"
@@ -96,7 +94,7 @@ function AggregateStats(props: any): JSX.Element{
 				</Col>
 				<Col span={4}>
 				<div className="aggregate">
-					<Card bodyStyle={{width: "250px"}} hoverable={true}>
+					<Card bodyStyle={{width: "200px"}} hoverable={true}>
 						<Statistic
 							className="stats"
 							title="Response Error"
