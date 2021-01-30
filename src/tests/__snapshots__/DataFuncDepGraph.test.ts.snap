@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`the dummy data is correct 1`] = `
+exports[`the dummy data matches the snapshot 1`] = `
 Object {
   "services": Array [
     Object {

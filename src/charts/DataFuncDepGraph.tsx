@@ -105,9 +105,9 @@ function changeChildArr(arr: IService[]): TreeNode[]{
 }
 
 // console.log('change arr', changeChildArr(test.services))
-// let children = changeChildArr(test.services)
-// console.log('children', children[1].children)
-
+let children = changeChildArr(test.services)[0]
+console.log('children', children)
+// console.log(test.services);
 
 /* ----------- CHANGE MAIN ARRAY --------- */
 // this is the kind of type of the tree node
@@ -197,4 +197,4 @@ const treeData = changeData(test)
 //     ]
 //   };
 
-  export { changeChildArr, changeData, test, treeData}
+  export { changeChildArr, changeData, test, treeData, IDataNode, IService, TreeNode}
