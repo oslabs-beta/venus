@@ -8,7 +8,7 @@ describe('hitting test files', () => {
   // what the specific test is
   it('hits the jest testing', () => {
     // what is expected
-    expect(true).toBeTruthy(true);
+    expect(true).toBeTruthy();
   })
 }) 
 
