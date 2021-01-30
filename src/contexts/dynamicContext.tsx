@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 type dynamicState = {
   services: { 
-    status: string,
+    status?: number,
     service: string,
-    load: string,
+    load: number,
     response_time: number, 
     error: number,
     availability: number,
@@ -12,8 +12,8 @@ type dynamicState = {
     byMethod: any
   }[],
   aggregate: {
-    status: string,
-    load: string,
+    status?: number,
+    load: number,
     response_time: number, 
     error: number,
     availability: number,

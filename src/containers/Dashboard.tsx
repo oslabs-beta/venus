@@ -25,7 +25,7 @@ function Dashboard(): JSX.Element {
   const { serverAddress } = useContext(globalContext)
 
   const dataSource: any = [];
-
+  // add port
   useEffect(() => {
     setFilter(filter)
     console.log(serverAddress)
@@ -107,7 +107,7 @@ function Dashboard(): JSX.Element {
         byMethod: {
           GET: {
             status: "bad",
-            load: "0.6666666865348816 hpm",
+            load: 1,
             response_time: 12,
             error: 5,
             availability: 1,
@@ -141,29 +141,30 @@ function Dashboard(): JSX.Element {
     })
     setServiceThresholds(
       [
-        {
-          service:'a'
-        },
-        {
-          service:'b'
-        },
-        {
-          service:'c'
-        }
+        {service: 'a'},
+        {service: 'b'},
+        {service: 'c'}
       ]
     )
+    
     return () => socket.disconnect();
   }, []);
 
   for (let i = 0; i < services.length; i++) {
     services[i].key = i;
+    let status = 0;
     if (filter[services[i].service]){
       const holder = filter[services[i].service]
       dataSource.push(services[i].byMethod[holder]);
+
     } else {
+      // if (serviceThresholds[i].load_threshold < services[i].load) ++status
+      // if (serviceThresholds[i].error_threshold < services[i].error) ++status
+      // if (serviceThresholds[i].response_time_threshold < services[i].response_time) ++status
+      // if (serviceThresholds[i].availability_threshold < services[i].availability) ++status
+      services[i].status = status
       dataSource.push(services[i]);
     }
-    
   }
   const columns: any = [
     {
@@ -176,14 +177,14 @@ function Dashboard(): JSX.Element {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: (status: string) => {
-        if (status === "good") {
+      render: (status: number) => {
+        if (status === 0) {
           return <Tag color={"green"}  style={{fontWeight: 'bold'}}>GOOD</Tag>;
         }
-        if (status === "fair") {
+        if (status === 1) {
           return <Tag color={"orange"} style={{fontWeight: 'bold'}}>FAIR</Tag>;
         }
-        if (status === "poor") {
+        if (status >= 2) {
           return <Tag color={"red"}  style={{fontWeight: 'bold'}}>POOR</Tag>;
         }
       },

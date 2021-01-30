@@ -15,6 +15,7 @@ import Card from 'antd/es/card';
 import Divider from "antd/es/divider";
 import Title from "antd/es/typography/Title";
 import Radio from 'antd/es/radio'
+import Button from 'antd/es/button'
 
 
 
@@ -37,15 +38,15 @@ function ChartContainer(): JSX.Element {
     // )
   },[])
   
+// temporal options for chart displays
   const options = [
     { label: 'Last Hour', value: 'lastHour' },
     { label: 'Last Day', value: 'lastDay' },
     { label: 'Last Week', value: 'lastWeek' },
     { label: 'Last Month', value: 'lastMonth' },
-    { label: 'Refresh Data', value: 'refreshData'}
   ];
 
-
+// select data range to display from historical state
   const filterData = (e:any) => {
     console.log('radio checked', e.target.value);
   };
@@ -61,9 +62,10 @@ function ChartContainer(): JSX.Element {
       <Divider><Title level={3}>Historical Status</Title></Divider>
       <div className="rangeSelectorContainer">
         <CardDropDown  />
-        <div className="">
-          <Radio.Group optionType="button"  onChange={filterData} options={options}/>
-        </div>
+        
+        <Radio.Group style={{marginLeft: '10px'}} optionType="button"  onChange={filterData} options={options}/>
+
+        <Button type="primary" style={{marginLeft: '10px'}}>Refresh Data</Button>
       </div>
         <Row gutter={[32,32]}>
           <Col span={12}>
@@ -83,7 +85,7 @@ function ChartContainer(): JSX.Element {
           <Col span={12}>
             <Title level={5}>Error Rate</Title>
             <Card bordered={true} hoverable={true} style={{width: "500px"}}>
-              <AreaChart />
+              <LoadChart />
             </Card>
           </Col>
           <Col span={12}>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { dynamicContext } from '../contexts/dynamicContext'
-import { Table, Input, InputNumber, Popconfirm, Form, Typography } from 'antd';
+import { Table, InputNumber, Popconfirm, Form, Typography } from 'antd';
 
 const EditableCell = ({
   editing,
