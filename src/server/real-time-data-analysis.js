@@ -5,7 +5,7 @@ const dfd = require('danfojs-node');
 const STREAM_WINDOW = 3;
 
 // #region 
-// const responseData = [
+const responseData = [
 //   // {
 //   //   reqMethod: 'GET',
 //   //   reqHost: 'curriculum-api.codesmith.io',
@@ -60,37 +60,37 @@ const STREAM_WINDOW = 3;
 //   //   cycleDuration: '1100',
 //   //   resMessage: 'OK',
 //   // },
-//   {
-//     id: '1611550577793-1',
-//     reqMethod: 'GET',
-//     reqHost: 'curriculum-api.codesmith.io',
-//     reqPath: '/messages/',
-//     reqUrl: 'https://curriculum-api.codesmith.io/messages/',
-//     resStatusCode: '200',
-//     resMessage: 'OK',
-//     cycleDuration: '1105.248547'
-//   },
-//   {
-//     id: '1611550577793-1',
-//     reqMethod: 'GET',
-//     reqHost: 'weather.google.com',
-//     reqPath: '/messages/',
-//     reqUrl: 'https://curriculum-api.codesmith.io/messages/',
-//     resStatusCode: '200',
-//     resMessage: 'OK',
-//     cycleDuration: '1105.248547'
-//   },
-//   {
-//     id: '1611550577793-1',
-//     reqMethod: 'GET',
-//     reqHost: 'finance.yahoo.com',
-//     reqPath: '/messages/',
-//     reqUrl: 'https://curriculum-api.codesmith.io/messages/',
-//     cycleDuration: '1105.248547',
-//     resStatusCode: '200',
-//     resMessage: 'OK'
-//   },
-// ];
+  {
+    id: '1611550577793-1',
+    reqMethod: 'GET',
+    reqHost: 'curriculum-api.codesmith.io',
+    reqPath: '/messages/',
+    reqUrl: 'https://curriculum-api.codesmith.io/messages/',
+    resStatusCode: '200',
+    resMessage: 'OK',
+    cycleDuration: '1105.248547'
+  },
+  {
+    id: '1611550577793-1',
+    reqMethod: 'GET',
+    reqHost: 'weather.google.com',
+    reqPath: '/messages/',
+    reqUrl: 'https://curriculum-api.codesmith.io/messages/',
+    resStatusCode: '200',
+    resMessage: 'OK',
+    cycleDuration: '1105.248547'
+  },
+  {
+    id: '1611550577793-1',
+    reqMethod: 'GET',
+    reqHost: 'finance.yahoo.com',
+    reqPath: '/messages/',
+    reqUrl: 'https://curriculum-api.codesmith.io/messages/',
+    cycleDuration: '1105.248547',
+    resStatusCode: '200',
+    resMessage: 'OK'
+  },
+];
 // #endregion
 
 // FIXME update logic (this file and wrapper) to properly handle no response
@@ -484,6 +484,6 @@ const rtData = (data) => {
   return JSON.stringify(consolidatedObj);
 };
 
-// rtData(responseData); 
+rtData(responseData); 
 exports.rtData = rtData; 
 

@@ -7,7 +7,8 @@ const redis = require('./real-time-read-handler.js');
 
 const SOCKET_PORT = 8080; 
 const EC2_HOST = process.env.EC2_HOST; 
-
+const COUNT = 0; 
+let BUFFER = []; 
 
 // const responseData = [
 //   {
@@ -66,7 +67,6 @@ const EC2_HOST = process.env.EC2_HOST;
 //   },
 // ];
 
-
 const app = express(); 
 app.use(cors({origin: '*'})); 
 app.use(bodyParser); 
@@ -84,21 +84,40 @@ io.sockets.on('connection', (socket) => {
 })
 
 async function sendData(socket){
+  //Increment count everytime sendData is invoked. 
+  COUNT++; 
 
-  console.log('Send Data Invoked!')
+  //Read last three minutes of log data from stream and store into an array of objects
   const streamData = await redis.readRedisStream();
 
   if(streamData.length !== 0){
-    const output = data.rtData(streamData); 
+    //Analyze last three minutes of stream data and store output of analysis
+    const output = data.rtData(streamData);
+    
+    //Emit output to the front-end via websocket
     socket.emit('real-time-object', output); 
-    console.log(`Output is ${output}`);
+
+    if(COUNT === 20){
+      //add output to buffer
+      BUFFER.push(output); 
+      //Reset count to be zero
+      COUNT = 0; 
+      
+      if(BUFFER.length === 20){
+        //pass buffer into historical data analysis
+        
+        //empty buffer
+        BUFFER = []; 
+      }
+    }
+
   } else {
     console.log('No usable data from the stream. ')
   }
 
   setTimeout(() => {
     sendData(socket); 
-  }, 1000); 
+  }, 3000); 
 }
 
 // const streamData = await redis.readRedisStream();
