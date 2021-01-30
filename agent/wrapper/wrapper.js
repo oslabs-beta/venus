@@ -56,9 +56,8 @@ function listener(module) {
       if (endpointMatch) {
         fullLog.cycleDuration = perfEntry.duration;
         // FIXME this is hardcoded logic for test purposes. Should fix when implementing response object edge cases
-        // console.log('LOG AFTER OBSERVER END', fullLog);
-        return fullLog;
-        // return redisStream.writeRedisStream(redisStream.streamName, fullLog);
+        console.log('LOG AFTER OBSERVER END', fullLog);
+        return redisStream.writeRedisStream(redisStream.streamName, fullLog);
       }
     });
 
@@ -94,81 +93,83 @@ function listener(module) {
        */
       req.emit = function (eventName, response) {
         switch (eventName) {
-          case "response": {
+        case "error": {
+          console.log("ERROR CAUGHT!");
+          break;
+        }
+        case "response": {
             // console.log('WE GOT RESPONSE FAM', response)
-            if (endpointMatch) {
-              // response.on('error', () => console.log('RESPONSE ERROR'));
-              const statusCode = response.statusCode || 404;
-              fullLog.resStatusCode = statusCode;
-              if (clientErrCodes[statusCode]) {
-                fullLog.clientError = 1;
-                fullLog.serverError = 0;
-                fullLog.noError = 0;
-              } else if (serverErrCodes[statusCode]) {
-                fullLog.clientError = 0;
-                fullLog.serverError = 1;
-                fullLog.noError = 0;
-              } else {
-                fullLog.clientError = 0;
-                fullLog.serverError = 0;
-                fullLog.noError = 1;
-              }
-            }
+          if (endpointMatch) {
+            const statusCode = response.statusCode || 404;
+            fullLog.resStatusCode = statusCode;
+            if (clientErrCodes[statusCode]) {
+              fullLog.clientError = 1;
+              fullLog.serverError = 0;
+              fullLog.noError = 0;
+              fullLog.resMessage = response.statusMessage || 'No message';
+              fullLog.cycleDuration = NaN;
+              return redisStream.writeRedisStream(redisStream.streamName, fullLog);
+            } if (serverErrCodes[statusCode]) {
+              fullLog.clientError = 0;
+              fullLog.serverError = 1;
+              fullLog.noError = 0;
+              fullLog.resMessage = response.statusMessage || 'No message';
+              fullLog.cycleDuration = NaN;
+              return redisStream.writeRedisStream(redisStream.streamName, fullLog);
+            } 
+            fullLog.clientError = 0;
+            fullLog.serverError = 0;
+            fullLog.noError = 1;
+            fullLog.resMessage = response.statusMessage || 'No message';
           }
+        }
         }
         return emit.apply(this, arguments);
       };
-      /**
-       * Return the event emitter with original argument and execution context.
-       */
+      logger(outgoing);
+      return req;
     }
 
     /**
      * return the original request object
      */
-    logger(outgoing);
-    return req;
-  }
 
-  /**
-   * @param req: request object
-   * reqUrl is either the value of a nested property in the request object
-   * or can be constructed with `protocol` + `//` + `hostname` + `path`
-   * */
+    // }
 
-  function logger(req) {
-    console.log("METHOD", req.method);
-    const reqUrl = req.uri
-      ? req.uri.Url.href
-      : `${req.protocol}//${req.host || req.hostname}${req.path}`;
     /**
-     * endpoints to be EXCLUDED based on configuration file, otherwise all are included by default
-     */
-    const endpoints = config.get("venus.endpoints");
-    if (endpoints[reqUrl]) return false;
-    const localReg = /localhost/gi;
-    fullLog.reqHost = req.host || req.hostname;
-    if (localReg.test(fullLog.reqHost)) return false;
-    // fullLog.reqMethod = req.method || 'GET';
-    fullLog.reqMethod = req.method;
-    fullLog.reqPath = req.pathname || req.path || "/";
-    fullLog.reqUrl = reqUrl;
-    endpointMatch = true;
-    // console.log(fullLog);
-    return true;
-  }
-  module.request = wrapper;
+     * @param req: request object
+     * reqUrl is either the value of a nested property in the request object
+     * or can be constructed with `protocol` + `//` + `hostname` + `path`
+     * */
 
+    function logger(req) {
+      console.log("METHOD", req.method);
+      const reqUrl = req.uri
+        ? req.uri.Url.href
+        : `${req.protocol}//${req.host || req.hostname}${req.path}`;
+      /**
+       * endpoints to be EXCLUDED based on configuration file, otherwise all are included by default
+       */
+      const endpoints = config.get("venus.endpoints");
+      if (endpoints[reqUrl]) return false;
+      const localReg = /localhost/gi;
+      fullLog.reqHost = req.host || req.hostname;
+      if (localReg.test(fullLog.reqHost)) return false;
+      // fullLog.reqMethod = req.method || 'GET';
+      fullLog.reqMethod = req.method;
+      fullLog.reqPath = req.pathname || req.path || "/";
+      fullLog.reqUrl = reqUrl;
+      endpointMatch = true;
+      // console.log(fullLog);
+      return true;
+    }
+    module.request = wrapper;
+  }
   /**
    * update request object with the updated wrapper function
    */
 
-  try {
-    override();
-  } catch (err) {
-    console.log("LOG OBJECT AFTER OVERRIDE CATCH", fullLog);
-  }
-  
+  return override();
 }
 
 module.exports = venus;
