@@ -137,11 +137,11 @@ function rtDataByCategory(df, category) {
  * @param {array} row -> Danfo.js DataFrame row
  * @param {string} service (optional) -> passed in when constructing service-level object and 
  * appends a service key:value pair with the service host (e.g. finance.google.com)
+ * NOTE: status property is merely a placeholder. Status is currently being evaluated on the front-end
  */
 function rowToObj(row, service = false) {
   const newObj = {};
   if (service) newObj.service = service;
-  newObj.status = 'good';
   newObj.load = `${Math.ceil(row[1])} hpm`;
   newObj.response_time = Math.round(row[2]);
   newObj.error = Math.round(row[3]);
@@ -157,6 +157,7 @@ function rowToObj(row, service = false) {
  * @param {array} row -> Danfo.js DataFrame row
  * @param {string} service (optional) -> passed in when constructing service-level object and 
  * appends a service key:value pair with the service host (e.g. finance.google.com)
+ * NOTE: status property is merely a placeholder. Status is currently being evaluated on the front-end
  */
 function aggregateStatsToObj(df) {
   const newObj = {};
@@ -164,7 +165,6 @@ function aggregateStatsToObj(df) {
   const totalResponses = df.resStatusCode.count();
   const totalClientErrors = df['clientError'].sum();
   newObj.error = Math.round(totalClientErrors / totalResponses * 100);
-  newObj.status = 'good';
   newObj.load = `${Math.ceil(totalRequests / STREAM_WINDOW)} hpm`;
   newObj.response_time = Math.round(df.cycleDuration.mean());
   const totalServerErrors = df['serverError'].sum();
