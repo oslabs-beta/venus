@@ -13,93 +13,120 @@ const STREAM_WINDOW = 3;
 const responseData = [
   {
     id: '1611550512393-1',
-    reqMethod: 'GET',
     reqHost: 'curriculum-api.codesmith.io',
+    reqMethod: 'GET',
     reqPath: '/messages',
-    reqUrl: 'https://curriculum-api.codesmith.io/messages',
-    resStatusCode: '200',
-    cycleDuration: '1232',
+    reqUrl: 'https://curriculum-api.codesmith.io/messagez',
+    resStatusCode: '403',
+    clientError: '1',
+    serverError: '0',
+    noError: '0',
     resMessage: 'OK',
+    cycleDuration: '1232',
   },
   {
     id: '1144550577793-1',
-    reqMethod: 'POST',
     reqHost: 'curriculum-api.codesmith.io',
+    reqMethod: 'POST',
     reqPath: '/messages',
     reqUrl: 'https://curriculum-api.codesmith.io/messages',
     resStatusCode: '400',
-    cycleDuration: '1300',
+    clientError: '1',
+    serverError: '0',
+    noError: '0',
     resMessage: 'OK',
+    cycleDuration: '1300',
   },
   {
     id: '1611550514493-1',
-    reqMethod: 'GET',
     reqHost: 'finance.yahoo.com',
+    reqMethod: 'GET',
     reqPath: '/TSLA',
     reqUrl: 'https://finance.yahoo.com/TSLA',
     resStatusCode: '500',
-    cycleDuration: '1500',
+    clientError: '0',
+    serverError: '1',
+    noError: '0',
     resMessage: 'OK',
+    cycleDuration: '1500',
   },
   {
     id: '1611550514593-1',
-    reqMethod: 'DELETE',
     reqHost: 'finance.yahoo.com',
+    reqMethod: 'DELETE',
     reqPath: '/AAPL',
     reqUrl: 'https://finance.yahoo.com/AAPL',
     resStatusCode: '200',
-    cycleDuration: '1335',
+    clientError: '0',
+    serverError: '0',
+    noError: '1',
     resMessage: 'OK',
+    cycleDuration: '1335',
   },
   {
     id: '1611550514593-1',
-    reqMethod: 'GET',
     reqHost: 'weather.google.com',
+    reqMethod: 'GET',
     reqPath: '/California/LA',
     reqUrl: 'https://weather.google.com/California/LA',
     resStatusCode: '200',
-    cycleDuration: '1200',
+    clientError: '0',
+    serverError: '0',
+    noError: '1',
     resMessage: 'OK',
+    cycleDuration: '1200',
   },
   {
     id: '1611550598793-1',
-    reqMethod: 'PATCH',
     reqHost: 'weather.google.com',
+    reqMethod: 'PATCH',
     reqPath: '/California/SF',
     reqUrl: 'https://weather.google.com/California/SF',
     resStatusCode: '200',
+    clientError: '0',
+    serverError: '0',
+    noError: '1',
+    resMessage: 'OK',
     cycleDuration: '1100',
-    resMessage: 'OK',
   },
   {
     id: '1611550577793-1',
-    reqMethod: 'GET',
     reqHost: 'curriculum-api.codesmith.io',
+    reqMethod: 'GET',
     reqPath: '/messages/',
     reqUrl: 'https://curriculum-api.codesmith.io/messages/',
     resStatusCode: '200',
-    cycleDuration: '1105.248547',
+    clientError: '0',
+    serverError: '0',
+    noError: '1',
     resMessage: 'OK',
+    cycleDuration: '1105.248547',
   },
   {
     id: '1611550577793-1',
-    reqMethod: 'POST',
     reqHost: 'weather.google.com',
+    reqMethod: 'POST',
     reqPath: '/messages/',
     reqUrl: 'https://curriculum-api.codesmith.io/messages/',
     resStatusCode: '200',
-    cycleDuration: '1105.248547',
+    clientError: '0',
+    serverError: '0',
+    noError: '1',
     resMessage: 'OK',
+    cycleDuration: '1105.248547',
   },
   {
     id: '1611550577793-1',
-    reqMethod: 'PUT',
     reqHost: 'finance.yahoo.com',
+    reqMethod: 'PUT',
     reqPath: '/messages/',
     reqUrl: 'https://curriculum-api.codesmith.io/messages/',
     resStatusCode: '200',
-    cycleDuration: '1105.248547',
+    clientError: '0',
+    serverError: '0',
+    noError: '1',
     resMessage: 'OK',
+    cycleDuration: '1105.248547',
   },
 ];
 
@@ -110,42 +137,47 @@ const rtData = (data) => {
 
 
   // column with response status codes
-  const errorTable = df.loc({
-    columns: [
-      'resStatusCode'
-    ]
-  })
+  // const errorTable = df.loc({
+  //   columns: [
+  //     'resStatusCode'
+  //   ]
+  // })
 
   // iterate through status codes and check against client error codes and server error codes in the config file
   // if not found in either object, assign 'no-error'
-  const errorCategory = [];
-    // boolean will be set to true if 1 or more client/server errors exist 
-    // if false, df.query will not be invoked given the function's error handling
-    let clientErrExists = false;
-    let serverErrExists = false;
-    errorTable.data.forEach(statusCode => {
-      if (clientErrCodes[statusCode]) {
-        errorCategory.push('client-error')
-        clientErrExists = true;
-      } else if (serverErrCodes[statusCode]) {
-        errorCategory.push('server-error')
-        serverErrExists = true;
-      } else errorCategory.push('no-error')
-    });
+  // const errorCategory = [];
+  //   // boolean will be set to true if 1 or more client/server errors exist 
+  //   // if false, df.query will not be invoked given the function's error handling
+  //   let clientErrExists = false;
+  //   let serverErrExists = false;
+  //   errorTable.data.forEach(statusCode => {
+  //     if (clientErrCodes[statusCode]) {
+  //       errorCategory.push('client-error')
+  //       clientErrExists = true;
+  //     } else if (serverErrCodes[statusCode]) {
+  //       errorCategory.push('server-error')
+  //       serverErrExists = true;
+  //     } else errorCategory.push('no-error')
+  //   });
 
-    // add response status column to data frame
-    df.addColumn({
-      column: "status",
-      value: errorCategory,
-    })
+  //   // add response status column to data frame
+  //   df.addColumn({
+  //     column: "status",
+  //     value: errorCategory,
+  //   })
 
-  df.print();
+  df['clientError'].print();
 
   df['cycleDuration'] = df['cycleDuration'].astype('int32')
   df['resStatusCode'] = df['resStatusCode'].astype('int32')
+  df['clientError'] = df['clientError'].astype('int32')
+  df['serverError'] = df['serverError'].astype('int32')
+  df['noError'] = df['noError'].astype('int32')
 
   const dfGroup = df.groupby(['reqHost']);
   const dfNew = dfGroup.col(['reqHost']).count();
+  console.log('dfNew TABLE');
+  df.print()
 
 
   let finalTable;
@@ -161,25 +193,25 @@ const rtData = (data) => {
   });
   
     // declaring outside of conditional scope for aggregate reference
-    let newClientErrorDF;
-    if (clientErrExists) {
-      const clientErrorResRows = df.query({ column: 'status', is: '==', to: 'client-error' });
-      const clientErrorDF = clientErrorResRows.groupby(['reqHost']);
-      newClientErrorDF = clientErrorDF.col(['resStatusCode']).count();
-      newClientErrorDF.columns[1] = 'client_err_count';
-      // newErrorDF.print();
-      console.log('CLIENT ERROR', newClientErrorDF)
-
-      // dfNew.print();
+    // if (clientErrExists) {
+      // const clientErrorResRows = df.query({ column: 'status', is: '==', to: 'client-error' });
+      
+      // const clientTest = df.groupby(['reqHost']);
+      const clientErrorDF = dfGroup.col(['clientError']).sum();
+      // let newClientErrorDF = df.col(['clientError']).count();
+      // console.log('new client error DF', newClientErrorDF);
+      clientErrorDF.columns[1] = 'client_err_count';
 
       finalTable = dfd.merge({
         left: finalTable,
-        right: newClientErrorDF,
+        right: clientErrorDF,
         on: ['reqHost'],
         how: 'left',
       });
 
       finalTable.fillna({ values: [0], inplace: true });
+      console.log('CLIENT ERROR TABLE BELOW')
+      finalTable.print();
 
 
       // console.log(finalTable);
@@ -192,19 +224,19 @@ const rtData = (data) => {
         column: 'Client Error (%)',
         value: clientErrorRateCol.col_data[0],
       });
-    } 
+    // } 
 
     // declaring outside of conditional scope for aggregate reference
-    let newServerErrorDF;
-    if (serverErrExists) {
-      const serverErrorResRows = df.query({ column: 'status', is: '==', to: 'server-error' });
-      const serverErrorDF = serverErrorResRows.groupby(['reqHost']);
-      newServerErrorDF = serverErrorDF.col(['resStatusCode']).count();
-      newServerErrorDF.columns[1] = 'server_err_count';
+    // let newServerErrorDF;
+    // if (serverErrExists) {
+      // const serverErrorResRows = df.query({ column: 'status', is: '==', to: 'server-error' });
+      // const serverErrorDF = serverErrorResRows.groupby(['reqHost']);
+      const serverErrorDF = dfGroup.col(['serverError']).sum();
+      serverErrorDF.columns[1] = 'server_err_count';
       // availabilityDF.print()
       finalTable = dfd.merge({
         left: finalTable,
-        right: newServerErrorDF,
+        right: serverErrorDF,
         on: ['reqHost'],
         how: 'left',
       });
@@ -220,7 +252,7 @@ const rtData = (data) => {
         column: 'Server Error (%)',
         value: serverErrCol.col_data[0],
       });
-    } 
+    // } 
   
   finalTable.print();
   // console.log(finalTable);
@@ -263,7 +295,7 @@ const rtData = (data) => {
 
   const totalRequests = df.reqHost.count();
   const totalResponses = df.resStatusCode.count();
-  const totalClientErrors = newClientErrorDF.col_data[0].length;
+  const totalClientErrors = clientErrorDF.col_data[0].length;
   consolidatedObj.aggregate.error = Math.round(totalClientErrors / totalResponses * 100)
 
   consolidatedObj.aggregate.status = 'good';
@@ -273,7 +305,7 @@ const rtData = (data) => {
     df.cycleDuration.mean(),
   );
   
-  const totalServerErrors = newServerErrorDF.col_data[0].length;
+  const totalServerErrors = serverErrorDF.col_data[0].length;
   consolidatedObj.aggregate.availability = Math.round( 100 -
     (totalServerErrors / totalRequests) * 100
   );
@@ -290,31 +322,8 @@ const rtData = (data) => {
       ]
     })
 
-    // iterate through status codes and check against client error codes and server error codes in the config file
-    // if not found in either object, assign 'no-error'
-    const errorCategoryMethod = [];
-    // boolean will be set to true if 1 or more client/server errors exist 
-    // if false, df.query will not be invoked given the function's error handling
-    let clientErrExistsMethod = false;
-    let serverErrExistsMethod = false;
-    errorTableMethod.data.forEach(statusCode => {
-      if (clientErrCodes[statusCode]) {
-        errorCategoryMethod.push('client-error')
-        clientErrExistsMethod = true;
-      } else if (serverErrCodes[statusCode]) {
-        errorCategoryMethod.push('server-error')
-        serverErrExistsMethod = true;
-      } else errorCategoryMethod.push('no-error')
-    });
-
-    // add response status column to data frame
-    dfHost.addColumn({
-      column: "status",
-      value: errorCategoryMethod,
-    })
-
-    const dfGroupMethod = dfHost.groupby(['reqMethod']);
-    const dfNewMethod = dfGroupMethod.col(['reqMethod']).count();
+      const dfGroupMethod = dfHost.groupby(['reqMethod']);
+      const dfNewMethod = dfGroupMethod.col(['reqMethod']).count();
 
       let finalTableMethod;      
 
@@ -325,83 +334,53 @@ const rtData = (data) => {
         right: resTimeDFMethod,
         on: ['reqMethod'],
         how: 'left',
+        });
+
+      const clientErrorDFMethod = dfGroupMethod.col(['clientError']).sum();
+      clientErrorDFMethod.columns[1] = 'client_err_count';
+
+      finalTableMethod = dfd.merge({
+        left: finalTableMethod,
+        right: clientErrorDFMethod,
+        on: ['reqMethod'],
+        how: 'left',
       });
 
-      console.log('finalTableMethod')
-      finalTableMethod.print()
+      finalTableMethod.fillna({ values: [0], inplace: true });
 
+      const clientErrorRateColMethod = finalTableMethod.client_err_count
+        .div(finalTableMethod.reqMethod_count)
+        .mul(100);
       
-      let newClientErrorDFMethod;
-      if (clientErrExistsMethod) {
-        const clientErrorResRowsMethod = dfHost.query({ column: 'status', is: '==', to: 'client-error' });
-        const clientErrorDFMethod = clientErrorResRowsMethod.groupby(['reqMethod']);
-        newClientErrorDFMethod = clientErrorDFMethod.col(['resStatusCode']).count();
-        newClientErrorDFMethod.columns[1] = 'client_err_count';
+      finalTableMethod.addColumn({
+        column: 'Client Error (%)',
+        value: clientErrorRateColMethod.col_data[0],
+      }); 
   
-        finalTableMethod.print()
-        newClientErrorDFMethod.print()
+      const serverErrorDFMethod = dfGroupMethod.col(['serverError']).sum();
+      serverErrorDFMethod.columns[1] = 'server_err_count';
+      // availabilityDF.print()
+      finalTableMethod = dfd.merge({
+        left: finalTableMethod,
+        right: serverErrorDFMethod,
+        on: ['reqMethod'],
+        how: 'left',
+      });
 
-        finalTableMethod = dfd.merge({
-          left: finalTableMethod,
-          right: newClientErrorDFMethod,
-          on: ['reqMethod'],
-          how: 'left',
-        });
-  
-        finalTableMethod.fillna({ values: [0], inplace: true });
-  
-  
-        // console.log(finalTable);
-        // finalTable.print();
-        const clientErrorRateColMethod = finalTableMethod.client_err_count
-          .div(finalTableMethod.reqMethod_count)
-          .mul(100);
-        
-        finalTableMethod.addColumn({
-          column: 'Client Error (%)',
-          value: clientErrorRateColMethod.col_data[0],
-        });
-      } else {
-        const colLength = finalTableMethod.col_data[0].length;
-        const zeroClientErrorsCol = [];
-        for (let i = 0; i < colLength; i++) {
-          zeroClientErrorsCol.push(0)
-        }
-        finalTableMethod.addColumn({
-          column: 'Client Error (%)',
-          value: zeroClientErrorsCol,
-        });
-      } 
-  
-      let newServerErrorDFMethod;
-      if (serverErrExistsMethod) {
-        const serverErrorResRowsMethod = dfHost.query({ column: 'status', is: '==', to: 'server-error' });
-        const serverErrorDFMethod = serverErrorResRowsMethod.groupby(['reqMethod']);
-        newServerErrorDFMethod = serverErrorDFMethod.col(['resStatusCode']).count();
-        newServerErrorDFMethod.columns[1] = 'server_err_count';
-        // availabilityDF.print()
-        finalTableMethod = dfd.merge({
-          left: finalTableMethod,
-          right: newServerErrorDFMethod,
-          on: ['reqMethod'],
-          how: 'left',
-        });
-  
-        finalTableMethod.fillna({ values: [0], inplace: true });
-        
-        console.log('table method error', finalTableMethod)
-        
-        const serverErrColMethod = finalTableMethod.server_err_count
-          .div(finalTableMethod.reqMethod_count)
-          .mul(100);
+      finalTableMethod.fillna({ values: [0], inplace: true });
+      
+      console.log('table method error', finalTableMethod)
+      
+      const serverErrColMethod = finalTableMethod.server_err_count
+        .div(finalTableMethod.reqMethod_count)
+        .mul(100);
 
-  
-        // availabilityCol.print();
-        finalTableMethod.addColumn({
-          column: 'Server Error (%)',
-          value: serverErrColMethod.col_data[0],
-        });
-      } else {
+
+      // availabilityCol.print();
+      finalTableMethod.addColumn({
+        column: 'Server Error (%)',
+        value: serverErrColMethod.col_data[0],
+      });
         console.log('tablepreerror', finalTableMethod)
         const colLength = finalTableMethod.col_data[0].length;
         const zeroServerErrorsCol = [];
@@ -412,7 +391,6 @@ const rtData = (data) => {
           column: 'Server Error (%)',
           value: zeroServerErrorsCol,
         });
-      }
       
       finalTableMethod.print()
     
@@ -451,7 +429,7 @@ const rtData = (data) => {
   console.log(consolidatedObj);
   console.log(consolidatedObj.services[0]);
   return JSON.stringify(consolidatedObj);
-};
+}
 
 // module.exports = rtData;
 
