@@ -4,6 +4,7 @@
 const dfd = require('danfojs-node');
 const { rtDataByCategory, rowToObj, aggregateStatsToObj } = require('./rt-data-helperFunctions');
 
+// FIXME array for testing purposes -- delete before final shipping
 const responseData = [
   {
     id: '1611550512393-1',
@@ -136,8 +137,14 @@ const responseData = [
   * with an identical structure to one mentioned above.
   */ 
 
-const rtData = (data) => {
+const rtData = data => {
+  /* consolidatedObj will be populated according to the structure necessary for the electron client to display real-time metrics */
   const consolidatedObj = {};
+
+  /** dependencyObj will be populated according to the structure necesary for the dependency graph to accurately reflect nesting
+   *  while also containing the same statistics needed to determine the 'status' property 
+   */
+  const dependencyObj = {};
 
   /**
    * convert array of objects to data frame and cast the numeric variables (currently in string format) to integers
@@ -151,46 +158,50 @@ const rtData = (data) => {
 
 
   
-  const outputTable = rtDataByCategory(df, 'reqHost');
+  const outputTableByService = rtDataByCategory(df, 'reqHost');
   
   /**
    * Each row in the outputTable includes consolidated metrics by service.
    * Iterate through each row and construct the service-level object to be pushed to the array ('services' key: value)
    */
   consolidatedObj.services = [];
-  outputTable.data.forEach((row) => {
+  outputTableByService.data.forEach(row => {
     const service = row[0];
-    const outputObj = rowToObj(row, service);
-    consolidatedObj.services.push(outputObj);
+    const serviceLvlObj = rowToObj(row, service);
+    // update consolidated object (real-time metrics)
+    consolidatedObj.services.push(serviceLvlObj);
+    // update dependency object (real-time dependency graph)
+    dependencyObj[service] = serviceLvlObj;
   });
 
   /**
    * Invoke similar function to the above to construct the aggregate object ('aggregate' key: value)
    */
-  consolidatedObj.aggregate = aggregateStatsToObj(df);
+  const aggregateLvlObj = aggregateStatsToObj(df);
+  // update consolidated object with aggregate data
+  consolidatedObj.aggregate = aggregateLvlObj;
+
+  // udpate dependency object with aggregate data
+  dependencyObj.aggregate = aggregateLvlObj;
 
   /** array of host values */
   const uniqueHosts = df.reqHost.unique().data;
 
-  /* iterate through each host (aka service) value in order to fill in service-level data */
+  /* iterate through each host (aka service) value in order to fill in method-level data for each service */
   uniqueHosts.forEach((host, hostIndex) => {
     const dfHost = df.query({ column: 'reqHost', is: '==', to: host });
     const outputTableByMethod = rtDataByCategory(dfHost, 'reqMethod');
     consolidatedObj.services[hostIndex].byMethod = {};
     
-    /* iterate through each request method in order to fill in method-level data */
-    outputTableByMethod.data.forEach((row) => {
+    // iterate through each request method in order to fill in method-level data
+    outputTableByMethod.data.forEach(row => {
       const method = row[0];
-      consolidatedObj.services[hostIndex].byMethod[method] = rowToObj(row);
+      const methodLvlObj = rowToObj(row);
+      // update consolidated object with method-level data
+      consolidatedObj.services[hostIndex].byMethod[method] = methodLvlObj;
     });
   });
-  // FIXME delete console.log before shipping
-  console.log(consolidatedObj);
-  console.log(consolidatedObj.services[1]);
   return JSON.stringify(consolidatedObj);
 };
 
-// FIXME uncomment below before shipping
-// module.exports = rtData;
-
-rtData(responseData);
+module.exports = rtData;
