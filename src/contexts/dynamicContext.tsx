@@ -24,11 +24,20 @@ type dynamicState = {
     children: any[]
   };
   filter: any,
+  serviceThresholds: {
+    service: string,
+    availability_threshold?: number,
+    response_time_threshold?: number,
+    load_threshold?: number,
+    error_threshold?: number, 
+    key?: number
+  }[]
   
   setServices: (input:any[]) => void;
   setAggregate: (input:any) => void;
   setDependencyGraph: (input:any) => void;
   setFilter: (input:any) => void;
+  setServiceThresholds: (input:any) => void;
 
 };
 
@@ -71,10 +80,20 @@ export const liveData: dynamicState = {
       }]
   },
   filter: {},
+  serviceThresholds: [
+      {
+      service: 'test',
+      availability_threshold: 1,
+      response_time_threshold: 2,
+      load_threshold: 3,
+      error_threshold: 4 
+    }
+  ],
   setServices: () => {},
   setAggregate: () => {},
   setDependencyGraph: () => {},
   setFilter:() => {},
+  setServiceThresholds: () => {},
 };
 
 export const dynamicContext = React.createContext<dynamicState>(liveData)
@@ -85,7 +104,8 @@ export const DynamicProvider: React.FC = (props: any) => {
   const [aggregate, setAggregate] = useState<any>({});
   const [dependencyGraph, setDependencyGraph ] = useState<any>({});
   const [filter, setFilter] = useState<any>({})
+  const [serviceThresholds, setServiceThresholds] = useState<any>([])
 
-return <dynamicContext.Provider value={{services, setServices, aggregate, setAggregate, dependencyGraph, setDependencyGraph, filter, setFilter}}>{props.children}</dynamicContext.Provider>
+return <dynamicContext.Provider value={{services, setServices, aggregate, setAggregate, dependencyGraph, setDependencyGraph, filter, setFilter, serviceThresholds, setServiceThresholds}}>{props.children}</dynamicContext.Provider>
 
 }

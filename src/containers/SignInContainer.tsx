@@ -1,4 +1,3 @@
-import Layout from 'antd/es/layout';
 import React, { useContext, useState } from "react";
 import data from '../../session_storage/storage.json'
 import { globalContext } from '../contexts/globalContext' 

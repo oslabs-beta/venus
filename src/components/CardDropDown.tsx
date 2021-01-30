@@ -23,18 +23,12 @@ function CardDropDown (): JSX.Element{
 
 	function onChange(value:string) {
     console.log(value)
+    // fetch request to route for data.
+    // data is then brought into state and updated. otherwise, create a larger pool for an initial pull
     setService(value)
     
-		}
-
-	function onBlur() {
-		console.log('blur');
-	}
-
-	function onFocus() {
-  	console.log('focus');
-	}
-
+    }
+    
 	function onSearch(val:any) {
 		console.log('search:', val);
 	}
@@ -46,8 +40,6 @@ function CardDropDown (): JSX.Element{
     placeholder="Select a service"
     optionFilterProp="children"
     onChange={onChange}
-    onFocus={onFocus}
-    onBlur={onBlur}
     onSearch={onSearch}
     filterOption={(input:any, option:any) =>
       option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}> 

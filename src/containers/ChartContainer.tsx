@@ -19,7 +19,6 @@ import Radio from 'antd/es/radio'
 
 
 function ChartContainer(): JSX.Element {
-  const [value, setValue] = React.useState(1);
   const { aggregate, setAggregate, service, } = useContext(historicalContext)
   let filter = aggregate;
   const test: any = {
@@ -43,12 +42,12 @@ function ChartContainer(): JSX.Element {
     { label: 'Last Day', value: 'lastDay' },
     { label: 'Last Week', value: 'lastWeek' },
     { label: 'Last Month', value: 'lastMonth' },
+    { label: 'Refresh Data', value: 'refreshData'}
   ];
 
 
   const filterData = (e:any) => {
     console.log('radio checked', e.target.value);
-    setValue(e.target.value);
   };
 
   return (

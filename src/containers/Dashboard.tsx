@@ -21,13 +21,12 @@ import Title from "antd/es/typography/Title";
 const variable: string = "oliver";
 
 function Dashboard(): JSX.Element {
-  const { services, setServices, aggregate, setAggregate, filter, setFilter } = useContext(dynamicContext);
+  const { services, setServices, aggregate, setAggregate, filter, setFilter, setServiceThresholds, serviceThresholds } = useContext(dynamicContext);
   const { serverAddress } = useContext(globalContext)
 
   const dataSource: any = [];
 
   useEffect(() => {
-    filter['abc'] = "GET"
     setFilter(filter)
     console.log(serverAddress)
     const socket:any = io(serverAddress, {
@@ -132,8 +131,6 @@ function Dashboard(): JSX.Element {
           }
         }
       },
-
-      
     ]);
     setAggregate({
       error: 40,
@@ -142,6 +139,19 @@ function Dashboard(): JSX.Element {
       availability: 83,
       status: 'good'
     })
+    setServiceThresholds(
+      [
+        {
+          service:'a'
+        },
+        {
+          service:'b'
+        },
+        {
+          service:'c'
+        }
+      ]
+    )
     return () => socket.disconnect();
   }, []);
 
@@ -168,18 +178,18 @@ function Dashboard(): JSX.Element {
       key: "status",
       render: (status: string) => {
         if (status === "good") {
-          return <Tag color={"green"} style={{fontWeight: 'bold'}}>GOOD</Tag>;
+          return <Tag color={"green"}  style={{fontWeight: 'bold'}}>GOOD</Tag>;
         }
         if (status === "fair") {
-          return <Tag color={"orange"}  style={{fontWeight: 'bold'}}>FAIR</Tag>;
+          return <Tag color={"orange"} style={{fontWeight: 'bold'}}>FAIR</Tag>;
         }
         if (status === "poor") {
-          return <Tag color={"red"} style={{fontWeight: 'bold'}}>POOR</Tag>;
+          return <Tag color={"red"}  style={{fontWeight: 'bold'}}>POOR</Tag>;
         }
       },
-      sorter:{
-        compare: (a:any, b:any) => a.status.length - b.status.length,
-      }
+      // sorter:{
+      //   compare: (a:any, b:any) => a.status - b.status,
+      // }
     },
     {
       title: "Method",
@@ -234,7 +244,7 @@ function Dashboard(): JSX.Element {
         <Title level={3}>Current Status</Title>
       </Divider>
       <Table
-
+        bordered
         scroll={{y: "67vh"}}
         columns={columns}
         dataSource={dataSource}

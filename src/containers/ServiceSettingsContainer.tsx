@@ -3,8 +3,8 @@
  * @desc Right-hand side of the Main Display.  Dashboard that displays services and corresponding data.
  * The parent container for Aggregate Data, Service Container, and Chart Container.
  */
-import { io } from "socket.io-client";
-import React, { useContext, useEffect } from "react";
+
+import React, { useContext, useEffect, useState } from "react";
 //  import TabContainer from './TabContainer'
 import { AggregateStats } from "../components/AggregateStats";
 import { dynamicContext } from "../contexts/dynamicContext";
@@ -12,6 +12,8 @@ import { globalContext } from "../contexts/globalContext";
 import Divider from "antd/es/divider";
 import Table from "antd/es/table";
 import Title from "antd/es/typography/Title";
+import { Input, InputNumber, Popconfirm, Form, Typography } from 'antd'
+import { EditableTable } from './TestServiceSettings'
 
 function SettingsContainer(): JSX.Element {
   const { services, setServices, aggregate, setAggregate } = useContext(
@@ -106,12 +108,7 @@ function SettingsContainer(): JSX.Element {
       <Divider>
         <Title level={3}>Service Settings</Title>
       </Divider>
-      <Table
-        columns={columns}
-        dataSource={dataSource}
-        pagination={false}
-        style={{ width: "100%" }}
-      />
+      <EditableTable />
     </div>
   );
 }
