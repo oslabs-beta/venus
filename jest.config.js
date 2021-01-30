@@ -4,10 +4,14 @@ module.exports = {
   "roots": [
     "<rootDir>/src"
   ],
+  // configured here to allow tsx, ts and jsx to ts-jest
   "transform": {
-    "^.+\\.tsx?$": "ts-jest"
+    "^.+\\.tsx?$": "ts-jest",
+    "^.+\\.jsx?$": "ts-jest",
+    "^.+\\.ts?$": "ts-jest",
+    "^.+\\.js?$": "ts-jest",
   },
-  "testRegex": "(DataFuncDepGraph.*|(\\.|/)(test|spec))\\.tsx?$",
+  "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
   "moduleFileExtensions": [
     "ts",
     "tsx",
@@ -16,8 +20,8 @@ module.exports = {
     "json",
     "node"
   ],
-  // "snapshotSerializers": ["enzyme-to-json/serializer"],
-  // "setupFilesAfterEnv": ['<rootDir>/src/setupTests.js'],
+  "snapshotSerializers": ["enzyme-to-json/serializer"],
+  "setupFilesAfterEnv": ['<rootDir>/src/setupTests.js'],
   // https://jestjs.io/docs/en/configuration.html#transformignorepatterns-arraystring
-  // "transformIgnorePatterns": ["/node_modules/(?!vue-awesome)"],
+  "transformIgnorePatterns": ["/node_modules"],
 };
