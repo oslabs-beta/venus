@@ -2,8 +2,6 @@
 /* eslint-disable no-restricted-syntax */
 const dfd = require('danfojs-node');
 
-// config objects descerning between client and server errors 
-const { clientErrCodes, serverErrCodes} = require('./errCode_Config');
 
 const STREAM_WINDOW = 3;
 
@@ -136,38 +134,6 @@ const rtData = (data) => {
   const df = new dfd.DataFrame(data);
 
 
-  // column with response status codes
-  // const errorTable = df.loc({
-  //   columns: [
-  //     'resStatusCode'
-  //   ]
-  // })
-
-  // iterate through status codes and check against client error codes and server error codes in the config file
-  // if not found in either object, assign 'no-error'
-  // const errorCategory = [];
-  //   // boolean will be set to true if 1 or more client/server errors exist 
-  //   // if false, df.query will not be invoked given the function's error handling
-  //   let clientErrExists = false;
-  //   let serverErrExists = false;
-  //   errorTable.data.forEach(statusCode => {
-  //     if (clientErrCodes[statusCode]) {
-  //       errorCategory.push('client-error')
-  //       clientErrExists = true;
-  //     } else if (serverErrCodes[statusCode]) {
-  //       errorCategory.push('server-error')
-  //       serverErrExists = true;
-  //     } else errorCategory.push('no-error')
-  //   });
-
-  //   // add response status column to data frame
-  //   df.addColumn({
-  //     column: "status",
-  //     value: errorCategory,
-  //   })
-
-  df['clientError'].print();
-
   df['cycleDuration'] = df['cycleDuration'].astype('int32')
   df['resStatusCode'] = df['resStatusCode'].astype('int32')
   df['clientError'] = df['clientError'].astype('int32')
@@ -176,9 +142,6 @@ const rtData = (data) => {
 
   const dfGroup = df.groupby(['reqHost']);
   const dfNew = dfGroup.col(['reqHost']).count();
-  console.log('dfNew TABLE');
-  df.print()
-
 
   let finalTable;
   const consolidatedObj = {};
@@ -210,8 +173,6 @@ const rtData = (data) => {
       });
 
       finalTable.fillna({ values: [0], inplace: true });
-      console.log('CLIENT ERROR TABLE BELOW')
-      finalTable.print();
 
 
       // console.log(finalTable);
@@ -254,7 +215,6 @@ const rtData = (data) => {
       });
     // } 
   
-  finalTable.print();
   // console.log(finalTable);
 
   const outputTable = finalTable.loc({
@@ -267,7 +227,7 @@ const rtData = (data) => {
     ],
   });
 
-  outputTable.reqHost_count = outputTable.reqHost_count.div(3);
+  outputTable.reqHost_count = outputTable.reqHost_count.div(STREAM_WINDOW);
 
   // console.log('Final Table: ', outputTable);
   // outputTable.print();
@@ -277,7 +237,6 @@ const rtData = (data) => {
 
   outputTable.data.forEach((row) => {
     const outputObj = {};
-    console.log(row)
     outputObj.service = row[0];
     outputObj.status = 'good';
     outputObj.load = `${Math.ceil(row[1])  } hpm`;
@@ -310,120 +269,115 @@ const rtData = (data) => {
     (totalServerErrors / totalRequests) * 100
   );
 
-  const uniqueHosts = df.reqHost.unique().data;
-
-  uniqueHosts.forEach((host, hostIndex) => {
-    const dfHost = df.query({ column: 'reqHost', is: '==', to: host });
-    
-    // column with response status codes
-    const errorTableMethod = dfHost.loc({
-      columns: [
-        'resStatusCode'
-      ]
-    })
-
-      const dfGroupMethod = dfHost.groupby(['reqMethod']);
-      const dfNewMethod = dfGroupMethod.col(['reqMethod']).count();
-
-      let finalTableMethod;      
-
-      const resTimeDFMethod = dfGroupMethod.col(['cycleDuration']).mean();
-
-      finalTableMethod = dfd.merge({
-        left: dfNewMethod,
-        right: resTimeDFMethod,
-        on: ['reqMethod'],
-        how: 'left',
-        });
-
-      const clientErrorDFMethod = dfGroupMethod.col(['clientError']).sum();
-      clientErrorDFMethod.columns[1] = 'client_err_count';
-
-      finalTableMethod = dfd.merge({
-        left: finalTableMethod,
-        right: clientErrorDFMethod,
-        on: ['reqMethod'],
-        how: 'left',
-      });
-
-      finalTableMethod.fillna({ values: [0], inplace: true });
-
-      const clientErrorRateColMethod = finalTableMethod.client_err_count
-        .div(finalTableMethod.reqMethod_count)
-        .mul(100);
-      
-      finalTableMethod.addColumn({
-        column: 'Client Error (%)',
-        value: clientErrorRateColMethod.col_data[0],
-      }); 
-  
-      const serverErrorDFMethod = dfGroupMethod.col(['serverError']).sum();
-      serverErrorDFMethod.columns[1] = 'server_err_count';
-      // availabilityDF.print()
-      finalTableMethod = dfd.merge({
-        left: finalTableMethod,
-        right: serverErrorDFMethod,
-        on: ['reqMethod'],
-        how: 'left',
-      });
-
-      finalTableMethod.fillna({ values: [0], inplace: true });
-      
-      console.log('table method error', finalTableMethod)
-      
-      const serverErrColMethod = finalTableMethod.server_err_count
-        .div(finalTableMethod.reqMethod_count)
-        .mul(100);
-
-
-      // availabilityCol.print();
-      finalTableMethod.addColumn({
-        column: 'Server Error (%)',
-        value: serverErrColMethod.col_data[0],
-      });
-        console.log('tablepreerror', finalTableMethod)
-        const colLength = finalTableMethod.col_data[0].length;
-        const zeroServerErrorsCol = [];
-        for (let i = 0; i < colLength; i++) {
-          zeroServerErrorsCol.push(0)
-        }
-        finalTableMethod.addColumn({
-          column: 'Server Error (%)',
-          value: zeroServerErrorsCol,
-        });
-      
-      finalTableMethod.print()
-    
-    // finalTableMethod.print();
-    // console.log(finalTableMethod);
-  
-    const outputTableMethod = finalTableMethod.loc({
-      columns: [
-        'reqMethod',
-        'reqMethod_count',
-        'cycleDuration_mean',
-        'Client Error (%)',
-        'Server Error (%)',
-      ],
+  const aggregateOutputTable = rtDataByMethod(df);
+  consolidatedObj.aggregate.byMethod = {};
+    // iterate through each method
+    aggregateOutputTable.data.forEach((row) => {
+      const method = row[0];
+      consolidatedObj.aggregate.byMethod[method] = {};
+      consolidatedObj.aggregate.byMethod[method].status = 'good';
+      consolidatedObj.aggregate.byMethod[method].load = `${Math.ceil(row[1])} hpm`;
+      consolidatedObj.aggregate.byMethod[method].response_time = Math.round(row[2]);
+      consolidatedObj.aggregate.byMethod[method].error = Math.round(row[3]);
+      consolidatedObj.aggregate.byMethod[method].availability = Math.round(100 - row[4]);
     });
 
-    outputTableMethod.print();
+    console.log(consolidatedObj.aggregate.byMethod)
   
-    outputTableMethod.reqMethod_count = outputTableMethod.reqMethod_count.div(3);
-      
-      consolidatedObj.services[hostIndex].byMethod = {};
-      outputTableMethod.data.forEach((row) => {
-        // console.log('ROW', row)
-        const method = row[0];
-        console.log('METHOD BRUH', method)
-        consolidatedObj.services[hostIndex].byMethod[method] = {};
-        consolidatedObj.services[hostIndex].byMethod[method].status = 'good';
-        consolidatedObj.services[hostIndex].byMethod[method].load = `${Math.ceil(row[1])} hpm`;
-        consolidatedObj.services[hostIndex].byMethod[method].response_time = Math.round(row[2]);
-        consolidatedObj.services[hostIndex].byMethod[method].error = Math.round(row[3]);
-        consolidatedObj.services[hostIndex].byMethod[method].availability = Math.round(100 - row[4]);
+
+  const uniqueHosts = df.reqHost.unique().data;
+
+  function rtDataByMethod (dfMethod) {
+    const dfGroupMethod = dfMethod.groupby(['reqMethod']);
+    const dfNewMethod = dfGroupMethod.col(['reqMethod']).count();
+
+    let finalTableMethod;      
+
+    const resTimeDFMethod = dfGroupMethod.col(['cycleDuration']).mean();
+
+    finalTableMethod = dfd.merge({
+      left: dfNewMethod,
+      right: resTimeDFMethod,
+      on: ['reqMethod'],
+      how: 'left',
       });
-      // console.log('FINAL OBJECT', consolidatedObj);
+
+    const clientErrorDFMethod = dfGroupMethod.col(['clientError']).sum();
+    clientErrorDFMethod.columns[1] = 'client_err_count';
+
+    finalTableMethod = dfd.merge({
+      left: finalTableMethod,
+      right: clientErrorDFMethod,
+      on: ['reqMethod'],
+      how: 'left',
+    });
+
+    finalTableMethod.fillna({ values: [0], inplace: true });
+
+    const clientErrorRateColMethod = finalTableMethod.client_err_count
+      .div(finalTableMethod.reqMethod_count)
+      .mul(100);
+    
+    finalTableMethod.addColumn({
+      column: 'Client Error (%)',
+      value: clientErrorRateColMethod.col_data[0],
+    }); 
+
+    const serverErrorDFMethod = dfGroupMethod.col(['serverError']).sum();
+    serverErrorDFMethod.columns[1] = 'server_err_count';
+    // availabilityDF.print()
+    finalTableMethod = dfd.merge({
+      left: finalTableMethod,
+      right: serverErrorDFMethod,
+      on: ['reqMethod'],
+      how: 'left',
+    });
+
+    finalTableMethod.fillna({ values: [0], inplace: true });
+    
+    
+    const serverErrColMethod = finalTableMethod.server_err_count
+      .div(finalTableMethod.reqMethod_count)
+      .mul(100);
+
+
+    // availabilityCol.print();
+    finalTableMethod.addColumn({
+      column: 'Server Error (%)',
+      value: serverErrColMethod.col_data[0],
+    });
+    
+  
+  // finalTableMethod.print();
+  // console.log(finalTableMethod);
+
+  const outputTableMethod = finalTableMethod.loc({
+    columns: [
+      'reqMethod',
+      'reqMethod_count',
+      'cycleDuration_mean',
+      'Client Error (%)',
+      'Server Error (%)',
+    ],
+  });
+  return outputTableMethod
+}
+  // iterate through each host
+  uniqueHosts.forEach((host, hostIndex) => {
+    const dfHost = df.query({ column: 'reqHost', is: '==', to: host });
+    const outputTable = rtDataByMethod(dfHost);
+    outputTable.reqMethod_count = outputTable.reqMethod_count.div(STREAM_WINDOW);
+    consolidatedObj.services[hostIndex].byMethod = {};
+    // iterate through each method
+    outputTable.data.forEach((row) => {
+      const method = row[0];
+      consolidatedObj.services[hostIndex].byMethod[method] = {};
+      consolidatedObj.services[hostIndex].byMethod[method].status = 'good';
+      consolidatedObj.services[hostIndex].byMethod[method].load = `${Math.ceil(row[1])} hpm`;
+      consolidatedObj.services[hostIndex].byMethod[method].response_time = Math.round(row[2]);
+      consolidatedObj.services[hostIndex].byMethod[method].error = Math.round(row[3]);
+      consolidatedObj.services[hostIndex].byMethod[method].availability = Math.round(100 - row[4]);
+    });
   });
   // console.log(JSON.stringify(consolidatedObj));
   console.log(consolidatedObj);
