@@ -18,7 +18,7 @@ A service Endpoint Monitoring Tool
 </p>
 
 <p align="center">
-  <a href="#how-to-use">How To Use</a> • <a href="#features">Features</a> • <a href="https://reactime.io">Website</a> • <a href="#read-more">Read More</a>
+  <a href="#how-to-use">How To Use</a> • <a href="#features">Features</a> • <a href="https://">Website</a> • <a href="#read-more">Read More</a>
 </p>
 
 // to start run npm install then npm run dev:react first, then npm run dev:electron

@@ -1,8 +1,17 @@
 // import { ipcRenderer } from "electron"
+import React from 'react';
 import { changeChildArr, changeData, IDataNode, test, IService, TreeNode} from "../charts/DataFuncDepGraph"
 import { treeData } from '../charts/DependencyTree'
 import { DependencyGraph} from '../charts/DependencyTree';
-import { Dashboard} from '../containers/Dashboard'
+import { SettingsContainer } from '../containers/ServiceSettingsContainer';
+// import {readAndWriteToDB} from '../server/historical-read-handler'
+
+import {App} from '../app';
+
+
+
+
+
 // describes what the test is
 describe('hitting test files', () => {
   // testData: IDataNode;
@@ -23,7 +32,13 @@ describe('hitting test files', () => {
       // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
       expect(DependencyGraph).toMatchSnapshot();
     })
-  })
+ 
+
+  // it('the redis stream matches the snapshot', () => {
+  //   // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
+  //   expect(readAndWriteToDB).toMatchSnapshot();
+  // })
+})
   //  it('the Dashboard chart component matches the snapshot', () => {
   //   // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
   //    expect(Dashboard).toMatchSnapshot();
@@ -64,3 +79,12 @@ describe('hitting test files', () => {
 //     }),
 //   );
 // });
+
+// const chai = require("chai");
+// const chaiAsPromised = require("chai-as-promised");
+// chai.use(chaiAsPromised);
+// const expect = chai.expect
+
+// it('Promise should pass', function() {
+//   return expect(readAndWriteToDB()).to.be.fulfilled
+// })
