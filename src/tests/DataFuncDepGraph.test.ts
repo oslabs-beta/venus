@@ -1,4 +1,4 @@
-import { ipcRenderer } from "electron"
+// import { ipcRenderer } from "electron"
 import { changeChildArr, changeData, IDataNode, test, IService, TreeNode} from "../charts/DataFuncDepGraph"
 import { treeData } from '../charts/DependencyTree'
 
@@ -8,7 +8,7 @@ describe('hitting test files', () => {
   // what the specific test is
   it('hits the jest testing', () => {
     // what is expected
-    expect(true).toBeTruthy();
+    expect(true).toBeTruthy(true);
   })
 }) 
 
@@ -26,7 +26,7 @@ it('Data from /charts/DataFuncDepGraph matches treeData from /charts/DependencyG
 
 // describe('mock test with dummy data', () => {
 //   const mockCallback = jest.fn(x => changeChildArr(x));
-//   function testChildFunc(items: IService[], callback: (arr: IService[]) => TreeNode[]){
+  // function testChildFunc(items: IService[], callback: (arr: IService[]) => TreeNode[]){
 //       callback(items);
 //   }
 //   testChildFunc(test.services,mockCallback);
