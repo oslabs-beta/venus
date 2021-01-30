@@ -4,12 +4,9 @@ module.exports = {
   "roots": [
     "<rootDir>/src"
   ],
-  // configured here to allow tsx, ts and jsx to ts-jest
+  // configured here to allow tsx, ts, js and jsx to ts-jest
   "transform": {
-    "^.+\\.tsx?$": "ts-jest",
-    "^.+\\.jsx?$": "ts-jest",
-    "^.+\\.ts?$": "ts-jest",
-    "^.+\\.js?$": "ts-jest",
+    "^.+\\.(ts|tsx|js|jsx)$": "ts-jest",
   },
   "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
   "moduleFileExtensions": [

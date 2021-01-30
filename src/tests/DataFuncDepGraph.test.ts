@@ -10,7 +10,14 @@ import {App} from '../app';
 
 
 
-
+// import { shallow } from 'enzyme';
+// // import {App} from '../app'; // Introduce the corresponding React component
+// describe('Link', () => {
+//   it('Renders link to Google', () => {
+//     const link:any = shallow(<DependencyGraph/>)
+//     expect(true).toBeTruthy();
+//   });
+// })
 
 // describes what the test is
 describe('hitting test files', () => {
