@@ -209,6 +209,6 @@ const rtData = data => {
   return [consolidatedObjStringify, dependencyObjStringify];
 };
 
-rtData(responseData);
+// rtData(responseData);
 
-// module.exports = rtData;
+module.exports = rtData;
