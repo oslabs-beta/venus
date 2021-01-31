@@ -60,15 +60,15 @@ const readRedisStream = async () => {
 
         const clientError = fieldNamesValues.indexOf('clientError'); 
         const clientErrorValue = clientError + 1;
-        obj['clientError'] = fieldNamesValues[clientError];
+        obj['clientError'] = fieldNamesValues[clientErrorValue];
 
         const serverError = fieldNamesValues.indexOf('serverError'); 
         const serverErrorValue = serverError + 1;
-        obj['serverError'] = fieldNamesValues[serverError];
+        obj['serverError'] = fieldNamesValues[serverErrorValue];
 
         const noError = fieldNamesValues.indexOf('noError'); 
         const noErrorValue = noError + 1;
-        obj['noError'] = fieldNamesValues[noError];
+        obj['noError'] = fieldNamesValues[noErrorValue];
 
         const resMessage = fieldNamesValues.indexOf('resMessage'); 
         const resMessageValue = resMessage + 1;
