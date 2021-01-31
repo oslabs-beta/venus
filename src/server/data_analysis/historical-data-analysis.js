@@ -13,11 +13,11 @@ const EIGHT_HOURS = 28800000
 
 //Boilerplate to set up postgres db (client) object
 const client = new Client({
-  user: process.env.DB_NAME, 
-  host: process.env.DB_PROXY, 
-  database: process.env.DB_NAME, 
-  password: process.env.DB_PASS, 
-  port: process.env.DB_PORT
+  user: 'postgres', 
+  host: 'rds-proxy-aurora-postgres.proxy-czysdiigcqcb.us-east-2.rds.amazonaws.com', 
+  database: 'postgres', 
+  password: 'lalalalovesong!', 
+  port: 5432
 })
 
 client.connect();
