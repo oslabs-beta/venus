@@ -160,6 +160,14 @@ const histWriteToDB = (buffer) => {
       console.log(`Finished writing to ${THREE_MIN_TABLE}...`, result); 
     }
   })
+
+  client.query('SELECT * FROM three_min_table;', (err, result) => {
+    if(err){
+      console.log(err); 
+    } else {
+      console.log(`${THREE_MIN_TABLE}...`, result); 
+    }
+  })
 }
 
 
