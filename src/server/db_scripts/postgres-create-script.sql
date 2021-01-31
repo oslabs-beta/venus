@@ -24,10 +24,10 @@ CREATE TABLE three_min_table (
     "timestamp" TIMESTAMPTZ NOT NULL, 
     "service" varchar NOT NULL,
     "method" varchar NOT NULL,
-    "availability" INT NOT NULL,
-    "response_time" INT NOT NULL,
-    "error_rate" INT NOT NULL,
-    "load" INT NOT NULL,
+    "availability" varchar NOT NULL,
+    "response_time" varchar NOT NULL,
+    "error_rate" varchar NOT NULL,
+    "load" varchar NOT NULL,
     PRIMARY KEY ("id")
 ) WITH (
     OIDS=FALSE
