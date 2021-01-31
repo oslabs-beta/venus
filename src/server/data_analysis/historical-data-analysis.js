@@ -132,7 +132,8 @@ const histWriteToDB = (buffer) => {
     queryText += `('${timeStamp}', 'aggregate', 'aggregate', '${threeMinObj.aggregate.availability}', '${threeMinObj.aggregate.response_time}', '${threeMinObj.aggregate.error}', '${threeMinObj.aggregate.load}'),`;
 
     //Fill in all the aggregate rows by method
-    for(let method in threeMinObj.byMethod){
+    for(let method in threeMinObj.aggregate.byMethod){
+      console.log('method: ', method); 
       queryText += `('${timeStamp}', 'aggregate', '${method}', '${method.availability}', '${method.response_time}', '${method.error}', '${method.load}'),`;
     }
     
@@ -161,13 +162,13 @@ const histWriteToDB = (buffer) => {
     }
   })
 
-  client.query('SELECT * FROM three_min_table;', (err, result) => {
-    if(err){
-      console.log(err); 
-    } else {
-      console.log(`${THREE_MIN_TABLE}...`, result); 
-    }
-  })
+  // client.query('SELECT * FROM three_min_table;', (err, result) => {
+  //   if(err){
+  //     console.log(err); 
+  //   } else {
+  //     console.log(`${THREE_MIN_TABLE}...`, result); 
+  //   }
+  // })
 }
 
 
