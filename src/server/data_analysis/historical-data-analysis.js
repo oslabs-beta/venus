@@ -137,7 +137,7 @@ const histWriteToDB = (buffer) => {
 
     for(let method in threeMinObj.aggregate.byMethod){
       console.log('method: ', method); 
-      console.log('method level object: ', threeMinObj.aggregate.byMethod.method); 
+      console.log('method level object: ', threeMinObj.aggregate.byMethod); 
       queryText += `('${timeStamp}', 'aggregate', '${method}', '${threeMinObj.aggregate.byMethod.method.availability}', '${threeMinObj.aggregate.byMethod.method.response_time}', '${threeMinObj.aggregate.byMethod.method.error}', '${threeMinObj.aggregate.byMethod.method.load}'),`;
     }
     
