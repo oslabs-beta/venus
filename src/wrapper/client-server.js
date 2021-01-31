@@ -130,7 +130,7 @@ venus();
 //#endregion
 
 
-app.use(express.static(path.join(__dirname, "../"))); //serves the index.html
+app.use(express.static(path.join(__dirname, '../test-client/'))); //serves the index.html
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

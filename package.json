@@ -12,10 +12,10 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "hist": "node src/server/historical-read-handler.js",
-    "rt": "node src/server/real-time-read-handler.js",
     "test": "jest",
-    "test:e2e": "./node_modules/mocha/bin/mocha src/tests/spectronTest.js"
-    
+    "test:e2e": "./node_modules/mocha/bin/mocha src/tests/spectronTest.js",
+    "rt": "node src/server/real-time-read-handler.js",
+    "client-test": "cross-env NODE_ENV=development nodemon wrapper/client-server.js"
   },
   "keywords": [],
   "author": "elisealcala",
