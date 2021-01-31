@@ -35,7 +35,6 @@ function SignIn():JSX.Element {
 
   return (
     <div className="loginContainer">
-
       <Card 
         style={{height: 'fit-content', width: 600, textAlign: 'center'}}
         bordered={true}

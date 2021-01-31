@@ -41,7 +41,6 @@ function MainDisplay(): JSX.Element {
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    
   };
 
 

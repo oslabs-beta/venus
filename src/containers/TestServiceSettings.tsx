@@ -33,22 +33,26 @@ const EditableCell = ({
 
 const EditableTable = () => {
   const originData: any = [];
+
+  useEffect(() => {
+  },[])
+
   const { serviceThresholds, setServiceThresholds } = useContext(dynamicContext)
-  for (let i = 0; i < serviceThresholds.length; i++) {
-    if (serviceThresholds[i].availability_threshold){
-      serviceThresholds[i].key = i
-      originData.push(serviceThresholds[i])
-    } else {
-      originData.push({
-        key: i,
-        service: serviceThresholds[i].service,
-        availability_threshold: 99,
-        response_time_threshold: 1500,
-        load_threshold: 100,
-        error_threshold: 1 
-      });
+    for (let i = 0; i < serviceThresholds.length; i++) {
+      if (serviceThresholds[i].availability_threshold){
+        serviceThresholds[i].key = i
+        originData.push(serviceThresholds[i])
+      } else {
+        originData.push({
+          key: i,
+          service: serviceThresholds[i].service,
+          availability_threshold: 99,
+          response_time_threshold: 1000,
+          load_threshold: 100,
+          error_threshold: 1 
+        });
+      }
     }
-  }
   
   const [form] = Form.useForm();
   // const [data, setData] = useState(originData);
