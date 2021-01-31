@@ -3,7 +3,6 @@
  * @desc Child of Dashboard, Parent container that holds and displays each Chart
  */
 import React, { useContext, useEffect} from "react";
-import { AreaChart } from "../charts/AreaChart"
 import { CardDropDown } from "../components/CardDropDown";
 import { historicalContext } from "../contexts/historicalContext"
 import { AggregateStats } from "../components/AggregateStats";
@@ -20,7 +19,7 @@ import Button from 'antd/es/button'
 
 
 function ChartContainer(): JSX.Element {
-  const { aggregate, setAggregate, service, } = useContext(historicalContext)
+  const { aggregate, setAggregate, service, setService } = useContext(historicalContext)
   let filter = aggregate;
   const test: any = {
     status: 'hello',
@@ -36,6 +35,7 @@ function ChartContainer(): JSX.Element {
     // ).then(
     //   data => console.log(data)
     // )
+
   },[])
   
 // temporal options for chart displays
