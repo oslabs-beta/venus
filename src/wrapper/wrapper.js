@@ -11,7 +11,7 @@ const redisStream = require('./redis-stream');
 
 
 /**
- * Monkey patch 'http' / 'https' modules to track relevant properties of the reques / response objects 
+ * Monkey patch 'http' / 'https' modules to track relevant properties of the request / response objects 
  * without modifying the original events
  */
 function venus() {

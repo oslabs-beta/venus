@@ -41,7 +41,7 @@ client.connect();
 
   console.log(`Reading the stream named ${STREAM_KEY}...`); 
 
-  const readAndWriteToDB = async () => {
+  export const readAndWriteToDB = async () => {
 
       //Transform xrange's output from two arrays of keys and value into one array of log objects
       Redis.Command.setReplyTransformer('xrange', function (result) {

@@ -8,6 +8,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1024,
     height: 768,
+    icon: path.join(__dirname, 'theDot.png'),
     // maxWidth:1450,
     // maxHeight:850,
     //  // this will give us our icon shown in the task bar or dock. This will also give you a small icon in the top left of your Windows app.
