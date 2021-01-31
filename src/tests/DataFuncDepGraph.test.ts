@@ -3,11 +3,9 @@ import { changeChildArr, changeData, IDataNode, test, IService, TreeNode} from "
 import { DependencyGraph,treeData, getLinkComponent, LinkControls  } from '../charts/DependencyTree'
 import { SettingsContainer } from '../containers/ServiceSettingsContainer';
 
-
 // describes what the test is
-describe('jest testing is in progress', () => {
-  // testData: IDataNode;
-  // what the specific test is
+  describe('jest testing is in progress', () => {
+    // what the specific test is
     it('jest testing activated', () => {
       // what is expected
       expect(true).toBeTruthy();
