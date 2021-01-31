@@ -6,39 +6,6 @@ exports[`jest snapshot testing dependency graph snapshot testing the dependency 
 
 exports[`jest snapshot testing dependency graph snapshot testing the getLinkComponent component matches the snapshot 1`] = `[Function]`;
 
-exports[`jest snapshot testing dummy data snapshot testing the altered dummy data matches the snapshot 1`] = `
-Object {
-  "children": Array [
-    Object {
-      "children": Array [
-        Object {
-          "service": "GET",
-          "status": "good",
-        },
-      ],
-      "service": "gogle api",
-      "status": "good",
-    },
-    Object {
-      "children": Array [
-        Object {
-          "service": "GET",
-          "status": "bad",
-        },
-        Object {
-          "service": "POST",
-          "status": "bad",
-        },
-      ],
-      "service": "wizard api",
-      "status": "fair",
-    },
-  ],
-  "service": "Services",
-  "status": "good",
-}
-`;
-
 exports[`jest snapshot testing dummy data snapshot testing the dummy data matches the snapshot 1`] = `
 Object {
   "services": Array [
@@ -84,5 +51,38 @@ Object {
       "status": "fair",
     },
   ],
+}
+`;
+
+exports[`jest snapshot testing dummy data snapshot testing the dummy data matches the snapshot 2`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "service": "GET",
+          "status": "good",
+        },
+      ],
+      "service": "gogle api",
+      "status": "good",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "service": "GET",
+          "status": "bad",
+        },
+        Object {
+          "service": "POST",
+          "status": "bad",
+        },
+      ],
+      "service": "wizard api",
+      "status": "fair",
+    },
+  ],
+  "service": "Services",
+  "status": "good",
 }
 `;
