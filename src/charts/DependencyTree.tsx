@@ -55,7 +55,7 @@ function LinkControls({
     return (
       <Select
         defaultValue={layout}
-        style={{ width: 120 }}
+        style={{ width: 140 }}
         onChange={handleChangeLayout}
       >
         <Option value="polar">Polar</Option>
@@ -71,7 +71,7 @@ function LinkControls({
     return (
       <Select
         defaultValue={orientation}
-        style={{ width: 120 }}
+        style={{ width: 140 }}
         onChange={handleChangeOrientation}
       >
         <Option value="horizontal">Horizontal</Option>
@@ -87,7 +87,7 @@ function LinkControls({
     return (
       <Select
         defaultValue={linkType}
-        style={{ width: 120 }}
+        style={{ width: 140 }}
         onChange={handleChangeLinkType}
       >
         <Option value="diagonal">Diagonal</Option>
@@ -100,13 +100,13 @@ function LinkControls({
   return (
     <div>
       {/* <div style={controlStyles}></div> */}
-      <label>layout: </label>&nbsp;
+      <label>  Layout: </label>&nbsp;
       <LayoutSelect />
       &nbsp;&nbsp;
-      <label>orientation: </label>&nbsp;
+      <label>Orientation: </label>&nbsp;
       <OrientationSelect />
       &nbsp;&nbsp;
-      <label>link: </label>&nbsp;
+      <label>Link: </label>&nbsp;
       <LinkTypeSelect />
       {linkType === "step" && layout !== "polar" && (
         <>
@@ -182,6 +182,7 @@ export type LinkTypesProps = {
   height: number;
   margin?: { top: number; right: number; bottom: number; left: number };
 };
+
 // renders the graph
 function DependencyGraph({
   width: totalWidth,

@@ -53,7 +53,7 @@ describe('jest data parser testing', () => {
     })
  
     it('check if first element from result array is an object', () => {
-      expect(typeof changeChildArr(test.services)).toBe('object');
+      expect(typeof changeChildArr(test.services)[0]).toBe('object');
     })
 
     it('check if first element from result array has "service" property', () => {
