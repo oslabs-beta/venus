@@ -133,7 +133,7 @@ const histWriteToDB = (buffer) => {
 
     //Fill in all the aggregate rows by method
 
-    console.log('byMethod for Aggregate:', threeMinObj.aggregate.byMethod); 
+    console.log('byMethod for Aggregate at GET:', threeMinObj.aggregate.byMethod.GET); 
 
     for(let method in threeMinObj.aggregate.byMethod){
       console.log('method: ', method); 
