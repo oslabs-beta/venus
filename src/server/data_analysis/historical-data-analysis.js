@@ -117,7 +117,9 @@ const histWriteToDB = (buffer) => {
 
   buffer.forEach((threeMinObj) => {
     
-     const timeStamp = convertUnixTime(threeMinObj.timestamp); 
+    console.log('threeMinObj', threeMinObj); 
+
+    const timeStamp = convertUnixTime(threeMinObj.timestamp); 
     
     //Write the overall aggregate statistics for the 3 minute interval
     queryText += `('${timeStamp}', 'aggregate', 'aggregate', '${threeMinObj.aggregate.availability}', '${threeMinObj.aggregate.response_time}', '${threeMinObj.aggregate.error}', '${threeMinObj.aggregate.load}'),`;
