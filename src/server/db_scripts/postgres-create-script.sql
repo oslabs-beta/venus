@@ -1,6 +1,7 @@
 DROP TABLE logs CASCADE;
 DROP TABLE three_min_table CASCADE;
 DROP TABLE one_hr_table CASCADE;
+DROP TABLE eight_hr_table CASCADE;
 DROP TABLE one_day_table CASCADE; 
 
 CREATE TABLE logs (
