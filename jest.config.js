@@ -17,7 +17,9 @@ module.exports = {
     "json",
     "node"
   ],
+    // https://jestjs.io/docs/en/configuration#snapshotserializers-arraystring
   "snapshotSerializers": ["enzyme-to-json/serializer"],
+    // https://jestjs.io/docs/en/configuration#setupfiles-array
   // "setupFilesAfterEnv": ['<rootDir>/src/setupTests.js'],
   setupFilesAfterEnv: [
     '<rootDir>/src/setupTests.js',

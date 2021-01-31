@@ -1,0 +1,14 @@
+console.log('in the babelrc file')
+
+{
+  "presets": ["next/babel"],
+  "plugins": [
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": "index.css"
+      }
+    ]
+  ]
+}
