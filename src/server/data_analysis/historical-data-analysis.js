@@ -53,22 +53,24 @@ const test = [
               availability: 299
             } 
         },
-      aggregate: {
-        error: 56,
-        load: 15,
-        response_time: 1198,
-        availability: 100,
-        byMethod: { GET: {
+      }
+    ], 
+    aggregate: {
+      error: 56,
+      load: 15,
+      response_time: 1198,
+      availability: 100,
+      byMethod: { 
+        GET: {
           load: 20, 
           response_time: 1292, 
           availability: 299
-          } }
-        }
+        } 
       }
-    ]
-  }, 
+    }
+  },
   {
-    timestamp: '1612071042936-0',
+    timestamp: '1612071042999-0',
       services: [
         {
           service: 'curriculum-api.codesmith.io',
@@ -78,35 +80,40 @@ const test = [
           availability: 100,
           byMethod: {
             GET: {
+            method: 'GET', 
             load: 20, 
             response_time: 1292, 
             availability: 299
             }, 
             PUT: {
+              method: 'GET', 
               load: 20, 
               response_time: 1292, 
               availability: 299
             }, 
             POST: {
+              method: 'GET', 
               load: 20, 
               response_time: 1292, 
               availability: 299
             } 
         },
-      aggregate: {
-        error: 56,
-        load: 15,
-        response_time: 1198,
-        availability: 100,
-        byMethod: { GET: {
+      }
+    ], 
+    aggregate: {
+      error: 56,
+      load: 15,
+      response_time: 1198,
+      availability: 100,
+      byMethod: { 
+        GET: {
           load: 20, 
           response_time: 1292, 
           availability: 299
-          } }
-        }
+        } 
       }
-    ]
-  }
+    }
+  } 
 ]
 
 
