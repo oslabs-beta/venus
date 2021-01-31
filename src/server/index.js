@@ -93,7 +93,7 @@ async function sendData(socket){
   if(streamData.length !== 0){
     //Analyze last three minutes of stream data and store output of analysis
     const output = data.rtData(streamData);
-    
+    console.log('EMITTING VIA SOCKET'); 
     //Emit output to the front-end via websocket
     socket.emit('real-time-object', output); 
 
