@@ -137,7 +137,7 @@ const histWriteToDB = (buffer) => {
 
     for(let method in threeMinObj.aggregate.byMethod){
       console.log('method: ', method); 
-      queryText += `('${timeStamp}', 'aggregate', '${method}', '${threeMinObj.aggregate.byMethod.method.availability}', '${threeMinObj.aggregate.byMethod.method.response_time}', '${threeMinObj.aggregate.byMethod.method.error}', '${threeMinObj.aggregate.byMethod.method.load}'),`;
+      queryText += `('${timeStamp}', 'aggregate', '${method}', '${JSON.stringify(threeMinObj.aggregate.byMethod)}', '${threeMinObj.aggregate.byMethod.method.response_time}', '${threeMinObj.aggregate.byMethod.method.error}', '${threeMinObj.aggregate.byMethod.method.load}'),`;
     }
     
     //Fill in all the rows for aggregate at the service level and then by the method level
