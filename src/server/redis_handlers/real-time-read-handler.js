@@ -27,32 +27,6 @@ const readRedisStream = async () => {
   const startTime = Date.now() - INTERVAL; 
   const endTime = startTime + INTERVAL;  
 
-  //Transform xrange's output from two arrays of keys and value into one array of log objects
-  // Redis.Command.setReplyTransformer('xrange', function (result) {
-  //   if(Array.isArray(result)){
-  //     const newResult = []; 
-  //     for(const r of result){
-  //       const obj = {
-  //         id: r[0]
-  //       }; 
-
-  //       const fieldNamesValues = r[1]; 
-
-  //       for(let i = 0; i < fieldNamesValues.length; i += 2){
-  //         const k = fieldNamesValues[i]; 
-  //         const v = fieldNamesValues[i + 1]; 
-  //         obj[k] = v; 
-  //       }
-
-  //       newResult.push(obj); 
-  //     }
-
-  //     return newResult; 
-  //   }
-
-  //   return result; 
-  // }); 
-
   // Transform xrange's output from two arrays of keys and value into one array of log objects
   Redis.Command.setReplyTransformer('xrange', function (result) {
     if(Array.isArray(result)){
@@ -64,31 +38,37 @@ const readRedisStream = async () => {
 
         const fieldNamesValues = r[1]; 
 
-        // for(let i = 0; i < fieldNamesValues.length; i += 2){
-        //   const k = fieldNamesValues[i]; 
-        //   const v = fieldNamesValues[i + 1]; 
-        //   obj[k] = v; 
-        // }
+        const reqHost = fieldNamesValues.indexOf('reqHost'); 
+        const reqHostValue = reqHost + 1;
+        obj['reqHost'] = fieldNamesValues[reqHostValue];
 
         const reqMethod = fieldNamesValues.indexOf('reqMethod'); 
         const reqMethodValue = reqMethod + 1;
         obj['reqMethod'] = fieldNamesValues[reqMethodValue]; 
         
-        const reqHost = fieldNamesValues.indexOf('reqHost'); 
-        const reqHostValue = reqHost + 1;
-        obj['reqHost'] = fieldNamesValues[reqHostValue];
-
+        const reqPath = fieldNamesValues.indexOf('reqPath'); 
+        const reqPathValue = reqPath + 1;
+        obj['reqPath'] = fieldNamesValues[reqPathValue];
+        
         const reqUrl = fieldNamesValues.indexOf('reqUrl'); 
         const reqUrlValue = reqUrl + 1;
         obj['reqUrl'] = fieldNamesValues[reqUrlValue];
 
-        const reqPath = fieldNamesValues.indexOf('reqPath'); 
-        const reqPathValue = reqPath + 1;
-        obj['reqPath'] = fieldNamesValues[reqPathValue];
-
         const resStatusCode = fieldNamesValues.indexOf('resStatusCode'); 
         const resStatusCodeValue = resStatusCode + 1;
         obj['resStatusCode'] = fieldNamesValues[resStatusCodeValue];
+
+        const clientError = fieldNamesValues.indexOf('clientError'); 
+        const clientErrorValue = clientError + 1;
+        obj['clientError'] = fieldNamesValues[clientError];
+
+        const serverError = fieldNamesValues.indexOf('serverError'); 
+        const serverErrorValue = serverError + 1;
+        obj['serverError'] = fieldNamesValues[serverError];
+
+        const noError = fieldNamesValues.indexOf('noError'); 
+        const noErrorValue = noError + 1;
+        obj['noError'] = fieldNamesValues[noError];
 
         const resMessage = fieldNamesValues.indexOf('resMessage'); 
         const resMessageValue = resMessage + 1;
