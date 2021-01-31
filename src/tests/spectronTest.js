@@ -1,7 +1,3 @@
-/* eslint-env node, mocha */
-// const assert = require('assert');
-// const path = require('path');
-// const {Application} = require('spectron');
 const Application = require('spectron').Application;
 const path = require('path');
 const chai = require('chai');
@@ -10,7 +6,7 @@ const chaiAsPromised = require('chai-as-promised');
 var electronPath = path.join(__dirname, '..', '..', 'node_modules', '.bin', 'electron');
 
 if (process.platform === 'win32') {
-    electronPath += '.cmd';
+  electronPath += '.cmd';
 }
 
 let appPath = path.join(__dirname, '..', '..');
@@ -51,10 +47,5 @@ let app = new Application({
           const count = await app.client.getWindowCount();
           assert.equal(count, 1);
         });
-      
-        // it('tests the title', function () {
-        //   return app.client.waitUntilWindowLoaded()
-        //     .getTitle().should.eventually.equal('Hello World!');
-        // });
       
       });
