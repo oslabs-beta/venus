@@ -140,11 +140,11 @@ const histWriteToDB = (buffer) => {
     //Fill in all the rows for aggregate at the service level and then by the method level
     threeMinObj.services.forEach((service) => {
       //Add aggregate service level metrics
-      queryText += `('${timeStamp}', '${service}', 'aggregate', '${service.availability}', '${service.response_time}', '${service.error}', '${service.load}'),`;
+      queryText += `('${timeStamp}', '${service.service}', 'aggregate', '${service.availability}', '${service.response_time}', '${service.error}', '${service.load}'),`;
 
       //Add service level metrics by method
       for(let method in service.byMethod){
-        queryText += `('${timeStamp}', '${service}', '${method}', '${method.availability}', '${method.response_time}', '${method.error}', '${method.load}'),`;
+        queryText += `('${timeStamp}', '${service.service}', '${method}', '${method.availability}', '${method.response_time}', '${method.error}', '${method.load}'),`;
       }
     })
   })
@@ -166,7 +166,7 @@ const histWriteToDB = (buffer) => {
     if(err){
       console.log(err); 
     } else {
-      console.log(`${THREE_MIN_TABLE}...`, result); 
+      console.log(`${THREE_MIN_TABLE}...`, result.rows); 
     }
   })
 }
