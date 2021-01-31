@@ -35,22 +35,22 @@ const test = [
           availability: 100,
           byMethod: {
             GET: {
-            method: 'GET', 
             load: 20, 
             response_time: 1292, 
-            availability: 299
+            availability: 299, 
+            error: 12
             }, 
             PUT: {
-              method: 'GET', 
               load: 20, 
               response_time: 1292, 
-              availability: 299
+              availability: 299, 
+              error: 34
             }, 
             POST: {
-              method: 'GET', 
               load: 20, 
               response_time: 1292, 
-              availability: 299
+              availability: 299, 
+              error: 32
             } 
         },
       }
@@ -64,7 +64,8 @@ const test = [
         GET: {
           load: 20, 
           response_time: 1292, 
-          availability: 299
+          availability: 299, 
+          error: 39
         } 
       }
     }
@@ -80,22 +81,22 @@ const test = [
           availability: 100,
           byMethod: {
             GET: {
-            method: 'GET', 
             load: 20, 
             response_time: 1292, 
-            availability: 299
+            availability: 299, 
+            error: 32
             }, 
             PUT: {
-              method: 'GET', 
               load: 20, 
               response_time: 1292, 
-              availability: 299
+              availability: 299, 
+              error: 12
             }, 
             POST: {
-              method: 'GET', 
               load: 20, 
               response_time: 1292, 
-              availability: 299
+              availability: 299, 
+              error: 53
             } 
         },
       }
@@ -109,7 +110,8 @@ const test = [
         GET: {
           load: 20, 
           response_time: 1292, 
-          availability: 299
+          availability: 299, 
+          error: 65
         } 
       }
     }
