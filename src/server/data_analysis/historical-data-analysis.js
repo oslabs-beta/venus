@@ -2,8 +2,6 @@ const dfd = require('danfojs-node');
 const { Client, Pool } = require('pg');
 require('dotenv').config();
 
-moment.format(); 
-
 //Specify table names
 const THREE_MIN_TABLE = 'three_min_table';
 const ONE_HR_TABLE = 'one_hour_table';
