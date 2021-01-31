@@ -4,9 +4,9 @@ import { DependencyGraph} from '../charts/DependencyTree'
 import { AggregateStats } from '../components/AggregateStats';
 import { dynamicContext } from '../contexts/dynamicContext';
 import Divider from 'antd/es/divider';
-import Title from 'antd/es/typography/Title';
+import Typography from 'antd/es/typography';
 import ParentSize from "@visx/responsive/lib/components/ParentSize";
-
+const { Title } = Typography
 
 function DependencyGraphContainer(): JSX.Element{
   
@@ -23,10 +23,11 @@ function DependencyGraphContainer(): JSX.Element{
         load={aggregate.load}
         availability={aggregate.availability}
         />
-         <Divider></Divider>
           <Card hoverable={true} style={{width: 'fit-content'}}>
-  
-               <DependencyGraph width={600} height={600} />
+            <Title level={5}>Service Endpoints and Method Dependencies</Title>
+          </Card>
+          <Card hoverable={true} style={{width: 'fit-content'}}>
+            <DependencyGraph width={600} height={600} />
           </Card>
     </div>
   )

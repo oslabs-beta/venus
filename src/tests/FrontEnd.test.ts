@@ -3,14 +3,6 @@ import { changeChildArr, changeData, IDataNode, test, IService, TreeNode} from "
 import { DependencyGraph,treeData, getLinkComponent, LinkControls  } from '../charts/DependencyTree'
 import { SettingsContainer } from '../containers/ServiceSettingsContainer';
 
-import { render } from "@testing-library/react";
-import { SignIn } from "../containers/SignInContainer";
-
-it('expects button to be in SignIN component', () => {
-  const { queryByTestId } = render(SignIn());
-  const addSignInButton = queryByTestId("signin-button");
-  expect(addSignInButton).toBeInTheDocument();
-})
 
 // describes what the test is
 describe('jest testing is in progress', () => {
@@ -126,4 +118,13 @@ describe('Enzyme testing is in progress', () => {
   });
 })
 
+// ----- Set Up For Ant Design Testing ----- //
 
+// import { render } from "@testing-library/react";
+// import { SignIn } from "../containers/SignInContainer";
+
+// it('expects button to be in SignIN component', () => {
+//   const { queryByTestId } = render(SignIn());
+//   const addSignInButton = queryByTestId("signin-button");
+//   expect(addSignInButton).toBeInTheDocument();
+// })
