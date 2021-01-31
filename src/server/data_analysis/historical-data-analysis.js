@@ -1,12 +1,14 @@
 const dfd = require('danfojs-node');
 const { Client, Pool } = require('pg');
-require('dotenv').config(); 
+require('dotenv').config();
+
+moment.format(); 
 
 //Specify table names
 const THREE_MIN_TABLE = 'three_min_table';
 const ONE_HR_TABLE = 'one_hour_table';
 const EIGHT_HR_TABLE = 'eight_hour_table'
-const TWENTY_FOUR_HR_TABLE = 'twenty_four_hour_table';
+const ONE_DAY_TABLE = 'one_day_table';
 const HOUR = 3600000
 const EIGHT_HOURS = 28800000 
 
@@ -21,6 +23,94 @@ const client = new Client({
 })
 
 client.connect();
+
+
+const test = [
+  {
+    timestamp: '1612071042936-0',
+      services: [
+        {
+          service: 'curriculum-api.codesmith.io',
+          load: 15,
+          response_time: 1198,
+          error: 56,
+          availability: 100,
+          byMethod: {
+            GET: {
+            method: 'GET', 
+            load: 20, 
+            response_time: 1292, 
+            availability: 299
+            }, 
+            PUT: {
+              method: 'GET', 
+              load: 20, 
+              response_time: 1292, 
+              availability: 299
+            }, 
+            POST: {
+              method: 'GET', 
+              load: 20, 
+              response_time: 1292, 
+              availability: 299
+            } 
+        },
+      aggregate: {
+        error: 56,
+        load: 15,
+        response_time: 1198,
+        availability: 100,
+        byMethod: { GET: {
+          load: 20, 
+          response_time: 1292, 
+          availability: 299
+          } }
+        }
+      }
+    ]
+  }, 
+  {
+    timestamp: '1612071042936-0',
+      services: [
+        {
+          service: 'curriculum-api.codesmith.io',
+          load: 15,
+          response_time: 1198,
+          error: 56,
+          availability: 100,
+          byMethod: {
+            GET: {
+            load: 20, 
+            response_time: 1292, 
+            availability: 299
+            }, 
+            PUT: {
+              load: 20, 
+              response_time: 1292, 
+              availability: 299
+            }, 
+            POST: {
+              load: 20, 
+              response_time: 1292, 
+              availability: 299
+            } 
+        },
+      aggregate: {
+        error: 56,
+        load: 15,
+        response_time: 1198,
+        availability: 100,
+        byMethod: { GET: {
+          load: 20, 
+          response_time: 1292, 
+          availability: 299
+          } }
+        }
+      }
+    ]
+  }
+]
+
 
 //histWriteToDB takes in a buffer of 3 min "real-time" objects and writes them to the 3-min data base
 const histWriteToDB = (buffer) => {
@@ -63,7 +153,7 @@ const histWriteToDB = (buffer) => {
 //Write a function that reads and analyzes the last hour of 3 minute rows
 const readAndWriteLastHour = () => {
   //Query the three minute table for the last hour of data only at the aggregate level (not service level)
-  const selectAggregate = `SELECT * FROM ${THREE_MIN_TABLE} WHERE service = aggregate AND timestamp >= ${Date.now() - HOUR}`;
+  const selectAggregate = `SELECT * FROM ${THREE_MIN_TABLE} WHERE service = aggregate AND timestamp >= ${Date.now() - HOUR};`;
   //Analyze by aggregate, service and method
 } 
 

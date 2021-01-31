@@ -15,25 +15,60 @@ CREATE TABLE logs (
     OIDS=FALSE
 );
 
--- seed the database with an initial value
--- INSERT INTO logs (
---   redis_timestamp, 
---   req_method, 
---   req_host,
---   req_path,
---   req_url,
---   res_status_code,
---   res_message,
---   cycle_duration
--- ) VALUES (
---   '1611124876933-0',
---   'GET', 
---   'curriculum-api.codesmith.io', 
---   '/messages', 
---   'https://curriculum-api.codesmith.io/messages', 
---   '200', 
---   'OK', 
---   '1232.32'
--- ); 
+CREATE TABLE three_min_table (
+    "id" serial NOT NULL,
+    "timestamp" TIMESTAMPTZ NOT NULL, 
+    "service" varchar NOT NULL,
+    "method" varchar NOT NULL,
+    "availability" FLOAT(8) NOT NULL,
+    "response_time" FLOAT(8) NOT NULL,
+    "error_rate" FLOAT(8) NOT NULL,
+    "load" INT NOT NULL,
+    PRIMARY KEY ("id")
+) WITH (
+    OIDS=FALSE
+);
+
+CREATE TABLE one_hr_table (
+    "id" serial NOT NULL,
+    "timestamp" TIMESTAMPTZ NOT NULL, 
+    "service" varchar NOT NULL,
+    "method" varchar NOT NULL,
+    "availability" FLOAT(8) NOT NULL,
+    "response_time" FLOAT(8) NOT NULL,
+    "error_rate" FLOAT(8) NOT NULL,
+    "load" INT NOT NULL,
+    PRIMARY KEY ("id")
+) WITH (
+    OIDS=FALSE
+);
+
+CREATE TABLE eight_hr_table (
+    "id" serial NOT NULL,
+    "timestamp" TIMESTAMPTZ NOT NULL, 
+    "service" varchar NOT NULL,
+    "method" varchar NOT NULL,
+    "availability" FLOAT(8) NOT NULL,
+    "response_time" FLOAT(8) NOT NULL,
+    "error_rate" FLOAT(8) NOT NULL,
+    "load" INT NOT NULL,
+    PRIMARY KEY ("id")
+) WITH (
+    OIDS=FALSE
+);
+
+CREATE TABLE one_day_table (
+    "id" serial NOT NULL,
+    "timestamp" TIMESTAMPTZ NOT NULL, 
+    "service" varchar NOT NULL,
+    "method" varchar NOT NULL,
+    "availability" FLOAT(8) NOT NULL,
+    "response_time" FLOAT(8) NOT NULL,
+    "error_rate" FLOAT(8) NOT NULL,
+    "load" INT NOT NULL,
+    PRIMARY KEY ("id")
+) WITH (
+    OIDS=FALSE
+);
 
 --USE THIS COMMAND TO RUN THIS SCRIPT IN THE DIRECTORY WHERE THIS FILE IS LOCATED:  psql --host=DB_HOST --port=DB_PORT --username=DB_NAME --password  --dbname=DB_NAME -f SCRIPT-FILE
