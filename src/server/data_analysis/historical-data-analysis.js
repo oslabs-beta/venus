@@ -124,6 +124,8 @@ const histWriteToDB = (buffer) => {
 
   buffer.forEach((threeMinObj) => {
     
+    console.log('threeMinObj', threeMinObj); 
+
     const timeStamp = convertUnixTime(threeMinObj.timestamp); 
     
     //Write the overall aggregate statistics for the 3 minute interval
@@ -131,8 +133,11 @@ const histWriteToDB = (buffer) => {
 
     //Fill in all the aggregate rows by method
 
-    for(let method in threeMinObj.aggregate.byMethod){
+    console.log('byMethod for Aggregate at GET at availability:', threeMinObj.aggregate.byMethod.GET.availability); 
 
+    for(let method in threeMinObj.aggregate.byMethod){
+      // console.log('method: ', method); 
+      console.log('method level object: ', threeMinObj.aggregate.byMethod[method]); 
       queryText += `('${timeStamp}', 'aggregate', '${method}', '${threeMinObj.aggregate.byMethod[method].availability}', '${threeMinObj.aggregate.byMethod[method].response_time}', '${threeMinObj.aggregate.byMethod[method].error}', '${threeMinObj.aggregate.byMethod[method].load}'),`;
     }
     
@@ -143,7 +148,6 @@ const histWriteToDB = (buffer) => {
 
       //Add service level metrics by method
       for(let method in service.byMethod){
-
         queryText += `('${timeStamp}', '${service.service}', '${method}', '${service.byMethod[method].availability}', '${service.byMethod[method].response_time}', '${service.byMethod[method].error}', '${service.byMethod[method].load}'),`;
       }
     })
