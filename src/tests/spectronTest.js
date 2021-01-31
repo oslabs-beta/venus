@@ -13,9 +13,9 @@ if (process.platform === 'win32') {
     electronPath += '.cmd';
 }
 
-var appPath = path.join(__dirname, '..', '..');
+let appPath = path.join(__dirname, '..', '..');
 
-var app = new Application({
+let app = new Application({
             path: electronPath,
             args: [appPath]
         });

@@ -27,7 +27,7 @@ import {
 const { Option } = Select;
 
 const controlStyles = { fontSize: 18 };
-type Props = {
+export type Props = {
   layout: string;
   orientation: string;
   linkType: string;
@@ -353,4 +353,4 @@ function useForceUpdate() {
   return () => setValue(value => value + 1); // update state to force render
 }
 
-export { DependencyGraph, treeData };
+export { DependencyGraph, treeData, getLinkComponent };
