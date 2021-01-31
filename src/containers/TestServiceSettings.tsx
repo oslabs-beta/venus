@@ -34,8 +34,8 @@ const EditableCell = ({
 const EditableTable = () => {
   const originData: any = [];
 
-  useEffect(() => {
-  },[])
+  // useEffect(() => {
+  // },[])
 
   const { serviceThresholds, setServiceThresholds } = useContext(dynamicContext)
     for (let i = 0; i < serviceThresholds.length; i++) {

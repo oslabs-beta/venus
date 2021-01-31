@@ -1,7 +1,9 @@
 
-import React, { useState, useEffect } from 'react';
-import Line from'@ant-design/charts/es/line';     
+import React, { useState, useEffect, useContext } from 'react';
+import Line from'@ant-design/charts/es/line';
+import { historicalContext } from '../contexts/historicalContext';     
 const Availability: React.FC = () => {
+  
   const [data, setData] = useState([]);
   useEffect(() => {
     asyncFetch();
@@ -16,8 +18,9 @@ const Availability: React.FC = () => {
         console.log('fetch data failed', error);
       });
   };
+  
   var config = {
-    data: data ,
+    data: data,
     xField: 'year',
     yField: 'value',
     seriesField: 'category',

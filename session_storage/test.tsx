@@ -1,40 +1,40 @@
-{
+ const holder: any = {
   "aggregate": {
     "load": [
       {
-      "year": "1850",
-      "value": 0,
-      "category": "google.com"
+      year: "1856",
+      value: 0,
+      category: "google.com"
     },
     {
-      "year": "1851",
-      "value": 0,
-      "category": "google.com"
+      year: "1856",
+      value: 0,
+      category: "google.com"
     },
     {
-      "year": "1852",
-      "value": 0,
-      "category": "google.com"
+      year: "1855",
+      value: 0,
+      category: "google.com"
     },
     {
-      "year": "1853",
-      "value": 0,
-      "category": "google.com"
+      year: "1854",
+      value: 0,
+      category: "google.com"
     },
     {
-      "year": "1854",
-      "value": 0,
-      "category": "google.com"
+      year: "1853",
+      value: 0,
+      category: "google.com"
     },
     {
-      "year": "1855",
-      "value": 0,
-      "category": "google.com"
+      year: "1852",
+      value: 0,
+      category: "google.com"
     },
     {
-      "year": "1856",
-      "value": 0,
-      "category": "google.com"
+      year: "1851",
+      value: 0,
+      category: "google.com"
     }
     ],
     "availability":[
@@ -108,3 +108,5 @@
     ]
   }
 }
+
+export { holder }

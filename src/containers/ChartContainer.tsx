@@ -15,9 +15,10 @@ import Divider from "antd/es/divider";
 import Title from "antd/es/typography/Title";
 import Radio from 'antd/es/radio'
 import Button from 'antd/es/button'
+import { holder } from '../../session_storage/test'
 
-
-
+const data = holder
+console.log(data.aggregate.load)
 function ChartContainer(): JSX.Element {
   const { aggregate, setAggregate, service, setService } = useContext(historicalContext)
   let filter = aggregate;
@@ -27,6 +28,17 @@ function ChartContainer(): JSX.Element {
     response_time: 12, 
     error: 12,
     availability: 12,
+  }
+
+  const testObject: any = {
+    dataSet1: {
+      load: [{
+        year: "1850",
+        value: 0,
+        category: "google.com"
+      },
+      ]
+    }
   }
   useEffect(() => {
     setAggregate(test)
@@ -48,7 +60,15 @@ function ChartContainer(): JSX.Element {
 
 // select data range to display from historical state
   const filterData = (e:any) => {
-    console.log('radio checked', e.target.value);
+    console.log('radio checked', e.target.value, service);
+  };
+
+  const refreshData = () => {
+    // fetch('localhost:3000/get/historicdata').then(
+    //   response => response.json()
+    // ).then(
+    //   data => console.log(data)
+    // )
   };
 
   return (
@@ -65,13 +85,13 @@ function ChartContainer(): JSX.Element {
         
         <Radio.Group style={{marginLeft: '10px'}} optionType="button"  onChange={filterData} options={options}/>
 
-        <Button type="primary" style={{marginLeft: '10px'}}>Refresh Data</Button>
+        <Button type="primary" style={{marginLeft: '10px'}} onClick={refreshData}>Refresh Data</Button>
       </div>
         <Row gutter={[32,32]}>
           <Col span={12}>
             <Title level={5}>Availability</Title>
             <Card bordered={true} hoverable={true} style={{width: "500px"}}>
-              <Availability />
+              <Availability data={data} />
             </Card>
           </Col>
           <Col span={12}>

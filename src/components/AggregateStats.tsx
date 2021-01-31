@@ -31,9 +31,9 @@ function AggregateStats(props: any): JSX.Element{
 						<Statistic
 							className="stats"
 							title="Title"
-							value="Codesmith"
+							value="System"
 							precision={2}
-							valueStyle={{ color: color.good }}
+							// valueStyle={{ color: color.good }}
 						/>
 					</Card>
 			</div>
@@ -45,7 +45,7 @@ function AggregateStats(props: any): JSX.Element{
 							title="Health"
 							value={'GOOD'}
 							precision={2}
-							valueStyle={{ color: color.bad }}
+							// valueStyle={{ color: color.bad }}
 						/>
 					</Card>
 					</div>
@@ -58,7 +58,7 @@ function AggregateStats(props: any): JSX.Element{
 							title="Availability"
 							value={props.availability}
 							precision={2}
-							valueStyle={{ color: color.good }}
+							// valueStyle={{ color: color.good }}
 							suffix="%"
 		
 						/>
@@ -72,7 +72,7 @@ function AggregateStats(props: any): JSX.Element{
 							title="Response Time"
 							value={props.response_time}
 							precision={2}
-							valueStyle={{ color: color.fair }}
+							// valueStyle={{ color: color.fair }}
 							suffix="ms"
 							/>
 					</Card>
@@ -86,7 +86,7 @@ function AggregateStats(props: any): JSX.Element{
 							title="Load"
 							value={props.load}
 							precision={2}
-							valueStyle={{ color: color.fair }}
+							// valueStyle={{ color: color.fair }}
 							suffix="hpm"
 							/>
 					</Card>
@@ -100,7 +100,7 @@ function AggregateStats(props: any): JSX.Element{
 							title="Response Error"
 							value={props.error}
 							precision={2}
-							valueStyle={{ color: color.fair }}
+							// valueStyle={{ color: color.fair }}
 							suffix="%"
 							/>
 					</Card>

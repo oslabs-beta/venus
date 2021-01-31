@@ -101,6 +101,7 @@ function Dashboard(): JSX.Element {
       availability: 83,
       status: 'good'
     })
+    setServiceThresholds(baselineSetting)
     // return () => socket.disconnect();
   }, []);
 
@@ -133,9 +134,9 @@ console.log(serviceThresholds, 'before conditional')
 // } else {
   for (let i = 0; i < services.length; i++) {
     const baseline: any = {
-      availability_threshold: 0,
-      response_time_threshold: 1000000,
-      load_threshold: 100,
+      availability_threshold: 99,
+      response_time_threshold: 1000,
+      load_threshold: 1000,
       error_threshold: 2
     }
     services[i].key = i;
@@ -159,8 +160,8 @@ console.log(serviceThresholds, 'before conditional')
       baselineSetting.push(baseline)
     }
   }
-  // setServiceThresholds(baselineSetting)
-// }
+  
+ 
 
   const columns: any = [
     {
