@@ -1,0 +1,45 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Calendar</title>
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="./client/style.css" media="screen"/>  
+</head>
+<body>
+  <!-- <div id="cal-container"></div>
+  <div id="chat-container">
+    <div id="msg-container">
+      <div class="msg-line">
+        <div class="msg-username">Vlad</div>
+        <div class="msg-text">Hey, what's up?</div>
+      </div>
+    </div>
+    <input id="chat-input">
+  </div> -->
+
+</body>
+<script src="./node_modules/expect/umd/expect.min.js"></script>
+<script src="./node_modules/mocha/mocha.js"></script>
+<script src="./test/polyfill.js"></script>
+<script src='./client/main.js'></script>
+
+<script>
+  // If called from Mocha Phantom-JS on the command line then add the test scripts
+  // to the end of the document.
+  if (window.callPhantom) {
+    mocha.setup('bdd')
+    addScript('./test/online-calendar-test.js');
+    addScript('./test/online-chatroom-test.js');
+    addScript('./test/runMocha.js');
+  }
+  
+  function addScript(path) {
+    var js = document.createElement('script');
+    js.type = 'text/javascript';
+    js.src = path;
+    document.body.appendChild(js);
+  }
+</script>
+
+</html>

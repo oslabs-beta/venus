@@ -1,0 +1,41 @@
+{
+  "name": "w1-s2-calendar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha-phantomjs --ignore-ssl-errors=true --web-security=no --ssl-protocol=any ./index.html",
+    "start": "cross-env NODE_ENV=production nodemon test-client/client-server.js",
+    "dev": "cross-env NODE_ENV=development nodemon test-client/client-server.js"
+  },
+  "preinstall": "brew update && brew install phantomjs",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^2.8.5",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "config": "^3.3.3",
+    "connect-datadog": "0.0.9",
+    "danfojs-node": "^0.1.10",
+    "dd-trace": "^0.30.0",
+    "dotenv": "^8.2.0",
+    "expect": "^1.20.2",
+    "express": "^4.17.1",
+    "express-opentracing": "^0.1.1",
+    "global-request-logger": "^0.1.1",
+    "ioredis": "^4.19.4",
+    "jquery": "^2.2.4",
+    "mocha": "^2.5.3",
+    "mocha-phantomjs": "^4.0.1",
+    "moesif-nodejs": "^3.1.5",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7",
+    "response-time": "^2.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.12.1",
+    "concurrently": "^5.0.0",
+    "cross-env": "^6.0.3"
+  }
+}

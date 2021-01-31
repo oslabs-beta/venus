@@ -10,6 +10,8 @@ const INTERVAL = process.env.RT_INTERVAL;
 const PING_RATE = process.env.RT_PING_RATE; 
 //Where Redis is being hosted (either local machine or elasticache)
 const REDIS_HOST = process.env.REDIS_HOST; 
+//Which port Redis is connected to - usually 6379
+const REDIS_PORT = process.env.REDIS_PORT; 
 
 const redis = new Redis({
   port: REDIS_PORT, 
@@ -18,6 +20,7 @@ const redis = new Redis({
 
 console.log(`Reading the stream named ${STREAM_KEY}...`); 
 
+  
 const readRedisStream = async () => {
 
   //Get the milliseconds for start and end time
@@ -25,6 +28,32 @@ const readRedisStream = async () => {
   const endTime = startTime + INTERVAL;  
 
   //Transform xrange's output from two arrays of keys and value into one array of log objects
+  // Redis.Command.setReplyTransformer('xrange', function (result) {
+  //   if(Array.isArray(result)){
+  //     const newResult = []; 
+  //     for(const r of result){
+  //       const obj = {
+  //         id: r[0]
+  //       }; 
+
+  //       const fieldNamesValues = r[1]; 
+
+  //       for(let i = 0; i < fieldNamesValues.length; i += 2){
+  //         const k = fieldNamesValues[i]; 
+  //         const v = fieldNamesValues[i + 1]; 
+  //         obj[k] = v; 
+  //       }
+
+  //       newResult.push(obj); 
+  //     }
+
+  //     return newResult; 
+  //   }
+
+  //   return result; 
+  // }); 
+
+  // Transform xrange's output from two arrays of keys and value into one array of log objects
   Redis.Command.setReplyTransformer('xrange', function (result) {
     if(Array.isArray(result)){
       const newResult = []; 
@@ -35,11 +64,39 @@ const readRedisStream = async () => {
 
         const fieldNamesValues = r[1]; 
 
-        for(let i = 0; i < fieldNamesValues.length; i += 2){
-          const k = fieldNamesValues[i]; 
-          const v = fieldNamesValues[i + 1]; 
-          obj[k] = v; 
-        }
+        // for(let i = 0; i < fieldNamesValues.length; i += 2){
+        //   const k = fieldNamesValues[i]; 
+        //   const v = fieldNamesValues[i + 1]; 
+        //   obj[k] = v; 
+        // }
+
+        const reqMethod = fieldNamesValues.indexOf('reqMethod'); 
+        const reqMethodValue = reqMethod + 1;
+        obj['reqMethod'] = fieldNamesValues[reqMethodValue]; 
+        
+        const reqHost = fieldNamesValues.indexOf('reqHost'); 
+        const reqHostValue = reqHost + 1;
+        obj['reqHost'] = fieldNamesValues[reqHostValue];
+
+        const reqUrl = fieldNamesValues.indexOf('reqUrl'); 
+        const reqUrlValue = reqUrl + 1;
+        obj['reqUrl'] = fieldNamesValues[reqUrlValue];
+
+        const reqPath = fieldNamesValues.indexOf('reqPath'); 
+        const reqPathValue = reqPath + 1;
+        obj['reqPath'] = fieldNamesValues[reqPathValue];
+
+        const resStatusCode = fieldNamesValues.indexOf('resStatusCode'); 
+        const resStatusCodeValue = resStatusCode + 1;
+        obj['resStatusCode'] = fieldNamesValues[resStatusCodeValue];
+
+        const resMessage = fieldNamesValues.indexOf('resMessage'); 
+        const resMessageValue = resMessage + 1;
+        obj['resMessage'] = fieldNamesValues[resMessageValue];
+
+        const cycleDuration = fieldNamesValues.indexOf('cycleDuration'); 
+        const cycleDurationValue = cycleDuration + 1;
+        obj['cycleDuration'] = fieldNamesValues[cycleDurationValue];
 
         newResult.push(obj); 
       }
@@ -48,19 +105,21 @@ const readRedisStream = async () => {
     }
 
     return result; 
-  }); 
+  });
 
   streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
 
-  //TODO: SEND TO PROCESSING ELSEWHERE 
-  //real-time entries should be sent for processing elsewhere 
   console.log('XRANGE, response with reply transformer'); 
   console.log(streamEntries); 
 
+  return streamEntries; 
+
 }
 
-try {
-  setInterval(async () => { await readRedisStream()}, PING_RATE); 
-} catch (e) {
-  console.error(e); 
-}
+exports.readRedisStream = readRedisStream; 
+
+// try {
+//   setInterval(async () => { await readRedisStream()}, PING_RATE); 
+// } catch (e) {
+//   console.error(e); 
+// }

@@ -8,6 +8,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1024,
     height: 768,
+    // maxWidth:1450,
+    // maxHeight:850,
     //  // this will give us our icon shown in the task bar or dock. This will also give you a small icon in the top left of your Windows app.
     // icon: __dirname + '/app/assets/img/icon.png',
     // darkTheme - Forces using dark theme for the window, only works on some GTK+3 desktop environments. Default is false.
@@ -21,7 +23,6 @@ function createWindow() {
     // and set allowRunningInsecureContent to true if this options has not been set by user. Default is true.
       webSecurity: false,
       // stops console from opening upon load
-      // devTools: false,
     },
   });
 

@@ -42,8 +42,6 @@ const client = new Client({
 
 // client.connect(); 
 
-//TODO: RDS PROXY AWS
-
 //TEST READ TABLE FROM POSTGRES
   pool.query('SELECT * FROM logs; ')
     .then((result) => {
