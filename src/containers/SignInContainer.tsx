@@ -1,20 +1,28 @@
-  import Layout from 'antd/es/layout';
-const { Header, Footer, Sider, Content } = Layout;
+import Layout from 'antd/es/layout';
 import React, { useContext, useState } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import data from '../../session_storage/storage.json'
+import { globalContext } from '../contexts/globalContext' 
 import Form from 'antd/es/form';
 import Input from 'antd/es/input';
 import Button from 'antd/es/button';
 import Card from 'antd/es/card';
 import Typography from "antd/es/typography";
-const { Title } = Typography
+const { Title } = Typography;
+
 
 function SignIn():JSX.Element {
-  
+  console.log(data)
+  const { verification, setVerification, setServerAddress, } = useContext(globalContext)
   const onFinish = (values: any) => {
-    console.log('Success:', values);
-  }
 
+    // create get request here to ratify the tokenization process. 
+    // currently compares to a local json file. 
+    // commmit token to local state.
+    if(data[values.serverIP]){
+      setServerAddress(values.serverIP)
+      setVerification(true)
+    } 
+  }
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };
@@ -28,6 +36,7 @@ function SignIn():JSX.Element {
 
   return (
     <div className="loginContainer">
+
       <Card 
         style={{height: 'fit-content', width: 600, textAlign: 'center'}}
         bordered={true}
@@ -36,9 +45,8 @@ function SignIn():JSX.Element {
         >
         <Form
           {...layout}
-          name="basic"
+          name="Login"
           initialValues={{ remember: true }}
-          style={{alignContent: 'center'}}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}>
           <Form.Item
@@ -46,19 +54,19 @@ function SignIn():JSX.Element {
             name="serverIP"
             rules={[{ required: true, message: 'Please enter valid Server Address.' }]}
           >
-            <Input />
+            <Input placeholder="Enter Server Address"/>
           </Form.Item>
           <Form.Item
             label="Secret"
             name="secret"
             rules={[{ required: true, message: 'Please enter valid Secret.' }]}
           >
-            <Input.Password />
+            <Input.Password placeholder="Enter Secret" />
           </Form.Item>
 
           <Form.Item {...tailLayout}>
             <Button type="primary" htmlType="submit">
-              Submit
+              Sign In
             </Button>
         </Form.Item>
         </Form>
@@ -67,6 +75,6 @@ function SignIn():JSX.Element {
   )
 }
 
-export { SignIn }
+export { SignIn };
 
 

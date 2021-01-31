@@ -1,17 +1,32 @@
 @import '~antd/dist/antd.css';
-
-
 .parentCardContainer {
   display: flex;
   flex-direction: row;
 }
-
 .loginContainer {
  display: flex;
  flex-direction: column;
  height: 100vh;
  justify-content: center;
  align-items: center;
+ background: linear-gradient(45deg, hsla(0, 0%, 0%, 1) 24%, hsla(332, 71%, 47%, 1) 100%);
+}
+
+.rangeSelectorContainer {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.rangeSelector {
+  margin-left: 10px;
+}
+
+.rangeSelector:hover{
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 .childCardContainer {
@@ -22,30 +37,34 @@
   width: fit-content;
   height: fit-content;
 }
-
 .ant-menu-inline {
-  width: 100%;
+  width: 100;
   height: 100vh;
 }
-
+.apiMethod {
+  display: flex;
+  flex-direction: column;
+  height: 5px;
+}
+.cardRow{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
 .addService {
   width: 100%;
   height: 100%;
   justify-content: center;
 }
-
 .aggregate {
   display: flex;
   flex-direction: row;
-  flex-shrink: 0;
 }
-
 .title {
   margin-left: 20px;
   margin-top: 20px;
   margin-bottom: 10px;
 }
-
 #serviceContainer {
   display: flex;
   align-content: center;
@@ -55,7 +74,6 @@
   width: 100%;
   overflow: auto
 }
-
 .dataContainer {
   border: 1px solid black;
   background-color: white;
@@ -64,7 +82,6 @@
   justify-content: center;
   align-self: center
 }
-
 #chartContainer {
   flex-grow: 10;
   display: flex;
@@ -74,15 +91,11 @@
   padding: 20px 20px;
   height: 100%;
 }
-
 #dashboard {
-  padding: 20px 20px;
-  flex-grow: 10;
+  //flex-grow: 10;
+  // justify-content: stretch;
+  // align-items: stretch;
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
   flex-direction: column;
+  padding: 20px 20px;
 }
-
-
-
