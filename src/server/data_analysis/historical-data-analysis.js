@@ -157,7 +157,7 @@ const histWriteToDB = (buffer) => {
     if(err){
       console.log(err); 
     } else {
-      console.log(`Finished writing to ${DB_NAME}...`, result); 
+      console.log(`Finished writing to ${THREE_MIN_TABLE}...`, result); 
     }
   })
 }
