@@ -211,4 +211,5 @@ const rtData = data => {
 
 // rtData(responseData);
 
-module.exports = rtData;
+// module.exports = rtData;
+exports.rtData = rtData; 
