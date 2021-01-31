@@ -1,56 +1,52 @@
-// import { ipcRenderer } from "electron"
 import React from 'react';
 import { changeChildArr, changeData, IDataNode, test, IService, TreeNode} from "../charts/DataFuncDepGraph"
-import { treeData } from '../charts/DependencyTree'
-import { DependencyGraph} from '../charts/DependencyTree';
+import { DependencyGraph,treeData, getLinkComponent, LinkControls  } from '../charts/DependencyTree'
 import { SettingsContainer } from '../containers/ServiceSettingsContainer';
-// import {readAndWriteToDB} from '../server/historical-read-handler'
 
-import {App} from '../app';
-
-
-
-// import { shallow } from 'enzyme';
-// // import {App} from '../app'; // Introduce the corresponding React component
-// describe('Link', () => {
-//   it('Renders link to Google', () => {
-//     const link:any = shallow(<DependencyGraph/>)
-//     expect(true).toBeTruthy();
-//   });
-// })
 
 // describes what the test is
-describe('hitting test files', () => {
+describe('jest testing is in progress', () => {
   // testData: IDataNode;
   // what the specific test is
-    it('hits the jest testing', () => {
+    it('jest testing activated', () => {
       // what is expected
       expect(true).toBeTruthy();
     })
   }) 
 
-  describe('snapshot testing', () => {
-    it('the dummy data matches the snapshot', () => {
-    // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
-      expect(test).toMatchSnapshot();
+  describe('jest snapshot testing', () => {
+    describe('dependency graph snapshot testing', () => {
+      it('the dependency chart component matches the snapshot', () => {
+        // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
+        expect(DependencyGraph).toMatchSnapshot();
+      })
+
+      it('the getLinkComponent component matches the snapshot', () => {
+        // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
+        expect(getLinkComponent).toMatchSnapshot();
+      })
+
+      it('the LinkControls component matches the snapshot', () => {
+        // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
+        expect(LinkControls).toMatchSnapshot();
+      })
+
     })
 
-    it('the dependency chart component matches the snapshot', () => {
+    describe('dummy data snapshot testing', () => {
+      it('the dummy data matches the snapshot', () => {
       // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
-      expect(DependencyGraph).toMatchSnapshot();
+        expect(test).toMatchSnapshot();
+      })
+      
+      it('the altered dummy data matches the snapshot', () => {
+        // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
+        expect(treeData).toMatchSnapshot();
+      })
     })
- 
+  })
 
-  // it('the redis stream matches the snapshot', () => {
-  //   // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
-  //   expect(readAndWriteToDB).toMatchSnapshot();
-  // })
-})
-  //  it('the Dashboard chart component matches the snapshot', () => {
-  //   // expect test to match the snapshot in ../_snapshots_/DataFuncDepGraph.test.ts.snap
-  //    expect(Dashboard).toMatchSnapshot();
-  //  })
-  describe('data flow testing', () => {
+  describe('jest data parser testing', () => {
     it('Dummy data from /charts/DataFuncDepGraph matches treeData from /charts/DependencyGraph', () => {
       expect(changeData(test)).toEqual(treeData)
     })
@@ -87,6 +83,7 @@ describe('hitting test files', () => {
 //   );
 // });
 
+//----- ground work for testing endpoints with promise testing by chai-as-promised -----//
 // const chai = require("chai");
 // const chaiAsPromised = require("chai-as-promised");
 // chai.use(chaiAsPromised);
@@ -94,4 +91,14 @@ describe('hitting test files', () => {
 
 // it('Promise should pass', function() {
 //   return expect(readAndWriteToDB()).to.be.fulfilled
+// })
+
+//----- ground work for enzyme testing -----//
+// import { shallow } from 'enzyme';
+// // import {App} from '../app'; // Introduce the corresponding React component
+// describe('Link', () => {
+//   it('Renders link to Google', () => {
+//     const link:any = shallow(<DependencyGraph/>)
+//     expect(true).toBeTruthy();
+//   });
 // })

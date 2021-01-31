@@ -353,4 +353,4 @@ function useForceUpdate() {
   return () => setValue(value => value + 1); // update state to force render
 }
 
-export { DependencyGraph, treeData, getLinkComponent };
+export { DependencyGraph, treeData, getLinkComponent, LinkControls };
