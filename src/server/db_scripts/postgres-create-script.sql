@@ -1,4 +1,7 @@
-DROP TABLE logs CASCADE; 
+DROP TABLE logs CASCADE;
+DROP TABLE three_min_table CASCADE;
+DROP TABLE one_hr_table CASCADE;
+DROP TABLE one_day_table CASCADE; 
 
 CREATE TABLE logs (
     "id" serial NOT NULL,
@@ -20,10 +23,10 @@ CREATE TABLE three_min_table (
     "timestamp" TIMESTAMPTZ NOT NULL, 
     "service" varchar NOT NULL,
     "method" varchar NOT NULL,
-    "availability" FLOAT(8) NOT NULL,
-    "response_time" FLOAT(8) NOT NULL,
-    "error_rate" FLOAT(8) NOT NULL,
-    "load" INT NOT NULL,
+    "availability" FLOAT NOT NULL,
+    "response_time" FLOAT NOT NULL,
+    "error_rate" FLOAT NOT NULL,
+    "load" FLOAT NOT NULL,
     PRIMARY KEY ("id")
 ) WITH (
     OIDS=FALSE
