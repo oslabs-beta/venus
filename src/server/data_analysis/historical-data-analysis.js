@@ -114,28 +114,33 @@ const test = [
 
 //histWriteToDB takes in a buffer of 3 min "real-time" objects and writes them to the 3-min data base
 const histWriteToDB = (buffer) => {
-  
+
   let queryText = `INSERT INTO ${THREE_MIN_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES `; 
-  
-  //Write the overall aggregate statistics for the 3 minute interval
-  queryText += `('${buffer.timestamp}', 'aggregate', 'aggregate', '${buffer.aggregate.availability}', '${buffer.aggregate.response_time}', '${buffer.aggregate.error}', '${buffer.aggregate.load}'),`;
 
-  //Fill in all the aggregate rows by method
-  for(let method in buffer.byMethod){
-    queryText += `('${buffer.timestamp}', 'aggregate', '${method}', '${buffer.aggregate.byMethod.method.availability}', '${buffer.aggregate.byMethod.method.response_time}', '${buffer.aggregate.byMethod.method.error}', '${buffer.aggregate.byMethod.method.load}'),`;
-  }
-  
-  //Fill in all the rows for aggregate at the service level and then by the method level
-  buffer.services.forEach((service) => {
-    //Add aggregate service level metrics
-    queryText += `('${buffer.timestamp}', '${service}', 'aggregate', '${service.availability}', '${service.response_time}', '${service.error}', '${service.load}'),`;
+  buffer.forEach((threeMinObj) => {
+    
+     const timeStamp = convertUnixTime(threeMinObj.timestamp); 
+    
+    //Write the overall aggregate statistics for the 3 minute interval
+    queryText += `('${timeStamp}', 'aggregate', 'aggregate', '${threeMinObj.aggregate.availability}', '${threeMinObj.aggregate.response_time}', '${threeMinObj.aggregate.error}', '${threeMinObj.aggregate.load}'),`;
 
-    //Add service level metrics by method
-    for(let method in service.byMethod){
-      queryText += `('${buffer.timestamp}', '${service}', '${method}', '${service.method.availability}', '${service.method.response_time}', '${service.method.error}', '${service.method.load}'),`;
+    //Fill in all the aggregate rows by method
+    for(let method in threeMinObj.byMethod){
+      queryText += `('${timeStamp}', 'aggregate', '${method}', '${method.availability}', '${method.response_time}', '${method.error}', '${method.load}'),`;
     }
-  })
+    
+    //Fill in all the rows for aggregate at the service level and then by the method level
+    threeMinObj.services.forEach((service) => {
+      //Add aggregate service level metrics
+      queryText += `('${timeStamp}', '${service}', 'aggregate', '${service.availability}', '${service.response_time}', '${service.error}', '${service.load}'),`;
 
+      //Add service level metrics by method
+      for(let method in service.byMethod){
+        queryText += `('${timeStamp}', '${service}', '${method}', '${method.availability}', '${method.response_time}', '${method.error}', '${method.load}'),`;
+      }
+    })
+  })
+  
   //Modify the last comma and replace with a semi-colon
   queryText = queryText.slice(0, queryText.length - 1); 
   queryText += ';'; 
@@ -150,10 +155,23 @@ const histWriteToDB = (buffer) => {
   })
 }
 
+
+//Function to convert unix time into a human readable timestamp
+const convertUnixTime = (unixString) => {
+
+  let unix = unixString.slice(0, unixString.length - 2);
+  
+  unix = new Number(unix); 
+
+  const timeStamp = new Date(unix);
+  
+  return timeStamp.toLocaleString(); 
+}
+
 //Write a function that reads and analyzes the last hour of 3 minute rows
 const readAndWriteLastHour = () => {
   //Query the three minute table for the last hour of data only at the aggregate level (not service level)
-  const selectAggregate = `SELECT * FROM ${THREE_MIN_TABLE} WHERE service = aggregate AND timestamp >= ${Date.now() - HOUR};`;
+  // const selectAggregate = `SELECT * FROM ${THREE_MIN_TABLE} WHERE service = aggregate AND timestamp >= ${Date.now() - HOUR};`;
   //Analyze by aggregate, service and method
 } 
 
@@ -171,3 +189,6 @@ const readAndWriteLastWeek = () => {
 const readAndWriteLastMonth = () => {
   
 } 
+
+
+histWriteToDB(test); 

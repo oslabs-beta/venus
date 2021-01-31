@@ -99,7 +99,7 @@ async function sendData(socket){
 
     if(COUNT === 20){
       //add output to buffer
-      BUFFER.push(output); 
+      BUFFER.push(output[0]); 
       //Reset count to be zero
       COUNT = 0; 
       
