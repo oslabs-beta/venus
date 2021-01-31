@@ -204,7 +204,11 @@ const rtData = data => {
   const consolidatedObjStringify = JSON.stringify(consolidatedObj);
   const dependencyObjStringify = JSON.stringify(dependencyObj);
   // return both stringified objects as array elements
+  console.log(consolidatedObj);
+  console.log(dependencyObj);
   return [consolidatedObjStringify, dependencyObjStringify];
 };
 
-module.exports = rtData;
+rtData(responseData);
+
+// module.exports = rtData;
