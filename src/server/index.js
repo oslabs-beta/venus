@@ -7,7 +7,7 @@ const redis = require('./real-time-read-handler.js');
 
 const SOCKET_PORT = 8080; 
 const EC2_HOST = process.env.EC2_HOST; 
-const COUNT = 0; 
+let COUNT = 0; 
 let BUFFER = []; 
 
 // const responseData = [
