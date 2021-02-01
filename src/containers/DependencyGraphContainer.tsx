@@ -5,8 +5,6 @@ import { AggregateStats } from '../components/AggregateStats';
 import { dynamicContext } from '../contexts/dynamicContext';
 import Divider from 'antd/es/divider';
 import Title from 'antd/es/typography/Title';
-import ParentSize from "@visx/responsive/lib/components/ParentSize";
-
 
 function DependencyGraphContainer(): JSX.Element{
   
@@ -25,8 +23,7 @@ function DependencyGraphContainer(): JSX.Element{
         />
          <Divider><Title level={3}>Dependency graph</Title></Divider>
           <Card hoverable={true} style={{width: 'fit-content'}}>
-  
-               <DependencyGraph width={600} height={600} />
+            <DependencyGraph width={600} height={600} />
           </Card>
     </div>
   )

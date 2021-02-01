@@ -16,7 +16,6 @@ const App: React.FC = () => {
     <div>
       <ContextProvider>
         <MainDisplay/>
-        {/* <SignInContainer/> */}
       </ContextProvider>
     </div>
   )
