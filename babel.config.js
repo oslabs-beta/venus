@@ -5,12 +5,13 @@ module.exports = {
     '@babel/preset-typescript',
     // "next/babel"
   ],
-  // plugins: [
-  //   [
-  //     "import",
-  //     {
-  //       "libraryName": "antd",
-  //       "style": "index.css"
-  //     }
-  //   ]
+  plugins: [
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": "index.css"
+      }
+    ]
+  ]
 }

@@ -71,7 +71,7 @@ describe('jest data parser testing', () => {
 
     it('check if dummy data result array from child parser has length of 2', () => {
       console.log(changeChildArr(test.services))
-      expect(changeChildArr(test.services)).toHaveLength(2)
+      expect(changeChildArr(test.services)).toHaveLength(3)
     })
   })
 })

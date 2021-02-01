@@ -37,7 +37,21 @@ const test: IDataNode = {
                     response_time: 1200,
                     error: 0,
                     availability:100
-                }
+                },
+                POST: {
+                  status: 'bad',
+                  load: '0.33 hpm',
+                  response_time: 1200,
+                  error: 0,
+                  availability:100
+              },
+              PATCH: {
+                status: 'fair',
+                load: '0.33 hpm',
+                response_time: 1200,
+                error: 0,
+                availability:100
+            }
             }
         },
         {
@@ -63,7 +77,31 @@ const test: IDataNode = {
                     availability:100
                 },
             }
-        }
+        },
+        {
+          service: 'Solarwinids api',
+          status: 'good',
+          load: '1.00 hpm',
+          response_time:1266,
+          error: 0,
+          availability: 100,
+          byMethod: {
+              GET: {
+                  status: 'good',
+                  load: '0.33 hpm',
+                  response_time: 1200,
+                  error: 0,
+                  availability:100
+              },
+              POST: {
+                  status: 'good',
+                  load: '0.33 hpm',
+                  response_time: 1200,
+                  error: 0,
+                  availability:100
+              },
+          }
+      }
     ]
 }
 
