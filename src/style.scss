@@ -46,10 +46,12 @@
   flex-direction: column;
   height: 5px;
 }
-.cardRow{
+.cardRow {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   width: 100%;
+  border-right: 20px;
 }
 .addService {
   width: 100%;

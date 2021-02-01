@@ -16,7 +16,6 @@ const App: React.FC = () => {
     <div>
       <ContextProvider>
         <MainDisplay/>
-        {/* <SignInContainer/> */}
       </ContextProvider>
     </div>
   )
@@ -33,3 +32,4 @@ ReactDom.render(
   </BrowserRouter>, mainElement);
 
 
+export { App };
