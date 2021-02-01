@@ -178,9 +178,9 @@ const convertUnixTime = (unixString) => {
   
   unix = new Number(unix); 
 
-  const timeStamp = new Date(unix);
+  // const timeStamp = new Date(unix);
   
-  return timeStamp.toLocaleString(); 
+  return unix; 
 }
 
 //Write a function that reads and analyzes the last hour of 3 minute rows
@@ -224,5 +224,5 @@ const readAndWriteLastMonth = () => {
 } 
 
 
-// histWriteToDB(test); 
+histWriteToDB(test); 
 readAndWriteLastHour(); 
