@@ -38,7 +38,7 @@ function AggregateStats(props: any): JSX.Element{
 					</Card>
 			</div>
 				</Col>
-				<Col span={4}>
+				{/* <Col span={4}>
 				<div className="aggregate">
 					<Card bordered={true} bodyStyle={{width: "190px"}} hoverable={true}>
 						<Statistic
@@ -49,7 +49,7 @@ function AggregateStats(props: any): JSX.Element{
 						/>
 					</Card>
 					</div>
-				</Col>
+				</Col> */}
 				<Col span={4}>
 				<div className="aggregate">
 					<Card className="aggregateCards" bordered={true} bodyStyle={{width: "190px"}} hoverable={true}>

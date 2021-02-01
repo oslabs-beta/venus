@@ -1,6 +1,9 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { dynamicContext } from '../contexts/dynamicContext'
+import React, { useState, useContext } from 'react';
 import { Table, InputNumber, Popconfirm, Form, Typography } from 'antd';
+import { dynamicContext } from '../contexts/dynamicContext';
+
+
+
 
 const EditableCell = ({
   editing,
@@ -12,7 +15,7 @@ const EditableCell = ({
   children,
   ...restProps
 }) => {
-  const inputNode = <InputNumber />;
+  const inputNode = <InputNumber />
   return (
     <td {...restProps}>
       {editing ? (
@@ -31,55 +34,38 @@ const EditableCell = ({
   );
 };
 
-const EditableTable = () => {
-
-  const originData: any = [];
-  const { serviceThresholds, setServiceThresholds, services } = useContext(dynamicContext)
-
-  // if (serviceThresholds.length === services.length){
-  //   console.log('equal length')
-  //   for (let i = 0; i < services.length; i++) {
-  //     originData.push({
-  //       key: i,
-  //       service: services[i].service,
-  //       availability_threshold: 99,
-  //       response_time_threshold: 1000,
-  //       load_threshold: 100,
-  //       error_threshold: 1 
-  //     });
-  //   }
-  //   console.log(originData, 'originData')
-  // } else {
-    console.log('defaults')
-    console.log(services, 'services')
-    for (let i = 0; i < services.length; i++) {
-      originData.push({
-        key: i,
-        service: services[i].service,
-        availability_threshold: 99,
-        response_time_threshold: 1000,
-        load_threshold: 100,
-        error_threshold: 1 
-      });
-    } 
-  // }
-  console.log(originData)
-
-
-// console.log(serviceThresholds, 'editable chart')
+const EditableTable2 = () => {
+  const { services, serviceThresholds, setServiceThresholds} = useContext(dynamicContext)
+  const originData:any = [];
+  if (serviceThresholds.length > 0) {
+    console.log('true', serviceThresholds)
+    for (let i = 0; i < serviceThresholds.length; i++) {
+      originData.push(serviceThresholds[i])
+    }
+  } else {
+   for (let i = 0; i < services.length; i++) {
+    
+    originData.push({
+      key: i,
+      service: services[i].service,
+      availability_threshold: 99,
+      response_time_threshold: 1000,
+      load_threshold: 100,
+      error_threshold: 1 
+    });
+  }
+}
   const [form] = Form.useForm();
   const [data, setData] = useState(originData);
   const [editingKey, setEditingKey] = useState('');
 
-  const isEditing = (record: any) => record.key === editingKey;
+  const isEditing = (record) => record.key === editingKey;
 
-  const edit = (record: any) => {
+  const edit = (record) => {
     form.setFieldsValue({
-      service: '',
-      availability_threshold: 0,
-      response_time_threshold: 0,
-      load_threshold: 0,
-      error_threshold: 0,
+      name: '',
+      age: '',
+      address: '',
       ...record,
     });
     setEditingKey(record.key);
@@ -89,10 +75,10 @@ const EditableTable = () => {
     setEditingKey('');
   };
 
-  const save = async (key:any) => {
-    try{
+  const save = async (key) => {
+    try {
       const row = await form.validateFields();
-      const newData = [...originData];
+      const newData = [...data];
       const index = newData.findIndex((item) => key === item.key);
 
       if (index > -1) {
@@ -105,7 +91,7 @@ const EditableTable = () => {
         setData(newData);
         setEditingKey('');
       }
-      console.log(serviceThresholds)
+      console.log(data)
     } catch (errInfo) {
       console.log('Validate Failed:', errInfo);
     }
@@ -121,7 +107,7 @@ const EditableTable = () => {
       }
     },
     {
-      title: "Availability Threshold (%)",
+      title: "Availability (%)",
       dataIndex: "availability_threshold",
       key: "availability",
       editable: true,
@@ -130,7 +116,7 @@ const EditableTable = () => {
       }
     },
     {
-      title: "Response Time Threshold (ms)",
+      title: "Response Time (ms)",
       dataIndex: "response_time_threshold",
       key: "response_time",
       editable: true,
@@ -139,13 +125,13 @@ const EditableTable = () => {
       }
     },
     {
-      title: "Load Threshold (hpm)",
+      title: "Load (hpm)",
       dataIndex: "load_threshold",
       key: "load",
       editable: true,
     },
     {
-      title: "Response Error Threshold (%)",
+      title: "Response Error (%)",
       dataIndex: "error_threshold",
       key: "error",
       editable: true,
@@ -158,7 +144,6 @@ const EditableTable = () => {
         return editable ? (
           <span>
             <a
-              // href="javascript:;"
               onClick={() => save(record.key)}
               style={{
                 marginRight: 8,
@@ -187,14 +172,14 @@ const EditableTable = () => {
       ...col,
       onCell: (record) => ({
         record,
-        // inputType: col.dataIndex === 'service' ? 'number' : 'text',
+        inputType: col.dataIndex === 'number',
         dataIndex: col.dataIndex,
         title: col.title,
         editing: isEditing(record),
       }),
     };
   });
-
+  setServiceThresholds(data)
   return (
     <Form form={form} component={false}>
       <Table
@@ -204,7 +189,7 @@ const EditableTable = () => {
           },
         }}
         bordered
-        dataSource={originData}
+        dataSource={data}
         columns={mergedColumns}
         rowClassName="editable-row"
         pagination={false}
@@ -213,4 +198,4 @@ const EditableTable = () => {
   );
 };
 
-export { EditableTable };
+export { EditableTable2 }

@@ -17,7 +17,7 @@ import { dynamicContext } from "../contexts/dynamicContext";
 import Title from "antd/es/typography/Title";
 
 
-// ec2-3-15-29-241.us-east-2.compute.amazonaws.com/:8080
+// ec2-3-15-29-241.us-east-2.compute.amazonaws.com:8080
 function Dashboard(): JSX.Element {
   
   const { services, setServices, aggregate, setAggregate, filter, setFilter, setServiceThresholds, serviceThresholds, firstTime, setFirstTime } = useContext(dynamicContext);
@@ -53,8 +53,8 @@ function Dashboard(): JSX.Element {
         availability: 1,
         byMethod: {
           GET: {
-            status: "bad",
-            load: "0.6666666865348816 hpm",
+            service: "a",
+            load: 99,
             response_time: 12,
             error: 5,
             availability: 1,
@@ -69,7 +69,7 @@ function Dashboard(): JSX.Element {
         availability: 100,
         byMethod: {
           GET: {
-            status: "bad",
+            service:"b",
             load: 2,
             response_time: 12,
             error: 5,
@@ -102,41 +102,15 @@ function Dashboard(): JSX.Element {
       status: 'good'
     })
     console.log('in use', baselineSetting)
-    setServiceThresholds(baselineSetting)
-    console.log(serviceThresholds)
+    // setServiceThresholds(baselineSetting)
+    // console.log(serviceThresholds)
     setFirstTime(false)
-    console.log(firstTime)
+    // console.log(firstTime)
     // return () => socket.disconnect();
     
   }, []);
 
-  // const baselineSetting: any = [];
- 
- 
-  if (firstTime){
-    console.log('second time')
-  for (let i = 0; i < services.length; i++) {
-    services[i].key = i;
-    let status = 0;
-    if (filter[services[i].service]){
-      const holder = filter[services[i].service]
-      if (serviceThresholds[i].load_threshold < services[i].byMethod[holder].load) ++status
-      if (serviceThresholds[i].error_threshold < services[i].byMethod[holder].error) ++status
-      if (serviceThresholds[i].response_time_threshold < services[i].byMethod[holder].response_time) ++status
-      if (serviceThresholds[i].availability_threshold > services[i].byMethod[holder].availability) ++status
-      services[i].byMethod[holder].status = status
-      dataSource.push(services[i].byMethod[holder]);
-    } else {
-      if (serviceThresholds[i].load_threshold < services[i].load) ++status
-      if (serviceThresholds[i].error_threshold < services[i].error) ++status
-      if (serviceThresholds[i].response_time_threshold < services[i].response_time) ++status
-      if (serviceThresholds[i].availability_threshold < services[i].availability) ++status
-      services[i].status = status
-      dataSource.push(services[i]);
-    }
-  }
-  } else {
-    console.log('first time')
+
   for (let i = 0; i < services.length; i++) {
     const baseline: any = {
       availability_threshold: 99,
@@ -165,12 +139,7 @@ function Dashboard(): JSX.Element {
       baselineSetting.push(baseline)
     }
   }
-    console.log(baselineSetting, baselineSetting)
-  }
-  
-  
  
-
   const columns: any = [
     {
       title: "Service",
