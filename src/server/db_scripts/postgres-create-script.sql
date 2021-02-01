@@ -21,7 +21,7 @@ CREATE TABLE logs (
 
 CREATE TABLE three_min_table (
     "id" serial NOT NULL,
-    "timestamp" TIMESTAMPTZ NOT NULL, 
+    "timestamp" TIMESTAMP NOT NULL, 
     "service" varchar NOT NULL,
     "method" varchar NOT NULL,
     "availability" varchar NOT NULL,
