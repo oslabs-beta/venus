@@ -15,11 +15,11 @@ const WEEK = 604800000;
 
 //Boilerplate to set up postgres db (client) object
 const client = new Client({
-  user: 'postgres', 
-  host: 'rds-proxy-aurora-postgres.proxy-czysdiigcqcb.us-east-2.rds.amazonaws.com', 
-  database: 'postgres', 
-  password: 'lalalalovesong!', 
-  port: 5432
+  user: process.env.DB_NAME, 
+  host: process.env.DB_HOST, 
+  database: process.env.DB_NAME, 
+  password: process.env.DB_PASS, 
+  port: process.env.DB_PORT
 })
 
 client.connect();
@@ -301,18 +301,63 @@ const writeThreeMinIncrements = () => {
 } 
 
 //Reading all rows from the last hour
-const readLastHour = () => {
+const readLastHour = (input) => {
   //Query for ALL rows in the last hour 
-  const queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 100000000000}::BIGINT GROUP BY service, method;`;
+  
+  let queryText = ''; 
 
-  client.query(queryText, (err, result) => {
-    if(err){
-      console.log(err); 
-    } else {
-      console.log('ALL ROWS FROM THE LAST HOUR:', result.rows); 
-      return result.rows; 
-    }
-  })
+  const returnObj = {}; 
+
+  if(input !== 'aggregate'){
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 100000000000}::BIGINT WHERE service = '${input}' AND method != 'aggregate' GROUP BY service, method;`;
+  } else {
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 100000000000}::BIGINT WHERE AND method = 'aggregate' GROUP BY service, method;`;
+
+    returnObj.service = 'aggregate'; 
+    
+    client.query(queryText, (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        
+        const rows = result.rows; 
+
+        rows.forEach((row) => {
+          if(row.service === input){
+
+            //Create availability property and push to array
+            returnObj.lastHour.availability.push({
+              "timestamp": row.timestamp, 
+              "value": row.availability, 
+              "service": row.service
+            })
+
+            returnObj.lastHour.error_rate.push({
+              "timestamp": row.timestamp, 
+              "value": row.error_rate, 
+              "service": row.service
+            })
+
+            returnObj.lastHour.response_time.push({
+              "timestamp": row.timestamp, 
+              "value": row.response_time, 
+              "service": row.service
+            })
+
+            returnObj.lastHour.load.push({
+              "timestamp": row.timestamp, 
+              "value": row.load, 
+              "service": row.service
+            })
+          }
+        })
+        
+        console.log(returnObj); 
+
+        return returnObj; 
+      }
+    })
+  }
 }
 
 //Write a function that reads and analyzes the last day of 1 hour rows
