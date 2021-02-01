@@ -4,45 +4,44 @@ import { DependencyGraph,treeData, getLinkComponent, LinkControls  } from '../ch
 import { SettingsContainer } from '../containers/ServiceSettingsContainer';
 
 // describes what the test is
-  describe('jest testing is in progress', () => {
-    // what the specific test is
+describe('jest testing is in progress', () => {
+  // what the specific test is
     it('jest testing activated', () => {
       // what is expected
       expect(true).toBeTruthy();
     })
   }) 
 
-  describe('jest snapshot testing', () => {
-    describe('dependency graph snapshot testing', () => {
-      it('the dependency chart component matches the snapshot', () => {
-        expect(DependencyGraph).toMatchSnapshot();
-      })
-
-      it('the getLinkComponent component matches the snapshot', () => {
-         expect(getLinkComponent).toMatchSnapshot();
-      })
-
-      it('the LinkControls component matches the snapshot', () => {
-        expect(LinkControls).toMatchSnapshot();
-      })
-      
+describe('jest snapshot testing', () => {
+  describe('dependency graph snapshot testing', () => {
+    it('the dependency chart component matches the snapshot', () => {
+      expect(DependencyGraph).toMatchSnapshot();
     })
 
-    describe('dummy data snapshot testing', () => {
-      it('the dummy data matches the snapshot', () => {
-        expect(test).toMatchSnapshot();
-      })
-      
-      it('the dummy data matches the snapshot', () => {
-        expect(treeData).toMatchSnapshot();
-      })
+    it('the getLinkComponent component matches the snapshot', () => {
+        expect(getLinkComponent).toMatchSnapshot();
+    })
+
+    it('the LinkControls component matches the snapshot', () => {
+      expect(LinkControls).toMatchSnapshot();
     })
   })
 
-  describe('jest data parser testing', () => {
-    it('dummy data ran through parser correctly matches post parser chart data', () => {
-      expect(changeData(test)).toEqual(treeData)
+  describe('dummy data snapshot testing', () => {
+    it('the dummy data matches the snapshot', () => {
+      expect(test).toMatchSnapshot();
     })
+    
+    it('the dummy data matches the snapshot', () => {
+      expect(treeData).toMatchSnapshot();
+    })
+  })
+})
+
+describe('jest data parser testing', () => {
+  it('dummy data ran through parser correctly matches post parser chart data', () => {
+    expect(changeData(test)).toEqual(treeData)
+  })
 
   describe('jest data child array parser testing', () => {
     it('check if first element from result array exists', () => {
@@ -76,7 +75,11 @@ import { SettingsContainer } from '../containers/ServiceSettingsContainer';
   })
 })
 
-// Ground work for mock testing 
+/** why we are not using interface in our jest testing file
+ * https://stackoverflow.com/questions/48813882/testing-typescript-interface-with-jest
+ */
+
+//--------Ground work for mock testing---------//
 
 // describe('mock test with dummy data', () => {
 //   const mockCallback = jest.fn(x => changeChildArr(x));
@@ -93,19 +96,6 @@ import { SettingsContainer } from '../containers/ServiceSettingsContainer';
 //   })
 
 // })
-
-
-// can use this to check properties on the object that user sends to the backend
-// test('onPress gets sent to the backend with the right properties on the event', () => {
-//   const onPress = jest.fn();
-//   simulatePresses(onPress);
-//   expect(onPress).toBeCalledWith(
-//     expect.objectContaining({
-//       x: expect.any(Number),
-//       y: expect.any(Number),
-//     }),
-//   );
-// });
 
 //----- ground work for testing endpoints with promise testing by chai-as-promised -----//
 // const chai = require("chai");
@@ -128,6 +118,3 @@ import { SettingsContainer } from '../containers/ServiceSettingsContainer';
 // })
 
 
-/** why we are not using interface in our jest testing file
- * https://stackoverflow.com/questions/48813882/testing-typescript-interface-with-jest
- */
