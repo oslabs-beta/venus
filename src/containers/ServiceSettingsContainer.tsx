@@ -19,39 +19,6 @@ function SettingsContainer(): JSX.Element {
 
   const dataSource: any = [];
   useEffect(() => {
-    setServices([
-      {
-        service: "curriculum-api.codesmith.io",
-        status: "good",
-        load: "0.6666666865348816 hpm",
-        response_time: 1266,
-        error: 50,
-        availability: 96,
-      },
-      {
-        service: "finance.yahoo.com",
-        status: "good",
-        load: "0.6666666865348816 hpm",
-        response_time: 1417.5,
-        error: 50,
-        availability: 100,
-      },
-      {
-        service: "weather.google.com",
-        status: "good",
-        load: "0.6666666865348816 hpm",
-        response_time: 1150,
-        error: 0,
-        availability: 50,
-      },
-    ]);
-    setAggregate({
-      error: 40,
-      response_time: 1278,
-      load: 2,
-      availability: 83,
-      status: "good",
-    });
   }, []);
 
   for (let i = 0; i < services.length; i++) {
@@ -65,7 +32,6 @@ function SettingsContainer(): JSX.Element {
       key: "service",
       sorter: {
         compare: (a:any, b:any) => a.title.length - b.title.length,
-        // multiple: 1,
       }
     },
     {
@@ -74,7 +40,6 @@ function SettingsContainer(): JSX.Element {
       key: "availability",
       sorter: {
         compare: (a:any, b:any) => a.availability - b.availability,
-        // multiple: 1,
       }
     },
     {

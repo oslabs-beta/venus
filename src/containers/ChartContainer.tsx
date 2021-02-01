@@ -2,7 +2,7 @@
  * @name ChartContainer
  * @desc Child of Dashboard, Parent container that holds and displays each Chart
  */
-import React, { useContext, useEffect} from "react";
+import React, { useContext, useEffect, useState} from "react";
 import { CardDropDown } from "../components/CardDropDown";
 import { historicalContext } from "../contexts/historicalContext"
 import { AggregateStats } from "../components/AggregateStats";
@@ -15,39 +15,37 @@ import Divider from "antd/es/divider";
 import Title from "antd/es/typography/Title";
 import Radio from 'antd/es/radio'
 import Button from 'antd/es/button'
-import { holder } from '../../session_storage/test'
 
-const data = holder
-console.log(data.aggregate.load)
 function ChartContainer(): JSX.Element {
-  const { aggregate, setAggregate, service, setService } = useContext(historicalContext)
+  const [bool, setBool] = useState(false)
+  const { aggregate, setAggregate, service, serviceData, setService, setServiceData } = useContext(historicalContext)
+  
   let filter = aggregate;
   const test: any = {
-    status: 'hello',
+    status: 0,
     load: 12,
     response_time: 12, 
     error: 12,
     availability: 12,
   }
-
-  const testObject: any = {
-    dataSet1: {
-      load: [{
-        year: "1850",
-        value: 0,
-        category: "google.com"
-      },
-      ]
-    }
-  }
+  
   useEffect(() => {
     setAggregate(test)
+    
     // fetch('localhost:3000/get/historicdata').then(
     //   response => response.json()
     // ).then(
     //   data => console.log(data)
     // )
-
+    fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
+      .then((response) => response.json())
+      .then((json) => { 
+        setServiceData(json)
+        setBool(true)
+      })
+      .catch((error) => {
+        console.log('fetch data failed', error);
+      });
   },[])
   
 // temporal options for chart displays
@@ -70,7 +68,10 @@ function ChartContainer(): JSX.Element {
     //   data => console.log(data)
     // )
   };
-
+  
+  if(!bool){
+     return <div>loading</div>
+  } else {
   return (
     <div id="chartContainer">
       <AggregateStats
@@ -91,7 +92,7 @@ function ChartContainer(): JSX.Element {
           <Col span={12}>
             <Title level={5}>Availability</Title>
             <Card bordered={true} hoverable={true} style={{width: "500px"}}>
-              <Availability data={data} />
+              <Availability />
             </Card>
           </Col>
           <Col span={12}>
@@ -118,5 +119,5 @@ function ChartContainer(): JSX.Element {
     </div>
   )
 }
-
+}
 export { ChartContainer }

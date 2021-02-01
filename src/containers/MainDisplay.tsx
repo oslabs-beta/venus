@@ -10,7 +10,6 @@ import { ChartContainer } from "./ChartContainer";
 import { DependencyGraphContainer } from "./DependencyGraphContainer";
 import { SettingsContainer } from "./ServiceSettingsContainer";
 import { SignIn } from "./SignInContainer";
-// import { EditableTable } from "./ThresholdsTest";
 import { globalContext } from "../contexts/globalContext";
 import { HistoricalProvider } from "../contexts/historicalContext";
 import { DynamicProvider } from "../contexts/dynamicContext";
@@ -20,7 +19,7 @@ import Menu from "antd/es/menu";
 import Layout from "antd/es/layout";
 import Modal from "antd/es/modal";
 import Button from "antd/es/button";
-import { bisectCenter } from "d3-array";
+
 const { Title } = Typography;
 const { Footer, Sider, Content } = Layout;
 const { SubMenu } = Menu;

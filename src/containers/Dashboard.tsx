@@ -16,34 +16,35 @@ import { globalContext } from "../contexts/globalContext"
 import { dynamicContext } from "../contexts/dynamicContext";
 import Title from "antd/es/typography/Title";
 
-const variable: string = "oliver";
+
 // ec2-3-15-29-241.us-east-2.compute.amazonaws.com/:8080
 function Dashboard(): JSX.Element {
+  
   const { services, setServices, aggregate, setAggregate, filter, setFilter, setServiceThresholds, serviceThresholds } = useContext(dynamicContext);
   const { serverAddress } = useContext(globalContext)
 
 
-  
+  // console.log(serviceThresholds, 'beforeUE')
   const dataSource: any = [];
   // add port
   useEffect(() => {
     setFilter(filter)
-    // console.log(serverAddress)
-    // const socket:any = io(serverAddress + ':8080', {
-    //   transports: ["websocket"],
-    // });
-    // socket.on("connection", () => {
-    //   console.log(socket.id);
-    // });
-    // socket.on("real-time-object", (output: any) => {
-    //   console.log("new update");
-    //   console.log(output)
-    //   const newData = JSON.parse(output[0]);
-    //   setAggregate(newData.aggregate);
-    //   setServices(newData.services);
-    //   console.log(newData.aggregate);
-    //   console.log(newData.services);
-    // });
+    console.log(serverAddress)
+    const socket:any = io(serverAddress + ':8080', {
+      transports: ["websocket"],
+    });
+    socket.on("connection", () => {
+      console.log(socket.id);
+    });
+    socket.on("real-time-object", (output: any) => {
+      console.log("new update");
+      console.log(output)
+      const newData = JSON.parse(output[0]);
+      setAggregate(newData.aggregate);
+      setServices(newData.services);
+      console.log(newData.aggregate);
+      console.log(newData.services);
+    });
     setServices([
       {
         service: "a",
@@ -102,36 +103,37 @@ function Dashboard(): JSX.Element {
       status: 'good'
     })
     setServiceThresholds(baselineSetting)
+    
     // return () => socket.disconnect();
   }, []);
 
-const baselineSetting: any = [];
-console.log(serviceThresholds, 'before conditional')
+  const baselineSetting: any = [];
+  console.log(serviceThresholds, 'before conditional')
 
-// if (serviceThresholds === []){
-//   console.log(serviceThresholds, 'after conditional')
-//   for (let i = 0; i < services.length; i++) {
-//     services[i].key = i;
-//     let status = 0;
-//     if (filter[services[i].service]){
-//       const holder = filter[services[i].service]
-//       if (serviceThresholds[i].load_threshold < services[i].byMethod[holder].load) ++status
-//       if (serviceThresholds[i].error_threshold < services[i].byMethod[holder].error) ++status
-//       if (serviceThresholds[i].response_time_threshold < services[i].byMethod[holder].response_time) ++status
-//       if (serviceThresholds[i].availability_threshold > services[i].byMethod[holder].availability) ++status
-//       services[i].byMethod[holder].status = status
-//       dataSource.push(services[i].byMethod[holder]);
+  if (serviceThresholds === []){
+  console.log(serviceThresholds, 'after conditional')
+  for (let i = 0; i < services.length; i++) {
+    services[i].key = i;
+    let status = 0;
+    if (filter[services[i].service]){
+      const holder = filter[services[i].service]
+      if (serviceThresholds[i].load_threshold < services[i].byMethod[holder].load) ++status
+      if (serviceThresholds[i].error_threshold < services[i].byMethod[holder].error) ++status
+      if (serviceThresholds[i].response_time_threshold < services[i].byMethod[holder].response_time) ++status
+      if (serviceThresholds[i].availability_threshold > services[i].byMethod[holder].availability) ++status
+      services[i].byMethod[holder].status = status
+      dataSource.push(services[i].byMethod[holder]);
 
-//     } else {
-//       if (serviceThresholds[i].load_threshold < services[i].load) ++status
-//       if (serviceThresholds[i].error_threshold < services[i].error) ++status
-//       if (serviceThresholds[i].response_time_threshold < services[i].response_time) ++status
-//       if (serviceThresholds[i].availability_threshold < services[i].availability) ++status
-//       services[i].status = status
-//       dataSource.push(services[i]);
-//     }
-//   }
-// } else {
+    } else {
+      if (serviceThresholds[i].load_threshold < services[i].load) ++status
+      if (serviceThresholds[i].error_threshold < services[i].error) ++status
+      if (serviceThresholds[i].response_time_threshold < services[i].response_time) ++status
+      if (serviceThresholds[i].availability_threshold < services[i].availability) ++status
+      services[i].status = status
+      dataSource.push(services[i]);
+    }
+  }
+  } else {
   for (let i = 0; i < services.length; i++) {
     const baseline: any = {
       availability_threshold: 99,
@@ -160,6 +162,8 @@ console.log(serviceThresholds, 'before conditional')
       baselineSetting.push(baseline)
     }
   }
+  }
+  // setServiceThresholds(baselineSetting)
   
  
 
