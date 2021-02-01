@@ -1,6 +1,6 @@
 const dfd = require('danfojs-node');
 const { Client, Pool } = require('pg');
-require('dotenv').config();
+console.log(require('dotenv').config());
 
 //Specify table names
 const THREE_MIN_TABLE = 'three_min_table';
