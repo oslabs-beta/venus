@@ -267,6 +267,8 @@ const readAndWriteLastHour = () => {
       console.log(err); 
     } else {
       
+      console.log('Select by service AND method: ', result.rows); 
+
       const avgs = result.rows; 
 
       avgs.forEach((avg) => {
