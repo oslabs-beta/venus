@@ -198,7 +198,7 @@ const readAndWriteLastHour = () => {
 
       let insertOverallAggregate = `INSERT INTO ${ONE_HR_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES`;
       
-      insertOverallAggregate += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error}', '${avg.load}');`;
+      insertOverallAggregate += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error_rate}', '${avg.load}');`;
 
       client.query(insertOverallAggregate, (err, result) => {
         if(err){
@@ -223,7 +223,7 @@ const readAndWriteLastHour = () => {
 
       let insertOverallMethod = `INSERT INTO ${ONE_HR_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES`;
       
-      insertOverallMethod += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error}', '${avg.load}');`;
+      insertOverallMethod += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error_rate}', '${avg.load}');`;
 
       client.query(insertOverallMethod, (err, result) => {
         if(err){
@@ -248,7 +248,7 @@ const readAndWriteLastHour = () => {
         
         let insertServiceAggregate = `INSERT INTO ${ONE_HR_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES`;
         
-        insertServiceAggregate += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error}', '${avg.load}');`;
+        insertServiceAggregate += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error_rate}', '${avg.load}');`;
   
         client.query(insertServiceAggregate, (err, result) => {
           if(err){
@@ -275,7 +275,7 @@ const readAndWriteLastHour = () => {
         
         let insertServiceMethod = `INSERT INTO ${ONE_HR_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES`;
         
-        insertServiceMethod += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error}', '${avg.load}');`;
+        insertServiceMethod += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error_rate}', '${avg.load}');`;
   
         client.query(insertServiceMethod, (err, result) => {
           if(err){
