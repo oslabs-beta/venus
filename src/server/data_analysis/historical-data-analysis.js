@@ -322,6 +322,12 @@ const readLastHour = (input) => {
         
         const rows = result.rows; 
 
+        returnObj['lastHour'] = {};
+        returnObj['lastHour']['availability'] = [];
+        returnObj['lastHour']['error_rate'] = [];
+        returnObj['lastHour']['response_time'] = [];
+        returnObj['lastHour']['load'] = [];
+
         rows.forEach((row) => {
           if(row.service === input){
 
