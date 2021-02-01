@@ -15,9 +15,9 @@ const WEEK = 604800000;
 
 //Boilerplate to set up postgres db (client) object
 const client = new Client({
-  user: process.env.DB_NAME, 
+  user: 'postgres', 
   host: process.env.DB_PROXY, 
-  database: process.env.DB_NAME, 
+  database: 'postgres', 
   password: process.env.DB_PASS, 
   port: process.env.DB_PORT
 })
