@@ -7,8 +7,8 @@ const THREE_MIN_TABLE = 'three_min_table';
 const ONE_HR_TABLE = 'one_hour_table';
 const EIGHT_HR_TABLE = 'eight_hour_table'
 const ONE_DAY_TABLE = 'one_day_table';
-const HOUR = 1; 
-const EIGHT_HOURS = 8;  
+const HOUR = 3600000; 
+const EIGHT_HOURS = 28800000;  
 
 
 //Boilerplate to set up postgres db (client) object
@@ -197,7 +197,7 @@ const readAndWriteLastHour = () => {
 
   //  const selectAggregate = `SELECT timestamp, service, method, AVG(availability::int::float4), AVG(response_time::int::float4), AVG(error_rate::int::float4), AVG(load::int::float4) FROM ${THREE_MIN_TABLE} WHERE timestamp > (to_timestamp(${Date.now() - HOUR})) GROUP BY timestamp, service, method;`;
   //  const selectAggregate = `SELECT timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= (to_timestamp(${date.toISOString()})) GROUP BY timestamp, service, method;`;
-   const selectAggregate = `SELECT timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= (to_timestamp(${Date.now()} / 1000.0)) GROUP BY timestamp, service, method;`;
+   const selectAggregate = `SELECT timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= (to_timestamp(${Date.now() - HOUR} / 1000.0)) GROUP BY timestamp, service, method;`;
 
   client.query(selectAggregate, (err, result) => {
     if(err){
