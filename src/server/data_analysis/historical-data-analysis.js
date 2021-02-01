@@ -162,7 +162,6 @@ const histWriteToDB = (buffer) => {
   })
 }
 
-
 //Function to convert unix time into a human readable timestamp
 const convertUnixTime = (unixString) => {
 
@@ -174,7 +173,7 @@ const convertUnixTime = (unixString) => {
 }
 
 //Write a function that reads and analyzes the last hour of 3 minute rows
-const readAndWriteLastHour = () => {
+const writeLastHour = () => {
 
   //Query for overall average
   const selectOverallAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 100000000000}::BIGINT AND service = 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
@@ -299,21 +298,36 @@ const readAndWriteLastHour = () => {
 
 } 
 
+
+const readLastHour = () => {
+  //Query for ALL rows in the last hour 
+  const queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 100000000000}::BIGINT GROUP BY service, method;`;
+
+  client.query(queryText, (err, result) => {
+    if(err){
+      console.log(err); 
+    } else {
+      return result.rows; 
+    }
+  })
+}
+
 //Write a function that reads and analyzes the last day of 1 hour rows
-const readAndWriteLastDay = () => {
+const writeLastDay = () => {
   
 } 
 
 //Write a function that reads and analyzes the last week of 8 hour rows
-const readAndWriteLastWeek = () => {
+const writeLastWeek = () => {
   
 } 
 
 //Write a function that reads and analyzes the last month of 1 day rows
-const readAndWriteLastMonth = () => {
+const writeLastMonth = () => {
   
 } 
 
 
-histWriteToDB(test); 
-readAndWriteLastHour(); 
+// histWriteToDB(test); 
+// readAndWriteLastHour(); 
+readLastHour(); 

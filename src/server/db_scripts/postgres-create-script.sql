@@ -52,10 +52,10 @@ CREATE TABLE eight_hr_table (
     "timestamp" BIGINT NOT NULL, 
     "service" varchar NOT NULL,
     "method" varchar NOT NULL,
-    "availability" varchar NOT NULL,
-    "response_time" varchar NOT NULL,
-    "error_rate" varchar NOT NULL,
-    "load" varchar NOT NULL,
+    "availability" FLOAT(4) NOT NULL,
+    "response_time" FLOAT(4) NOT NULL,
+    "error_rate" FLOAT(4) NOT NULL,
+    "load" FLOAT(4) NOT NULL,
     PRIMARY KEY ("id")
 ) WITH (
     OIDS=FALSE
@@ -66,10 +66,10 @@ CREATE TABLE one_day_table (
     "timestamp" BIGINT NOT NULL, 
     "service" varchar NOT NULL,
     "method" varchar NOT NULL,
-    "availability" varchar NOT NULL,
-    "response_time" varchar NOT NULL,
-    "error_rate" varchar NOT NULL,
-    "load" varchar NOT NULL,
+    "availability" FLOAT(4) NOT NULL,
+    "response_time" FLOAT(4) NOT NULL,
+    "error_rate" FLOAT(4) NOT NULL,
+    "load" FLOAT(4) NOT NULL,
     PRIMARY KEY ("id")
 ) WITH (
     OIDS=FALSE
