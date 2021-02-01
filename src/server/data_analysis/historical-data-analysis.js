@@ -210,7 +210,7 @@ const readAndWriteLastHour = () => {
         if(err){
           console.log(err); 
         } else {
-          console.log(`Result from ${ONE_HR_TABLE}... ${result}`)
+          console.log(`Result from ${ONE_HR_TABLE}... ${JSON.stringify(result)}`)
         }
       })
       
