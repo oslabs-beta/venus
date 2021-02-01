@@ -13,7 +13,6 @@ import { SignIn } from "./SignInContainer";
 import { globalContext } from "../contexts/globalContext";
 import { HistoricalProvider } from "../contexts/historicalContext";
 import { DynamicProvider } from "../contexts/dynamicContext";
-
 import Typography from "antd/es/typography";
 import Menu from "antd/es/menu";
 import Layout from "antd/es/layout";
@@ -48,7 +47,7 @@ function MainDisplay(): JSX.Element {
 
   const large: any = "large";
 
-  if (!verification) {
+  if (verification) {
     return <SignIn />;
   } else {
     return (

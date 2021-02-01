@@ -20,12 +20,10 @@ import Title from "antd/es/typography/Title";
 // ec2-3-15-29-241.us-east-2.compute.amazonaws.com:8080
 function Dashboard(): JSX.Element {
   
-  const { services, setServices, aggregate, setAggregate, filter, setFilter, setServiceThresholds, serviceThresholds, firstTime, setFirstTime } = useContext(dynamicContext);
+  const { services, setServices, aggregate, setAggregate, filter, setFilter, serviceThresholds, firstTime, setFirstTime } = useContext(dynamicContext);
   const { serverAddress } = useContext(globalContext)
 
   const dataSource: any = [];
-  const baselineSetting: any = [];
-  // add port
   useEffect(() => {
     setFilter(filter)
     // console.log(serverAddress)
@@ -47,9 +45,9 @@ function Dashboard(): JSX.Element {
     setServices([
       {
         service: "a",
-        load: 101,
-        response_time: 1000,
-        error: 3,
+        load: 1,
+        response_time: 1,
+        error: 1,
         availability: 1,
         byMethod: {
           GET: {
@@ -101,42 +99,59 @@ function Dashboard(): JSX.Element {
       availability: 83,
       status: 'good'
     })
-    console.log('in use', baselineSetting)
-    // setServiceThresholds(baselineSetting)
-    // console.log(serviceThresholds)
-    setFirstTime(false)
-    // console.log(firstTime)
     // return () => socket.disconnect();
     
   }, []);
 
 
-  for (let i = 0; i < services.length; i++) {
-    const baseline: any = {
-      availability_threshold: 99,
-      response_time_threshold: 1000,
-      load_threshold: 1000,
-      error_threshold: 2
+  if (serviceThresholds.length > 0){
+
+      for (let i = 0; i < services.length; i++){
+      let status = 0
+      if (filter[services[i].service]){
+        const holder = filter[services[i].service]
+        if (serviceThresholds[i].load_threshold < services[i].byMethod[holder].load) ++status
+        if (serviceThresholds[i].error_threshold < services[i].byMethod[holder].error) ++status
+        if (serviceThresholds[i].response_time_threshold < services[i].byMethod[holder].response_time) ++status
+        if (serviceThresholds[i].availability_threshold > services[i].byMethod[holder].availability) ++status
+        services[i].byMethod[holder].status = status
+        dataSource.push(services[i].byMethod[holder]);
+      } else {
+        console.log(serviceThresholds, services[i])
+        if (serviceThresholds[i].load_threshold < services[i].load) ++status
+        if (serviceThresholds[i].error_threshold < services[i].error) ++status
+        if (serviceThresholds[i].response_time_threshold < services[i].response_time) ++status
+        if (serviceThresholds[i].availability_threshold > services[i].availability) ++status
+        services[i].status = status
+        dataSource.push(services[i]);
+      }
     }
-    services[i].key = i;
-    let status = 0;
-    if (filter[services[i].service]){
-      const holder = filter[services[i].service]
-      if (baseline.load_threshold < services[i].byMethod[holder].load) ++status
-      if (baseline.error_threshold < services[i].byMethod[holder].error) ++status
-      if (baseline.response_time_threshold < services[i].byMethod[holder].response_time) ++status
-      if (baseline.availability_threshold > services[i].byMethod[holder].availability) ++status
-      services[i].byMethod[holder].status = status
-      dataSource.push(services[i].byMethod[holder]);
-    } else {
-      if (baseline.load_threshold < services[i].load) ++status
-      if (baseline.error_threshold < services[i].error) ++status
-      if (baseline.response_time_threshold < services[i].response_time) ++status
-      if (baseline.availability_threshold > services[i].availability) ++status
-      services[i].status = status
-      baseline.service = services[i].service
-      dataSource.push(services[i]);
-      baselineSetting.push(baseline)
+  } else {
+    for (let i = 0; i < services.length; i++) {
+      const baseline: any = {
+        availability_threshold: 99,
+        response_time_threshold: 1000,
+        load_threshold: 1000,
+        error_threshold: 1
+      }
+      services[i].key = i;
+      let status = 0;
+      if (filter[services[i].service]){
+        const holder = filter[services[i].service]
+        if (baseline.load_threshold < services[i].byMethod[holder].load) ++status
+        if (baseline.error_threshold < services[i].byMethod[holder].error) ++status
+        if (baseline.response_time_threshold < services[i].byMethod[holder].response_time) ++status
+        if (baseline.availability_threshold > services[i].byMethod[holder].availability) ++status
+        services[i].byMethod[holder].status = status
+        dataSource.push(services[i].byMethod[holder]);
+      } else {
+        if (baseline.load_threshold < services[i].load) ++status
+        if (baseline.error_threshold < services[i].error) ++status
+        if (baseline.response_time_threshold < services[i].response_time) ++status
+        if (baseline.availability_threshold > services[i].availability) ++status
+        services[i].status = status
+        dataSource.push(services[i]);
+      }
     }
   }
  

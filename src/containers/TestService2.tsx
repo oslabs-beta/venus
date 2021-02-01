@@ -38,7 +38,6 @@ const EditableTable2 = () => {
   const { services, serviceThresholds, setServiceThresholds} = useContext(dynamicContext)
   const originData:any = [];
   if (serviceThresholds.length > 0) {
-    console.log('true', serviceThresholds)
     for (let i = 0; i < serviceThresholds.length; i++) {
       originData.push(serviceThresholds[i])
     }
@@ -50,7 +49,7 @@ const EditableTable2 = () => {
       service: services[i].service,
       availability_threshold: 99,
       response_time_threshold: 1000,
-      load_threshold: 100,
+      load_threshold: 1000,
       error_threshold: 1 
     });
   }
