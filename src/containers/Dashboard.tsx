@@ -91,6 +91,54 @@ function Dashboard(): JSX.Element {
           }
         }
       },
+      {
+        service: "d",
+        load: 101,
+        response_time: 1266,
+        error: 5,
+        availability: 152,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: "0.6666666865348816 hpm",
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
+      },
+      {
+        service: "e",
+        load: 101,
+        response_time: 1266,
+        error: 5,
+        availability: 152,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: "0.6666666865348816 hpm",
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
+      },
+      {
+        service: "f",
+        load: 101,
+        response_time: 1266,
+        error: 5,
+        availability: 152,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: "0.6666666865348816 hpm",
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
+      },
     ]);
     setAggregate({
       error: 40,
