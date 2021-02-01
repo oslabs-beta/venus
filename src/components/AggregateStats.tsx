@@ -21,46 +21,44 @@ const color: colors = {
 	bad: '#f5222d'
 }
 
-
-
 function AggregateStats(props: any): JSX.Element{
     return (
 	<div className="cardRow">
 	<Row gutter={32}>
 				<Col span={4}>
 			<div className="aggregate">
-					<Card bordered={true} bodyStyle={{width: "250px"}} hoverable={true}>
+					<Card bordered={true} bodyStyle={{width: "190px"}} hoverable={true}>
 						<Statistic
 							className="stats"
 							title="Title"
-							value="Codesmith"
+							value="System"
 							precision={2}
-							valueStyle={{ color: color.good }}
+							// valueStyle={{ color: color.good }}
 						/>
 					</Card>
 			</div>
 				</Col>
-				<Col span={4}>
+				{/* <Col span={4}>
 				<div className="aggregate">
-					<Card bordered={true} bodyStyle={{width: "250px"}} hoverable={true}>
+					<Card bordered={true} bodyStyle={{width: "190px"}} hoverable={true}>
 						<Statistic
 							title="Health"
 							value={'GOOD'}
 							precision={2}
-							valueStyle={{ color: color.bad }}
+							// valueStyle={{ color: color.bad }}
 						/>
 					</Card>
 					</div>
-				</Col>
+				</Col> */}
 				<Col span={4}>
 				<div className="aggregate">
-					<Card className="aggregateCards" bordered={true} bodyStyle={{width: "250px"}} hoverable={true}>
+					<Card className="aggregateCards" bordered={true} bodyStyle={{width: "190px"}} hoverable={true}>
 						<Statistic
 							className="stats"
 							title="Availability"
 							value={props.availability}
 							precision={2}
-							valueStyle={{ color: color.good }}
+							// valueStyle={{ color: color.good }}
 							suffix="%"
 		
 						/>
@@ -69,12 +67,12 @@ function AggregateStats(props: any): JSX.Element{
 				</Col>
 		<Col span={4}>
 				<div className="aggregate">
-					<Card bordered={true} bodyStyle={{width: "250px"}} hoverable={true}>
+					<Card bordered={true} bodyStyle={{width: "190px"}} hoverable={true}>
 						<Statistic
 							title="Response Time"
 							value={props.response_time}
 							precision={2}
-							valueStyle={{ color: color.fair }}
+							// valueStyle={{ color: color.fair }}
 							suffix="ms"
 							/>
 					</Card>
@@ -82,13 +80,13 @@ function AggregateStats(props: any): JSX.Element{
 				</Col>
 				<Col span={4}>
 				<div className="aggregate">
-					<Card bordered={true} bodyStyle={{width: "250px"}} hoverable={true}>
+					<Card bordered={true} bodyStyle={{width: "190px"}} hoverable={true}>
 						<Statistic
 							className="stats"
 							title="Load"
 							value={props.load}
 							precision={2}
-							valueStyle={{ color: color.fair }}
+							// valueStyle={{ color: color.fair }}
 							suffix="hpm"
 							/>
 					</Card>
@@ -96,13 +94,13 @@ function AggregateStats(props: any): JSX.Element{
 				</Col>
 				<Col span={4}>
 				<div className="aggregate">
-					<Card bodyStyle={{width: "250px"}} hoverable={true}>
+					<Card bodyStyle={{width: "190px"}} hoverable={true}>
 						<Statistic
 							className="stats"
 							title="Response Error"
 							value={props.error}
 							precision={2}
-							valueStyle={{ color: color.fair }}
+							// valueStyle={{ color: color.fair }}
 							suffix="%"
 							/>
 					</Card>

@@ -1,23 +1,14 @@
 
-import React, { useState, useEffect } from 'react';
-import Line from'@ant-design/charts/es/line';     
+import React, { useState, useEffect, useContext } from 'react';
+import Line from'@ant-design/charts/es/line';
+import { historicalContext } from '../contexts/historicalContext';     
 const Availability: React.FC = () => {
+  
+  const { aggregate, serviceData } = useContext(historicalContext)
   const [data, setData] = useState([]);
-  useEffect(() => {
-    asyncFetch();
-  }, []);
-  const asyncFetch = () => {
-    fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
-      .then((response) => response.json())
-      .then((json) => { 
-        console.log(json)
-        return setData(json)})
-      .catch((error) => {
-        console.log('fetch data failed', error);
-      });
-  };
-  var config = {
-    data: data ,
+
+  let config = {
+    data: serviceData,
     xField: 'year',
     yField: 'value',
     seriesField: 'category',
@@ -32,6 +23,8 @@ const Availability: React.FC = () => {
       },
     },
   };
+  console.log(config.data, 'config')
+  if (config.data === undefined) return <div>loading</div>
   return <Line {...config} />;
 };
 export { Availability } ;  

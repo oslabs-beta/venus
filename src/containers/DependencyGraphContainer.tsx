@@ -5,7 +5,6 @@ import { AggregateStats } from '../components/AggregateStats';
 import { dynamicContext } from '../contexts/dynamicContext';
 import Divider from 'antd/es/divider';
 import Typography from 'antd/es/typography';
-import ParentSize from "@visx/responsive/lib/components/ParentSize";
 const { Title } = Typography
 
 function DependencyGraphContainer(): JSX.Element{
