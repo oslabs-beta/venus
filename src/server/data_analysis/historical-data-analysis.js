@@ -218,4 +218,5 @@ const readAndWriteLastMonth = () => {
 } 
 
 
-histWriteToDB(test); 
+// histWriteToDB(test); 
+readAndWriteLastHour(); 
