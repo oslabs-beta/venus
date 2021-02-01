@@ -189,7 +189,7 @@ const readAndWriteLastHour = () => {
 
   const queries = []; 
 
-  const selectAggregate = `SELECT timestamp, service, method, AVG(availability), AVG(response_time) FROM ${THREE_MIN_TABLE} WHERE service = aggregate AND timestamp >= ${Date.now() - HOUR};`;
+  const selectAggregate = `SELECT timestamp, service, method, AVG(availability::int::float4), AVG(response_time::int::float4), AVG(error:::int::float4), AVG(load::int::float4) FROM ${THREE_MIN_TABLE} WHERE service = aggregate AND timestamp >= ${Date.now() - HOUR};`;
 
   client.query(selectAggregate, (err, result) => {
     if(err){
