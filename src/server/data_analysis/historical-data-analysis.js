@@ -201,16 +201,17 @@ const readAndWriteLastHour = () => {
           console.log(err); 
         } else {
           console.log(`Wrote query... ${result}`); 
-
-          client.query(`SELECT * FROM ${ONE_HR_TABLE}`, (err, result) => {
-            if(err){
-              console.log(err); 
-            } else {
-              console.log(`Result from ${ONE_HR_TABLE}... ${result.rows}`)
-            }
-          })
         }
       })
+      
+      client.query(`SELECT * FROM ${ONE_HR_TABLE}`, (err, result) => {
+        if(err){
+          console.log(err); 
+        } else {
+          console.log(`Result from ${ONE_HR_TABLE}... ${result.rows}`)
+        }
+      })
+      
     }
   })
 
