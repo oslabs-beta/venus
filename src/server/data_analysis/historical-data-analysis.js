@@ -192,7 +192,7 @@ const readAndWriteLastHour = () => {
     if(err){
       console.log(err); 
     } else {
-      console.log('Results from service level aggregate stats:', results.rows); 
+      console.log('Results from service level aggregate stats:', result.rows); 
     }
   })
 
