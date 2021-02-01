@@ -1,6 +1,5 @@
-import Layout from 'antd/es/layout';
 import React, { useContext, useState } from "react";
-import data from '../../session_storage/storage.json'
+// import data from '../../session_storage/storage.json'
 import { globalContext } from '../contexts/globalContext' 
 import Form from 'antd/es/form';
 import Input from 'antd/es/input';
@@ -11,17 +10,16 @@ const { Title } = Typography;
 
 
 function SignIn():JSX.Element {
-  console.log(data)
   const { verification, setVerification, setServerAddress, } = useContext(globalContext)
   const onFinish = (values: any) => {
 
     // create get request here to ratify the tokenization process. 
     // currently compares to a local json file. 
     // commmit token to local state.
-    if(data[values.serverIP]){
+    // if(data[values.serverIP]){
       setServerAddress(values.serverIP)
       setVerification(true)
-    } 
+    // } 
   }
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
@@ -36,7 +34,6 @@ function SignIn():JSX.Element {
 
   return (
     <div className="loginContainer">
-
       <Card 
         style={{height: 'fit-content', width: 600, textAlign: 'center'}}
         bordered={true}

@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 
 type dynamicState = {
   services: { 
-    status: string,
+    status?: number,
     service: string,
-    load: string,
+    load: number,
     response_time: number, 
     error: number,
-   availability: number,
-   key?: number,
+    availability: number,
+    key?: number,
+    byMethod: any
   }[],
   aggregate: {
-    status: string,
-    load: string,
+    status?: number,
+    load: number,
     response_time: number, 
     error: number,
     availability: number,
@@ -22,44 +23,42 @@ type dynamicState = {
     status: string,
     children: any[]
   };
+  filter: any,
+  serviceThresholds: {
+    service: string,
+    availability_threshold?: number,
+    response_time_threshold?: number,
+    load_threshold?: number,
+    error_threshold?: number, 
+    key?: number
+  }[]
+  firstTime: boolean
   setServices: (input:any[]) => void;
   setAggregate: (input:any) => void;
-  setDependencyGraph: (input:any) => void
+  setDependencyGraph: (input:any) => void;
+  setFilter: (input:any) => void;
+  setServiceThresholds: (input:any) => void;
+  setFirstTime: (input:boolean) => void
 };
 
 export const liveData: dynamicState = {
   services: [
     {
-      status: 'good',
+      status: 9,
       service: 'curriculum-api.codesmith.io',
-      load: '0.6666666865348816hpm',
+      load: 0,
       response_time: 1266,
       error: 50,
-      availability: 100
-    },
-    {
-      status: 'good',
-      service: 'finance.yahoo.com',
-      load: '0.6666666865348816hpm',
-      response_time: 1417.5,
-      error: 50,
-      availability: 100
-    },
-    {
-      status: 'good',
-      service: 'weather.google.com',
-      load: '0.6666666865348816hpm',
-      response_time: 1150,
-      error: 0,
-      availability: 50
+      availability: 100,
+      byMethod: {},
     }
   ],
   aggregate: {
     error: 40,
     response_time: 1278,
-    load: '2hpm',
+    load: 2,
     availability: 83,
-    status: 'good'
+    status: 0
   },
   dependencyGraph: {
     service: "CodeSmith",
@@ -80,9 +79,23 @@ export const liveData: dynamicState = {
           ]
       }]
   },
+  filter: {},
+  serviceThresholds: [
+      {
+      service: 'test',
+      availability_threshold: 1,
+      response_time_threshold: 2,
+      load_threshold: 3,
+      error_threshold: 4 
+    }
+  ],
+  firstTime: true,
   setServices: () => {},
   setAggregate: () => {},
-  setDependencyGraph: () => {}
+  setDependencyGraph: () => {},
+  setFilter:() => {},
+  setServiceThresholds: () => {},
+  setFirstTime: () => {}
 };
 
 export const dynamicContext = React.createContext<dynamicState>(liveData)
@@ -92,7 +105,10 @@ export const DynamicProvider: React.FC = (props: any) => {
   const [services, setServices] = useState<any[]>([]);
   const [aggregate, setAggregate] = useState<any>({});
   const [dependencyGraph, setDependencyGraph ] = useState<any>({});
+  const [filter, setFilter] = useState<any>({})
+  const [serviceThresholds, setServiceThresholds] = useState<any>([])
+  const [firstTime, setFirstTime] = useState<any>(true)
 
-return <dynamicContext.Provider value={{services, setServices, aggregate, setAggregate, dependencyGraph, setDependencyGraph}}>{props.children}</dynamicContext.Provider>
+return <dynamicContext.Provider value={{services, setServices, aggregate, setAggregate, dependencyGraph, setDependencyGraph, filter, setFilter, serviceThresholds, setServiceThresholds, firstTime, setFirstTime}}>{props.children}</dynamicContext.Provider>
 
 }
