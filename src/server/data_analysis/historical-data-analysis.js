@@ -262,31 +262,31 @@ const readAndWriteLastHour = () => {
   // })
 
   // Query service level stats and write to the one hour table
-  client.query(selectServiceMethod, (err, result) => {
-    if(err){
-      console.log(err); 
-    } else {
+  // client.query(selectServiceMethod, (err, result) => {
+  //   if(err){
+  //     console.log(err); 
+  //   } else {
       
-      console.log('Select by service AND method: ', result.rows); 
+  //     console.log('Select by service AND method: ', result.rows); 
 
-      const avgs = result.rows; 
+  //     const avgs = result.rows; 
 
-      avgs.forEach((avg) => {
+  //     avgs.forEach((avg) => {
         
-        let insertServiceMethod = `INSERT INTO ${ONE_HR_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES`;
+  //       let insertServiceMethod = `INSERT INTO ${ONE_HR_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES`;
         
-        insertServiceMethod += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error}', '${avg.load}');`;
+  //       insertServiceMethod += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error}', '${avg.load}');`;
   
-        client.query(insertServiceMethod, (err, result) => {
-          if(err){
-            console.log(err); 
-          } else {
-            console.log(`Wrote query...`, result); 
-          }
-        })
-      })
-    }
-  })
+  //       client.query(insertServiceMethod, (err, result) => {
+  //         if(err){
+  //           console.log(err); 
+  //         } else {
+  //           console.log(`Wrote query...`, result); 
+  //         }
+  //       })
+  //     })
+  //   }
+  // })
 
 
   client.query('SELECT * FROM one_hr_table', (err, result) => {
