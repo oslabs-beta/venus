@@ -10,8 +10,7 @@ import { AggregateStats } from "../components/AggregateStats";
 import { dynamicContext } from "../contexts/dynamicContext";
 import Divider from "antd/es/divider";
 import Title from "antd/es/typography/Title";
-import { EditableTable2 } from './TestService2'
-import { EditableTable } from './TestServiceSettings'
+import { EditableTable2 } from '../components/EditableTable'
 
 function SettingsContainer(): JSX.Element {
   const { services, setServices, aggregate, setAggregate } = useContext(dynamicContext);
