@@ -3,23 +3,22 @@
  * @desc Highest component in hierarchy that displays both Navigation Bar and Dashboard
  **/
 
-import React, { Component, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Dashboard } from "./Dashboard";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import { ChartContainer } from "./ChartContainer";
 import { DependencyGraphContainer } from "./DependencyGraphContainer";
 import { SettingsContainer } from "./ServiceSettingsContainer";
 import { SignIn } from "./SignInContainer";
-// import { EditableTable } from "./ThresholdsTest";
 import { globalContext } from "../contexts/globalContext";
 import { HistoricalProvider } from "../contexts/historicalContext";
 import { DynamicProvider } from "../contexts/dynamicContext";
-
 import Typography from "antd/es/typography";
 import Menu from "antd/es/menu";
 import Layout from "antd/es/layout";
 import Modal from "antd/es/modal";
 import Button from "antd/es/button";
+
 const { Title } = Typography;
 const { Footer, Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -35,13 +34,14 @@ function MainDisplay(): JSX.Element {
   };
 
   const handleSignout = () => {
+    console.log('handleSignout')
     setIsModalVisible(false);
     setVerification(false)
+    console.log(isModalVisible)
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    
   };
 
 
@@ -89,33 +89,30 @@ function MainDisplay(): JSX.Element {
                       </div>
                     </Link>
                   </Menu.Item>
-                  <Menu.Item>
-                    <div
-                      style={{ width: "100%", height: "100%" }}
-                      key="5"
-                      onClick={showModal}
-                    >
-                      Sign Out
-                    </div>
-                    <Modal
-                      title="Sign Out"
-                      visible={isModalVisible}
-                      onOk={handleSignout}
-                      onCancel={handleCancel}
-                      footer={[
-                        <Button key="back" onClick={handleCancel}>
-                          Return
-                        </Button>,
-                        <Button key="submit" type="primary" onClick={handleSignout}>
-                          Sign Out
-                        </Button>,
-                      ]}
-                    >
-                      Are you sure you want to end this session?
-                      <br></br>
-                      All unsaved session configurations will be lost.
-                    </Modal>
-                  </Menu.Item>
+                  <div style={{ width: 200, justifyContent: 'center'}}>
+                  <Button onClick={showModal} block={true} type={"primary"} style={{ position: 'absolute', zIndex: 10, bottom: 20, marginBottom: 80, }}>
+                    Sign Out
+                  </Button>
+                  </div>
+                  <Modal
+                        title="Sign Out"
+                        visible={isModalVisible}
+                        onOk={handleSignout}
+                        onCancel={handleCancel}
+                        footer={[
+                          <Button key="back" onClick={handleCancel}>
+                            Return
+                          </Button>,
+                          <Button key="submit" type="primary" onClick={handleSignout}>
+                            Sign Out
+                          </Button>,
+                        ]}
+                      >
+                        Are you sure you want to end this session?
+                        <br></br>
+                        All unsaved session configurations will be lost.
+                      </Modal>
+                {/* <h1 style={{ position: 'absolute', zIndex: 10, marginLeft: 20, bottom: 20, marginBottom: 100}}>test</h1> */}
                 </Menu>
               </Sider>
               <Layout
@@ -126,6 +123,7 @@ function MainDisplay(): JSX.Element {
                 }}
               >
                 <Content>
+                  
                   <Route path="/" exact component={Dashboard} />
                   <Route path="/dependencyGraph" component={DependencyGraphContainer}/>
                   <Route path="/historicalData" component={ChartContainer} />

@@ -7,34 +7,29 @@ import React, { useContext } from 'react'
 import Select from 'antd/es/select';
 import { historicalContext } from '../contexts/historicalContext';
 
-const options: any[] = [
-  'curriculum-api.codesmith.io', 'google.com', 'surfline.com'
-];
-const dropDownOptions: any[] =[];
-for (let i = 0; i < options.length; i++){
-  dropDownOptions.push(
-    <Select.Option value={options[i]} key={i}>{options[i]}</Select.Option>
-  )
-}
+// const options: any[] = [
+//   'curriculum-api.codesmith.io', 'google.com', 'surfline.com'
+// ];
 
-function CardDropDown (): JSX.Element{
-
+function CardDropDown (props:any): JSX.Element{
+  
+  const dropDownOptions: any[] =[];
+  for (let i = 0; i < props.services.length; i++){
+    dropDownOptions.push(
+      <Select.Option value={props.services[i]} key={i}>{props.services[i]}</Select.Option>
+    )
+  }
   const { setService } = useContext(historicalContext)
 
 	function onChange(value:string) {
     console.log(value)
+    // fetch request to route for data.
+    // data is then brought into state and updated. otherwise, create a larger pool for an initial pull
     setService(value)
     
-		}
-
-	function onBlur() {
-		console.log('blur');
-	}
-
-	function onFocus() {
-  	console.log('focus');
-	}
-
+    
+    }
+    
 	function onSearch(val:any) {
 		console.log('search:', val);
 	}
@@ -46,8 +41,6 @@ function CardDropDown (): JSX.Element{
     placeholder="Select a service"
     optionFilterProp="children"
     onChange={onChange}
-    onFocus={onFocus}
-    onBlur={onBlur}
     onSearch={onSearch}
     filterOption={(input:any, option:any) =>
       option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}> 
