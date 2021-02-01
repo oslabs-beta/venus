@@ -71,7 +71,7 @@ const test = [
     }
   },
   {
-    timestamp: '1612071042999-0',
+    timestamp: '1612165090650-0',
       services: [
         {
           service: 'curriculum-api.codesmith.io',
@@ -177,8 +177,6 @@ const convertUnixTime = (unixString) => {
   let unix = unixString.slice(0, unixString.length - 2);
   
   unix = new Number(unix); 
-
-  // const timeStamp = new Date(unix);
   
   return unix; 
 }
@@ -189,8 +187,7 @@ const readAndWriteLastHour = () => {
 
   const queries = []; 
 
-  //  const selectAggregate = `SELECT timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= (to_timestamp(${Date.now() - HOUR} / 1000.0)) GROUP BY timestamp, service, method;`;
-   const selectAggregate = `SELECT id, timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT GROUP BY timestamp, service, method, id ORDER BY id;`;
+   const selectAggregate = `SELECT id, timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = 'aggregate' AND method = 'aggregate' GROUP BY timestamp, service, method, id ORDER BY id;`;
 
   client.query(selectAggregate, (err, result) => {
     if(err){
