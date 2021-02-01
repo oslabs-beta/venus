@@ -298,7 +298,7 @@ const writeLastHour = () => {
 
 } 
 
-
+//Reading all rows from the last hour
 const readLastHour = () => {
   //Query for ALL rows in the last hour 
   const queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 100000000000}::BIGINT GROUP BY service, method;`;
@@ -307,6 +307,7 @@ const readLastHour = () => {
     if(err){
       console.log(err); 
     } else {
+      console.log('ALL ROWS FROM THE LAST HOUR:', result.rows); 
       return result.rows; 
     }
   })
