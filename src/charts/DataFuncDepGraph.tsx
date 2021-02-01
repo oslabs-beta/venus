@@ -69,7 +69,7 @@ const test: IDataNode = {
 
 /* ----------- CHANGE CHILD ARRAY ---------- */
 
-function changeChildArr(arr: IService[]){
+function changeChildArr(arr: IService[]): TreeNode[]{
     // make a new array with map
     // we will be putting the services inside the array
     const newArr = arr.map( (obj: any) => {
@@ -105,9 +105,9 @@ function changeChildArr(arr: IService[]){
 }
 
 // console.log('change arr', changeChildArr(test.services))
-// let children = changeChildArr(test.services)
-// console.log('children', children[1].children)
-
+let children = changeChildArr(test.services)[0]
+console.log('children', children)
+// console.log(test.services);
 
 /* ----------- CHANGE MAIN ARRAY --------- */
 // this is the kind of type of the tree node
@@ -117,8 +117,8 @@ interface TreeNode {
     isExpanded?: boolean;
     children?: TreeNode[];
   }
-// input Object (obj)
-function changeData(obj: any){
+
+function changeData(obj: IDataNode): TreeNode{
     let result: TreeNode = {
     // create the main node and its children using helper function
             service: "Services",
@@ -197,4 +197,4 @@ const treeData = changeData(test)
 //     ]
 //   };
 
-  export { changeChildArr, changeData, test, treeData}
+  export { changeChildArr, changeData, test, treeData, IDataNode, IService, TreeNode}

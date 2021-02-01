@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`jest snapshot testing dependency graph snapshot testing the LinkControls component matches the snapshot 1`] = `[Function]`;
+
+exports[`jest snapshot testing dependency graph snapshot testing the dependency chart component matches the snapshot 1`] = `[Function]`;
+
+exports[`jest snapshot testing dependency graph snapshot testing the getLinkComponent component matches the snapshot 1`] = `[Function]`;
+
+exports[`jest snapshot testing dummy data snapshot testing the dummy data matches the snapshot 1`] = `
+Object {
+  "services": Array [
+    Object {
+      "availability": 100,
+      "byMethod": Object {
+        "GET": Object {
+          "availability": 100,
+          "error": 0,
+          "load": "0.33 hpm",
+          "response_time": 1200,
+          "status": "good",
+        },
+      },
+      "error": 0,
+      "load": "1.00 hpm",
+      "response_time": 1266,
+      "service": "gogle api",
+      "status": "good",
+    },
+    Object {
+      "availability": 100,
+      "byMethod": Object {
+        "GET": Object {
+          "availability": 100,
+          "error": 0,
+          "load": "0.33 hpm",
+          "response_time": 1200,
+          "status": "bad",
+        },
+        "POST": Object {
+          "availability": 100,
+          "error": 0,
+          "load": "0.33 hpm",
+          "response_time": 1200,
+          "status": "bad",
+        },
+      },
+      "error": 0,
+      "load": "1.00 hpm",
+      "response_time": 1266,
+      "service": "wizard api",
+      "status": "fair",
+    },
+  ],
+}
+`;
+
+exports[`jest snapshot testing dummy data snapshot testing the dummy data matches the snapshot 2`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "service": "GET",
+          "status": "good",
+        },
+      ],
+      "service": "gogle api",
+      "status": "good",
+    },
+    Object {
+      "children": Array [
+        Object {
+          "service": "GET",
+          "status": "bad",
+        },
+        Object {
+          "service": "POST",
+          "status": "bad",
+        },
+      ],
+      "service": "wizard api",
+      "status": "fair",
+    },
+  ],
+  "service": "Services",
+  "status": "good",
+}
+`;
