@@ -128,7 +128,7 @@ const histWriteToDB = (buffer) => {
 
   buffer.forEach((threeMinObj) => {
 
-    const timeStamp = convertUnixTime(threeMinObj.timestamp); 
+    const timeStamp = unixStringToNumber(threeMinObj.timestamp); 
     
     //Write the overall aggregate statistics for the 3 minute interval
     queryText += `('${timeStamp}', 'aggregate', 'aggregate', '${threeMinObj.aggregate.availability}', '${threeMinObj.aggregate.response_time}', '${threeMinObj.aggregate.error}', '${threeMinObj.aggregate.load}'),`;
@@ -165,13 +165,23 @@ const histWriteToDB = (buffer) => {
 }
 
 //Function to convert unix time into a human readable timestamp
-const convertUnixTime = (unixString) => {
+const unixStringToNumber = (unixString) => {
 
   let unix = unixString.slice(0, unixString.length - 2);
   
   unix = new Number(unix); 
   
   return unix; 
+}
+
+const unixToTimestamp = (unixString) => {
+
+  const unix = new Number(unixString); 
+
+  const date = new Date(unix); 
+
+  return JSON.stringify(date); 
+
 }
 
 //Write a function that reads and analyzes the last hour of 3 minute rows
@@ -333,25 +343,25 @@ const readLastHour = (input) => {
 
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
-              "timestamp": row.timestamp, 
+              "timestamp": unixToTimeStamp(row.timestamp), 
               "value": row.availability, 
               "service": row.service
             })
 
             returnObj['lastHour']['error_rate'].push({
-              "timestamp": row.timestamp, 
+              "timestamp": unixToTimeStamp(row.timestamp), 
               "value": row.error_rate, 
               "service": row.service
             })
 
             returnObj['lastHour']['response_time'].push({
-              "timestamp": row.timestamp, 
+              "timestamp": unixToTimeStamp(row.timestamp), 
               "value": row.response_time, 
               "service": row.service
             })
 
             returnObj['lastHour']['load'].push({
-              "timestamp": row.timestamp, 
+              "timestamp": unixToTimeStamp(row.timestamp), 
               "value": row.load, 
               "service": row.service
             })
