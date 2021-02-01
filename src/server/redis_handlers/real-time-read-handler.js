@@ -14,8 +14,8 @@ const REDIS_HOST = process.env.REDIS_HOST;
 const REDIS_PORT = process.env.REDIS_PORT; 
 
 const redis = new Redis({
-  port: REDIS_PORT, 
-  host: REDIS_HOST
+  port: process.env.REDIS_PORT, 
+  host: process.env.REDIS_HOST
 });
 
 console.log(`Reading the stream named ${STREAM_KEY}...`); 
