@@ -74,7 +74,7 @@ const test = [
     timestamp: '1612165090650-0',
       services: [
         {
-          service: 'curriculum-api.codesmith.io',
+          service: 'google-weather-api',
           load: 15,
           response_time: 1198,
           error: 56,
@@ -263,5 +263,5 @@ const readAndWriteLastMonth = () => {
 } 
 
 
-// histWriteToDB(test); 
+histWriteToDB(test); 
 readAndWriteLastHour(); 
