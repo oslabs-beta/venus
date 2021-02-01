@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors'); 
 const data = require('./data_analysis/rt-data.js'); 
 const redis = require('./redis_handlers/real-time-read-handler.js'); 
+require('dotenv').config();
+
 
 const SOCKET_PORT = 8080; 
 const EC2_HOST = process.env.EC2_HOST; 
