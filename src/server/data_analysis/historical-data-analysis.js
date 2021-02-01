@@ -343,25 +343,25 @@ const readLastHour = (input) => {
 
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
-              "timestamp": unixToTimeStamp(row.timestamp), 
+              "timestamp": unixToTimestamp(row.timestamp), 
               "value": row.availability, 
               "service": row.service
             })
 
             returnObj['lastHour']['error_rate'].push({
-              "timestamp": unixToTimeStamp(row.timestamp), 
+              "timestamp": unixToTimestamp(row.timestamp), 
               "value": row.error_rate, 
               "service": row.service
             })
 
             returnObj['lastHour']['response_time'].push({
-              "timestamp": unixToTimeStamp(row.timestamp), 
+              "timestamp": unixToTimestamp(row.timestamp), 
               "value": row.response_time, 
               "service": row.service
             })
 
             returnObj['lastHour']['load'].push({
-              "timestamp": unixToTimeStamp(row.timestamp), 
+              "timestamp": unixToTimestamp(row.timestamp), 
               "value": row.load, 
               "service": row.service
             })
