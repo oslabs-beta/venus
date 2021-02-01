@@ -329,7 +329,7 @@ const readLastHour = (input) => {
         returnObj['lastHour']['load'] = [];
 
         rows.forEach((row) => {
-          if(row.service !== input){
+          // if(row.service !== input){
 
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
@@ -355,7 +355,7 @@ const readLastHour = (input) => {
               "value": row.load, 
               "service": row.service
             })
-          }
+          // }
         })
         
         console.log(returnObj.lastHour); 
