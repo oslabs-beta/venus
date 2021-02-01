@@ -326,25 +326,25 @@ const readLastHour = (input) => {
           if(row.service === input){
 
             //Create availability property and push to array
-            returnObj.lastHour.availability.push({
+            returnObj['lastHour']['availability'].push({
               "timestamp": row.timestamp, 
               "value": row.availability, 
               "service": row.service
             })
 
-            returnObj.lastHour.error_rate.push({
+            returnObj['lastHour']['error_rate'].push({
               "timestamp": row.timestamp, 
               "value": row.error_rate, 
               "service": row.service
             })
 
-            returnObj.lastHour.response_time.push({
+            returnObj['lastHour']['response_time'].push({
               "timestamp": row.timestamp, 
               "value": row.response_time, 
               "service": row.service
             })
 
-            returnObj.lastHour.load.push({
+            returnObj['lastHour']['load'].push({
               "timestamp": row.timestamp, 
               "value": row.load, 
               "service": row.service
