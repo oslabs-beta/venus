@@ -35,7 +35,7 @@ CREATE TABLE three_min_table (
 
 CREATE TABLE one_hr_table (
     "id" serial NOT NULL,
-    "timestamp" TIMESTAMPTZ NOT NULL, 
+    "timestamp" BIGINT NOT NULL, 
     "service" varchar NOT NULL,
     "method" varchar NOT NULL,
     "availability" FLOAT(8) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE one_hr_table (
 
 CREATE TABLE eight_hr_table (
     "id" serial NOT NULL,
-    "timestamp" TIMESTAMPTZ NOT NULL, 
+    "timestamp" BIGINT NOT NULL, 
     "service" varchar NOT NULL,
     "method" varchar NOT NULL,
     "availability" FLOAT(8) NOT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE eight_hr_table (
 
 CREATE TABLE one_day_table (
     "id" serial NOT NULL,
-    "timestamp" TIMESTAMPTZ NOT NULL, 
+    "timestamp" BIGINT NOT NULL, 
     "service" varchar NOT NULL,
     "method" varchar NOT NULL,
     "availability" FLOAT(8) NOT NULL,
