@@ -201,7 +201,7 @@ const readAndWriteLastHour = () => {
         
         insertServiceAggregate += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error}', '${avg.load}');`;
   
-        client.query(insertOverallAggregate, (err, result) => {
+        client.query(insertServiceAggregate, (err, result) => {
           if(err){
             console.log(err); 
           } else {
