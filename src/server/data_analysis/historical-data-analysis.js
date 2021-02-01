@@ -195,7 +195,7 @@ const readAndWriteLastHour = () => {
 
   console.log(date); 
   //  const selectAggregate = `SELECT timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= (to_timestamp(${Date.now() - HOUR} / 1000.0)) GROUP BY timestamp, service, method;`;
-   const selectAggregate = `SELECT timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= (now() - interval '1 hour') GROUP BY timestamp, service, method;`;
+   const selectAggregate = `SELECT timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= date_trunc('hour', now() - interval '1 hour') GROUP BY timestamp, service, method;`;
 
   client.query(selectAggregate, (err, result) => {
     if(err){
