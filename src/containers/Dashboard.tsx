@@ -168,7 +168,7 @@ function Dashboard(): JSX.Element {
       title: "Service",
       dataIndex: "service",
       key: "service",
-      sorter: (a:any, b:any) => a.service.length - b.service.length
+      sorter: (a:any, b:any) => columns[0].key.sort(a.key.localeCompare(b.key))
     },
     {
       title: "Status",
