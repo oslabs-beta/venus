@@ -190,7 +190,9 @@ const readAndWriteLastHour = () => {
       console.log(err); 
     } else {
 
-      const avg = result.rows[0]; 
+      const avg = result.rows[0];
+      
+      console.log('Result from average in 3 min query:', result.rows); 
 
       let insertOverallMethod = `INSERT INTO ${ONE_HR_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES`;
       
@@ -236,5 +238,5 @@ const readAndWriteLastMonth = () => {
 } 
 
 
-histWriteToDB(test); 
+// histWriteToDB(test); 
 readAndWriteLastHour(); 
