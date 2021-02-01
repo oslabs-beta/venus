@@ -188,11 +188,11 @@ const readAndWriteLastHour = () => {
   //Query for aggregate statistics by service
   const selectServiceAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service != 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
 
-  client.query('SELECT * FROM three_min_table', (err, result) => {
+  client.query(selectOverallAggregate, (err, result) => {
     if(err){
       console.log(err); 
     } else {
-      console.log('Results from service level aggregate stats:', result.rows); 
+      console.log('Results from overall level aggregate stats:', result.rows); 
     }
   })
 
@@ -263,5 +263,5 @@ const readAndWriteLastMonth = () => {
 } 
 
 
-histWriteToDB(test); 
+// histWriteToDB(test); 
 readAndWriteLastHour(); 
