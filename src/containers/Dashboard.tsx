@@ -4,9 +4,9 @@
  * The parent container for Aggregate Data and Chart Container.
  */
 
+
 import { io } from "socket.io-client";
 import React, { useContext, useEffect } from "react";
-
 import { AggregateStats } from "../components/AggregateStats";
 import Divider from "antd/es/divider";
 import Table from "antd/es/table";
@@ -15,7 +15,6 @@ import { FormDropDown } from '../components/FormDropDown';
 import { globalContext } from "../contexts/globalContext"
 import { dynamicContext } from "../contexts/dynamicContext";
 import Title from "antd/es/typography/Title";
-
 
 // ec2-3-15-29-241.us-east-2.compute.amazonaws.com:8080
 function Dashboard(): JSX.Element {
@@ -26,128 +25,128 @@ function Dashboard(): JSX.Element {
   const dataSource: any = [];
   useEffect(() => {
     setFilter(filter)
-    // console.log(serverAddress)
-    // const socket:any = io(serverAddress + ':8080', {
-    //   transports: ["websocket"],
-    // });
-    // socket.on("connection", () => {
-    //   console.log(socket.id);
-    // });
-    // socket.on("real-time-object", (output: any) => {
-    //   console.log("new update");
-    //   console.log(output)
-    //   const newData = JSON.parse(output[0]);
-    //   setAggregate(newData.aggregate);
-    //   setServices(newData.services);
-    //   console.log(newData.aggregate);
-    //   console.log(newData.services);
-    // });
-    setServices([
-      {
-        service: "a",
-        load: 1,
-        response_time: 1,
-        error: 1,
-        availability: 1,
-        byMethod: {
-          GET: {
-            service: "a",
-            load: 99,
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "b",
-        load: 0,
-        response_time: 1000,
-        error: 0,
-        availability: 100,
-        byMethod: {
-          GET: {
-            service:"b",
-            load: 2,
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "c",
-        load: 101,
-        response_time: 1266,
-        error: 5,
-        availability: 152,
-        byMethod: {
-          GET: {
-            status: "bad",
-            load: "0.6666666865348816 hpm",
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "d",
-        load: 101,
-        response_time: 1266,
-        error: 5,
-        availability: 152,
-        byMethod: {
-          GET: {
-            status: "bad",
-            load: "0.6666666865348816 hpm",
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "e",
-        load: 101,
-        response_time: 1266,
-        error: 5,
-        availability: 152,
-        byMethod: {
-          GET: {
-            status: "bad",
-            load: "0.6666666865348816 hpm",
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "f",
-        load: 101,
-        response_time: 1266,
-        error: 5,
-        availability: 152,
-        byMethod: {
-          GET: {
-            status: "bad",
-            load: "0.6666666865348816 hpm",
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-    ]);
-    setAggregate({
-      error: 40,
-      response_time: 1278,
-      load: 2,
-      availability: 83,
-      status: 'good'
-    })
-    // return () => socket.disconnect();
+    console.log(serverAddress)
+    const socket:any = io(serverAddress + ':8080', {
+      transports: ["websocket"],
+    });
+    socket.on("connection", () => {
+      console.log(socket.id);
+    });
+    socket.on("real-time-object", (output: any) => {
+      console.log("new update");
+      console.log(output)
+      const newData = JSON.parse(output[0]);
+      setAggregate(newData.aggregate);
+      setServices(newData.services);
+      console.log(newData.aggregate);
+      console.log(newData.services, 'services');
+    });
+    // setServices([
+    //   {
+    //     service: "a",
+    //     load: 1,
+    //     response_time: 1,
+    //     error: 1,
+    //     availability: 1,
+    //     byMethod: {
+    //       GET: {
+    //         service: "a",
+    //         load: 99,
+    //         response_time: 12,
+    //         error: 5,
+    //         availability: 1,
+    //       }
+    //     }
+    //   },
+    //   {
+    //     service: "b",
+    //     load: 0,
+    //     response_time: 1000,
+    //     error: 0,
+    //     availability: 100,
+    //     byMethod: {
+    //       GET: {
+    //         service:"b",
+    //         load: 2,
+    //         response_time: 12,
+    //         error: 5,
+    //         availability: 1,
+    //       }
+    //     }
+    //   },
+    //   {
+    //     service: "c",
+    //     load: 101,
+    //     response_time: 1266,
+    //     error: 5,
+    //     availability: 152,
+    //     byMethod: {
+    //       GET: {
+    //         status: "bad",
+    //         load: "0.6666666865348816 hpm",
+    //         response_time: 12,
+    //         error: 5,
+    //         availability: 1,
+    //       }
+    //     }
+    //   },
+    //   {
+    //     service: "d",
+    //     load: 101,
+    //     response_time: 1266,
+    //     error: 5,
+    //     availability: 152,
+    //     byMethod: {
+    //       GET: {
+    //         status: "bad",
+    //         load: "0.6666666865348816 hpm",
+    //         response_time: 12,
+    //         error: 5,
+    //         availability: 1,
+    //       }
+    //     }
+    //   },
+    //   {
+    //     service: "e",
+    //     load: 101,
+    //     response_time: 1266,
+    //     error: 5,
+    //     availability: 152,
+    //     byMethod: {
+    //       GET: {
+    //         status: "bad",
+    //         load: "0.6666666865348816 hpm",
+    //         response_time: 12,
+    //         error: 5,
+    //         availability: 1,
+    //       }
+    //     }
+    //   },
+    //   {
+    //     service: "f",
+    //     load: 101,
+    //     response_time: 1266,
+    //     error: 5,
+    //     availability: 152,
+    //     byMethod: {
+    //       GET: {
+    //         status: "bad",
+    //         load: "0.6666666865348816 hpm",
+    //         response_time: 12,
+    //         error: 5,
+    //         availability: 1,
+    //       }
+    //     }
+    //   },
+    // ]);
+    // setAggregate({
+    //   error: 40,
+    //   response_time: 1278,
+    //   load: 2,
+    //   availability: 83,
+    //   status: 'good'
+    // })
+    return () => socket.disconnect();
     
   }, []);
 
