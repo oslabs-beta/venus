@@ -595,4 +595,7 @@ const writeEightHourIncrements = () => {
 
 // histWriteToDB(test); 
 // readAndWriteLastHour(); 
-readLastHour(); 
+
+const testService = 'curriculum-api.codesmith.io'
+
+readLastHour(testService); 
