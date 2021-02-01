@@ -160,14 +160,6 @@ const histWriteToDB = (buffer) => {
       console.log(`Finished writing to ${THREE_MIN_TABLE}...`, result); 
     }
   })
-
-  client.query('SELECT * FROM three_min_table;', (err, result) => {
-    if(err){
-      console.log(err); 
-    } else {
-      console.log(`${THREE_MIN_TABLE}...`, result.rows); 
-    }
-  })
 }
 
 
@@ -191,13 +183,19 @@ const readAndWriteLastHour = () => {
   const selectOverallAggregate = `SELECT service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
   
   //Query for overall averages by method
-  const selectOverallMethod = `SELECT service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
+  const selectOverallMethod = `SELECT MAX(timestamp), service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
 
   client.query(selectOverallMethod, (err, result) => {
     if(err){
       console.log(err); 
     } else {
+
+      // let insertQuery = `INSERT INTO ${THREE_MIN_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES`;
+      
+      // insertQuery += `('${timeStamp}', 'aggregate', 'aggregate', '${threeMinObj.aggregate.availability}', '${threeMinObj.aggregate.response_time}', '${threeMinObj.aggregate.error}', '${threeMinObj.aggregate.load}'),`;
+
       console.log(`Result of selectAggregate...`, result.rows); 
+
     }
   })
 
