@@ -125,8 +125,6 @@ const histWriteToDB = (buffer) => {
   let queryText = `INSERT INTO ${THREE_MIN_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES `; 
 
   buffer.forEach((threeMinObj) => {
-    
-    console.log('threeMinObj', threeMinObj); 
 
     const timeStamp = convertUnixTime(threeMinObj.timestamp); 
     
@@ -134,12 +132,7 @@ const histWriteToDB = (buffer) => {
     queryText += `('${timeStamp}', 'aggregate', 'aggregate', '${threeMinObj.aggregate.availability}', '${threeMinObj.aggregate.response_time}', '${threeMinObj.aggregate.error}', '${threeMinObj.aggregate.load}'),`;
 
     //Fill in all the aggregate rows by method
-
-    console.log('byMethod for Aggregate at GET at availability:', threeMinObj.aggregate.byMethod.GET.availability); 
-
     for(let method in threeMinObj.aggregate.byMethod){
-      // console.log('method: ', method); 
-      console.log('method level object: ', threeMinObj.aggregate.byMethod[method]); 
       queryText += `('${timeStamp}', 'aggregate', '${method}', '${threeMinObj.aggregate.byMethod[method].availability}', '${threeMinObj.aggregate.byMethod[method].response_time}', '${threeMinObj.aggregate.byMethod[method].error}', '${threeMinObj.aggregate.byMethod[method].load}'),`;
     }
     
@@ -193,7 +186,19 @@ const convertUnixTime = (unixString) => {
 //Write a function that reads and analyzes the last hour of 3 minute rows
 const readAndWriteLastHour = () => {
   //Query the three minute table for the last hour of data only at the aggregate level (not service level)
-  // const selectAggregate = `SELECT * FROM ${THREE_MIN_TABLE} WHERE service = aggregate AND timestamp >= ${Date.now() - HOUR};`;
+
+  const queries = []; 
+
+  const selectAggregate = `SELECT timestamp, service, method, AVG(availability), AVG(response_time) FROM ${THREE_MIN_TABLE} WHERE service = aggregate AND timestamp >= ${Date.now() - HOUR};`;
+
+  client.query(selectAggregate, (err, result) => {
+    if(err){
+      console.log(err); 
+    } else {
+      console.log(`Result of selectAggregate...`, result.rows); 
+    }
+  })
+
   //Analyze by aggregate, service and method
 } 
 
