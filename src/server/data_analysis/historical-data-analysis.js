@@ -4,8 +4,8 @@ require('dotenv').config();
 
 //Specify table names
 const THREE_MIN_TABLE = 'three_min_table';
-const ONE_HR_TABLE = 'one_hour_table';
-const EIGHT_HR_TABLE = 'eight_hour_table'
+const ONE_HR_TABLE = 'one_hr_table';
+const EIGHT_HR_TABLE = 'eight_hr_table'
 const ONE_DAY_TABLE = 'one_day_table';
 const HOUR = 3600000; 
 const EIGHT_HOURS = 28800000;  
