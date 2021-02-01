@@ -12,7 +12,6 @@ const EIGHT_HOURS = 28800000;
 const DAY = 86400000; 
 const WEEK = 604800000; 
 
-
 //Boilerplate to set up postgres db (client) object
 const client = new Client({
   user: 'postgres', 
@@ -120,7 +119,6 @@ const test = [
   } 
 ]
 
-
 //histWriteToDB takes in a buffer of 3 min "real-time" objects and writes them to the 3-min data base
 const histWriteToDB = (buffer) => {
 
@@ -162,30 +160,6 @@ const histWriteToDB = (buffer) => {
       console.log(`Finished writing to ${THREE_MIN_TABLE}...`, result); 
     }
   })
-}
-
-//Function to convert unix time into a human readable timestamp
-const unixStringToNumber = (unixString) => {
-
-  let unix = unixString.slice(0, unixString.length - 2);
-  
-  unix = new Number(unix); 
-  
-  return unix; 
-}
-
-const unixToTimestamp = (unixString) => {
-
-  const unix = new Number(unixString); 
-
-  let date = new Date(unix); 
-
-  date = JSON.stringify(date); 
-
-  date = date.slice(1, date.length - 6); 
-
-  return date; 
-
 }
 
 //Write a function that reads and analyzes the last hour of 3 minute rows
@@ -314,481 +288,9 @@ const writeThreeMinIncrements = () => {
 
 } 
 
-//Reading all rows from the last hour
-const readLastHour = (input) => {
-  //Query for ALL rows in the last hour 
-  
-  let queryText = ''; 
-
-  const returnObj = {}; 
-
-  if(input !== 'aggregate'){
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = '${input}' AND method != 'aggregate' GROUP BY service, method;`;
-
-    returnObj.service = input; 
-    
-    client.query(queryText, (err, result) => {
-      if(err){
-        console.log(err); 
-      } else {
-        
-        const rows = result.rows; 
-
-        returnObj['lastHour'] = {};
-        returnObj['lastHour']['availability'] = [];
-        returnObj['lastHour']['error_rate'] = [];
-        returnObj['lastHour']['response_time'] = [];
-        returnObj['lastHour']['load'] = [];
-
-        rows.forEach((row) => {
-          if(row.service === input){
-
-            //Create availability property and push to array
-            returnObj['lastHour']['availability'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
-              "method": row.method
-            })
-
-            returnObj['lastHour']['error_rate'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
-              "method": row.method
-            })
-
-            returnObj['lastHour']['response_time'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
-              "method": row.method
-            })
-
-            returnObj['lastHour']['load'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
-              "method": row.method
-            })
-          }
-        })
-        
-        console.log(returnObj.lastHour); 
-
-        return returnObj; 
-      }
-    })
-
-  } else {
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
-
-    returnObj.service = 'aggregate'; 
-    
-    client.query(queryText, (err, result) => {
-      if(err){
-        console.log(err); 
-      } else {
-        
-        const rows = result.rows; 
-
-        returnObj['lastHour'] = {};
-        returnObj['lastHour']['availability'] = [];
-        returnObj['lastHour']['error_rate'] = [];
-        returnObj['lastHour']['response_time'] = [];
-        returnObj['lastHour']['load'] = [];
-
-        rows.forEach((row) => {
-          // if(row.service !== input){
-
-            //Create availability property and push to array
-            returnObj['lastHour']['availability'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
-              "service": row.service
-            })
-
-            returnObj['lastHour']['error_rate'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
-              "service": row.service
-            })
-
-            returnObj['lastHour']['response_time'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
-              "service": row.service
-            })
-
-            returnObj['lastHour']['load'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
-              "service": row.service
-            })
-          // }
-        })
-        
-        console.log(returnObj.lastHour); 
-
-        return returnObj; 
-      }
-    })
-  }
-}
-
-//Reading all rows from the last hour
-const readLastDay = (input) => {
-  //Query for ALL rows in the last hour 
-  
-  let queryText = ''; 
-
-  const returnObj = {}; 
-
-  if(input !== 'aggregate'){
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND service = '${input}' AND method != 'aggregate' GROUP BY service, method;`;
-
-    returnObj.service = input; 
-    
-    client.query(queryText, (err, result) => {
-      if(err){
-        console.log(err); 
-      } else {
-        
-        const rows = result.rows; 
-
-        returnObj['lastDay'] = {};
-        returnObj['lastDay']['availability'] = [];
-        returnObj['lastDay']['error_rate'] = [];
-        returnObj['lastDay']['response_time'] = [];
-        returnObj['lastDay']['load'] = [];
-
-        rows.forEach((row) => {
-          if(row.service === input){
-
-            //Create availability property and push to array
-            returnObj['lastDay']['availability'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
-              "method": row.method
-            })
-
-            returnObj['lastDay']['error_rate'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
-              "method": row.method
-            })
-
-            returnObj['lastDay']['response_time'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
-              "method": row.method
-            })
-
-            returnObj['lastDay']['load'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
-              "method": row.method
-            })
-          }
-        })
-        
-        console.log(returnObj.lastDay); 
-
-        return returnObj; 
-      }
-    })
-
-  } else {
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
-
-    returnObj.service = 'aggregate'; 
-    
-    client.query(queryText, (err, result) => {
-      if(err){
-        console.log(err); 
-      } else {
-        
-        const rows = result.rows; 
-
-        returnObj['lastDay'] = {};
-        returnObj['lastDay']['availability'] = [];
-        returnObj['lastDay']['error_rate'] = [];
-        returnObj['lastDay']['response_time'] = [];
-        returnObj['lastDay']['load'] = [];
-
-        rows.forEach((row) => {
-          // if(row.service !== input){
-
-            //Create availability property and push to array
-            returnObj['lastDay']['availability'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
-              "service": row.service
-            })
-
-            returnObj['lastDay']['error_rate'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
-              "service": row.service
-            })
-
-            returnObj['lastDay']['response_time'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
-              "service": row.service
-            })
-
-            returnObj['lastDay']['load'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
-              "service": row.service
-            })
-          // }
-        })
-        
-        console.log(returnObj.lastDay); 
-
-        return returnObj; 
-      }
-    })
-  }
-}
-
-//Reading all rows from the last hour
-const readLastWeek = (input) => {
-  //Query for ALL rows in the last hour 
-  
-  let queryText = ''; 
-
-  const returnObj = {}; 
-
-  if(input !== 'aggregate'){
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - WEEK}::BIGINT AND service = '${input}' AND method != 'aggregate' GROUP BY service, method;`;
-
-    returnObj.service = input; 
-    
-    client.query(queryText, (err, result) => {
-      if(err){
-        console.log(err); 
-      } else {
-        
-        const rows = result.rows; 
-
-        returnObj['lastWeek'] = {};
-        returnObj['lastWeek']['availability'] = [];
-        returnObj['lastWeek']['error_rate'] = [];
-        returnObj['lastWeek']['response_time'] = [];
-        returnObj['lastWeek']['load'] = [];
-
-        rows.forEach((row) => {
-          if(row.service === input){
-
-            //Create availability property and push to array
-            returnObj['lastWeek']['availability'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
-              "method": row.method
-            })
-
-            returnObj['lastWeek']['error_rate'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
-              "method": row.method
-            })
-
-            returnObj['lastWeek']['response_time'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
-              "method": row.method
-            })
-
-            returnObj['lastWeek']['load'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
-              "method": row.method
-            })
-          }
-        })
-        
-        console.log(returnObj.lastWeek); 
-
-        return returnObj; 
-      }
-    })
-
-  } else {
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - WEEK}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
-
-    returnObj.service = 'aggregate'; 
-    
-    client.query(queryText, (err, result) => {
-      if(err){
-        console.log(err); 
-      } else {
-        
-        const rows = result.rows; 
-
-        returnObj['lastWeek'] = {};
-        returnObj['lastWeek']['availability'] = [];
-        returnObj['lastWeek']['error_rate'] = [];
-        returnObj['lastWeek']['response_time'] = [];
-        returnObj['lastWeek']['load'] = [];
-
-        rows.forEach((row) => {
-          // if(row.service !== input){
-
-            //Create availability property and push to array
-            returnObj['lastWeek']['availability'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
-              "service": row.service
-            })
-
-            returnObj['lastWeek']['error_rate'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
-              "service": row.service
-            })
-
-            returnObj['lastWeek']['response_time'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
-              "service": row.service
-            })
-
-            returnObj['lastWeek']['load'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
-              "service": row.service
-            })
-          // }
-        })
-        
-        console.log(returnObj.lastWeek); 
-
-        return returnObj; 
-      }
-    })
-  }
-}
-
-//Reading all rows from the last hour
-const readLastMonth = (input) => {
-  //Query for ALL rows in the last hour 
-  
-  let queryText = ''; 
-
-  const returnObj = {}; 
-
-  if(input !== 'aggregate'){
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_DAY_TABLE} WHERE timestamp >= ${Date.now() - MONTH}::BIGINT AND service = '${input}' AND method != 'aggregate' GROUP BY service, method;`;
-
-    returnObj.service = input; 
-    
-    client.query(queryText, (err, result) => {
-      if(err){
-        console.log(err); 
-      } else {
-        
-        const rows = result.rows; 
-
-        returnObj['lastMonth'] = {};
-        returnObj['lastMonth']['availability'] = [];
-        returnObj['lastMonth']['error_rate'] = [];
-        returnObj['lastMonth']['response_time'] = [];
-        returnObj['lastMonth']['load'] = [];
-
-        rows.forEach((row) => {
-          if(row.service === input){
-
-            //Create availability property and push to array
-            returnObj['lastMonth']['availability'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
-              "method": row.method
-            })
-
-            returnObj['lastMonth']['error_rate'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
-              "method": row.method
-            })
-
-            returnObj['lastMonth']['response_time'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
-              "method": row.method
-            })
-
-            returnObj['lastMonth']['load'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
-              "method": row.method
-            })
-          }
-        })
-        
-        console.log(returnObj.lastMonth); 
-
-        return returnObj; 
-      }
-    })
-
-  } else {
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - MONTH}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
-
-    returnObj.service = 'aggregate'; 
-    
-    client.query(queryText, (err, result) => {
-      if(err){
-        console.log(err); 
-      } else {
-        
-        const rows = result.rows; 
-
-        returnObj['lastMonth'] = {};
-        returnObj['lastMonth']['availability'] = [];
-        returnObj['lastMonth']['error_rate'] = [];
-        returnObj['lastMonth']['response_time'] = [];
-        returnObj['lastMonth']['load'] = [];
-
-        rows.forEach((row) => {
-          // if(row.service !== input){
-
-            //Create availability property and push to array
-            returnObj['lastMonth']['availability'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
-              "service": row.service
-            })
-
-            returnObj['lastMonth']['error_rate'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
-              "service": row.service
-            })
-
-            returnObj['lastMonth']['response_time'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
-              "service": row.service
-            })
-
-            returnObj['lastMonth']['load'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
-              "service": row.service
-            })
-          // }
-        })
-        
-        console.log(returnObj.lastMonth); 
-
-        return returnObj; 
-      }
-    })
-  }
-}
-
 //Write a function that reads and analyzes the last day of 1 hour rows
 const writeOneHourIncrements = () => {
-
+  
   //Query for overall average
   const selectOverallAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - EIGHT_HOURS}::BIGINT AND service = 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
   
@@ -1019,9 +521,525 @@ const writeEightHourIncrements = () => {
   })
 } 
 
+//Reading rows from the last hour for consumption on the front-end
+const readLastHour = (input) => {
+  //Query for ALL rows in the last hour 
+  
+  let queryText = ''; 
+
+  const returnObj = {}; 
+
+  if(input !== 'aggregate'){
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = '${input}' AND method != 'aggregate' GROUP BY service, method;`;
+
+    returnObj.service = input; 
+    
+    client.query(queryText, (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        
+        const rows = result.rows; 
+
+        returnObj['lastHour'] = {};
+        returnObj['lastHour']['availability'] = [];
+        returnObj['lastHour']['error_rate'] = [];
+        returnObj['lastHour']['response_time'] = [];
+        returnObj['lastHour']['load'] = [];
+
+        rows.forEach((row) => {
+          if(row.service === input){
+
+            //Create availability property and push to array
+            returnObj['lastHour']['availability'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.availability, 
+              "method": row.method
+            })
+
+            returnObj['lastHour']['error_rate'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.error_rate, 
+              "method": row.method
+            })
+
+            returnObj['lastHour']['response_time'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.response_time, 
+              "method": row.method
+            })
+
+            returnObj['lastHour']['load'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.load, 
+              "method": row.method
+            })
+          }
+        })
+        
+        console.log(returnObj.lastHour); 
+
+        return returnObj; 
+      }
+    })
+
+  } else {
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
+
+    returnObj.service = 'aggregate'; 
+    
+    client.query(queryText, (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        
+        const rows = result.rows; 
+
+        returnObj['lastHour'] = {};
+        returnObj['lastHour']['availability'] = [];
+        returnObj['lastHour']['error_rate'] = [];
+        returnObj['lastHour']['response_time'] = [];
+        returnObj['lastHour']['load'] = [];
+
+        rows.forEach((row) => {
+          // if(row.service !== input){
+
+            //Create availability property and push to array
+            returnObj['lastHour']['availability'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.availability, 
+              "service": row.service
+            })
+
+            returnObj['lastHour']['error_rate'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.error_rate, 
+              "service": row.service
+            })
+
+            returnObj['lastHour']['response_time'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.response_time, 
+              "service": row.service
+            })
+
+            returnObj['lastHour']['load'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.load, 
+              "service": row.service
+            })
+          // }
+        })
+        
+        console.log(returnObj.lastHour); 
+
+        return returnObj; 
+      }
+    })
+  }
+}
+
+//Reading rows from the last day for consumption on the front-end
+const readLastDay = (input) => {
+  //Query for ALL rows in the last hour 
+  
+  let queryText = ''; 
+
+  const returnObj = {}; 
+
+  if(input !== 'aggregate'){
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND service = '${input}' AND method != 'aggregate' GROUP BY service, method;`;
+
+    returnObj.service = input; 
+    
+    client.query(queryText, (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        
+        const rows = result.rows; 
+
+        returnObj['lastDay'] = {};
+        returnObj['lastDay']['availability'] = [];
+        returnObj['lastDay']['error_rate'] = [];
+        returnObj['lastDay']['response_time'] = [];
+        returnObj['lastDay']['load'] = [];
+
+        rows.forEach((row) => {
+          if(row.service === input){
+
+            //Create availability property and push to array
+            returnObj['lastDay']['availability'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.availability, 
+              "method": row.method
+            })
+
+            returnObj['lastDay']['error_rate'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.error_rate, 
+              "method": row.method
+            })
+
+            returnObj['lastDay']['response_time'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.response_time, 
+              "method": row.method
+            })
+
+            returnObj['lastDay']['load'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.load, 
+              "method": row.method
+            })
+          }
+        })
+        
+        console.log(returnObj.lastDay); 
+
+        return returnObj; 
+      }
+    })
+
+  } else {
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
+
+    returnObj.service = 'aggregate'; 
+    
+    client.query(queryText, (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        
+        const rows = result.rows; 
+
+        returnObj['lastDay'] = {};
+        returnObj['lastDay']['availability'] = [];
+        returnObj['lastDay']['error_rate'] = [];
+        returnObj['lastDay']['response_time'] = [];
+        returnObj['lastDay']['load'] = [];
+
+        rows.forEach((row) => {
+          // if(row.service !== input){
+
+            //Create availability property and push to array
+            returnObj['lastDay']['availability'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.availability, 
+              "service": row.service
+            })
+
+            returnObj['lastDay']['error_rate'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.error_rate, 
+              "service": row.service
+            })
+
+            returnObj['lastDay']['response_time'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.response_time, 
+              "service": row.service
+            })
+
+            returnObj['lastDay']['load'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.load, 
+              "service": row.service
+            })
+          // }
+        })
+        
+        console.log(returnObj.lastDay); 
+
+        return returnObj; 
+      }
+    })
+  }
+}
+
+//Reading rows from the last week for consumption on the front-end
+const readLastWeek = (input) => {
+  //Query for ALL rows in the last hour 
+  
+  let queryText = ''; 
+
+  const returnObj = {}; 
+
+  if(input !== 'aggregate'){
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - WEEK}::BIGINT AND service = '${input}' AND method != 'aggregate' GROUP BY service, method;`;
+
+    returnObj.service = input; 
+    
+    client.query(queryText, (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        
+        const rows = result.rows; 
+
+        returnObj['lastWeek'] = {};
+        returnObj['lastWeek']['availability'] = [];
+        returnObj['lastWeek']['error_rate'] = [];
+        returnObj['lastWeek']['response_time'] = [];
+        returnObj['lastWeek']['load'] = [];
+
+        rows.forEach((row) => {
+          if(row.service === input){
+
+            //Create availability property and push to array
+            returnObj['lastWeek']['availability'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.availability, 
+              "method": row.method
+            })
+
+            returnObj['lastWeek']['error_rate'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.error_rate, 
+              "method": row.method
+            })
+
+            returnObj['lastWeek']['response_time'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.response_time, 
+              "method": row.method
+            })
+
+            returnObj['lastWeek']['load'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.load, 
+              "method": row.method
+            })
+          }
+        })
+        
+        console.log(returnObj.lastWeek); 
+
+        return returnObj; 
+      }
+    })
+
+  } else {
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - WEEK}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
+
+    returnObj.service = 'aggregate'; 
+    
+    client.query(queryText, (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        
+        const rows = result.rows; 
+
+        returnObj['lastWeek'] = {};
+        returnObj['lastWeek']['availability'] = [];
+        returnObj['lastWeek']['error_rate'] = [];
+        returnObj['lastWeek']['response_time'] = [];
+        returnObj['lastWeek']['load'] = [];
+
+        rows.forEach((row) => {
+          // if(row.service !== input){
+
+            //Create availability property and push to array
+            returnObj['lastWeek']['availability'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.availability, 
+              "service": row.service
+            })
+
+            returnObj['lastWeek']['error_rate'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.error_rate, 
+              "service": row.service
+            })
+
+            returnObj['lastWeek']['response_time'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.response_time, 
+              "service": row.service
+            })
+
+            returnObj['lastWeek']['load'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.load, 
+              "service": row.service
+            })
+          // }
+        })
+        
+        console.log(returnObj.lastWeek); 
+
+        return returnObj; 
+      }
+    })
+  }
+}
+
+//Reading rows from the last month for consumption on the front-end
+const readLastMonth = (input) => {
+  //Query for ALL rows in the last hour 
+  
+  let queryText = ''; 
+
+  const returnObj = {}; 
+
+  if(input !== 'aggregate'){
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_DAY_TABLE} WHERE timestamp >= ${Date.now() - MONTH}::BIGINT AND service = '${input}' AND method != 'aggregate' GROUP BY service, method;`;
+
+    returnObj.service = input; 
+    
+    client.query(queryText, (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        
+        const rows = result.rows; 
+
+        returnObj['lastMonth'] = {};
+        returnObj['lastMonth']['availability'] = [];
+        returnObj['lastMonth']['error_rate'] = [];
+        returnObj['lastMonth']['response_time'] = [];
+        returnObj['lastMonth']['load'] = [];
+
+        rows.forEach((row) => {
+          if(row.service === input){
+
+            //Create availability property and push to array
+            returnObj['lastMonth']['availability'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.availability, 
+              "method": row.method
+            })
+
+            returnObj['lastMonth']['error_rate'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.error_rate, 
+              "method": row.method
+            })
+
+            returnObj['lastMonth']['response_time'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.response_time, 
+              "method": row.method
+            })
+
+            returnObj['lastMonth']['load'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.load, 
+              "method": row.method
+            })
+          }
+        })
+        
+        console.log(returnObj.lastMonth); 
+
+        return returnObj; 
+      }
+    })
+
+  } else {
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - MONTH}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
+
+    returnObj.service = 'aggregate'; 
+    
+    client.query(queryText, (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        
+        const rows = result.rows; 
+
+        returnObj['lastMonth'] = {};
+        returnObj['lastMonth']['availability'] = [];
+        returnObj['lastMonth']['error_rate'] = [];
+        returnObj['lastMonth']['response_time'] = [];
+        returnObj['lastMonth']['load'] = [];
+
+        rows.forEach((row) => {
+          // if(row.service !== input){
+
+            //Create availability property and push to array
+            returnObj['lastMonth']['availability'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.availability, 
+              "service": row.service
+            })
+
+            returnObj['lastMonth']['error_rate'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.error_rate, 
+              "service": row.service
+            })
+
+            returnObj['lastMonth']['response_time'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.response_time, 
+              "service": row.service
+            })
+
+            returnObj['lastMonth']['load'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.load, 
+              "service": row.service
+            })
+          // }
+        })
+        
+        console.log(returnObj.lastMonth); 
+
+        return returnObj; 
+      }
+    })
+  }
+}
+
+//Function to convert unix time into a number
+const unixStringToNumber = (unixString) => {
+
+  let unix = unixString.slice(0, unixString.length - 2);
+  
+  unix = new Number(unix); 
+  
+  return unix; 
+}
+
+//Function to convert unix time into a timestamp consumable by the front-end
+const unixToTimestamp = (unixString) => {
+
+  const unix = new Number(unixString); 
+
+  let date = new Date(unix); 
+
+  date = JSON.stringify(date); 
+
+  date = date.slice(1, date.length - 6); 
+
+  return date; 
+
+}
+
+
+/*
+  Main function initiaties all of the set timeouts necessary to begin the cascading write process. 
+  Note that this operates on a separate cadence than the function that initially writes to the 3 min table (that function is triggered manually in the index.js file whenever the buffer becomes full).
+*/
+const main = () => {
+
+  setTimeout(() => {
+    writeThreeMinIncrements(); 
+  }, HOUR)
+
+  setTimeout(() => {
+    writeOneHourIncrements(); 
+  }, HOUR)
+
+  setTimeout(() => {
+    writeEightHourIncrements(); 
+  }, EIGHT_HOURS)
+
+}
+
 // histWriteToDB(test); 
 // readAndWriteLastHour(); 
-
-const testService = 'curriculum-api.codesmith.io'
-
-readLastHour(testService); 
+// const testService = 'curriculum-api.codesmith.io'
+// readLastHour(testService); 
