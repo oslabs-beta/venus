@@ -58,8 +58,8 @@ const test = [
     aggregate: {
       error: 56,
       load: 15,
-      response_time: 1198,
-      availability: 100,
+      response_time: 500,
+      availability: 50,
       byMethod: { 
         GET: {
           load: 20, 
@@ -104,7 +104,7 @@ const test = [
     aggregate: {
       error: 56,
       load: 15,
-      response_time: 1198,
+      response_time: 1000,
       availability: 100,
       byMethod: { 
         GET: {
