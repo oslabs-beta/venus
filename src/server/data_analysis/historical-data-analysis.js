@@ -178,9 +178,13 @@ const unixToTimestamp = (unixString) => {
 
   const unix = new Number(unixString); 
 
-  const date = new Date(unix); 
+  let date = new Date(unix); 
 
-  return JSON.stringify(date); 
+  date = JSON.stringify(date); 
+
+  date = date.slice(1, date.length - 6); 
+
+  return date; 
 
 }
 
