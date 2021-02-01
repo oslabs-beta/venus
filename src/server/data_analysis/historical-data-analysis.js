@@ -188,78 +188,78 @@ const readAndWriteLastHour = () => {
   //Query for method level statistics by service 
   const selectServiceMethod = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 100000000000}::BIGINT AND service != 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
 
-  // Query overall stats and write to the one hour table
-  client.query(selectOverallAggregate, (err, result) => {
-    if(err){
-      console.log(err); 
-    } else {
+  // // Query overall stats and write to the one hour table
+  // client.query(selectOverallAggregate, (err, result) => {
+  //   if(err){
+  //     console.log(err); 
+  //   } else {
 
-      const avg = result.rows[0];
+  //     const avg = result.rows[0];
 
-      let insertOverallAggregate = `INSERT INTO ${ONE_HR_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES`;
+  //     let insertOverallAggregate = `INSERT INTO ${ONE_HR_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES`;
       
-      insertOverallAggregate += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error}', '${avg.load}');`;
+  //     insertOverallAggregate += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error}', '${avg.load}');`;
 
-      client.query(insertOverallAggregate, (err, result) => {
-        if(err){
-          console.log(err); 
-        } else {
-          console.log(`Wrote query...`, result); 
-        }
-      })
+  //     client.query(insertOverallAggregate, (err, result) => {
+  //       if(err){
+  //         console.log(err); 
+  //       } else {
+  //         console.log(`Wrote query...`, result); 
+  //       }
+  //     })
       
-    }
-  })
+  //   }
+  // })
   
-  // Query overall stats by method and write to the one hour table
-  client.query(selectOverallMethod, (err, result) => {
-    if(err){
-      console.log(err); 
-    } else {
+  // // Query overall stats by method and write to the one hour table
+  // client.query(selectOverallMethod, (err, result) => {
+  //   if(err){
+  //     console.log(err); 
+  //   } else {
 
-      const avg = result.rows[0];
+  //     const avg = result.rows[0];
       
-      console.log('Result from average in 3 min query:', result.rows); 
+  //     console.log('Result from average in 3 min query:', result.rows); 
 
-      let insertOverallMethod = `INSERT INTO ${ONE_HR_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES`;
+  //     let insertOverallMethod = `INSERT INTO ${ONE_HR_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES`;
       
-      insertOverallMethod += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error}', '${avg.load}');`;
+  //     insertOverallMethod += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error}', '${avg.load}');`;
 
-      client.query(insertOverallMethod, (err, result) => {
-        if(err){
-          console.log(err); 
-        } else {
-          console.log(`Wrote query...`, result); 
-        }
-      })
+  //     client.query(insertOverallMethod, (err, result) => {
+  //       if(err){
+  //         console.log(err); 
+  //       } else {
+  //         console.log(`Wrote query...`, result); 
+  //       }
+  //     })
       
-    }
-  })
+  //   }
+  // })
 
-  // Query service level stats and write to the one hour table
-  client.query(selectServiceAggregate, (err, result) => {
-    if(err){
-      console.log(err); 
-    } else {
+  // // Query service level stats and write to the one hour table
+  // client.query(selectServiceAggregate, (err, result) => {
+  //   if(err){
+  //     console.log(err); 
+  //   } else {
       
-      const avgs = result.rows; 
+  //     const avgs = result.rows; 
 
-      avgs.forEach((avg) => {
+  //     avgs.forEach((avg) => {
         
-        let insertServiceAggregate = `INSERT INTO ${ONE_HR_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES`;
+  //       let insertServiceAggregate = `INSERT INTO ${ONE_HR_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES`;
         
-        insertServiceAggregate += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error}', '${avg.load}');`;
+  //       insertServiceAggregate += `('${avg.timestamp}', '${avg.service}', '${avg.method}', '${avg.availability}', '${avg.response_time}', '${avg.error}', '${avg.load}');`;
   
-        client.query(insertServiceAggregate, (err, result) => {
-          if(err){
-            console.log(err); 
-          } else {
-            console.log(`Wrote query...`, result); 
-          }
-        })
-      })
-    }
-  })
+  //       client.query(insertServiceAggregate, (err, result) => {
+  //         if(err){
+  //           console.log(err); 
+  //         } else {
+  //           console.log(`Wrote query...`, result); 
+  //         }
+  //       })
+  //     })
+  //   }
+  // })
 
   // Query service level stats and write to the one hour table
   client.query(selectServiceMethod, (err, result) => {
