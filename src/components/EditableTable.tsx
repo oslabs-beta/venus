@@ -34,7 +34,7 @@ const EditableCell = ({
   );
 };
 
-const EditableTable2 = () => {
+const EditableTable = () => {
   const { services, serviceThresholds, setServiceThresholds} = useContext(dynamicContext)
   const originData:any = [];
   if (serviceThresholds.length > 0) {
@@ -197,4 +197,4 @@ const EditableTable2 = () => {
   );
 };
 
-export { EditableTable2 }
+export { EditableTable }

@@ -6,9 +6,10 @@ let mainWindow: Electron.BrowserWindow | null;
 const menu = Menu
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1024,
+    width: 1277,
     height: 768,
-    // maxWidth:1450,
+    maxWidth: 1277,
+    minWidth: 1277,
     // maxHeight:850,
     //  // this will give us our icon shown in the task bar or dock. This will also give you a small icon in the top left of your Windows app.
     // icon: __dirname + '/app/assets/img/icon.png',
