@@ -32,21 +32,21 @@ type dynamicState = {
     error_threshold?: number, 
     key?: number
   }[]
-  
+  firstTime: boolean
   setServices: (input:any[]) => void;
   setAggregate: (input:any) => void;
   setDependencyGraph: (input:any) => void;
   setFilter: (input:any) => void;
   setServiceThresholds: (input:any) => void;
-
+  setFirstTime: (input:boolean) => void
 };
 
 export const liveData: dynamicState = {
   services: [
     {
-      status: 'good',
+      status: 9,
       service: 'curriculum-api.codesmith.io',
-      load: '0.6666666865348816hpm',
+      load: 0,
       response_time: 1266,
       error: 50,
       availability: 100,
@@ -56,9 +56,9 @@ export const liveData: dynamicState = {
   aggregate: {
     error: 40,
     response_time: 1278,
-    load: '2hpm',
+    load: 2,
     availability: 83,
-    status: 'good'
+    status: 0
   },
   dependencyGraph: {
     service: "CodeSmith",
@@ -89,11 +89,13 @@ export const liveData: dynamicState = {
       error_threshold: 4 
     }
   ],
+  firstTime: true,
   setServices: () => {},
   setAggregate: () => {},
   setDependencyGraph: () => {},
   setFilter:() => {},
   setServiceThresholds: () => {},
+  setFirstTime: () => {}
 };
 
 export const dynamicContext = React.createContext<dynamicState>(liveData)
@@ -105,7 +107,8 @@ export const DynamicProvider: React.FC = (props: any) => {
   const [dependencyGraph, setDependencyGraph ] = useState<any>({});
   const [filter, setFilter] = useState<any>({})
   const [serviceThresholds, setServiceThresholds] = useState<any>([])
+  const [firstTime, setFirstTime] = useState<any>(true)
 
-return <dynamicContext.Provider value={{services, setServices, aggregate, setAggregate, dependencyGraph, setDependencyGraph, filter, setFilter, serviceThresholds, setServiceThresholds}}>{props.children}</dynamicContext.Provider>
+return <dynamicContext.Provider value={{services, setServices, aggregate, setAggregate, dependencyGraph, setDependencyGraph, filter, setFilter, serviceThresholds, setServiceThresholds, firstTime, setFirstTime}}>{props.children}</dynamicContext.Provider>
 
 }

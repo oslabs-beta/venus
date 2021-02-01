@@ -3,11 +3,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import Line from'@ant-design/charts/es/line';
 import { historicalContext } from '../contexts/historicalContext';     
 const Availability: React.FC = () => {
+  
   const { aggregate, serviceData } = useContext(historicalContext)
   const [data, setData] = useState([]);
-  console.log(aggregate)
-  console.log(serviceData, 'service data')
-  
+
   let config = {
     data: serviceData,
     xField: 'year',

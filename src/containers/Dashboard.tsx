@@ -20,31 +20,30 @@ import Title from "antd/es/typography/Title";
 // ec2-3-15-29-241.us-east-2.compute.amazonaws.com/:8080
 function Dashboard(): JSX.Element {
   
-  const { services, setServices, aggregate, setAggregate, filter, setFilter, setServiceThresholds, serviceThresholds } = useContext(dynamicContext);
+  const { services, setServices, aggregate, setAggregate, filter, setFilter, setServiceThresholds, serviceThresholds, firstTime, setFirstTime } = useContext(dynamicContext);
   const { serverAddress } = useContext(globalContext)
 
-
-  // console.log(serviceThresholds, 'beforeUE')
   const dataSource: any = [];
+  const baselineSetting: any = [];
   // add port
   useEffect(() => {
     setFilter(filter)
-    console.log(serverAddress)
-    const socket:any = io(serverAddress + ':8080', {
-      transports: ["websocket"],
-    });
-    socket.on("connection", () => {
-      console.log(socket.id);
-    });
-    socket.on("real-time-object", (output: any) => {
-      console.log("new update");
-      console.log(output)
-      const newData = JSON.parse(output[0]);
-      setAggregate(newData.aggregate);
-      setServices(newData.services);
-      console.log(newData.aggregate);
-      console.log(newData.services);
-    });
+    // console.log(serverAddress)
+    // const socket:any = io(serverAddress + ':8080', {
+    //   transports: ["websocket"],
+    // });
+    // socket.on("connection", () => {
+    //   console.log(socket.id);
+    // });
+    // socket.on("real-time-object", (output: any) => {
+    //   console.log("new update");
+    //   console.log(output)
+    //   const newData = JSON.parse(output[0]);
+    //   setAggregate(newData.aggregate);
+    //   setServices(newData.services);
+    //   console.log(newData.aggregate);
+    //   console.log(newData.services);
+    // });
     setServices([
       {
         service: "a",
@@ -102,16 +101,20 @@ function Dashboard(): JSX.Element {
       availability: 83,
       status: 'good'
     })
+    console.log('in use', baselineSetting)
     setServiceThresholds(baselineSetting)
-    
+    console.log(serviceThresholds)
+    setFirstTime(false)
+    console.log(firstTime)
     // return () => socket.disconnect();
+    
   }, []);
 
-  const baselineSetting: any = [];
-  console.log(serviceThresholds, 'before conditional')
-
-  if (serviceThresholds === []){
-  console.log(serviceThresholds, 'after conditional')
+  // const baselineSetting: any = [];
+ 
+ 
+  if (firstTime){
+    console.log('second time')
   for (let i = 0; i < services.length; i++) {
     services[i].key = i;
     let status = 0;
@@ -123,7 +126,6 @@ function Dashboard(): JSX.Element {
       if (serviceThresholds[i].availability_threshold > services[i].byMethod[holder].availability) ++status
       services[i].byMethod[holder].status = status
       dataSource.push(services[i].byMethod[holder]);
-
     } else {
       if (serviceThresholds[i].load_threshold < services[i].load) ++status
       if (serviceThresholds[i].error_threshold < services[i].error) ++status
@@ -134,6 +136,7 @@ function Dashboard(): JSX.Element {
     }
   }
   } else {
+    console.log('first time')
   for (let i = 0; i < services.length; i++) {
     const baseline: any = {
       availability_threshold: 99,
@@ -162,8 +165,9 @@ function Dashboard(): JSX.Element {
       baselineSetting.push(baseline)
     }
   }
+    console.log(baselineSetting, baselineSetting)
   }
-  // setServiceThresholds(baselineSetting)
+  
   
  
 

@@ -15,12 +15,12 @@ import Divider from "antd/es/divider";
 import Title from "antd/es/typography/Title";
 import Radio from 'antd/es/radio'
 import Button from 'antd/es/button'
+import Skeleton from 'antd/es/skeleton'
 
 function ChartContainer(): JSX.Element {
   const [bool, setBool] = useState(false)
   const { aggregate, setAggregate, service, serviceData, setService, setServiceData } = useContext(historicalContext)
   
-  let filter = aggregate;
   const test: any = {
     status: 0,
     load: 12,
@@ -28,6 +28,9 @@ function ChartContainer(): JSX.Element {
     error: 12,
     availability: 12,
   }
+  let services:any = [
+    'service a', 'service b', 'service c'
+  ]
   
   useEffect(() => {
     setAggregate(test)
@@ -37,6 +40,7 @@ function ChartContainer(): JSX.Element {
     // ).then(
     //   data => console.log(data)
     // )
+    console.log('rerender')
     fetch('https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json')
       .then((response) => response.json())
       .then((json) => { 
@@ -47,6 +51,7 @@ function ChartContainer(): JSX.Element {
         console.log('fetch data failed', error);
       });
   },[])
+
   
 // temporal options for chart displays
   const options = [
@@ -66,11 +71,12 @@ function ChartContainer(): JSX.Element {
     //   response => response.json()
     // ).then(
     //   data => console.log(data)
+    //   setServiceData(data)
     // )
   };
   
   if(!bool){
-     return <div>loading</div>
+     return <div>LOADING</div>
   } else {
   return (
     <div id="chartContainer">
@@ -82,7 +88,7 @@ function ChartContainer(): JSX.Element {
       />
       <Divider><Title level={3}>Historical Status</Title></Divider>
       <div className="rangeSelectorContainer">
-        <CardDropDown  />
+        <CardDropDown services={services}  />
         
         <Radio.Group style={{marginLeft: '10px'}} optionType="button"  onChange={filterData} options={options}/>
 

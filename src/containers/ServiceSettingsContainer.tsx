@@ -13,13 +13,9 @@ import Title from "antd/es/typography/Title";
 import { EditableTable } from './TestServiceSettings'
 
 function SettingsContainer(): JSX.Element {
-  const { services, setServices, aggregate, setAggregate } = useContext(
-    dynamicContext
-  );
+  const { services, setServices, aggregate, setAggregate } = useContext(dynamicContext);
 
   const dataSource: any = [];
-  useEffect(() => {
-  }, []);
 
   for (let i = 0; i < services.length; i++) {
     services[i].key = i;
