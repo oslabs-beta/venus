@@ -358,7 +358,7 @@ const readLastHour = (input) => {
           }
         })
         
-        console.log(returnObj); 
+        console.log(returnObj.lastHour); 
 
         return returnObj; 
       }
