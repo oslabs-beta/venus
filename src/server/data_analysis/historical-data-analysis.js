@@ -324,6 +324,58 @@ const readLastHour = (input) => {
 
   if(input !== 'aggregate'){
     queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 100000000000}::BIGINT AND service = '${input}' AND method != 'aggregate' GROUP BY service, method;`;
+
+    returnObj.service = input; 
+    
+    client.query(queryText, (err, result) => {
+      if(err){
+        console.log(err); 
+      } else {
+        
+        const rows = result.rows; 
+
+        returnObj['lastHour'] = {};
+        returnObj['lastHour']['availability'] = [];
+        returnObj['lastHour']['error_rate'] = [];
+        returnObj['lastHour']['response_time'] = [];
+        returnObj['lastHour']['load'] = [];
+
+        rows.forEach((row) => {
+          if(row.service === input){
+
+            //Create availability property and push to array
+            returnObj['lastHour']['availability'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.availability, 
+              "method": row.method
+            })
+
+            returnObj['lastHour']['error_rate'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.error_rate, 
+              "method": row.method
+            })
+
+            returnObj['lastHour']['response_time'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.response_time, 
+              "method": row.method
+            })
+
+            returnObj['lastHour']['load'].push({
+              "timestamp": unixToTimestamp(row.timestamp), 
+              "value": row.load, 
+              "method": row.method
+            })
+          }
+        })
+        
+        console.log(returnObj.lastHour); 
+
+        return returnObj; 
+      }
+    })
+
   } else {
     queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 100000000000}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
 
@@ -616,6 +668,6 @@ const writeEightHourIncrements = () => {
 // histWriteToDB(test); 
 // readAndWriteLastHour(); 
 
-const testService = 'aggregate'
+const testService = 'curriculum-api.codesmith.io'
 
 readLastHour(testService); 
