@@ -1,6 +1,6 @@
 const express = require('express')
 const socket = require('socket.io'); 
-const bodyParser = require('body-parser'); 
+// const bodyParser = require('body-parser'); 
 const cors = require('cors'); 
 
 const app = express()
@@ -11,10 +11,10 @@ const { constructHistorical, main, writeToDB } = require('./data_analysis/histor
 const redis = require('./redis_handlers/real-time-read-handler.js'); 
 const authController = require('./controller.js')
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 app.use(cors({origin: '*'})); 
-app.use(bodyParser); 
+// app.use(bodyParser); 
 
 
 
