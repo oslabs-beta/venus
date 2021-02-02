@@ -7,11 +7,12 @@ const { constructHistorical, main, writeToDB } = require('./data_analysis/histor
 const redis = require('./redis_handlers/real-time-read-handler.js'); 
 const authController = require('./controller.js')
 
-require('dotenv').config();
+require('dotenv').config({ path: require('find-config')('.env') })
 
 
 const SOCKET_PORT = 8080; 
-const EC2_HOST = process.env.EC2_HOST; 
+// const EC2_HOST = process.env.EC2_HOST; 
+const EC2_HOST = config.get('EC2_HOST'); 
 let COUNT = 0; 
 let BUFFER = []; 
 
