@@ -119,8 +119,8 @@ const test = [
   } 
 ]
 
-//histWriteToDB takes in a buffer of 3 min "real-time" objects and writes them to the 3-min data base
-const histWriteToDB = (buffer) => {
+//writeToDB takes in a buffer of 3 min "real-time" objects and writes them to the 3-min table
+const writeToDB = (buffer) => {
 
   let queryText = `INSERT INTO ${THREE_MIN_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES `; 
 
@@ -162,8 +162,8 @@ const histWriteToDB = (buffer) => {
   })
 }
 
-//Write a function that reads and analyzes the last hour of 3 minute rows
-const writeThreeMinIncrements = () => {
+//Write a function that reads and analyzes the last hour of 3 minute rows and writes it to the 1 hour table
+const writeOneHourIncrements = () => {
 
   //Query for overall average
   const selectOverallAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
@@ -288,8 +288,8 @@ const writeThreeMinIncrements = () => {
 
 } 
 
-//Write a function that reads and analyzes the last day of 1 hour rows
-const writeOneHourIncrements = () => {
+//Write a function that reads and analyzes the last eight hours of 1 hour rows and writes it to the 8 hour table
+const writeEightHourIncrements = () => {
   
   //Query for overall average
   const selectOverallAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - EIGHT_HOURS}::BIGINT AND service = 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
@@ -405,8 +405,8 @@ const writeOneHourIncrements = () => {
 
 } 
 
-//Write a function that reads and analyzes the last week of 8 hour rows
-const writeEightHourIncrements = () => {
+//Write a function that reads and analyzes the last day of 8 hour rows and writes it to the one day table
+const writeOneDayIncrements = () => {
 
   //Query for overall average
   const selectOverallAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HOUR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND service = 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
@@ -579,7 +579,7 @@ const readLastHour = (input) => {
         
         console.log(returnObj.lastHour); 
 
-        return returnObj; 
+        return returnObj.lastHour; 
       }
     })
 
@@ -633,7 +633,7 @@ const readLastHour = (input) => {
         
         console.log(returnObj.lastHour); 
 
-        return returnObj; 
+        return returnObj.lastHour; 
       }
     })
   }
@@ -697,7 +697,7 @@ const readLastDay = (input) => {
         
         console.log(returnObj.lastDay); 
 
-        return returnObj; 
+        return returnObj.lastDay; 
       }
     })
 
@@ -751,7 +751,7 @@ const readLastDay = (input) => {
         
         console.log(returnObj.lastDay); 
 
-        return returnObj; 
+        return returnObj.lastDay; 
       }
     })
   }
@@ -815,7 +815,7 @@ const readLastWeek = (input) => {
         
         console.log(returnObj.lastWeek); 
 
-        return returnObj; 
+        return returnObj.lastWeek; 
       }
     })
 
@@ -855,8 +855,8 @@ const readLastWeek = (input) => {
 
             returnObj['lastWeek']['response_time'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
               "service": row.service
+              "value": row.response_time, 
             })
 
             returnObj['lastWeek']['load'].push({
@@ -869,7 +869,7 @@ const readLastWeek = (input) => {
         
         console.log(returnObj.lastWeek); 
 
-        return returnObj; 
+        return returnObj.lastWeek; 
       }
     })
   }
@@ -933,7 +933,7 @@ const readLastMonth = (input) => {
         
         console.log(returnObj.lastMonth); 
 
-        return returnObj; 
+        return returnObj.lastMonth; 
       }
     })
 
@@ -987,7 +987,7 @@ const readLastMonth = (input) => {
         
         console.log(returnObj.lastMonth); 
 
-        return returnObj; 
+        return returnObj.lastMonth; 
       }
     })
   }
@@ -1018,16 +1018,25 @@ const unixToTimestamp = (unixString) => {
 
 }
 
+//Historical read object constructor function
+const constructHistorical = async (input) => {
+  
+  const obj = {};
+  
+  obj['service'] = input; 
+
+  obj['lastHour'] = await readLastHour(input); 
+  obj['lastDay'] = await readLastDay(input); 
+  obj['lastWeek'] = await readLastWeek(input); 
+  obj['lastMonth'] = await readLastMonth(input); 
+  return obj; 
+}
 
 /*
   Main function initiaties all of the set timeouts necessary to begin the cascading write process. 
   Note that this operates on a separate cadence than the function that initially writes to the 3 min table (that function is triggered manually in the index.js file whenever the buffer becomes full).
 */
 const main = () => {
-
-  setTimeout(() => {
-    writeThreeMinIncrements(); 
-  }, HOUR)
 
   setTimeout(() => {
     writeOneHourIncrements(); 
@@ -1037,9 +1046,15 @@ const main = () => {
     writeEightHourIncrements(); 
   }, EIGHT_HOURS)
 
+  setTimeout(() => {
+    writeOneDayIncrements(); 
+  }, DAY)
+
 }
 
 // histWriteToDB(test); 
 // readAndWriteLastHour(); 
 // const testService = 'curriculum-api.codesmith.io'
 // readLastHour(testService); 
+
+module.exports = {constructHistorical, main, writeToDB}; 
