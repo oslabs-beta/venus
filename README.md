@@ -3,7 +3,7 @@
 <h1 align="center">
   <br>
   <br>
-A service Endpoint Monitoring Tool
+Self-Hosted Service Monitoring
 <br>
 <br>
 </h1>
