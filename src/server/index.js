@@ -30,7 +30,7 @@ main();
  */
 const jwt = require('jsonwebtoken');
 // jwt ACCESS token lifetime (in MINUTES)
-const access_token_lifetime = 5;
+const access_token_lifetime = 600;
 
 // jwt REFRESH token lifetime (in HOURS)
 const refresh_token_lifetime = 24;
@@ -94,7 +94,7 @@ async function sendData(socket){
     //Emit output to the front-end via websocket
     socket.emit('real-time-object', output); 
     
-    if(COUNT === 10){
+    if(COUNT === 5){
       //add output to buffer
       BUFFER.push(output[0]); 
       //Reset count to be zero
@@ -114,7 +114,7 @@ async function sendData(socket){
     
   } else {
 
-    if(COUNT === 60){
+    if(COUNT === 5){
       COUNT = 0; 
     }
     
