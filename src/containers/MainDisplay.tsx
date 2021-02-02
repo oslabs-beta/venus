@@ -55,7 +55,7 @@ function MainDisplay(): JSX.Element {
       <DynamicProvider>
         <Router>
           <Switch>
-            <Layout className="custom" hasSider={true}>
+            <Layout hasSider={true}>
               <Sider theme="light" style={{ position: "fixed" }}>
                 <Title level={2} className="title">
                   VENUS

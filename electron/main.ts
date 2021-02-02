@@ -2,14 +2,18 @@ import { app, BrowserWindow, Menu } from "electron";
 import * as path from "path";
 import * as url from "url";
 
+
+
 let mainWindow: Electron.BrowserWindow | null;
 const menu = Menu
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 768,
-    // maxWidth:1450,
-    // maxHeight:850,
+    width: 1372,
+    height: 833,
+    maxWidth: 1439,
+    maxHeight:990,
+    minWidth: 1372,
+    minHeight: 833,
     //  // this will give us our icon shown in the task bar or dock. This will also give you a small icon in the top left of your Windows app.
     // icon: __dirname + '/app/assets/img/icon.png',
     // darkTheme - Forces using dark theme for the window, only works on some GTK+3 desktop environments. Default is false.
@@ -28,7 +32,7 @@ function createWindow() {
 
   if (process.env.NODE_ENV === "development") {
     mainWindow.loadURL(`http://localhost:4000`);
-    mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
   } else {
     mainWindow.loadURL(
       url.format({

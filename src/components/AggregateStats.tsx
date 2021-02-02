@@ -7,6 +7,7 @@ import React from 'react'
 import Statistic from 'antd/es/statistic'
 import Card from 'antd/es/card'
 import Row from 'antd/es/row'
+import Space from 'antd/es/space';
 import Col from 'antd/es/col'
 
 
@@ -25,6 +26,7 @@ function AggregateStats(props: any): JSX.Element{
     return (
 	<div className="cardRow">
 	<Row gutter={32}>
+		<Space className="cardRow" direction="horizontal">
 				<Col span={4}>
 			<div className="aggregate">
 					<Card bordered={true} bodyStyle={{width: "190px"}} hoverable={true}>
@@ -65,7 +67,7 @@ function AggregateStats(props: any): JSX.Element{
 					</Card>
 					</div>
 				</Col>
-		<Col span={4}>
+				<Col span={4}>
 				<div className="aggregate">
 					<Card bordered={true} bodyStyle={{width: "190px"}} hoverable={true}>
 						<Statistic
@@ -106,7 +108,8 @@ function AggregateStats(props: any): JSX.Element{
 					</Card>
 					</div>
 				</Col>
-			</Row>
+			</Space>
+		</Row>
 	</div>
   )
 };
