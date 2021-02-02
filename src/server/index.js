@@ -31,7 +31,7 @@ let BUFFER = [];
 /**
  * JWT token logic
  */
-// const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 // jwt ACCESS token lifetime (in MINUTES)
 const access_token_lifetime = 5;
 
@@ -54,7 +54,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-// const io = socket(server); 
+const io = socket(server); 
 
 /**
  * socket.io "global handler" 
