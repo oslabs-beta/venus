@@ -11,7 +11,8 @@ require('dotenv').config({ path: require('find-config')('.env') })
 
 
 const SOCKET_PORT = 8080; 
-const EC2_HOST = process.env.EC2_HOST; 
+// const EC2_HOST = process.env.EC2_HOST; 
+const EC2_HOST = config.get('EC2_HOST'); 
 let COUNT = 0; 
 let BUFFER = []; 
 

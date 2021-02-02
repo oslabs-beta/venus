@@ -3,15 +3,20 @@ const Redis = require('ioredis');
 require('dotenv').config({ path: require('find-config')('.env') })
 
 //Name of stream we are reading from
-const STREAM_KEY = process.env.STREAM_KEY; 
+// const STREAM_KEY = process.env.STREAM_KEY; 
+const STREAM_KEY = config.get('STREAM_KEY'); 
 //Interval of the stream we are processing to determine the "real-time" statistics
-const INTERVAL = process.env.RT_INTERVAL;
+// const INTERVAL = process.env.RT_INTERVAL;
+const INTERVAL = config.get('RT_INTERVAL');
 //Rate at which we want to query the stream for data
-const PING_RATE = process.env.RT_PING_RATE; 
+// const PING_RATE = process.env.RT_PING_RATE; 
+const PING_RATE = config.get('RT_PING_RATE'); 
 //Where Redis is being hosted (either local machine or elasticache)
-const REDIS_HOST = process.env.REDIS_HOST; 
+// const REDIS_HOST = process.env.REDIS_HOST; 
+const REDIS_HOST = config.get('REDIS_HOST'); 
 //Which port Redis is connected to - usually 6379
-const REDIS_PORT = process.env.REDIS_PORT; 
+// const REDIS_PORT = process.env.REDIS_PORT; 
+const REDIS_PORT = config.get('REDIS_PORT'); 
 
 const redis = new Redis({
   port: 'venus-redis-micro.syohjt.ng.0001.use2.cache.amazonaws.com', 

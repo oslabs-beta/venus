@@ -5,6 +5,7 @@ require('dotenv').config();
 const pool = require('./db.js');
 
 //Name of stream we are reading from
+// const STREAM_KEY = process.env.STREAM_KEY; 
 const STREAM_KEY = process.env.STREAM_KEY; 
 //Interval of the stream we are processing to write to the database
 const INTERVAL = process.env.INTERVAL;
