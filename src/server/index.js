@@ -94,13 +94,13 @@ async function sendData(socket){
     //Emit output to the front-end via websocket
     socket.emit('real-time-object', output); 
     
-    if(COUNT === 5){
+    if(COUNT === 1){
       //add output to buffer
       BUFFER.push(output[0]); 
       //Reset count to be zero
       COUNT = 0; 
       
-      if(BUFFER.length === 5){
+      if(BUFFER.length === 3){
         
         console.log('WRITE TO DB TRIGGERED!'); 
 
@@ -114,7 +114,7 @@ async function sendData(socket){
     
   } else {
 
-    if(COUNT === 5){
+    if(COUNT === 1){
       COUNT = 0; 
     }
     
