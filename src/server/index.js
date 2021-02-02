@@ -1,7 +1,7 @@
 const express = require('express')
 const socket = require('socket.io'); 
-const bodyParser = require('body-parser'); 
-// const cors = require('cors'); 
+// const bodyParser = require('body-parser'); 
+const cors = require('cors'); 
 
 const app = express()
 const port = 3000
@@ -13,8 +13,8 @@ const authController = require('./controller.js')
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-// app.use(cors({origin: '*'})); 
-app.use(bodyParser); 
+app.use(cors({origin: '*'})); 
+// app.use(bodyParser); 
 
 
 
