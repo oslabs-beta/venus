@@ -1,6 +1,6 @@
 const { read } = require('fs');
 const Redis = require('ioredis');  
-require('dotenv').config();
+require('dotenv').config({ path: require('find-config')('.env') })
 
 //Name of stream we are reading from
 const STREAM_KEY = process.env.STREAM_KEY; 
@@ -19,7 +19,6 @@ const redis = new Redis({
 });
 
 console.log(`Reading the stream named ${STREAM_KEY}...`); 
-
   
 const readRedisStream = async () => {
 
