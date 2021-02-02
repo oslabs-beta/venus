@@ -94,7 +94,7 @@ async function sendData(socket){
     //Emit output to the front-end via websocket
     socket.emit('real-time-object', output); 
     
-    if(COUNT === 60){
+    if(COUNT === 10){
       //add output to buffer
       BUFFER.push(output[0]); 
       //Reset count to be zero
