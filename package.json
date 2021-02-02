@@ -18,7 +18,7 @@
     "client-test": "cross-env NODE_ENV=development nodemon wrapper/client-server.js"
   },
   "keywords": [],
-  "author": "elisealcala",
+  "author": "Venus",
   "license": "ISC",
   "build": {
     "files": [
@@ -26,8 +26,8 @@
       "node_modules/",
       "package.json"
     ],
-    "productName": "example",
-    "appId": "com.example.app",
+    "productName": "Venus",
+    "appId": "venus.app",
     "directories": {
       "output": "dist"
     }

@@ -3,37 +3,34 @@
  * @desc Child of ChartContainer, Displays drop down on 2nd page
 **/
 
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Select from 'antd/es/select';
 import { historicalContext } from '../contexts/historicalContext';
+import { dynamicContext } from '../contexts/dynamicContext';
 
-// const options: any[] = [
-//   'curriculum-api.codesmith.io', 'google.com', 'surfline.com'
-// ];
 
 function CardDropDown (props:any): JSX.Element{
   
+  let holder: string = 'aggregate'
+  const { serviceNames } = useContext(dynamicContext)
   const dropDownOptions: any[] =[];
-  for (let i = 0; i < props.services.length; i++){
+  for (let i = 0; i < serviceNames.length; i++){
     dropDownOptions.push(
-      <Select.Option value={props.services[i]} key={i}>{props.services[i]}</Select.Option>
+      <Select.Option value={props.services[i]} key={i}>{serviceNames[i]}</Select.Option>
     )
   }
   const { setService } = useContext(historicalContext)
-
 	function onChange(value:string) {
     console.log(value)
     // fetch request to route for data.
     // data is then brought into state and updated. otherwise, create a larger pool for an initial pull
     setService(value)
-    
-    
     }
     
 	function onSearch(val:any) {
 		console.log('search:', val);
-	}
-
+  }
+  
   return (
   <Select
     showSearch
