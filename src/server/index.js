@@ -137,13 +137,13 @@ async function sendData(socket){
 app.post('/login', (req, res) => {
   console.log('LOGIN BODY', req.body);
   console.log('ENV DATA', {
-    serverIP: SERVER_IP,
+    serverIP: `${EC2_HOST}`,
     secret: ACCESS_SECRET,
   });
   const { serverIP, secret } = req.body;
   // check against environment variables
   if (
-    serverIP === SERVER_IP
+    serverIP === EC2_HOST
     && secret === ACCESS_SECRET
   ) {
     // generate ACCESS token
