@@ -1,5 +1,6 @@
 const { read } = require('fs');
-const Redis = require('ioredis');  
+const Redis = require('ioredis'); 
+const config = require('config'); 
 require('dotenv').config({ path: require('find-config')('.env') })
 
 //Name of stream we are reading from

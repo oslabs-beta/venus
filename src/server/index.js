@@ -1,5 +1,6 @@
 const express = require('express'); 
 const socket = require('socket.io'); 
+const config = require('config');
 const bodyParser = require('body-parser'); 
 const cors = require('cors'); 
 const data = require('./data_analysis/rt-data.js'); 
