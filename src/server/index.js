@@ -7,6 +7,8 @@ const data = require('./data_analysis/rt-data.js');
 const { constructHistorical, main, writeToDB } = require('./data_analysis/historical-data-analysis.js'); 
 const redis = require('./redis_handlers/real-time-read-handler.js'); 
 const authController = require('./controller.js')
+const http = require('http'); 
+
 
 require('dotenv').config(); 
 
@@ -29,7 +31,7 @@ app.use(bodyParser);
 /**
  * JWT token logic
  */
-const jwt = require('jsonwebtoken');
+// const jwt = require('jsonwebtoken');
 // jwt ACCESS token lifetime (in MINUTES)
 const access_token_lifetime = 5;
 
