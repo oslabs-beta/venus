@@ -855,7 +855,7 @@ const readLastWeek = (input) => {
 
             returnObj['lastWeek']['response_time'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "service": row.service
+              "service": row.service,
               "value": row.response_time, 
             })
 
