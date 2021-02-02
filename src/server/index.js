@@ -7,7 +7,8 @@ const data = require('./data_analysis/rt-data.js');
 const { constructHistorical, main, writeToDB } = require('./data_analysis/historical-data-analysis.js'); 
 const redis = require('./redis_handlers/real-time-read-handler.js'); 
 const authController = require('./controller.js')
-const http = require('http'); 
+// const http = require('http'); 
+// const http = require('https'); 
 
 
 require('dotenv').config(); 
@@ -19,8 +20,9 @@ const EC2_HOST = process.env.EC2_HOST;
 let COUNT = 0; 
 let BUFFER = []; 
 
-console.log('http object', http); 
-console.log('http request', http.request()); 
+// console.log('http object', http); 
+// console.log('http request', http.request()); 
+// console.log('HTTPS request', https.request()); 
 
 const app = express(); 
 app.use(express.json());
