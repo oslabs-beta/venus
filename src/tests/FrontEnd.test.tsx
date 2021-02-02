@@ -1,8 +1,25 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import React from 'react';
 import { changeChildArr, changeData, IDataNode, test, IService, TreeNode} from "../charts/DataFuncDepGraph"
 import { DependencyGraph,treeData, getLinkComponent, LinkControls  } from '../charts/DependencyTree'
 import { SettingsContainer } from '../containers/ServiceSettingsContainer';
 
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation(query => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // Deprecated
+    removeListener: jest.fn(), // Deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
 
 // describes what the test is
 describe('jest testing is in progress', () => {
@@ -122,9 +139,26 @@ describe('Enzyme testing is in progress', () => {
 
 import { render } from "@testing-library/react";
 import { SignIn } from "../containers/SignInContainer";
-
+// import ReactDOM from "react-dom";
+// describe('enzyme test for react', () => {
+//   it(('checking the sign in', () => {
+//   const onCountChange = jest.fn();
+//   let wrapper;
+//   })
+//   beforeEach(() => {
+//     wrapper = mount(SignIn())
+//   })
+// })
+describe('button test', () => {
 it('expects button to be in SignIN component', () => {
-  const { queryByTestId } = render(SignIn());
+  const { queryByTestId } = render(<SignIn />);
   const addSignInButton = queryByTestId("signin-button");
   expect(addSignInButton).toBeInTheDocument();
 })
+})
+// import {App} from "../app.jsx";
+// it("renders without crashing", () => {
+//   const div = document.createElement("div");
+//   ReactDOM.render(SignIn(), div);
+//   ReactDOM.unmountComponentAtNode(div);
+// });

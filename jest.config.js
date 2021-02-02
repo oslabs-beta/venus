@@ -27,7 +27,9 @@ module.exports = {
     // "@testing-library/jest-dom/extend-expect"
   ],
   // https://jestjs.io/docs/en/configuration.html#transformignorepatterns-arraystring
-  "transformIgnorePatterns": ["node_modules/(?!(.*antd/es)/)"]
+  "transformIgnorePatterns": [
+    "/node_modules/(?!antd|@ant-design|rc-.+?|@babel/runtime).+(js|jsx)$"
+  ]
   // Module file extensions for importing
   // moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"]
 };
