@@ -1,15 +1,12 @@
 # Venus
-
-<h1 align="center">
-  <br>
-  <br>
+<br>
+<br>
+<h2>
 Self-Hosted Service Monitoring
-<br>
-<br>
-</h1>
+</h2>
 
-<h4 align="center">Venus is a lightweight, self-hosted service monitoring tool that provides customizable, real-time and historical data on critical health metrics of service dependencies.
-</h4>
+Venus is a lightweight, self-hosted service monitoring tool that provides customizable, real-time and historical data on critical health metrics of service dependencies.
+<
 
 // include links here
 <br>
