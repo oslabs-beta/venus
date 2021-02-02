@@ -165,11 +165,11 @@ describe('checking signin component', () => {
       expect(addSignInButton).toBeInTheDocument();
     })
 
-    it('expects signin form to be in SignIn component', () => {
-      const { queryByTestId } = render(<SignIn />);
-      const addSignInButton = queryByTestId("signin-form");
-      expect(addSignInButton).prop('label').toHaveProperty('secret');
-    })
+    // it('expects signin form to be in SignIn component', () => {
+    //   const { queryByTestId } = render(<SignIn />);
+    //   const addSignInButton = queryByTestId("signin-form");
+    //   expect(addSignInButton).prop('label').toHaveProperty('secret');
+    // })
   })
 })
 // import {App} from "../app.jsx";
