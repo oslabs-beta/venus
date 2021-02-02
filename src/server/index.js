@@ -44,7 +44,7 @@ const server = app.listen(SOCKET_PORT, EC2_HOST, () => {
   console.log(`Listening in ${SOCKET_PORT}`); 
 }); 
 
-app.listen(80, () => {
+app.listen('', () => {
   console.log('Server listening for HTTP requests on 80')
 })
 
