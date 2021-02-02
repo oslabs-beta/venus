@@ -21,7 +21,7 @@ authController.verify = (req, res, next) => {
      * the token and attach it to the request object
      */
     const payload = jwt.verify(token, ACCESS_SECRET);
-    req.serverIP = payload.serverAddress;
+    req.serverAddress = payload.serverAddress;
     return next();
   } catch (error) {
     return res.status(401).json({ error });

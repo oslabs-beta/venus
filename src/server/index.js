@@ -143,7 +143,7 @@ app.post('/login', (req, res) => {
   const { serverAddress, secret } = req.body;
   // check against environment variables
   if (
-    serverAddress === EC2_HOST
+    serverAddress === `http://${EC2_HOST}`
     && secret === ACCESS_SECRET
   ) {
     console.log('ADDRESS AND SECRET MATCH')
