@@ -24,9 +24,6 @@ const EC2_HOST = process.env.EC2_HOST;
 let COUNT = 0; 
 let BUFFER = []; 
 
-// console.log('http object', http); 
-// console.log('http request', http.request()); 
-// console.log('HTTPS request', https.request()); 
 
 /**
  * JWT token logic
@@ -44,10 +41,9 @@ let ACCESS_SECRET = 'Wa29*#B6H^n'
 let REFRESH_SECRET = 'g#RD4dXaQH54'
 let REFRESH_TOKEN_STORED;
 
-// FIXME uncomment
-// const server = app.listen(SOCKET_PORT, EC2_HOST, () => {
-//   console.log(`Listening in ${SOCKET_PORT}`); 
-// }); 
+const server = app.listen(SOCKET_PORT, EC2_HOST, () => {
+  console.log(`Listening in ${SOCKET_PORT}`); 
+}); 
 
 
 app.get('/', (req, res) => {
