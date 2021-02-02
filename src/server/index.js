@@ -17,8 +17,12 @@ const EC2_HOST = process.env.EC2_HOST;
 let COUNT = 0; 
 let BUFFER = []; 
 
+console.log('http object', http); 
+console.log('http request', http.request()); 
 
 const app = express(); 
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 app.use(cors({origin: '*'})); 
 app.use(bodyParser); 
 
@@ -44,12 +48,12 @@ let REFRESH_TOKEN_STORED;
 //   console.log(`Listening in ${SOCKET_PORT}`); 
 // }); 
 
-app.listen(3000, () => {
-  console.log('Server listening for HTTP requests on 3000')
-})
-
 app.get('/hello', (req, res) => {
   res.send('hello!'); 
+})
+
+app.listen( 3000, () => {
+  console.log('Server listening for HTTP requests on 3000')
 })
 
 // const io = socket(server); 
