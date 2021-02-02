@@ -1,9 +1,9 @@
-const express = require('express')
+const express = require('express'); 
 const socket = require('socket.io'); 
 const cors = require('cors'); 
 
-const app = express()
-const port = 3000
+const app = express(); 
+const HTTP_PORT = 3000; 
 
 const data = require('./data_analysis/rt-data.js'); 
 const { constructHistorical, main, writeToDB } = require('./data_analysis/historical-data-analysis.js'); 
@@ -137,19 +137,19 @@ async function sendData(socket){
 app.post('/login', (req, res) => {
   console.log('LOGIN BODY', req.body);
   console.log('ENV DATA', {
-    serverIP: `${EC2_HOST}`,
+    serverAddress: `${EC2_HOST}:${HTTP_PORT}`,
     secret: ACCESS_SECRET,
   });
-  const { serverIP, secret } = req.body;
+  const { serverAddress, secret } = req.body;
   // check against environment variables
   if (
-    serverIP === EC2_HOST
+    serverAddress === EC2_HOST
     && secret === ACCESS_SECRET
   ) {
     // generate ACCESS token
     const accessToken = jwt.sign(
       {
-        serverIP,
+        serverAddress,
       },
       secret,
       {
@@ -160,7 +160,7 @@ app.post('/login', (req, res) => {
     // generate REFRESH token
     const refreshToken = jwt.sign(
       {
-        serverIP,
+        serverAddress,
       },
       REFRESH_SECRET,
       {
@@ -204,7 +204,7 @@ app.post('/refresh_token', (req, res) => {
   const payload = jwt.verify(REFRESH_TOKEN_STORED, REFRESH_SECRET);
   const accessToken = jwt.sign(
     {
-      serverIP: payload,
+      serverAddress: payload,
     },
     ACCESS_SECRET,
     {
@@ -229,8 +229,8 @@ app.get('/getHistorical',
 
 
 
-app.listen(port, () => {
-  console.log(`HTTP requests listening on port ${port}`)
+app.listen(HTTP_PORT, () => {
+  console.log(`HTTP requests listening on port ${HTTP_PORT}`)
 })
 
 
