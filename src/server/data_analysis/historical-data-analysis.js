@@ -19,8 +19,8 @@ const client = new Client({
   host: 'rds-proxy-aurora-postgres.proxy-czysdiigcqcb.us-east-2.rds.amazonaws.com', 
   database: 'postgres', 
   password: 'lalalalovesong!', 
-  // port: process.env.DB_PORT
-  port: config.get('DB_PORT')
+  port: process.env.DB_PORT
+  // port: config.get('DB_PORT')
 })
 
 client.connect();
