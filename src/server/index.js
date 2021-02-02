@@ -8,7 +8,7 @@ const { constructHistorical, main, writeToDB } = require('./data_analysis/histor
 const redis = require('./redis_handlers/real-time-read-handler.js'); 
 const authController = require('./controller.js')
 
-require('dotenv').config({ path: require('find-config')('.env') })
+require('dotenv').config(); 
 
 
 const SOCKET_PORT = 8080; 
