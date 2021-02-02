@@ -6,20 +6,6 @@ A self-hosted service monitoring tool for growing projects.
 
 Venus is a lightweight, self-hosted service monitoring tool that provides customizable, real-time and historical data on critical health metrics of service dependencies.
 
-## Technical Overview
-* Electron
-* TypeScript
-* React
-* React Router
-* AWS (Elasticache, EC2, RDS)
-* PostgreSQL
-* Redis 
-* Websockets
-* Danfo.js
-* Express
-* Ant Design
-* Ant Design Charting Libraries 
-* Visx / D3
 
 ## Motivation
 
@@ -34,7 +20,7 @@ As architectures shift more towards distributed and cloud based systems, the nee
 * Server side authentication for secure storage and distribution of analytics. 
 * Secure Session authentication.
 
-## Brief Overview of the Venus Orbit 
+## A Brief Overview of the Venus Orbit 
 
 -- Insert flow chart of data. 
 
@@ -51,23 +37,36 @@ There are three key phases of The Venus Orbit:
 
 
 
-## Getting Started
+## Getting Started With Venus 
+1. 
+
+# Configuring the Agent with Node.js and AWS Elasticache.
 
 ```
 git clone https://github.com/oslabs-beta/venus.git
 ```
+
+# Spinning up the Venus Electron Interface
 
 Within the Venus parent directory:
 ```
 npm install
 ```
 
-## Development
-
-
-### Client
-Venus is an Electron cross platform desktop app. It is built with React. For Venus to fully function, it most be configured with AWS Elasticache and EC2. Please review documentation below for setup specifications.  
-
+## Technical Overview
+* Electron
+* TypeScript
+* React
+* React Router
+* AWS (Elasticache, EC2, RDS)
+* PostgreSQL
+* Redis 
+* Websockets
+* Danfo.js
+* Express
+* Ant Design
+* Ant Design Charting Libraries 
+* Visx / D3
 
 ## Potential for Improvement
 * The addition of Metrics for dynamic and historic data.
