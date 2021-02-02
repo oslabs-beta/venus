@@ -61,6 +61,7 @@ io.use(function (socket, next) {
   if (socket.handshake.query && socket.handshake.query.accessToken) {
       console.log('SUCCESSFUL TOKEN HANDSHAKE')
       jwt.verify(socket.handshake.query.accessToken, ACCESS_SECRET, (err, decoded) => {
+        console.log('VERIFIED!')
         if (err) return next(new Error('Token authentication error!'))
         socket.emit('')
         socket.decoded = decoded;
@@ -76,16 +77,11 @@ io.sockets.on('connection', (socket) => {
   sendData(socket); 
 })
 
-io.sockets.on('connection', (socket) => {
-  console.log(`New connection: ${socket.id}`); 
-  sendData(socket); 
-})
-
 async function sendData(socket){
   //Increment count everytime sendData is invoked. 
   COUNT++; 
   
-//   //Read last three minutes of log data from stream and store into an array of objects
+//Read last three minutes of log data from stream and store into an array of objects
   const streamData = await redis.readRedisStream();
   
   if(streamData.length !== 0){
