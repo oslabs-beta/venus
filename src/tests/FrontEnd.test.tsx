@@ -149,29 +149,44 @@ import { SignIn } from "../containers/SignInContainer";
 //     wrapper = mount(SignIn())
 //   })
 // })
-describe('checking signin component', () => {
-  describe('button test', () => {
+
+
+  describe('checking sign in container', () => {
+    it('expects secret form to be in SignIn component', () => {
+      const { queryByTestId } = render(<SignIn />);
+      const addSignInButton = queryByTestId("secret-form");
+      expect(addSignInButton).toBeInTheDocument();
+    })
+
+    it('expects server IP form to be in SignIn component', () => {
+      const { queryByTestId } = render(<SignIn />);
+      const addSignInButton = queryByTestId("serverIP-form");
+      expect(addSignInButton).toBeInTheDocument();
+    })
+
     it('expects button to be in SignIn component', () => {
       const { queryByTestId } = render(<SignIn />);
       const addSignInButton = queryByTestId("signin-button");
       expect(addSignInButton).toBeInTheDocument();
-    })
-  })
+    })     
 
-  describe('sign in form', () => {
-    it('expects signin form to be in SignIn component', () => {
-      const { queryByTestId } = render(<SignIn />);
-      const addSignInButton = queryByTestId("signin-form");
-      expect(addSignInButton).toBeInTheDocument();
-    })
 
-    // it('expects signin form to be in SignIn component', () => {
-    //   const { queryByTestId } = render(<SignIn />);
-    //   const addSignInButton = queryByTestId("signin-form");
-    //   expect(addSignInButton).prop('label').toHaveProperty('secret');
-    // })
   })
-})
+  
+// it("App loads with initial state of 0", () => {
+//   const { container } = render(<SignIn />);
+//   const countValue = getByTestId(container, "secret-form");
+//   expect(countValue.textContent).toBe("0");
+// });
+
+// describe('checking service settings container', () => {
+//     it('expects button to be in SignIn component', () => {
+//       const { queryByTestId } = render(<SettingsContainer />);
+//       const addReactComponent = queryById("dashboard");
+//       expect(addReactComponent).toBeInTheDocument();
+//     })
+// })
+
 // import {App} from "../app.jsx";
 // it("renders without crashing", () => {
 //   const div = document.createElement("div");

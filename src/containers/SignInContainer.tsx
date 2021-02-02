@@ -42,11 +42,13 @@ function SignIn():JSX.Element {
         >
         <Form
           {...layout}
+          data-testid="Login-form"
           name="Login"
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}>
           <Form.Item
+            data-testid="serverIP-form"
             label="Server Address"
             name="serverIP"
             rules={[{ required: true, message: 'Please enter valid Server Address.' }]}
@@ -54,7 +56,7 @@ function SignIn():JSX.Element {
             <Input placeholder="Enter Server Address"/>
           </Form.Item>
           <Form.Item
-            data-testid="signin-form"
+            data-testid="secret-form"
             label="Secret"
             name="secret"
             rules={[{ required: true, message: 'Please enter valid Secret.' }]}
