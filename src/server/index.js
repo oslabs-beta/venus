@@ -63,7 +63,8 @@ io.use(function (socket, next) {
       jwt.verify(socket.handshake.query.accessToken, ACCESS_SECRET, (err, decoded) => {
         console.log('VERIFIED!')
         if (err) return next(new Error('Token authentication error!'))
-        socket.emit('')
+        // socket.emit('')
+        socket.emit('connection', 'connected!'); 
         socket.decoded = decoded;
         return next();
       });
@@ -213,8 +214,6 @@ app.post('/refresh_token', (req, res) => {
   );
   return res.json({ accessToken });
 });
-
-
 
 
 app.get('/getHistorical', 
