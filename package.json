@@ -15,7 +15,7 @@
     "test": "jest",
     "test:e2e": "./node_modules/mocha/bin/mocha src/tests/spectronTest.js",
     "rt": "node src/server/real-time-read-handler.js",
-    "client-test": "cross-env NODE_ENV=development nodemon wrapper/client-server.js",
+    "client-test": "cross-env NODE_ENV=development nodemon src/server/index.js",
     "server-test": "cross-env NODE_ENV=production nodemon src/server/index.js"
   },
   "keywords": [],
