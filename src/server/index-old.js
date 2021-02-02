@@ -23,11 +23,7 @@ let BUFFER = [];
 // console.log('http request', http.request()); 
 // console.log('HTTPS request', https.request()); 
 
-const app = express(); 
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-app.use(cors({origin: '*'})); 
-app.use(bodyParser); 
+
 
 /**
  * JWT token logic
