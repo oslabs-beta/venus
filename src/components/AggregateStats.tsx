@@ -1,7 +1,7 @@
 /**
  * @name AggregateStats
- * @desc Child of Dashboard (no children), Indiviual Service Card showing aggregate stats of 
- * particular service
+ * @desc Child container rendered in DependencyGraph, ChartContainer, ServiceSettingsContainer, and Dashboard.
+ *  Service cards that render on top of each page, displaying Aggregate stats of application
  */
 import React from 'react'
 import Statistic from 'antd/es/statistic'

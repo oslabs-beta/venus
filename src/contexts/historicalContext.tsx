@@ -1,3 +1,7 @@
+/**
+ * @name historicalContext
+ * @desc Context that dynamically updates all historicalData within specific time frame.
+ */
 import React, { useState } from 'react'; 
 
 type historicalState = {

@@ -1,3 +1,9 @@
+/**
+ * @name DependencyTree
+ * @desc Visual dependency tree that renders when Depenedency Graph tab is selected. Complete display of interconnectivity of application and
+ * its endpoints. Child component of DependencyGraphContainer.
+ * 
+ */
 
 import React, { useState } from "react";
 import { Group } from "@visx/group";
@@ -48,9 +54,11 @@ function LinkControls({
   setLinkType,
   setStepPercent
 }: Props) {
+
   function handleChangeLayout(value) {
     setLayout(value);
   }
+
   function LayoutSelect(): any {
     return (
       <Select
@@ -67,6 +75,7 @@ function LinkControls({
   function handleChangeOrientation(value) {
     setOrientation(value);
   }
+
   function OrientationSelect(): any {
     return (
       <Select

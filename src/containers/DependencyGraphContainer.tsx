@@ -1,6 +1,10 @@
+/**
+ * @name DependencyGraphContainer
+ * @desc Parent container that holds both Aggregate stats and DependencyTree
+ */
 import React, { useContext, useEffect,} from 'react';
 import Card from 'antd/es/card';
-import { DependencyGraph} from '../charts/DependencyTree'
+import { DependencyGraph } from '../charts/DependencyTree'
 import { AggregateStats } from '../components/AggregateStats';
 import { dynamicContext } from '../contexts/dynamicContext';
 import Divider from 'antd/es/divider';

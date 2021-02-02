@@ -1,6 +1,6 @@
 /**
  * @name CardDropDown
- * @desc Child of ChartContainer, Displays drop down on 2nd page
+ * @desc Child of ChartContainer, Displays drop down menu where user can select from available services
 **/
 
 import React, { useContext } from 'react'
@@ -26,8 +26,6 @@ function CardDropDown (props:any): JSX.Element{
     // fetch request to route for data.
     // data is then brought into state and updated. otherwise, create a larger pool for an initial pull
     setService(value)
-    
-    
     }
     
 	function onSearch(val:any) {

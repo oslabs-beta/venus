@@ -1,7 +1,6 @@
 /**
  * @name Dashboard
- * @desc Right-hand side of the Main Display.  Dashboard that displays services and corresponding data.
- * The parent container for Aggregate Data and Chart Container.
+ * @desc Current Status page that immediately renders when user signs in. Parent container to aggregate stats
  */
 
 import { io } from "socket.io-client";

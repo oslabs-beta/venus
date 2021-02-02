@@ -1,4 +1,7 @@
-
+/**
+ * @name AvailabilityChart
+ * @desc Chart that renders historical statistics for availability on the Historical Status tab. Child component of ChartContainer
+ */
 import React, { useState, useEffect, useContext } from 'react';
 import Line from'@ant-design/charts/es/line';
 import { historicalContext } from '../contexts/historicalContext';     

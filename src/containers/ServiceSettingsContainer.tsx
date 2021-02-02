@@ -1,7 +1,7 @@
 /**
- * @name Dashboard
- * @desc Right-hand side of the Main Display.  Dashboard that displays services and corresponding data.
- * The parent container for Aggregate Data, Service Container, and Chart Container.
+ * @name ServiceSettingsContainer
+ * @desc Displays service threshold settings where user can customize display based on threshold parameters
+ * Parent Container to aggregate stats displayed on top of page.
  */
 
 import React, { useContext, } from "react";
@@ -17,7 +17,7 @@ function SettingsContainer(): JSX.Element {
   const { services, setServices, aggregate, setAggregate } = useContext(dynamicContext);
 
   return (
-    <div id="dashboard">
+    <div id="chartContainer">
       <AggregateStats
         error={aggregate.error}
         response_time={aggregate.response_time}
