@@ -219,7 +219,7 @@ app.get('/getHistorical',
     return res.json(output); 
 })
 
-app.post('/hello', (req, res) => {
+app.get('/', (req, res) => {
   res.send('hello!'); 
 })
 
