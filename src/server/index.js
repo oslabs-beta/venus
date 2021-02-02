@@ -11,7 +11,6 @@ const { constructHistorical, main, writeToDB } = require('./data_analysis/histor
 const redis = require('./redis_handlers/real-time-read-handler.js'); 
 const authController = require('./controller.js')
 
-const app = express(); 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors({origin: '*'})); 
