@@ -87,3 +87,5 @@ Will Bladon
 Justin Cohen 
 
 ## License
+
+Venus is <a href="#"><img src="./app/assets/mit-logo-color.png" alt="MIT" title="MIT" align="center" height="20" /></a> [licensed.]
