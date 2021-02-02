@@ -100,7 +100,7 @@ async function sendData(socket){
       //Reset count to be zero
       COUNT = 0; 
       
-      if(BUFFER.length === 20){
+      if(BUFFER.length === 5){
         
         console.log('WRITE TO DB TRIGGERED!'); 
 
