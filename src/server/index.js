@@ -44,8 +44,8 @@ const server = app.listen(SOCKET_PORT, EC2_HOST, () => {
   console.log(`Listening in ${SOCKET_PORT}`); 
 }); 
 
-app.listen(0, () => {
-  console.log('Server listening for HTTP requests on 80')
+app.listen(3000, () => {
+  console.log('Server listening for HTTP requests on 3000')
 })
 
 const io = socket(server); 
