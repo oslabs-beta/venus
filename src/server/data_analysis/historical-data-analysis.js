@@ -1,5 +1,6 @@
 const dfd = require('danfojs-node');
 const { Client, Pool } = require('pg');
+const config = require('config');
 require('dotenv').config();
 
 //Specify table names
