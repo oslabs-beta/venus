@@ -1,7 +1,7 @@
 /**
  * @name Dashboard
  * @desc Right-hand side of the Main Display.  Dashboard that displays services and corresponding data.
- * The parent container for Aggregate Data and Chart Container.
+ * The parent container for Aggregate Data and Table.
  */
 import { io } from "socket.io-client";
 import React, { useContext, useEffect } from "react";
@@ -14,9 +14,10 @@ import { globalContext } from "../contexts/globalContext"
 import { dynamicContext } from "../contexts/dynamicContext";
 import Title from "antd/es/typography/Title";
 
-// ec2-3-15-29-241.us-east-2.compute.amazonaws.com:8080
+
 function Dashboard(): JSX.Element {
   
+  //imported dynamic context services for conditional rendering of real time data. 
   const { services, setServices, aggregate, setAggregate, filter, setFilter, serviceThresholds, serviceNames, setServiceNames } = useContext(dynamicContext);
   const { serverAddress } = useContext(globalContext)
   const dataSource: any = [];
@@ -27,9 +28,12 @@ function Dashboard(): JSX.Element {
     // const socket:any = io(serverAddress + ':8080', {
     //   transports: ["websocket"],
     // });
+    // console.log('in console')
     // socket.on("connection", () => {
     //   console.log(socket.id);
+    //   console.log('connected')
     // });
+    // console.log('past connection req')
     // socket.on("real-time-object", (output: any) => {
     //   console.log("new update");
     //   console.log(output)
@@ -38,6 +42,7 @@ function Dashboard(): JSX.Element {
     //   setServices(newData.services);
     //   console.log(newData.aggregate);
     //   console.log(newData.services, 'services');
+    //   console.log('test')
     // });
     setServices([
       {
@@ -197,7 +202,6 @@ function Dashboard(): JSX.Element {
         if (baseline.availability_threshold > services[i].availability) ++status
         services[i].status = status
         dataSource.push(services[i]);
-        
       }
     }
     setServiceNames(serviceNames)

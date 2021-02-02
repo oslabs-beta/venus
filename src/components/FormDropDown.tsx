@@ -7,18 +7,21 @@ import React, { useContext } from 'react'
 import Select from 'antd/es/select';
 import { dynamicContext } from '../contexts/dynamicContext';
 
+
 const options: any[] = [
   'ALL METHODS','GET', 'POST', 'PATCH', 'DELETE', 
 ];
-const dropDownOptions: any[] =[];
-for (let i = 0; i < options.length; i++){
-  dropDownOptions.push(
-    <Select.Option value={options[i]} key={i}>{options[i]}</Select.Option>
-  )
-}
 
 function FormDropDown (props:any): JSX.Element{
-
+  console.log(props.record.byMethod)
+  
+  let methods: string[] = Object.keys(props.record.byMethod)
+    const dropDownOptions: any[] =[];
+    for (let i = 0; i < methods.length; i++){
+    dropDownOptions.push(
+      <Select.Option value={methods[i]} key={i}>{methods[i]}</Select.Option>
+    )
+  }
   const { filter, setFilter } = useContext(dynamicContext)
   
 	function onChange(value:string ) {
