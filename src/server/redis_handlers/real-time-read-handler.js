@@ -20,8 +20,8 @@ const REDIS_PORT = process.env.REDIS_PORT;
 // const REDIS_PORT = config.get('REDIS_PORT'); 
 
 const redis = new Redis({
-  port: 'venus-redis-micro.syohjt.ng.0001.use2.cache.amazonaws.com', 
-  host: 6379
+  host: process.env.REDIS_HOST, 
+  port: process.env.REDIS_PORT
 });
 
 console.log(`Reading the stream named ${STREAM_KEY}...`); 
