@@ -50,6 +50,15 @@ There are three key phases of The Venus Orbit:
 
 ## Getting Started
 
+```
+git clone https://github.com/oslabs-beta/venus.git
+```
+
+Within the Venus parent directory:
+```
+npm install
+```
+
 ## Development
 
 
