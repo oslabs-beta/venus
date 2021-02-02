@@ -201,12 +201,12 @@ const rtData = data => {
       consolidatedObj.services[hostIndex].byMethod[method] = methodLvlObj;
     });
   });
-  const consolidatedObjStringify = JSON.stringify(consolidatedObj);
-  const dependencyObjStringify = JSON.stringify(dependencyObj);
+  // const consolidatedObjStringify = JSON.stringify(consolidatedObj);
+  // const dependencyObjStringify = JSON.stringify(dependencyObj);
   // return both stringified objects as array elements
   console.log(consolidatedObj);
   console.log(dependencyObj);
-  return [consolidatedObjStringify, dependencyObjStringify];
+  return [consolidatedObj, dependencyObj];
 };
 
 // rtData(responseData);
