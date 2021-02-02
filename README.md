@@ -1,6 +1,6 @@
 # Venus
 
-Self-Hosted Service Monitoring
+A self-hosted service monitoring tool for growing projects. 
 
 ## Description
 
@@ -14,7 +14,19 @@ As architectures shift more towards distributed and cloud based systems, the nee
 ## Features
 * Real-time rolling averages on service specific KPIs including Availability, Response Time, Load, and Response Error.
 * Service specific KPI threshold settings for quick glance report cards.
-* 
+* Historic panel data on KPI statistics for Past Hour, Past Day, Past Week, Past Month intervals.
+* Real-time dependency graph visualizer that maps service structure and statistics. 
+* Server side authentication for secure storage and distribution of analytics. 
+
+## The Venus Orbit 
+
+-- Insert flow chart of data. 
+
+
+There are three key phases of Venus' Orbit:
+
+- Deployment
+
 
 ## Getting Started
 
