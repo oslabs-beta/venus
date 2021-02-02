@@ -215,6 +215,9 @@ app.get('/getHistorical',
     return res.json(output); 
 })
 
+app.post('/hello', (req, res) => {
+  res.send('hello!'); 
+})
 
 
 
