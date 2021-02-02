@@ -20,7 +20,6 @@ const client = new Client({
   database: 'postgres', 
   password: 'lalalalovesong!', 
   port: process.env.DB_PORT
-  // port: config.get('DB_PORT')
 })
 
 client.connect();
@@ -1031,6 +1030,7 @@ const constructHistorical = async (input) => {
   obj['lastDay'] = await readLastDay(input); 
   obj['lastWeek'] = await readLastWeek(input); 
   obj['lastMonth'] = await readLastMonth(input); 
+  
   return obj; 
 }
 

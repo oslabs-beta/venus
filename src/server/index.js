@@ -14,8 +14,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors({origin: '*'})); 
 
-
-
 require('dotenv').config(); 
 
 const SOCKET_PORT = 8080; 
@@ -24,6 +22,8 @@ const EC2_HOST = process.env.EC2_HOST;
 let COUNT = 0; 
 let BUFFER = []; 
 
+//Trigger historical writes in database
+main(); 
 
 /**
  * JWT token logic
@@ -81,6 +81,8 @@ io.sockets.on('connection', (socket) => {
 async function sendData(socket){
   //Increment count everytime sendData is invoked. 
   COUNT++; 
+  console.log('COUNT:', COUNT); 
+  console.log('BUFFER:', BUFFER); 
   
 //Read last three minutes of log data from stream and store into an array of objects
   const streamData = await redis.readRedisStream();
@@ -100,6 +102,8 @@ async function sendData(socket){
       
       if(BUFFER.length === 20){
         
+        console.log('WRITE TO DB TRIGGERED!'); 
+
         //pass buffer into historical data analysis
         writeToDB(BUFFER); 
         
@@ -225,12 +229,6 @@ app.get('/getHistorical',
 })
 
 
-
 app.listen(HTTP_PORT, () => {
   console.log(`HTTP requests listening on port ${HTTP_PORT}`)
 })
-
-
-
-
-
