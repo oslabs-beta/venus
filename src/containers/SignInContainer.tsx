@@ -54,6 +54,7 @@ function SignIn():JSX.Element {
             <Input placeholder="Enter Server Address"/>
           </Form.Item>
           <Form.Item
+            data-testid="signin-form"
             label="Secret"
             name="secret"
             rules={[{ required: true, message: 'Please enter valid Secret.' }]}

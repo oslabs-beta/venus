@@ -149,12 +149,28 @@ import { SignIn } from "../containers/SignInContainer";
 //     wrapper = mount(SignIn())
 //   })
 // })
-describe('button test', () => {
-it('expects button to be in SignIN component', () => {
-  const { queryByTestId } = render(<SignIn />);
-  const addSignInButton = queryByTestId("signin-button");
-  expect(addSignInButton).toBeInTheDocument();
-})
+describe('checking signin component', () => {
+  describe('button test', () => {
+    it('expects button to be in SignIn component', () => {
+      const { queryByTestId } = render(<SignIn />);
+      const addSignInButton = queryByTestId("signin-button");
+      expect(addSignInButton).toBeInTheDocument();
+    })
+  })
+
+  describe('sign in form', () => {
+    it('expects signin form to be in SignIn component', () => {
+      const { queryByTestId } = render(<SignIn />);
+      const addSignInButton = queryByTestId("signin-form");
+      expect(addSignInButton).toBeInTheDocument();
+    })
+
+    it('expects signin form to be in SignIn component', () => {
+      const { queryByTestId } = render(<SignIn />);
+      const addSignInButton = queryByTestId("signin-form");
+      expect(addSignInButton).prop('label').toHaveProperty('secret');
+    })
+  })
 })
 // import {App} from "../app.jsx";
 // it("renders without crashing", () => {
