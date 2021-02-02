@@ -146,6 +146,7 @@ app.post('/login', (req, res) => {
     serverAddress === EC2_HOST
     && secret === ACCESS_SECRET
   ) {
+    console.log('ADDRESS AND SECRET MATCH')
     // generate ACCESS token
     const accessToken = jwt.sign(
       {
@@ -187,6 +188,7 @@ app.post('/login', (req, res) => {
  * Access token.
  */
 app.post('/refresh_token', (req, res) => {
+  console.log('REFRESH TOKEN HANDLER INVOKED')
   const { refreshToken } = req.body;
   // check if refreshToken was included in body
   if (!refreshToken) {
