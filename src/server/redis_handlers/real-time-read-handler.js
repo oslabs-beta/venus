@@ -102,9 +102,3 @@ const readRedisStream = async () => {
 }
 
 exports.readRedisStream = readRedisStream; 
-
-// try {
-//   setInterval(async () => { await readRedisStream()}, PING_RATE); 
-// } catch (e) {
-//   console.error(e); 
-// }
