@@ -18,10 +18,9 @@ import Menu from "antd/es/menu";
 import Layout from "antd/es/layout";
 import Modal from "antd/es/modal";
 import Button from "antd/es/button";
-
 const { Title } = Typography;
-const { Footer, Sider, Content } = Layout;
-const { SubMenu } = Menu;
+const { Sider, Content } = Layout;
+
 
 function MainDisplay(): JSX.Element {
   const { verification, setVerification } = useContext(globalContext);

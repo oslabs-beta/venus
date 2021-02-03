@@ -24,7 +24,7 @@ interface IDataNode {
 const test: IDataNode = {
     services: [
         {
-            service: 'gogle api',
+            service: 'gewgul api',
             status: 'good',
             load: '1.00 hpm',
             response_time:1266,
