@@ -111,7 +111,7 @@ function LinkControls({
       {linkType === "step" && layout !== "polar" && (
         <>
           &nbsp;&nbsp;
-          <label>step:</label>&nbsp;
+          {/* <label>step:</label>&nbsp;
           <input
             onClick={(e) => e.stopPropagation()}
             type="range"
@@ -121,7 +121,7 @@ function LinkControls({
             onChange={(e) => setStepPercent(Number(e.target.value))}
             value={stepPercent}
             disabled={linkType !== "step" || layout === "polar"}
-          />
+          /> */}
         </>
       )}
       <br />
@@ -309,9 +309,9 @@ function DependencyGraph({
                       {node.depth !== 0 && (
                         <rect
                           height={height}
-                          width={node.data.children ? "20%" : "10%"}
+                          width={node.data.children ? "24%" : "10%"}
                           y={-height / 2}
-                          x={node.data.children ? -(width-40) / 2 : -(width-100) / 2}
+                          x={node.data.children ? -(width-18) / 2 : -(width-100) / 2}
                           // fill of individual node boxes
                           fill={changeChildren}
                           // change border here ------------
