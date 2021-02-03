@@ -1,5 +1,10 @@
+/**
+ * @name SignInContainer
+ * @desc Component that renders to the page upon initial load of application for user to sign in
+ * 
+ */
+
 import React, { useContext, useState } from "react";
-// import data from '../../session_storage/storage.json'
 import { globalContext } from '../contexts/globalContext' 
 import Form from 'antd/es/form';
 import Input from 'antd/es/input';
@@ -12,14 +17,8 @@ const { Title } = Typography;
 function SignIn():JSX.Element {
   const { verification, setVerification, setServerAddress, } = useContext(globalContext)
   const onFinish = (values: any) => {
-
-    // create get request here to ratify the tokenization process. 
-    // currently compares to a local json file. 
-    // commmit token to local state.
-    // if(data[values.serverIP]){
       setServerAddress(values.serverIP)
       setVerification(true)
-    // } 
   }
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);

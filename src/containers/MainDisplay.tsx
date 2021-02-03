@@ -1,6 +1,6 @@
 /**
  * @name MainDisplay
- * @desc Highest component in hierarchy that displays both Navigation Bar and Dashboard
+ * @desc Highest component in hierarchy that holds Dashboard, DependencyGraphContainer, ChartContainer, and ServiceSettingsContainer
  **/
 
 import React, { useContext, useState } from "react";
@@ -55,7 +55,7 @@ function MainDisplay(): JSX.Element {
       <DynamicProvider>
         <Router>
           <Switch>
-            <Layout className="custom" hasSider={true}>
+            <Layout hasSider={true}>
               <Sider theme="light" style={{ position: "fixed" }}>
                 <Title level={2} className="title">
                   VENUS

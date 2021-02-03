@@ -1,3 +1,7 @@
+/**
+ * @name dynamicContext
+ * @desc Component that broadcasts a live stream of data so its subscribers can listen and apply real-time state changes via Context API
+ */
 import React, { useState } from 'react'; 
 
 type dynamicState = {

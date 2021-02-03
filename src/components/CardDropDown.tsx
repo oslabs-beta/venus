@@ -1,6 +1,6 @@
 /**
  * @name CardDropDown
- * @desc Child of ChartContainer, Displays drop down on 2nd page
+ * @desc Child of ChartContainer, Displays drop down menu where user can select from available services
 **/
 
 import React, { useContext, useEffect } from 'react'

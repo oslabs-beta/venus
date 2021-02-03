@@ -180,7 +180,7 @@ const EditableTable = () => {
   });
   setServiceThresholds(data)
   return (
-    <Form form={form} component={false}>
+    <Form form={form} component={false} >
       <Table
         components={{
           body: {
@@ -188,6 +188,7 @@ const EditableTable = () => {
           },
         }}
         bordered
+        style={{width: '100%'}}
         dataSource={data}
         columns={mergedColumns}
         rowClassName="editable-row"

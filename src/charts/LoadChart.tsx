@@ -1,3 +1,8 @@
+/**
+ * @name LoadChart
+ * @desc Chart that displays in historical status page rendering historical load statistics. Child component of ChartContainer.
+ */
+
 import React, { useState, useEffect, useContext } from 'react';    
 import Area  from '@ant-design/charts/es/area';
 import { historicalContext } from '../contexts/historicalContext';
