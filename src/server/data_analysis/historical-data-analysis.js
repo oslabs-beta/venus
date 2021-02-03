@@ -161,6 +161,15 @@ const writeToDB = (buffer) => {
       console.log(`Finished writing to ${THREE_MIN_TABLE}...`, result.rows); 
     }
   })
+
+  client.query('SELECT * FROM three_min_table; ', (err, result) => {
+    if(err){
+      console.log(err); 
+    } else {
+      console.log(`${THREE_MIN_TABLE}...`, result.rows); 
+    }
+  })
+
 }
 
 //Write a function that reads and analyzes the last hour of 3 minute rows and writes it to the 1 hour table
