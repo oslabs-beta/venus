@@ -131,7 +131,7 @@ async function sendData(socket){
     if(COUNT === 60){
       
       //Add the log object to the buffer. 
-      BUFFER.push(output[0]); 
+      BUFFER.push(output[2]); 
       
       //Reset count for the next cycle. 
       COUNT = 0; 
