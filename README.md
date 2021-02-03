@@ -19,24 +19,18 @@ Venus is a self-hosted service monitoring tool for growing projects.  Venus prov
 
 ## Table of Contents
 
+[Install Dependencies](#install-dependencies)
+
 - [Description](#description)
 - [Motivation](#motivation)
 - [Features](#features)
 - [A Brief Overview of Venus](#A-Brief-Overview-of-the-Venus-Orbit)
 - [Demo](#demo)
-- [Installation](#installation)
-    - [Pre-Installation](#pre-installation)
-    - [Install Dependencies](#install-dependencies)
-    - [Configure Chronos](#configure-chronos)
-    - [Initialize Chronos](#initialize-chronos)
-    - [Docker Configuration](#docker-configuration)
-- [Branches](#branches)
-    - [Master](#master-branch)
-      - [Examples](#examples)
-        - [Microservices](#microservices)
-        - [Docker](#docker)
-    - [Middleware](#middleware-branch)
+- [Getting Started with Venus](#Getting-started-with-venus)
+    - [Configuring the Agent](#Configuring-the-Agent-with-Node.js-and-AWS-Elasticache)
+    - [Install Dependencies and Run](#Install-Dependencies-and-run-Venus)
 - [Technologies](#technologies)
+- [Contributing](#contributing)
 - [License](#license)
 
 #
@@ -87,6 +81,9 @@ There are three key phases of The Venus Orbit:
 
 insert demo here
 
+#
+##### Return to [Top](#Venus)
+
 <br>
 
 # Getting Started With Venus 
@@ -102,7 +99,7 @@ git clone https://github.com/oslabs-beta/venus.git
 
 <br>
 
-## Spinning up the Venus Electron Interface
+## Install Dependencies and run Venus
 
 Within the Venus parent directory:
 ```
@@ -112,14 +109,14 @@ run
 ```
 npm run dev:react
 ```
-then run
+then
 ```
 npm run dev:electron
 ```
 
 <br>
 
-## Technical Overview
+## Technologies
 - <a href="#"><img src="./src/assets/electron-logo-color.png" alt="Electron" title="Electron" align="center" height="30" /></a>
 
 - <a href="#"><img src="./src/assets/ts-logo-long-blue.png" alt="TypeScript" title="TypeScript" align="center" height="30" /></a>
@@ -133,7 +130,7 @@ npm run dev:electron
 - <a href="#"><img src="./src/assets/aws-logo-color.png" alt="AWS" title="AWS" align="center" height="30" /></a> 
   * Elasticache
   * EC2
-  * RDS)
+  * RDS
 
 - <a href="#"><img src="./src/assets/postgres-logo-color.png" alt="PostgreSQL" title="PostgreSQL" align="center" height="30" /></a>
 
@@ -145,12 +142,12 @@ npm run dev:electron
 
 - <a href="#"><img src="./src/assets/express-logo-color.png" alt="Express" title="Express" align="center" height="30" /></a> 
 
-- <a href="#"><img src="./src/assets/antdesign-logo.png" alt="antDesign" title="Express" align="center" height="30" />  Ant Design</a> 
+- <a href="#"><img src="./src/assets/antdesign-logo.png" alt="antDesign" title="antDesign" align="center" height="30" />  Ant Design</a> 
   - Ant Design Charting Libraries 
 
-- <a href="#"><img src="./src/assets/Visx-D3-React-logo.jpeg" alt="Express" title="Express" align="center" height="35" /></a>  
+- <a href="#"><img src="./src/assets/Visx-D3-React-logo.jpeg" alt="Visx" title="Visx" align="center" height="35" /></a>  
 
-- <a href="#"><img src="./src/assets/jest-logo-color.png" alt="PostgreSQL" title="PostgreSQL" align="center" height="25" /></a> / <a href="#"><img src="./src/assets/enzyme-logo-color.png" alt="PostgreSQL" title="PostgreSQL" align="center" height="25" /></a>
+- <a href="#"><img src="./src/assets/jest-logo-color.png" alt="Jest" title="Jest" align="center" height="25" /></a> / <a href="#"><img src="./src/assets/enzyme-logo-color.png" alt="Enzyme" title="Enzyme" align="center" height="25" /></a>
 
 <br>
 
@@ -160,16 +157,17 @@ Development of Chronos is open source on GitHub through the tech accelerator umb
 
 
 
-## Potential for Improvement
+### Potential for Improvement
 * The addition of Metrics for dynamic and historic data.
 * Webhook integration for user alerts on threshold triggers.
 * Persistent user thresholds. 
 *
 
-// should we put in this link and make another file?
-- [Contributing](https://github.com/oslabs-beta/Venus/blob/master/CONTRIBUTING.md)
-#
-###### Return to [Top](#Venus)
+<br>
+
+
+
+- [Contributing](https://github.com/oslabs-beta/Chronos/blob/master/CONTRIBUTING.md)
 
 <br>
 
@@ -189,9 +187,7 @@ Justin Cohen
 
 ## License
 
-Venus is <a href="#"><img src="./app/assets/mit-logo-color.png" alt="MIT" title="MIT" align="center" height="20" /></a> [licensed.]
-
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 #
-###### Return to [Top](#Venus)
+#### [Return to Top](#Venus)
