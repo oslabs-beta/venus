@@ -22,7 +22,9 @@
   justify-content: center;
   align-items: center;
 }
-
+// .signInCard {
+//   boxShadow: "5px 8px 24px 5px rgba(208, 216, 243, 0.6)" 
+// }
 .loading {
   display: flex;
   width: 100%;
@@ -106,3 +108,6 @@
   padding: 20px 20px;
   height: 100%;
 }
+
+//box-shadow: 0px 4px 4px 0px rgba(90, 93, 112, 0.6)
+// box-shadow: rgba(46, 45, 45, 0.16) 0px 3px 6px, rgba(46, 45, 45, 0.16) 0px 3px 6px;
