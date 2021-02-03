@@ -1,0 +1,377 @@
+{
+  "service": "google-api",
+  "lastHour": {
+    "availability": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "DELETE" 
+      }
+    ],
+    "error-rate": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 3.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 4.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 5.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 2.3, 
+        "method": "DELETE" 
+      } 
+    ], 
+    "response-time": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "DELETE" 
+      } 
+    ], 
+    "load": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "DELETE" 
+      }
+    ]
+  }, 
+  "lastDay": {
+    "availability": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "DELETE" 
+      }
+    ],
+    "error-rate": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 3.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 4.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 5.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 2.3, 
+        "method": "DELETE" 
+      } 
+    ], 
+    "response-time": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "DELETE" 
+      } 
+    ], 
+    "load": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "DELETE" 
+      }
+    ]
+  }, 
+  "lastWeek": {
+    "availability": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "DELETE" 
+      }
+    ],
+    "error-rate": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 3.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 4.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 5.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 2.3, 
+        "method": "DELETE" 
+      } 
+    ], 
+    "response-time": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "DELETE" 
+      } 
+    ], 
+    "load": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "DELETE" 
+      }
+    ]
+  }, 
+  "lastMonth": {
+    "availability": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "DELETE" 
+      }
+    ],
+    "error-rate": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 3.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 4.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 5.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 2.3, 
+        "method": "DELETE" 
+      } 
+    ], 
+    "response-time": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "DELETE" 
+      } 
+    ], 
+    "load": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "DELETE" 
+      }
+    ]
+  } 
+}
+
+{
+  "service": "aggregate",
+  "last-hour": {
+    "availability": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "service": "google-api" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "service": "plaid" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "service": "weather-api" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "service": "quotes-api" 
+      }
+    ],
+    "error-rate": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 3.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 4.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 5.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 2.3, 
+        "method": "DELETE" 
+      } 
+    ], 
+    "response-time": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "DELETE" 
+      } 
+    ], 
+    "load": [
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.8, 
+        "method": "GET" 
+      },
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.5, 
+        "method": "POST" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "PUT" 
+      }, 
+      { "time":"2020-01-01T17:23:00",
+        "value": 99.3, 
+        "method": "DELETE" 
+      }
+    ]
+  } 
+}

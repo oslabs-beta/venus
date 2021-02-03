@@ -15,7 +15,8 @@
     "test": "jest",
     "test:e2e": "./node_modules/mocha/bin/mocha src/tests/spectronTest.js",
     "rt": "node src/server/real-time-read-handler.js",
-    "client-test": "cross-env NODE_ENV=development nodemon wrapper/client-server.js"
+    "client-test": "cross-env NODE_ENV=development nodemon src/server/index.js",
+    "server-test": "cross-env NODE_ENV=production nodemon src/server/index.js"
   },
   "keywords": [],
   "author": "elisealcala",
@@ -100,6 +101,7 @@
     "enzyme-to-json": "^3.6.1",
     "express": "^4.17.1",
     "ioredis": "^4.19.4",
+    "jsonwebtoken": "^8.5.1",
     "mocha": "^8.2.1",
     "nodemon": "^2.0.7",
     "pg": "^8.5.1",
@@ -110,6 +112,7 @@
     "redis": "^3.0.2",
     "socket.io": "^3.1.0",
     "socket.io-client": "^3.1.0",
-    "spectron": "^3.8.0"
+    "spectron": "^3.8.0",
+    "uuid-random": "^1.3.2"
   }
 }
