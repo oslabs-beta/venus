@@ -88,8 +88,9 @@ function MainDisplay(): JSX.Element {
                     </Menu.Item>
                     <div style={{ width: 200, justifyContent: "center" }}>
                       <Button
+                      
                         onClick={showModal}
-                        block={true}
+                        block={false}
                         type={"primary"}
                         style={{
                           position: "absolute",
