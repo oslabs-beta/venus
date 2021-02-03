@@ -1,4 +1,13 @@
-{
+{ "aggregate":{
+  "lastHour": {
+    "availability": [
+      { "time": "2020-01-01T17:23:00", "value": 99.8, "method": "GET" },
+      { "time": "2020-01-01T17:23:00", "value": 99.5, "method": "POST" },
+      { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "PUT" },
+      { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "DELETE" }
+    ]
+  }
+},
   "service": "google-api",
   "lastHour": {
     "availability": [

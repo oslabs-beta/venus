@@ -11,17 +11,24 @@ import { dynamicContext } from '../contexts/dynamicContext';
 
 function CardDropDown (props:any): JSX.Element{
   
-  let holder: string = 'aggregate'
-  const { serviceNames } = useContext(dynamicContext)
-  const dropDownOptions: any[] =[];
-  for (let i = 0; i < serviceNames.length; i++){
+  let aggregate: JSX.Element = <Select.Option value={'aggregate'} key={10000}>{'Aggregate'}</Select.Option>
+  const dropDownOptions: any[] =[aggregate];
+  for (let i = 0; i < props.services.length; i++){
     dropDownOptions.push(
-      <Select.Option value={props.services[i]} key={i}>{serviceNames[i]}</Select.Option>
+      <Select.Option value={props.services[i]} key={i}>{props.services[i]}</Select.Option>
     )
   }
-  const { setService } = useContext(historicalContext)
+  const { setService, setTimeRange, currentRange } = useContext(historicalContext)
 	function onChange(value:string) {
     console.log(value)
+    // axios.get('ec2instance'+':3000/getHistorical/' + value).then(function(response){
+    //   console.log(response)
+    //   setServiceData(response.data[currentRange])
+    //  setTimeRange(response.data)
+    // })
+    // .catch(function(error){
+    //   console.log(error,'< error')
+    // })
     // fetch request to route for data.
     // data is then brought into state and updated. otherwise, create a larger pool for an initial pull
     setService(value)
@@ -33,14 +40,12 @@ function CardDropDown (props:any): JSX.Element{
   
   return (
   <Select
-    showSearch
     style={{ width: 300}}
     placeholder="Select a service"
     optionFilterProp="children"
     onChange={onChange}
-    onSearch={onSearch}
     filterOption={(input:any, option:any) =>
-      option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}> 
+       option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}> 
     {dropDownOptions}
   </Select>
   )

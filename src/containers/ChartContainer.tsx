@@ -33,6 +33,8 @@ function ChartContainer(): JSX.Element {
     setServiceData,
     timeRange,
     setTimeRange,
+    currentRange,
+    setCurrentRange,
   } = useContext(historicalContext);
   const { serverAddress } = useContext(globalContext)
   const { serviceNames } = useContext(dynamicContext);
@@ -75,9 +77,10 @@ function ChartContainer(): JSX.Element {
   const filterData = (e: any) => {
     console.log("radio checked", e.target.value);
     setServiceData(timeRange[e.target.value])
+    setCurrentRange(e.target.value)
 
   };
-
+console.log(currentRange, 'currentRange')
   const refreshData = () => {
     // axios.get('ec2instance'+':3000/getHistorical/' + service).then(function(response){
     //   console.log(response)
