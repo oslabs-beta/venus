@@ -143,13 +143,13 @@ function ChartContainer(): JSX.Element {
           <Col span={12}>
             <Title level={5}>Error Rate</Title>
             <Card bordered={true} hoverable={true} style={{ width: "500px" }}>
-              {/* <LoadChart /> */}
+              <LoadChart />
             </Card>
           </Col>
           <Col span={12}>
             <Title level={5}>Load</Title>
             <Card bordered={true} hoverable={true} style={{ width: "500px" }}>
-              {/* <LoadChart /> */}
+              <LoadChart />
             </Card>
           </Col>
         </Row>

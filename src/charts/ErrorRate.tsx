@@ -8,7 +8,7 @@ import Area from "@ant-design/charts/es/area";
 import { historicalContext } from "../contexts/historicalContext";
 function ErrorRate(): JSX.Element {
   const { serviceData } = useContext(historicalContext);
-
+  console.log(serviceData["lastHour"]);
   var config = {
     data: serviceData["lastHour"]["error-rate"],
     xField: "time",
