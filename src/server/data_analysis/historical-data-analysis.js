@@ -646,7 +646,6 @@ histController.readLastHour = (req, res, next) => {
         res.locals.data.lastHour = returnObj.lastHour; 
 
         return next(); 
-        // return returnObj.lastHour;
 
       }
     })
@@ -776,7 +775,6 @@ histController.readLastDay = (req, res, next) => {
 
         res.locals.data.lastDay = returnObj.lastDay; 
 
-        // return returnObj.lastDay; 
         return next(); 
       }
     })
@@ -800,7 +798,6 @@ histController.readLastDay = (req, res, next) => {
         returnObj['lastDay']['load'] = [];
 
         rows.forEach((row) => {
-          // if(row.service !== input){
 
             //Create availability property and push to array
             returnObj['lastDay']['availability'].push({
@@ -826,7 +823,6 @@ histController.readLastDay = (req, res, next) => {
               "value": row.load, 
               "service": row.service
             })
-          // }
         })
         
         console.log(returnObj.lastDay); 
@@ -835,7 +831,6 @@ histController.readLastDay = (req, res, next) => {
 
         res.locals.data.lastDay = returnObj.lastDay;
 
-        // return returnObj.lastDay; 
         return next(); 
       }
     })
@@ -906,7 +901,6 @@ histController.readLastWeek = (req, res, next) => {
 
         res.locals.data.lastWeek = returnObj.lastWeek; 
 
-        // return returnObj.lastWeek;
         return next();  
       }
     })
@@ -930,7 +924,6 @@ histController.readLastWeek = (req, res, next) => {
         returnObj['lastWeek']['load'] = [];
 
         rows.forEach((row) => {
-          // if(row.service !== input){
 
             //Create availability property and push to array
             returnObj['lastWeek']['availability'].push({
@@ -956,7 +949,6 @@ histController.readLastWeek = (req, res, next) => {
               "value": row.load, 
               "service": row.service
             })
-          // }
         })
         
         console.log(returnObj.lastWeek); 
@@ -965,7 +957,6 @@ histController.readLastWeek = (req, res, next) => {
 
         res.locals.data.lastWeek = returnObj.lastWeek;
 
-        // return returnObj.lastWeek; 
         return next(); 
       }
     })
@@ -1036,7 +1027,6 @@ histController.readLastMonth = (req, res, next) => {
 
         res.locals.data.lastMonth = returnObj.lastMonth;
 
-        // return returnObj.lastMonth; 
         return next(); 
       }
     })
@@ -1060,7 +1050,6 @@ histController.readLastMonth = (req, res, next) => {
         returnObj['lastMonth']['load'] = [];
 
         rows.forEach((row) => {
-          // if(row.service !== input){
 
             //Create availability property and push to array
             returnObj['lastMonth']['availability'].push({
@@ -1086,7 +1075,6 @@ histController.readLastMonth = (req, res, next) => {
               "value": row.load, 
               "service": row.service
             })
-          // }
         })
         
         console.log(returnObj.lastMonth);
@@ -1095,7 +1083,6 @@ histController.readLastMonth = (req, res, next) => {
 
         res.locals.data.lastMonth = returnObj.lastMonth;
 
-        // return returnObj.lastMonth; 
         return next(); 
       }
     })
