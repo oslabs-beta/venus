@@ -158,7 +158,7 @@ const writeToDB = (buffer) => {
     if(err){
       console.log(err); 
     } else {
-      console.log(`Finished writing to ${THREE_MIN_TABLE}...`, result); 
+      console.log(`Finished writing to ${THREE_MIN_TABLE}...`, result.rows); 
     }
   })
 }
@@ -1030,7 +1030,7 @@ const constructHistorical = async (input) => {
   obj['lastDay'] = await readLastDay(input); 
   obj['lastWeek'] = await readLastWeek(input); 
   obj['lastMonth'] = await readLastMonth(input); 
-  
+
   return obj; 
 }
 
