@@ -571,8 +571,10 @@ const histMain = () => {
 
 /* This function reads rows from the 3 minute table for the last hour and appends to the historical data object to be consumed on the front end. */
 const readLastHour = (input) => {
-  //Query for ALL rows in the last hour 
   
+
+  console.log('Invoked readLastHour...')
+
   let queryText = ''; 
 
   const returnObj = {}; 
@@ -586,6 +588,8 @@ const readLastHour = (input) => {
       if(err){
         console.log(err); 
       } else {
+
+        console.log('Result from readLastHour query...', result.rows); 
         
         const rows = result.rows; 
 
