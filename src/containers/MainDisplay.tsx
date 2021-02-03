@@ -96,7 +96,7 @@ function MainDisplay(): JSX.Element {
                           position: "absolute",
                           zIndex: 10,
                           bottom: 20,
-                          marginBottom: 80,
+                          marginBottom: 70,
                         }}
                       >
                         Sign Out
