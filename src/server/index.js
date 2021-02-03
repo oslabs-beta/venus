@@ -129,7 +129,7 @@ async function sendData(socket){
     socket.emit('real-time-object', output); 
     
     //When 3 minutes have passed (i.e. count is 60, since count only increments every 3 seconds), add to buffer. 
-    if(COUNT === 60){
+    if(COUNT === 5){
       
       //Add the log object to the buffer. 
       BUFFER.push(output[2]); 
@@ -137,7 +137,7 @@ async function sendData(socket){
       //Reset count for the next cycle. 
       COUNT = 0; 
       
-      if(BUFFER.length === 20){
+      if(BUFFER.length === 5){
         
         console.log('WRITE TO DB TRIGGERED!'); 
 
@@ -151,7 +151,7 @@ async function sendData(socket){
     
   } else {
 
-    if(COUNT === 60){
+    if(COUNT === 5){
       COUNT = 0; 
     }
     
@@ -161,7 +161,7 @@ async function sendData(socket){
   //Recursive call to trigger function every 3 seconds. 
   setTimeout(() => {
     sendData(socket); 
-  }, 3000); 
+  }, 1000); 
 }
 
 

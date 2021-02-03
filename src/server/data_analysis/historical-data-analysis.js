@@ -192,16 +192,16 @@ const writeToDB = (buffer) => {
 const writeOneHourIncrements = () => {
 
   //Query for overall average
-  const selectOverallAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
+  const selectOverallAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service = 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
   
   //Query for overall averages by method
-  const selectOverallMethod = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
+  const selectOverallMethod = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service = 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
 
   //Query for aggregate statistics by service
-  const selectServiceAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service != 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
+  const selectServiceAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service != 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
 
   //Query for method level statistics by service 
-  const selectServiceMethod = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service != 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
+  const selectServiceMethod = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service != 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
 
   // // Query overall stats and write to the one hour table
   client.query(selectOverallAggregate, (err, result) => {
@@ -318,16 +318,16 @@ const writeOneHourIncrements = () => {
 const writeEightHourIncrements = () => {
   
   //Query for overall average
-  const selectOverallAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - EIGHT_HOURS}::BIGINT AND service = 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
+  const selectOverallAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service = 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
   
   //Query for overall averages by method
-  const selectOverallMethod = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - EIGHT_HOURS}::BIGINT AND service = 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
+  const selectOverallMethod = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service = 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
 
   //Query for aggregate statistics by service
-  const selectServiceAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - EIGHT_HOURS}::BIGINT AND service != 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
+  const selectServiceAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service != 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
 
   //Query for method level statistics by service 
-  const selectServiceMethod = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - EIGHT_HOURS}::BIGINT AND service != 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
+  const selectServiceMethod = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service != 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
 
   // // Query overall stats and write to the one hour table
   client.query(selectOverallAggregate, (err, result) => {
@@ -435,16 +435,16 @@ const writeEightHourIncrements = () => {
 const writeOneDayIncrements = () => {
 
   //Query for overall average
-  const selectOverallAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HOUR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND service = 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
+  const selectOverallAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service = 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
   
   //Query for overall averages by method
-  const selectOverallMethod = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HOUR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND service = 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
+  const selectOverallMethod = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service = 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
 
   //Query for aggregate statistics by service
-  const selectServiceAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HOUR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND service != 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
+  const selectServiceAggregate = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service != 'aggregate' AND method = 'aggregate' GROUP BY service, method;`;
 
   //Query for method level statistics by service 
-  const selectServiceMethod = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HOUR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND service != 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
+  const selectServiceMethod = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service != 'aggregate' AND method != 'aggregate' GROUP BY service, method;`;
 
   // // Query overall stats and write to the one hour table
   client.query(selectOverallAggregate, (err, result) => {
@@ -552,15 +552,15 @@ const histMain = () => {
 
   setTimeout(() => {
     writeOneHourIncrements(); 
-  }, HOUR)
+  }, 36000)
 
   setTimeout(() => {
     writeEightHourIncrements(); 
-  }, EIGHT_HOURS)
+  }, 50000)
 
   setTimeout(() => {
     writeOneDayIncrements(); 
-  }, DAY)
+  }, 90000)
 }
 
 
@@ -590,7 +590,7 @@ histController.readLastHour = (req, res, next) => {
 
   if(service !== 'aggregate'){
 
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service = '${service}' GROUP BY service, method;`;
 
     returnObj.service = service; 
     
@@ -604,14 +604,23 @@ histController.readLastHour = (req, res, next) => {
         const rows = result.rows; 
 
         returnObj['lastHour'] = {};
+        returnObj['lastHour']['aggregate'] = {}; 
         returnObj['lastHour']['availability'] = [];
         returnObj['lastHour']['error_rate'] = [];
         returnObj['lastHour']['response_time'] = [];
         returnObj['lastHour']['load'] = [];
 
         rows.forEach((row) => {
-          if(row.service === input){
+          
+          if(row.method === 'aggregate'){
 
+            returnObj.lastHour.aggregate['availability'] = row.availability;
+            returnObj.lastHour.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastHour.aggregate['response_time'] = row.response_time;
+            returnObj.lastHour.aggregate['load'] = row.load; 
+          }
+          
+          if(row.service === service && row.method !== 'aggregate'){
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
@@ -646,15 +655,11 @@ histController.readLastHour = (req, res, next) => {
         res.locals.data.lastHour = returnObj.lastHour; 
 
         return next(); 
-
       }
     })
 
-    console.log('result: ', result); 
-    return result; 
-
-  } else {
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
+  } else { //If input is aggregate 
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
 
     returnObj.service = 'aggregate'; 
     
@@ -666,13 +671,23 @@ histController.readLastHour = (req, res, next) => {
         const rows = result.rows; 
 
         returnObj['lastHour'] = {};
+        returnObj['lastHour']['aggregate'] = {}; 
         returnObj['lastHour']['availability'] = [];
         returnObj['lastHour']['error_rate'] = [];
         returnObj['lastHour']['response_time'] = [];
         returnObj['lastHour']['load'] = [];
 
+        
+
         rows.forEach((row) => {
 
+          if(row.method === 'aggregate' && row.service === 'aggregate'){
+
+            returnObj.lastHour.aggregate['availability'] = row.availability;
+            returnObj.lastHour.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastHour.aggregate['response_time'] = row.response_time;
+            returnObj.lastHour.aggregate['load'] = row.load; 
+          } else {
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
@@ -697,6 +712,7 @@ histController.readLastHour = (req, res, next) => {
               "value": row.load, 
               "service": row.service
             })
+          }
         })
         
         console.log(returnObj.lastHour);
@@ -722,7 +738,7 @@ histController.readLastDay = (req, res, next) => {
   const returnObj = {}; 
 
   if(service !== 'aggregate'){
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
 
     returnObj.service = service; 
     
@@ -734,13 +750,25 @@ histController.readLastDay = (req, res, next) => {
         const rows = result.rows; 
 
         returnObj['lastDay'] = {};
+        returnObj['lastDay']['aggregate'] = {}; 
         returnObj['lastDay']['availability'] = [];
         returnObj['lastDay']['error_rate'] = [];
         returnObj['lastDay']['response_time'] = [];
         returnObj['lastDay']['load'] = [];
 
         rows.forEach((row) => {
-          if(row.service === input){
+
+
+          if(row.method === 'aggregate'){
+
+            returnObj.lastDay.aggregate['availability'] = row.availability;
+            returnObj.lastDay.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastDay.aggregate['response_time'] = row.response_time;
+            returnObj.lastDay.aggregate['load'] = row.load; 
+          }
+
+
+          if(row.service === service && row.method !== 'aggregate'){
 
             //Create availability property and push to array
             returnObj['lastDay']['availability'].push({
@@ -780,7 +808,7 @@ histController.readLastDay = (req, res, next) => {
     })
 
   } else {
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
 
     returnObj.service = 'aggregate'; 
     
@@ -792,12 +820,22 @@ histController.readLastDay = (req, res, next) => {
         const rows = result.rows; 
 
         returnObj['lastDay'] = {};
+        returnObj['lastDay']['aggregate'] = {}; 
         returnObj['lastDay']['availability'] = [];
         returnObj['lastDay']['error_rate'] = [];
         returnObj['lastDay']['response_time'] = [];
         returnObj['lastDay']['load'] = [];
 
         rows.forEach((row) => {
+
+
+          if(row.method === 'aggregate' && row.service === 'aggregate'){
+
+            returnObj.lastDay.aggregate['availability'] = row.availability;
+            returnObj.lastDay.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastDay.aggregate['response_time'] = row.response_time;
+            returnObj.lastDay.aggregate['load'] = row.load; 
+          } else {
 
             //Create availability property and push to array
             returnObj['lastDay']['availability'].push({
@@ -823,6 +861,7 @@ histController.readLastDay = (req, res, next) => {
               "value": row.load, 
               "service": row.service
             })
+          }
         })
         
         console.log(returnObj.lastDay); 
@@ -848,7 +887,7 @@ histController.readLastWeek = (req, res, next) => {
   const returnObj = {}; 
 
   if(service !== 'aggregate'){
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - WEEK}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
 
     returnObj.service = service; 
     
@@ -860,13 +899,23 @@ histController.readLastWeek = (req, res, next) => {
         const rows = result.rows; 
 
         returnObj['lastWeek'] = {};
+        returnObj['lastWeek']['aggregate'] = {}; 
         returnObj['lastWeek']['availability'] = [];
         returnObj['lastWeek']['error_rate'] = [];
         returnObj['lastWeek']['response_time'] = [];
         returnObj['lastWeek']['load'] = [];
 
         rows.forEach((row) => {
-          if(row.service === input){
+
+          if(row.method === 'aggregate'){
+
+            returnObj.lastWeek.aggregate['availability'] = row.availability;
+            returnObj.lastWeek.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastWeek.aggregate['response_time'] = row.response_time;
+            returnObj.lastWeek.aggregate['load'] = row.load; 
+          }
+
+          if(row.service === service && row.method !== 'aggregate'){
 
             //Create availability property and push to array
             returnObj['lastWeek']['availability'].push({
@@ -906,7 +955,7 @@ histController.readLastWeek = (req, res, next) => {
     })
 
   } else {
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - WEEK}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
 
     returnObj.service = 'aggregate'; 
     
@@ -918,12 +967,23 @@ histController.readLastWeek = (req, res, next) => {
         const rows = result.rows; 
 
         returnObj['lastWeek'] = {};
+        returnObj['lastWeek']['aggregate'] = {}; 
         returnObj['lastWeek']['availability'] = [];
         returnObj['lastWeek']['error_rate'] = [];
         returnObj['lastWeek']['response_time'] = [];
         returnObj['lastWeek']['load'] = [];
 
         rows.forEach((row) => {
+
+          if(row.method === 'aggregate' && row.service === 'aggregate'){
+
+            returnObj.lastWeek.aggregate['availability'] = row.availability;
+            returnObj.lastWeek.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastWeek.aggregate['response_time'] = row.response_time;
+            returnObj.lastWeek.aggregate['load'] = row.load; 
+          } else {
+
+          
 
             //Create availability property and push to array
             returnObj['lastWeek']['availability'].push({
@@ -949,8 +1009,9 @@ histController.readLastWeek = (req, res, next) => {
               "value": row.load, 
               "service": row.service
             })
+          }
         })
-        
+
         console.log(returnObj.lastWeek); 
 
         res.locals.data['lastWeek'] = {}; 
@@ -974,7 +1035,7 @@ histController.readLastMonth = (req, res, next) => {
   const returnObj = {}; 
 
   if(service !== 'aggregate'){
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_DAY_TABLE} WHERE timestamp >= ${Date.now() - MONTH}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_DAY_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
 
     returnObj.service = service; 
     
@@ -984,15 +1045,24 @@ histController.readLastMonth = (req, res, next) => {
       } else {
         
         const rows = result.rows; 
-
+       
         returnObj['lastMonth'] = {};
+        returnObj['lastMonth']['aggregate'] = {}; 
         returnObj['lastMonth']['availability'] = [];
         returnObj['lastMonth']['error_rate'] = [];
         returnObj['lastMonth']['response_time'] = [];
         returnObj['lastMonth']['load'] = [];
 
         rows.forEach((row) => {
-          if(row.service === input){
+
+          if(row.method === 'aggregate'){
+            returnObj.lastMonth.aggregate['availability'] = row.availability;
+            returnObj.lastMonth.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastMonth.aggregate['response_time'] = row.response_time;
+            returnObj.lastMonth.aggregate['load'] = row.load; 
+          }
+          
+          if(row.service === service && row.method !== 'aggregate'){
 
             //Create availability property and push to array
             returnObj['lastMonth']['availability'].push({
@@ -1032,7 +1102,7 @@ histController.readLastMonth = (req, res, next) => {
     })
 
   } else {
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - MONTH}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
 
     returnObj.service = 'aggregate'; 
     
@@ -1044,12 +1114,21 @@ histController.readLastMonth = (req, res, next) => {
         const rows = result.rows; 
 
         returnObj['lastMonth'] = {};
+        returnObj['lastMonth']['aggregate'] = {}; 
         returnObj['lastMonth']['availability'] = [];
         returnObj['lastMonth']['error_rate'] = [];
         returnObj['lastMonth']['response_time'] = [];
         returnObj['lastMonth']['load'] = [];
 
         rows.forEach((row) => {
+
+          if(row.method === 'aggregate' && row.service === 'aggregate'){
+
+            returnObj.lastMonth.aggregate['availability'] = row.availability;
+            returnObj.lastMonth.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastMonth.aggregate['response_time'] = row.response_time;
+            returnObj.lastMonth.aggregate['load'] = row.load; 
+          } else {
 
             //Create availability property and push to array
             returnObj['lastMonth']['availability'].push({
@@ -1075,6 +1154,7 @@ histController.readLastMonth = (req, res, next) => {
               "value": row.load, 
               "service": row.service
             })
+          }
         })
         
         console.log(returnObj.lastMonth);
