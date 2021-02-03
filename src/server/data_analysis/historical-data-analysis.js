@@ -1057,6 +1057,8 @@ const constructHistorical = async (input) => {
   obj['lastWeek'] = await readLastWeek(input); 
   obj['lastMonth'] = await readLastMonth(input); 
 
+  console.log('FULLY FORMED HISTORICAL OBJECT: ', obj); 
+
   return obj; 
 }
 
