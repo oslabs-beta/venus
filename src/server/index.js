@@ -44,9 +44,9 @@ let BUFFER = [];
   * write to the series of tables Venus uses to have pre-calculated data points to serve onto the front-end. 
 */
 histMain(); 
-readLastHour('aggregate'); 
-readLastHour('curriculum-api.codesmith.io'); 
-readAll(); 
+// readLastHour('aggregate'); 
+// readLastHour('curriculum-api.codesmith.io'); 
+// readAll(); 
 constructHistorical('aggregate');
 constructHistorical('curriculum-api.codesmith.io');
 
