@@ -578,7 +578,9 @@ histController.readLastHour = (req, res, next) => {
   
   const { service } = req.params; 
 
-  res.locals.data.service = service; 
+  res.locals.data = {}; 
+
+  res.locals.data['service'] = service; 
 
   console.log('Invoked readLastHour...')
 
