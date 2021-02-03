@@ -109,6 +109,9 @@ io.sockets.on('connection', (socket) => {
 async function sendData(socket){
   //Increment count everytime sendData is invoked. 
   COUNT++; 
+
+  console.log('COUNT: ', COUNT);
+  console.log('BUFFER: ', BUFFER); 
   
   //Read last three minutes of log data from stream and store into an array of objects.
   const streamData = await redis.readRedisStream();
