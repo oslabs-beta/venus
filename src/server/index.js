@@ -10,7 +10,7 @@ const cors = require('cors');
 const data = require('./data_analysis/rt-data.js'); 
 const jwt = require('jsonwebtoken');
 const redis = require('./redis_handlers/real-time-read-handler.js'); 
-const { constructHistorical, histMain, writeToDB, readLastHour, readAll } = require('./data_analysis/historical-data-analysis.js'); 
+const { constructHistorical, histMain, writeToDB, histController, readAll } = require('./data_analysis/historical-data-analysis.js'); 
 const authController = require('./controller.js')
 require('dotenv').config(); 
 
@@ -198,12 +198,16 @@ app.post('/login', (req, res) => {
  * This handler passes on the service the front-end is requesting data for and generates 
  * a historical data object that is then served back to the front-end for display. 
  */
-app.get('/getHistorical', 
+app.get('/getHistorical/:service', 
   authController.verify,
+  histController.readLastHour,
+  histController.readLastDay,
+  histController.readLastWeek,
+  histController.readLastMonth,
   (req, res) => {
-    const { service } = req.body; 
-    const histData = constructHistorical(service); 
-    return res.json(histData); 
+
+    return res.json(res.locals.data); 
+
 })
 
 

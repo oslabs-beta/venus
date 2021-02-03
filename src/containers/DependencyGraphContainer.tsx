@@ -10,7 +10,19 @@ function DependencyGraphContainer(): JSX.Element{
   
   const { aggregate, services } = useContext(dynamicContext)
   useEffect(()=> {
-
+    const accessToken = localStorage.getItem('accessToken');
+    const socket:any = io(serverAddress + ':8080', {
+      transports: ["websocket"],
+      query: { accessToken },
+    });
+    socket.on("connection", () => {
+      console.log('Desktop connected to DEPENDENCY client!');
+    });
+    socket.on("real-time-object", (output: any) => {
+      console.log(output)
+      const newData = JSON.parse(output[0]);
+      setAggregate(newData.aggregate);
+      setServices(newData.services);
   },[])
 
   return(

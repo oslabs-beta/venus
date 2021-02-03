@@ -31,7 +31,7 @@ function Dashboard(): JSX.Element {
       query: { accessToken },
     });
     socket.on("connection", () => {
-      console.log('Desktop connected to client!');
+      console.log('Desktop connected to DASHBOARD client!');
     });
     socket.on("real-time-object", (output: any) => {
       console.log(output)

@@ -23,7 +23,7 @@ const DAY = 86400000;
 const WEEK = 604800000;
 const MONTH =  2629800000; 
 
-const histObj = {}; 
+const histController = {}; 
 
 /* BOILERPLATE CODE TO INSTANTIATE DB CONNECTION */
 const client = new Client({
@@ -574,8 +574,12 @@ const histMain = () => {
 */
 
 /* This function reads rows from the 3 minute table for the last hour and appends to the historical data object to be consumed on the front end. */
-const readLastHour = async (input) => {
+histController.readLastHour = (req, res, next) => {
   
+  const { service } = req.params; 
+
+  res.locals.data.service = service; 
+
   console.log('Invoked readLastHour...')
 
   let queryText = ''; 
@@ -584,11 +588,11 @@ const readLastHour = async (input) => {
 
   if(input !== 'aggregate'){
 
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = '${input}' AND method != 'aggregate' GROUP BY service, method;`;
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
 
-    returnObj.service = input; 
+    returnObj.service = service; 
     
-    const result = await client.query(queryText, (err, result) => {
+    client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -635,9 +639,11 @@ const readLastHour = async (input) => {
         
         console.log(returnObj.lastHour); 
 
-        histObj['lastHour'] = returnObj.lastHour; 
+        res.locals.data.lastHour = returnObj.lastHour; 
 
-        return returnObj.lastHour; 
+        return next(); 
+        // return returnObj.lastHour;
+
       }
     })
 
@@ -649,7 +655,7 @@ const readLastHour = async (input) => {
 
     returnObj.service = 'aggregate'; 
     
-    const result = await client.query(queryText, (err, result) => {
+    client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -691,32 +697,31 @@ const readLastHour = async (input) => {
         })
         
         console.log(returnObj.lastHour);
-        
-        histObj['lastHour'] = returnObj.lastHour;
 
-        return returnObj.lastHour; 
+        res.locals.data.lastHour = returnObj.lastHour;
+        
+        return next();
       }
     })
-
-    console.log('result: ', result);
-    return result; 
   }
 }
 
 /* This function reads rows from the 1 hour table for the last day and appends to the historical data object to be consumed on the front end. */
-const readLastDay = async (input) => {
+histController.readLastDay = (req, res, next) => {
   //Query for ALL rows in the last hour 
   
+  const { service } = req.params;
+
   let queryText = ''; 
 
   const returnObj = {}; 
 
   if(input !== 'aggregate'){
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND service = '${input}' AND method != 'aggregate' GROUP BY service, method;`;
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
 
-    returnObj.service = input; 
+    returnObj.service = service; 
     
-    await client.query(queryText, (err, result) => {
+    client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -761,7 +766,10 @@ const readLastDay = async (input) => {
         
         console.log(returnObj.lastDay); 
 
-        return returnObj.lastDay; 
+        res.locals.data.lastDay = returnObj.lastDay; 
+
+        // return returnObj.lastDay; 
+        return next(); 
       }
     })
 
@@ -770,7 +778,7 @@ const readLastDay = async (input) => {
 
     returnObj.service = 'aggregate'; 
     
-    await client.query(queryText, (err, result) => {
+    client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -815,26 +823,31 @@ const readLastDay = async (input) => {
         
         console.log(returnObj.lastDay); 
 
-        return returnObj.lastDay; 
+        res.locals.data.lastDay = returnObj.lastDay;
+
+        // return returnObj.lastDay; 
+        return next(); 
       }
     })
   }
 }
 
 /* This function reads rows from the 8 hour table for the last week and appends to the historical data object to be consumed on the front end. */
-const readLastWeek = async (input) => {
+histController.readLastWeek = (req, res, next) => {
   //Query for ALL rows in the last hour 
   
+  const { service } = req.params;
+
   let queryText = ''; 
 
   const returnObj = {}; 
 
   if(input !== 'aggregate'){
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - WEEK}::BIGINT AND service = '${input}' AND method != 'aggregate' GROUP BY service, method;`;
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - WEEK}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
 
-    returnObj.service = input; 
+    returnObj.service = service; 
     
-    await client.query(queryText, (err, result) => {
+    client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -879,7 +892,10 @@ const readLastWeek = async (input) => {
         
         console.log(returnObj.lastWeek); 
 
-        return returnObj.lastWeek; 
+        res.locals.data.lastWeek = returnObj.lastWeek; 
+
+        // return returnObj.lastWeek;
+        return next();  
       }
     })
 
@@ -888,7 +904,7 @@ const readLastWeek = async (input) => {
 
     returnObj.service = 'aggregate'; 
     
-    await client.query(queryText, (err, result) => {
+    client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -933,26 +949,31 @@ const readLastWeek = async (input) => {
         
         console.log(returnObj.lastWeek); 
 
-        return returnObj.lastWeek; 
+        res.locals.data.lastWeek = returnObj.lastWeek;
+
+        // return returnObj.lastWeek; 
+        return next(); 
       }
     })
   }
 }
 
 /* This function reads rows from the one day table for the last month and appends to the historical data object to be consumed on the front end. */
-const readLastMonth = async (input) => {
+histController.readLastMonth = (req, res, next) => {
   //Query for ALL rows in the last hour 
   
+  const { service } = req.params;
+
   let queryText = ''; 
 
   const returnObj = {}; 
 
   if(input !== 'aggregate'){
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_DAY_TABLE} WHERE timestamp >= ${Date.now() - MONTH}::BIGINT AND service = '${input}' AND method != 'aggregate' GROUP BY service, method;`;
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_DAY_TABLE} WHERE timestamp >= ${Date.now() - MONTH}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
 
-    returnObj.service = input; 
+    returnObj.service = service; 
     
-    await client.query(queryText, (err, result) => {
+    client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -997,7 +1018,10 @@ const readLastMonth = async (input) => {
         
         console.log(returnObj.lastMonth); 
 
-        return returnObj.lastMonth; 
+        res.locals.data.lastMonth = returnObj.lastMonth;
+
+        // return returnObj.lastMonth; 
+        return next(); 
       }
     })
 
@@ -1006,7 +1030,7 @@ const readLastMonth = async (input) => {
 
     returnObj.service = 'aggregate'; 
     
-    await client.query(queryText, (err, result) => {
+    client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -1051,7 +1075,10 @@ const readLastMonth = async (input) => {
         
         console.log(returnObj.lastMonth); 
 
-        return returnObj.lastMonth; 
+        res.locals.data.lastMonth = returnObj.lastMonth;
+
+        // return returnObj.lastMonth; 
+        return next(); 
       }
     })
   }
@@ -1062,19 +1089,6 @@ const readLastMonth = async (input) => {
   * This function stitches all of the write functions above in order to output one consolidated historical data object
   * that is then consumed by the front-end for display purposes. 
 */
-// const constructHistorical = async (input) => {
-  
-//   histObj['service'] = input; 
-
-//   histObj['lastHour'] = await readLastHour(input); 
-//   histObj['lastDay'] = await readLastDay(input); 
-//   histObj['lastWeek'] = await readLastWeek(input); 
-//   histObj['lastMonth'] = await readLastMonth(input); 
-
-//   console.log('FULLY FORMED HISTORICAL OBJECT: ', histObj); 
-
-//   return histObj; 
-// }
 
 const constructHistorical = async (input) => {
   
@@ -1089,7 +1103,6 @@ const constructHistorical = async (input) => {
 
   return histObj; 
 }
-
 
 /* This is a helper function converts the unix timestamp passed in from the redis stream into a number. */
 const unixStringToNumber = (unixString) => {
@@ -1150,5 +1163,4 @@ const readAll = () => {
   })
 }
 
-
-module.exports = { constructHistorical, histMain, writeToDB, readLastHour, readAll }; 
+module.exports = { histMain, writeToDB, readAll, histController }; 
