@@ -1124,4 +1124,4 @@ const readAll = () => {
 }
 
 
-module.exports = {constructHistorical, histMain, writeToDB, readAll }; 
+module.exports = {constructHistorical, histMain, writeToDB, readLastHour }; 

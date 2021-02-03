@@ -10,7 +10,7 @@ const cors = require('cors');
 const data = require('./data_analysis/rt-data.js'); 
 const jwt = require('jsonwebtoken');
 const redis = require('./redis_handlers/real-time-read-handler.js'); 
-const { constructHistorical, histMain, writeToDB, readAll } = require('./data_analysis/historical-data-analysis.js'); 
+const { constructHistorical, histMain, writeToDB, readLastHour } = require('./data_analysis/historical-data-analysis.js'); 
 const authController = require('./controller.js')
 require('dotenv').config(); 
 
@@ -44,7 +44,7 @@ let BUFFER = [];
   * write to the series of tables Venus uses to have pre-calculated data points to serve onto the front-end. 
 */
 histMain(); 
-readAll(); 
+readLastHour(); 
 constructHistorical('aggregate');
 constructHistorical('curriculum-api.codesmith.io');
 
