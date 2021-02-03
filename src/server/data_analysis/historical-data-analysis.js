@@ -750,13 +750,25 @@ histController.readLastDay = (req, res, next) => {
         const rows = result.rows; 
 
         returnObj['lastDay'] = {};
+        returnObj['lastDay']['aggregate'] = {}; 
         returnObj['lastDay']['availability'] = [];
         returnObj['lastDay']['error_rate'] = [];
         returnObj['lastDay']['response_time'] = [];
         returnObj['lastDay']['load'] = [];
 
         rows.forEach((row) => {
-          if(row.service === input){
+
+
+          if(row.method === 'aggregate'){
+
+            returnObj.lastDay.aggregate['availability'] = row.availability;
+            returnObj.lastDay.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastDay.aggregate['response_time'] = row.response_time;
+            returnObj.lastDay.aggregate['load'] = row.load; 
+          }
+
+
+          if(row.service === input && row.method !== 'aggregate'){
 
             //Create availability property and push to array
             returnObj['lastDay']['availability'].push({
@@ -791,7 +803,6 @@ histController.readLastDay = (req, res, next) => {
 
         res.locals.data.lastDay = returnObj.lastDay; 
 
-        // return returnObj.lastDay; 
         return next(); 
       }
     })
@@ -809,13 +820,22 @@ histController.readLastDay = (req, res, next) => {
         const rows = result.rows; 
 
         returnObj['lastDay'] = {};
+        returnObj['lastDay']['aggregate'] = {}; 
         returnObj['lastDay']['availability'] = [];
         returnObj['lastDay']['error_rate'] = [];
         returnObj['lastDay']['response_time'] = [];
         returnObj['lastDay']['load'] = [];
 
         rows.forEach((row) => {
-          // if(row.service !== input){
+
+
+          if(row.method === 'aggregate' && row.service === 'aggregate'){
+
+            returnObj.lastDay.aggregate['availability'] = row.availability;
+            returnObj.lastDay.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastDay.aggregate['response_time'] = row.response_time;
+            returnObj.lastDay.aggregate['load'] = row.load; 
+          } else {
 
             //Create availability property and push to array
             returnObj['lastDay']['availability'].push({
@@ -841,7 +861,7 @@ histController.readLastDay = (req, res, next) => {
               "value": row.load, 
               "service": row.service
             })
-          // }
+          }
         })
         
         console.log(returnObj.lastDay); 
@@ -850,7 +870,6 @@ histController.readLastDay = (req, res, next) => {
 
         res.locals.data.lastDay = returnObj.lastDay;
 
-        // return returnObj.lastDay; 
         return next(); 
       }
     })
@@ -880,13 +899,23 @@ histController.readLastWeek = (req, res, next) => {
         const rows = result.rows; 
 
         returnObj['lastWeek'] = {};
+        returnObj['lastWeek']['aggregate'] = {}; 
         returnObj['lastWeek']['availability'] = [];
         returnObj['lastWeek']['error_rate'] = [];
         returnObj['lastWeek']['response_time'] = [];
         returnObj['lastWeek']['load'] = [];
 
         rows.forEach((row) => {
-          if(row.service === input){
+
+          if(row.method === 'aggregate'){
+
+            returnObj.lastWeek.aggregate['availability'] = row.availability;
+            returnObj.lastWeek.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastWeek.aggregate['response_time'] = row.response_time;
+            returnObj.lastWeek.aggregate['load'] = row.load; 
+          }
+
+          if(row.service === input && row.method !== 'aggregate'){
 
             //Create availability property and push to array
             returnObj['lastWeek']['availability'].push({
@@ -921,7 +950,6 @@ histController.readLastWeek = (req, res, next) => {
 
         res.locals.data.lastWeek = returnObj.lastWeek; 
 
-        // return returnObj.lastWeek;
         return next();  
       }
     })
@@ -939,13 +967,23 @@ histController.readLastWeek = (req, res, next) => {
         const rows = result.rows; 
 
         returnObj['lastWeek'] = {};
+        returnObj['lastWeek']['aggregate'] = {}; 
         returnObj['lastWeek']['availability'] = [];
         returnObj['lastWeek']['error_rate'] = [];
         returnObj['lastWeek']['response_time'] = [];
         returnObj['lastWeek']['load'] = [];
 
         rows.forEach((row) => {
-          // if(row.service !== input){
+
+          if(row.method === 'aggregate' && row.service === 'aggregate'){
+
+            returnObj.lastWeek.aggregate['availability'] = row.availability;
+            returnObj.lastWeek.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastWeek.aggregate['response_time'] = row.response_time;
+            returnObj.lastWeek.aggregate['load'] = row.load; 
+          } else {
+
+          
 
             //Create availability property and push to array
             returnObj['lastWeek']['availability'].push({
@@ -971,16 +1009,15 @@ histController.readLastWeek = (req, res, next) => {
               "value": row.load, 
               "service": row.service
             })
-          // }
+          }
         })
-        
+
         console.log(returnObj.lastWeek); 
 
         res.locals.data['lastWeek'] = {}; 
 
         res.locals.data.lastWeek = returnObj.lastWeek;
 
-        // return returnObj.lastWeek; 
         return next(); 
       }
     })
@@ -1008,15 +1045,24 @@ histController.readLastMonth = (req, res, next) => {
       } else {
         
         const rows = result.rows; 
-
+       
         returnObj['lastMonth'] = {};
+        returnObj['lastMonth']['aggregate'] = {}; 
         returnObj['lastMonth']['availability'] = [];
         returnObj['lastMonth']['error_rate'] = [];
         returnObj['lastMonth']['response_time'] = [];
         returnObj['lastMonth']['load'] = [];
 
         rows.forEach((row) => {
-          if(row.service === input){
+
+          if(row.method === 'aggregate'){
+            returnObj.lastMonth.aggregate['availability'] = row.availability;
+            returnObj.lastMonth.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastMonth.aggregate['response_time'] = row.response_time;
+            returnObj.lastMonth.aggregate['load'] = row.load; 
+          }
+          
+          if(row.service === input && row.method !== 'aggregate'){
 
             //Create availability property and push to array
             returnObj['lastMonth']['availability'].push({
@@ -1069,13 +1115,21 @@ histController.readLastMonth = (req, res, next) => {
         const rows = result.rows; 
 
         returnObj['lastMonth'] = {};
+        returnObj['lastMonth']['aggregate'] = {}; 
         returnObj['lastMonth']['availability'] = [];
         returnObj['lastMonth']['error_rate'] = [];
         returnObj['lastMonth']['response_time'] = [];
         returnObj['lastMonth']['load'] = [];
 
         rows.forEach((row) => {
-          // if(row.service !== input){
+
+          if(row.method === 'aggregate' && row.service === 'aggregate'){
+
+            returnObj.lastMonth.aggregate['availability'] = row.availability;
+            returnObj.lastMonth.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastMonth.aggregate['response_time'] = row.response_time;
+            returnObj.lastMonth.aggregate['load'] = row.load; 
+          } else {
 
             //Create availability property and push to array
             returnObj['lastMonth']['availability'].push({
@@ -1101,7 +1155,7 @@ histController.readLastMonth = (req, res, next) => {
               "value": row.load, 
               "service": row.service
             })
-          // }
+          }
         })
         
         console.log(returnObj.lastMonth);
@@ -1110,7 +1164,6 @@ histController.readLastMonth = (req, res, next) => {
 
         res.locals.data.lastMonth = returnObj.lastMonth;
 
-        // return returnObj.lastMonth; 
         return next(); 
       }
     })
