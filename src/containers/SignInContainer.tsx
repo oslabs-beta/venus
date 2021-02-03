@@ -37,7 +37,8 @@ function SignIn():JSX.Element {
       <Title>VENUS</Title>
       
       <Card 
-        style={{height: 'fit-content', width: 500}}
+        className="signInCard"
+        style={{height: 'fit-content', width: 500, boxShadow: "rgba(46, 45, 45, 0.16) 0px 3px 6px, rgba(46, 45, 45, 0.16) 0px 3px 6px"}}
         bordered={true}
         hoverable={true}
         >
