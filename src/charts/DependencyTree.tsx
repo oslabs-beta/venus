@@ -4,14 +4,11 @@
  * its endpoints. Child component of DependencyGraphContainer.
  * 
  */
-
 import React, { useState } from "react";
 import { Group } from "@visx/group";
 import { hierarchy, Tree } from "@visx/hierarchy";
 import { LinearGradient } from "@visx/gradient";
 import { pointRadial } from "d3-shape";
-
-
 import { Select } from "antd";
 
 // import useForceUpdate from "./useForceUpdate";
