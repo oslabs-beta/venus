@@ -3,7 +3,6 @@
  * @desc Component that renders to the page upon initial load of application for user to sign in
  * 
  */
-
 import React, { useContext, useState } from "react";
 import { globalContext } from '../contexts/globalContext' 
 import Form from 'antd/es/form';
@@ -11,6 +10,7 @@ import Input from 'antd/es/input';
 import Button from 'antd/es/button';
 import Card from 'antd/es/card';
 import Typography from "antd/es/typography";
+import logo from '../logo/venus.png';
 const { Title, Text } = Typography;
 
 
@@ -33,7 +33,9 @@ function SignIn():JSX.Element {
 
   return (
     <div className="loginContainer">
+      <img src={logo} alt="logo" className="logo"/>
       <Title>VENUS</Title>
+      
       <Card 
         style={{height: 'fit-content', width: 500}}
         bordered={true}
@@ -44,16 +46,17 @@ function SignIn():JSX.Element {
           name="Login"
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}>
+          onFinishFailed={onFinishFailed}
+          >
           <Form.Item
-            label="Server Address"
+            // label="Server"
             name="serverIP"
             rules={[{ required: true, message: 'Please enter valid Server Address.' }]}
           >
             <Input placeholder="Enter Server Address"/>
           </Form.Item>
           <Form.Item
-            label="Secret"
+            // label="Secret"
             name="secret"
             rules={[{ required: true, message: 'Please enter valid Secret.' }]}
           >
@@ -61,7 +64,7 @@ function SignIn():JSX.Element {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" style={{marginLeft: 37}}>
               Sign In
             </Button>
         </Form.Item>
