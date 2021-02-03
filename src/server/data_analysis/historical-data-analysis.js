@@ -1080,10 +1080,10 @@ const constructHistorical = async (input) => {
   
   histObj['service'] = input; 
 
-  readLastHour(input); 
-  readLastDay(input); 
-  readLastWeek(input); 
-  readLastMonth(input); 
+  await readLastHour(input); 
+  await readLastDay(input); 
+  await readLastWeek(input); 
+  await readLastMonth(input); 
 
   console.log('FULLY FORMED HISTORICAL OBJECT: ', histObj); 
 
