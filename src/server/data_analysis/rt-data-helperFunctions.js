@@ -159,7 +159,7 @@ function rtDataByCategory(df, category) {
 function rowToObj(row, service = false) {
   const newObj = {};
   if (service) newObj.service = service;
-  newObj.load = `${Math.ceil(row[1])} hpm`;
+  newObj.load = Math.ceil(row[1]);
   newObj.response_time = Math.round(row[2]);
   newObj.error = Math.round(row[3]);
   newObj.availability = Math.round(100 - row[4]);
@@ -183,7 +183,7 @@ function aggregateStatsToObj(df) {
   const totalResponses = df.resStatusCode.count();
   const totalClientErrors = df['clientError'].sum();
   newObj.error = Math.round(totalClientErrors / totalResponses * 100);
-  newObj.load = `${Math.ceil(totalRequests / STREAM_WINDOW)} hpm`;
+  newObj.load = Math.ceil(totalRequests / STREAM_WINDOW);
   newObj.response_time = Math.round(df.cycleDuration.mean());
   const totalServerErrors = df['serverError'].sum();
   newObj.availability = Math.round(100 - (totalServerErrors / totalRequests) * 100);
