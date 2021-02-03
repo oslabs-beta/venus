@@ -1056,7 +1056,7 @@ const constructHistorical = async (input) => {
   
   obj['service'] = input; 
 
-  obj['lastHour'] = readLastHour(input).promise(); 
+  obj['lastHour'] = await readLastHour(input); 
   obj['lastDay'] = await readLastDay(input); 
   obj['lastWeek'] = await readLastWeek(input); 
   obj['lastMonth'] = await readLastMonth(input); 
