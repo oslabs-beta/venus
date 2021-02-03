@@ -3,6 +3,8 @@ const path = require('path');
 const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 
+// ------ TODO: needs to wait for window to load ----- //
+
 // make the path for electron
 var electronPath = path.join(__dirname, '..', '..', 'node_modules', '.bin', 'electron');
 
@@ -19,7 +21,7 @@ let app = new Application({
         });
         describe('Application launch', function() {
           this.timeout(20000)})
-          
+       // using "chaiAsPromised" for async functions   
         global.before(function () {
           chai.should();
           chai.use(chaiAsPromised);

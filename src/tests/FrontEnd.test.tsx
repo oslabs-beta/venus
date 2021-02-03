@@ -115,7 +115,8 @@ describe('jest data parser testing', () => {
 
 // })
 
-//----- ground work for testing endpoints with promise testing by chai-as-promised -----//
+//----- ground work for testing endpoints with promise testing with chai-as-promised -----//
+
 // const chai = require("chai");
 // const chaiAsPromised = require("chai-as-promised");
 // chai.use(chaiAsPromised);
@@ -126,7 +127,7 @@ describe('jest data parser testing', () => {
 // })
 
 //----- ground work for enzyme testing -----//
-import { shallow } from 'enzyme';
+import enzyme, { shallow } from 'enzyme';
 // import {App} from '../app'; // Introduce the corresponding React component
 describe('Enzyme testing is in progress', () => {
   it('Enzyme testing activated', () => {
@@ -142,7 +143,7 @@ import { SignIn } from "../containers/SignInContainer";
 import { ChartContainer,  Availability, LoadChart, AggregateStats} from "../containers/ChartContainer";
 import { MainDisplay} from "../containers/MainDisplay";
 // import { shallow } from 'enzyme';
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 // describe('enzyme test for react', () => {
 //   it(('checking the sign in', () => {
 //   const onCountChange = jest.fn();
@@ -152,7 +153,6 @@ import ReactDOM from "react-dom";
 //     wrapper = mount(SignIn())
 //   })
 // })
-
 
   describe('checking sign in container', () => {
     it('expects secret form to be in SignIn component', () => {
@@ -187,17 +187,14 @@ import ReactDOM from "react-dom";
 
   })
 
-
-// -------- testing react hooks --------- //
+// -------- testing react hooks with enzyme for chart container/MainDisplay--------- //
 
 describe('snapshot testing for chart container', () => {
   it('the chart container container matches the snapshot', () => {
     expect(ChartContainer).toMatchSnapshot();
   })
-
-
 })
-  describe('chart container component', () => {
+  // describe('chart container component', () => {
     // it('renders', () => {
     // let wrapper: any = shallow(<ChartContainer />).context;
 
@@ -205,30 +202,23 @@ describe('snapshot testing for chart container', () => {
     // })
 
     // it('renders', () => {
-    //   let wrapper: any = shallow(<ChartContainer />).context;
-  
-    //     expect(wrapper.children().contains(<AggregateStats />)).toEqual(true);
+    //   let wrapper: any = enzyme.render(<ChartContainer />);
+    //   expect(wrapper.find('.rangeSelectorContainer')).toContainEqual(<div className="rangeSelectorContainer" />);
+    //     expect(wrapper.equals(<AggregateStats />)).toEqual(true);
     //   })
 
-    it("renders without crashing", () => {
-      const div = document.createElement("div");
-      ReactDOM.render(<MainDisplay />, div);
-      ReactDOM.unmountComponentAtNode(div);
-    });
+    // it("renders without crashing", () => {
+    //   const div = document.createElement("div");
+    //   ReactDOM.render(<MainDisplay />, div);
+    //   ReactDOM.unmountComponentAtNode(div);
+    // });
 
   //   // it('expects chart container component', () => {
   //   //   const { queryByTestId } = render(<ChartContainer />);
   //   //   const addMainDisplay = queryByTestId("card-dropdown-btn");
   //   //   expect(addMainDisplay).toBeInTheDocument();
   //   // })   
-
-  })
-  
-// it("App loads with initial state of 0", () => {
-//   const { container } = render(<SignIn />);
-//   const countValue = getByTestId(container, "secret-form");
-//   expect(countValue.textContent).toBe("0");
-// });
+  // })
 
 // describe('checking service settings container', () => {
 //     it('expects button to be in SignIn component', () => {
