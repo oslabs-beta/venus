@@ -146,3 +146,5 @@ Object {
   "status": "good",
 }
 `;
+
+exports[`snapshot testing for chart container the chart container container matches the snapshot 1`] = `[Function]`;

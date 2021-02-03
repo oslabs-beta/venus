@@ -124,7 +124,7 @@ function MainDisplay(): JSX.Element {
               >
                 <Content>
                   
-                  <Route path="/" exact component={Dashboard} />
+                  <Route data-testid="menuItem1" path="/" exact component={Dashboard} />
                   <Route path="/dependencyGraph" component={DependencyGraphContainer}/>
                   <Route path="/historicalData" component={ChartContainer} />
                   <Route path="/settings" component={SettingsContainer} />

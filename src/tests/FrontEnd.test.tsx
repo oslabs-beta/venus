@@ -135,12 +135,14 @@ describe('Enzyme testing is in progress', () => {
   });
 })
 
-// ----- Set Up For Ant Design Testing ----- //
+// -------- testing sign in container --------- //
 
 import { render } from "@testing-library/react";
 import { SignIn } from "../containers/SignInContainer";
-import { MainDisplay } from "../containers/MainDisplay";
-// import ReactDOM from "react-dom";
+import { ChartContainer,  Availability, LoadChart} from "../containers/ChartContainer";
+import { MainDisplay} from "../containers/MainDisplay";
+import { mount } from 'enzyme';
+import ReactDOM from "react-dom";
 // describe('enzyme test for react', () => {
 //   it(('checking the sign in', () => {
 //   const onCountChange = jest.fn();
@@ -185,12 +187,37 @@ import { MainDisplay } from "../containers/MainDisplay";
 
   })
 
-  describe('checking cards in chart container', () => {
-    it('expects "Enter Secret" component to be in SignIn component', () => {
-      const { queryByTestId } = render(<MainDisplay />);
-      const addMainDisplay = queryByTestId("menuItem1");
-      expect(addMainDisplay).toBeInTheDocument();
-    })   
+
+// -------- testing react hooks --------- //
+
+describe('snapshot testing for chart container', () => {
+  it('the chart container container matches the snapshot', () => {
+    expect(ChartContainer).toMatchSnapshot();
+  })
+
+
+})
+  describe('chart container component', () => {
+    const onCountChange = jest.fn();
+    let wrapper;
+    beforeEach(() => {
+      wrapper = mount(<ChartContainer setAggregate={onCountChange}/>);
+    })
+    it('renders', () => {
+      expect(2+2).toEqual(4)
+    })
+
+    // it("renders without crashing", () => {
+    //   const div = document.createElement("div");
+    //   ReactDOM.render(<MainDisplay />, div);
+    //   ReactDOM.unmountComponentAtNode(div);
+    // });
+
+  //   // it('expects chart container component', () => {
+  //   //   const { queryByTestId } = render(<ChartContainer />);
+  //   //   const addMainDisplay = queryByTestId("card-dropdown-btn");
+  //   //   expect(addMainDisplay).toBeInTheDocument();
+  //   // })   
 
   })
   
