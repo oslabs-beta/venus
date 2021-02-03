@@ -6,6 +6,10 @@ import React from 'react';
 import { changeChildArr, changeData, IDataNode, test, IService, TreeNode} from "../charts/DataFuncDepGraph"
 import { DependencyGraph,treeData, getLinkComponent, LinkControls  } from '../charts/DependencyTree'
 import { SettingsContainer } from '../containers/ServiceSettingsContainer';
+import { render } from "@testing-library/react";
+import { SignIn } from "../containers/SignInContainer";
+import { ChartContainer,  Availability, LoadChart, AggregateStats} from "../containers/ChartContainer";
+import { Dashboard } from "../containers/Dashboard";
 
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
@@ -127,23 +131,16 @@ describe('jest data parser testing', () => {
 // })
 
 //----- ground work for enzyme testing -----//
-import enzyme, { shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 // import {App} from '../app'; // Introduce the corresponding React component
 describe('Enzyme testing is in progress', () => {
   it('Enzyme testing activated', () => {
-    // const link:any = shallow(<DependencyGraph/>)
     expect(true).toBeTruthy();
   });
 })
 
 // -------- testing sign in container --------- //
 
-import { render } from "@testing-library/react";
-import { SignIn } from "../containers/SignInContainer";
-import { ChartContainer,  Availability, LoadChart, AggregateStats} from "../containers/ChartContainer";
-import { MainDisplay} from "../containers/MainDisplay";
-// import { shallow } from 'enzyme';
-// import ReactDOM from "react-dom";
 // describe('enzyme test for react', () => {
 //   it(('checking the sign in', () => {
 //   const onCountChange = jest.fn();
@@ -155,31 +152,36 @@ import { MainDisplay} from "../containers/MainDisplay";
 // })
 
   describe('checking sign in container', () => {
-    it('expects secret form to be in SignIn component', () => {
+    it('sign in container exists', () => {
+      const signInContainer:any = shallow(<SignIn/>)
+      expect(signInContainer).toBeTruthy();
+    });
+
+    it('expects secret form to be in SignIn conatainer', () => {
       const { queryByTestId } = render(<SignIn />);
       const addSignInButton = queryByTestId("secret-form");
       expect(addSignInButton).toBeInTheDocument();
     })
 
-    it('expects server IP form to be in SignIn component', () => {
+    it('expects server IP form to be in SignIn container', () => {
       const { queryByTestId } = render(<SignIn />);
       const addSignInButton = queryByTestId("serverIP-form");
       expect(addSignInButton).toBeInTheDocument();
     })
 
-    it('expects button to be in SignIn component', () => {
+    it('expects button to be in SignIn container', () => {
       const { queryByTestId } = render(<SignIn />);
       const addSignInButton = queryByTestId("signin-button");
       expect(addSignInButton).toBeInTheDocument();
     })   
     
-    it('expects signin card to be in SignIn component', () => {
+    it('expects signin card to be in SignIn container', () => {
       const { queryByTestId } = render(<SignIn />);
       const addSignInButton = queryByTestId("signin-card");
       expect(addSignInButton).toBeInTheDocument();
     })     
 
-    it('expects "Enter Secret" component to be in SignIn component', () => {
+    it('expects "Enter Secret" component to be in SignIn container', () => {
       const { queryByTestId } = render(<SignIn />);
       const addSignInButton = queryByTestId("signin-secret");
       expect(addSignInButton).toBeInTheDocument();
@@ -187,50 +189,62 @@ import { MainDisplay} from "../containers/MainDisplay";
 
   })
 
-// -------- testing react hooks with enzyme for chart container/MainDisplay--------- //
+// -------- testing chart container with enzyme (to bring in: react hooks with enzyme for chart container/MainDisplay)--------- //
 
-describe('snapshot testing for chart container', () => {
+describe('testing for chart container', () => {
+  it('chart container exists', () => {
+    const chartContainer:any = shallow(<ChartContainer />)
+    expect(chartContainer).toBeTruthy();
+  });
+
   it('the chart container container matches the snapshot', () => {
     expect(ChartContainer).toMatchSnapshot();
   })
+
+  it('availability exists in the chart container', () => {
+    const availabilityComponent:any = shallow(<Availability />)
+    expect(availabilityComponent).toBeTruthy();
+  });
+
+  it('load chart exists in the chart container', () => {
+    const loadChartComponent:any = shallow(<LoadChart />)
+    expect(loadChartComponent).toBeTruthy();
+  });
+
+  it('aggregate stats exist in the chart container', () => {
+    const aggregateStatsComponent:any = shallow(<AggregateStats />)
+    expect(aggregateStatsComponent).toBeTruthy();
+  });
 })
-  // describe('chart container component', () => {
-    // it('renders', () => {
-    // let wrapper: any = shallow(<ChartContainer />).context;
 
-    //   expect(wrapper.contains(<div className="rangeSelectorContainer"></div>)).toEqual(true);
-    // })
+// ----- checking main Display ----- //
 
-    // it('renders', () => {
-    //   let wrapper: any = enzyme.render(<ChartContainer />);
-    //   expect(wrapper.find('.rangeSelectorContainer')).toContainEqual(<div className="rangeSelectorContainer" />);
-    //     expect(wrapper.equals(<AggregateStats />)).toEqual(true);
-    //   })
-
-    // it("renders without crashing", () => {
-    //   const div = document.createElement("div");
-    //   ReactDOM.render(<MainDisplay />, div);
-    //   ReactDOM.unmountComponentAtNode(div);
-    // });
-
-  //   // it('expects chart container component', () => {
-  //   //   const { queryByTestId } = render(<ChartContainer />);
-  //   //   const addMainDisplay = queryByTestId("card-dropdown-btn");
-  //   //   expect(addMainDisplay).toBeInTheDocument();
-  //   // })   
-  // })
-
-// describe('checking service settings container', () => {
-//     it('expects button to be in SignIn component', () => {
-//       const { queryByTestId } = render(<SettingsContainer />);
-//       const addReactComponent = queryById("dashboard");
-//       expect(addReactComponent).toBeInTheDocument();
-//     })
+// describe('testing for maindisplay container', () => {
+//   it('main display container exists', () => {
+//     const mainDisplayContainer:any = render(<MainDisplay />)
+//     expect(mainDisplayContainer).toBeTruthy();
+//   });
 // })
 
-// import {App} from "../app.jsx";
-// it("renders without crashing", () => {
-//   const div = document.createElement("div");
-//   ReactDOM.render(SignIn(), div);
-//   ReactDOM.unmountComponentAtNode(div);
-// });
+// ----- checking Dashboard container ----- //
+
+// describe('testing for maindisplay container', () => {
+//   it('main display container exists', () => {
+//     const dashboardContainer:any = render(<Dashboard />)
+//     expect(dashboardContainer).toBeTruthy();
+//   });
+// })
+
+// ----- checking service settings container ------ //
+
+// describe('checking service settings container', () => {
+//   it('service settings container exists', () => {
+//     const serviceSettingsContainer:any = render(<SettingsContainer/>)
+//     expect(serviceSettingsContainer).toBeTruthy();
+//   })
+//   // it('expects button to be in SignIn component', () => {
+//   //   const { queryByTestId } = render(<SettingsContainer />);
+//   //   const addReactComponent = queryById("dashboard");
+//   //   expect(addReactComponent).toBeInTheDocument();
+//   // })
+// })
