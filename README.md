@@ -167,7 +167,7 @@ Development of Chronos is open source on GitHub through the tech accelerator umb
 
 
 
-- [Contributing](https://github.com/oslabs-beta/Chronos/blob/master/CONTRIBUTING.md)
+- [Contributing](https://github.com/wkencel/Venus/blob/main/CONTRIBUTING.md)
 
 <br>
 
