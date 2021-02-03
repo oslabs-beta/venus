@@ -588,7 +588,7 @@ histController.readLastHour = (req, res, next) => {
 
   const returnObj = {}; 
 
-  if(input !== 'aggregate'){
+  if(service !== 'aggregate'){
 
     queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
 
