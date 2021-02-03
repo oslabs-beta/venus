@@ -590,7 +590,7 @@ histController.readLastHour = (req, res, next) => {
 
   if(service !== 'aggregate'){
 
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
+    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service = '${service}' GROUP BY service, method;`;
 
     returnObj.service = service; 
     
@@ -604,14 +604,23 @@ histController.readLastHour = (req, res, next) => {
         const rows = result.rows; 
 
         returnObj['lastHour'] = {};
+        returnObj['lastHour']['aggregate'] = {}; 
         returnObj['lastHour']['availability'] = [];
         returnObj['lastHour']['error_rate'] = [];
         returnObj['lastHour']['response_time'] = [];
         returnObj['lastHour']['load'] = [];
 
         rows.forEach((row) => {
-          if(row.service === input){
+          
+          if(row.method === 'aggregate'){
 
+            returnObj.lastHour.aggregate['availability'] = row.availability;
+            returnObj.lastHour.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastHour.aggregate['response_time'] = row.response_time;
+            returnObj.lastHour.aggregate['load'] = row.load; 
+          }
+          
+          if(row.service === input && row.method !== 'aggregate'){
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
@@ -646,15 +655,10 @@ histController.readLastHour = (req, res, next) => {
         res.locals.data.lastHour = returnObj.lastHour; 
 
         return next(); 
-        // return returnObj.lastHour;
-
       }
     })
 
-    console.log('result: ', result); 
-    return result; 
-
-  } else {
+  } else { //If input is aggregate 
     queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
 
     returnObj.service = 'aggregate'; 
@@ -667,13 +671,23 @@ histController.readLastHour = (req, res, next) => {
         const rows = result.rows; 
 
         returnObj['lastHour'] = {};
+        returnObj['lastHour']['aggregate'] = {}; 
         returnObj['lastHour']['availability'] = [];
         returnObj['lastHour']['error_rate'] = [];
         returnObj['lastHour']['response_time'] = [];
         returnObj['lastHour']['load'] = [];
 
+        
+
         rows.forEach((row) => {
 
+          if(row.method === 'aggregate' && row.service === 'aggregate'){
+
+            returnObj.lastHour.aggregate['availability'] = row.availability;
+            returnObj.lastHour.aggregate['error_rate'] = row.error_rate;
+            returnObj.lastHour.aggregate['response_time'] = row.response_time;
+            returnObj.lastHour.aggregate['load'] = row.load; 
+          } else {
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
@@ -698,6 +712,7 @@ histController.readLastHour = (req, res, next) => {
               "value": row.load, 
               "service": row.service
             })
+          }
         })
         
         console.log(returnObj.lastHour);
