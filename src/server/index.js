@@ -199,7 +199,6 @@ app.post('/login', (req, res) => {
  * a historical data object that is then served back to the front-end for display. 
  */
 app.get('/getHistorical/:service', 
-  authController.verify,
   histController.readLastHour,
   histController.readLastDay,
   histController.readLastWeek,
