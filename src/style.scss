@@ -1,5 +1,10 @@
 @import "~antd/dist/antd.css";
 
+
+.logo {
+  width: 178px;
+  margin-bottom: 25px;
+}
 .parentCardContainer {
   display: flex;
   flex-direction: row;
@@ -11,8 +16,7 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
-  //  background: linear-gradient(44deg, #ffffb8 0%, #1890ff 99%);
-  // background: linear-gradient(44deg, #1890ff 0%, #ffffb8 70%, #feffe6 95%);
+  background-color: #f5f5f5;
 }
 
 .rangeSelectorContainer {
