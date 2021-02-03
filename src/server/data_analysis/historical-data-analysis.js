@@ -556,11 +556,11 @@ const histMain = () => {
 
   setTimeout(() => {
     writeEightHourIncrements(); 
-  }, 36000)
+  }, 50000)
 
   setTimeout(() => {
     writeOneDayIncrements(); 
-  }, 36000)
+  }, 90000)
 }
 
 
