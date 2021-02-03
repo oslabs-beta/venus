@@ -673,6 +673,8 @@ histController.readLastHour = (req, res, next) => {
         
         const rows = result.rows; 
 
+        console.log('Result from readLastHour query...', result.rows); 
+
         returnObj['lastHour'] = {};
         returnObj['lastHour']['aggregate'] = {}; 
         returnObj['lastHour']['availability'] = [];
