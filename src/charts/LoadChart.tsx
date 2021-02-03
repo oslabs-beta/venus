@@ -7,10 +7,10 @@ import React, { useState, useEffect, useContext } from "react";
 import Area from "@ant-design/charts/es/area";
 import { historicalContext } from "../contexts/historicalContext";
 function LoadChart(): JSX.Element {
-  const { serviceData } = useContext(historicalContext);
-
+const { timeRange } = useContext(historicalContext);
+  console.log(timeRange.load)
   var config = {
-    data: serviceData["last-hour"]["load"],
+    data: timeRange.load,
     xField: "time",
     yField: "value",
     seriesField: "method",

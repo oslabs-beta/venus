@@ -9,6 +9,7 @@ import { dynamicContext } from "../contexts/dynamicContext";
 import { AggregateStats } from "../components/AggregateStats";
 import { Availability } from "../charts/AvailabilityChart";
 import { LoadChart } from "../charts/LoadChart";
+import { ErrorRate } from '../charts/ErrorRate';
 import Row from "antd/es/row";
 import Col from "antd/es/col";
 import Card from "antd/es/card";
@@ -20,6 +21,7 @@ import Button from "antd/es/button";
 import axios from "axios";
 import dummyData from "../../session_storage/dummy_data.json";
 function ChartContainer(): JSX.Element {
+  let dataProps;
   const [bool, setBool] = useState(false);
   const {
     aggregate,
@@ -28,6 +30,8 @@ function ChartContainer(): JSX.Element {
     serviceData,
     setService,
     setServiceData,
+    timeRange,
+    setTimeRange,
   } = useContext(historicalContext);
   const { serviceNames } = useContext(dynamicContext);
   const test: any = {
@@ -37,28 +41,45 @@ function ChartContainer(): JSX.Element {
     error: 12,
     availability: 12,
   };
-  console.log(dummyData);
-  useEffect(() => {
-    setServiceData(dummyData);
+ 
+
+  const generateData = async () => {
+    await setTimeRange(dummyData.oneHour)
+    await setServiceData(dummyData)
     setBool(true);
+  }
+
+  useEffect(() => {
+    // generateData()
     setAggregate(test);
+
+    // fetch the data
+    // save the master object in memory. 
+    // key into the master object and overwrite a variable. 
+    // that variable will be passed down as props. 
+
+    //
+
+
     // axios.get('ec2instance'+'/getHistorical').then(function(response){
     //   setServiceData(response.data)
     // })
     // .catch(function(error){
     //   console.log(error,'error')
     // })
-    // axios
-    //   .get(
-    //     "https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json"
-    //   )
-    //   .then((response) => {
-    //     setServiceData(response.data);
-    //     setBool(true);
-    //   })
-    //   .catch((error) => {
-    //     console.log("fetch data failed", error);
-    //   });
+    axios
+      .get(
+        "https://gw.alipayobjects.com/os/bmw-prod/55424a73-7cb8-4f79-b60d-3ab627ac5698.json"
+      )
+      .then((response) => {
+        setServiceData(dummyData);
+        setBool(true);
+      })
+      .catch((error) => {
+        console.log("fetch data failed", error);
+      });
+
+
   }, []);
 
   // temporal options for chart displays
@@ -69,9 +90,11 @@ function ChartContainer(): JSX.Element {
     { label: "Last Month", value: "lastMonth" },
   ];
 
+
   // select data range to display from historical state
   const filterData = (e: any) => {
-    console.log("radio checked", e.target.value, service);
+    console.log("radio checked", e.target.value);
+    setTimeRange(serviceData[e.target.value])
   };
 
   const refreshData = () => {
@@ -115,6 +138,7 @@ function ChartContainer(): JSX.Element {
             optionType="button"
             onChange={filterData}
             options={options}
+            defaultValue="lastHour"
           />
 
           <Button
@@ -129,13 +153,13 @@ function ChartContainer(): JSX.Element {
           <Col span={12}>
             <Title level={5}>Availability</Title>
             <Card bordered={true} hoverable={true} style={{ width: "500px" }}>
-              {/* <Availability /> */}
+              <Availability />
             </Card>
           </Col>
           <Col span={12}>
             <Title level={5}>Latency</Title>
             <Card bordered={true} hoverable={true} style={{ width: "500px" }}>
-              {/* <Availability /> */}
+              <Availability />
             </Card>
           </Col>
         </Row>
@@ -143,7 +167,7 @@ function ChartContainer(): JSX.Element {
           <Col span={12}>
             <Title level={5}>Error Rate</Title>
             <Card bordered={true} hoverable={true} style={{ width: "500px" }}>
-              <LoadChart />
+              <ErrorRate />
             </Card>
           </Col>
           <Col span={12}>

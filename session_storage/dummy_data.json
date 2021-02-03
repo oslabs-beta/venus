@@ -1,19 +1,19 @@
 {
   "service": "google-api",
-  "last-hour": {
+  "lastHour": {
     "availability": [
       { "time": "2020-01-01T17:23:00", "value": 99.8, "method": "GET" },
       { "time": "2020-01-01T17:23:00", "value": 99.5, "method": "POST" },
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "PUT" },
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "DELETE" }
     ],
-    "error-rate": [
+    "errorRate": [
       { "time": "2020-01-01T17:23:00", "value": 3.8, "method": "GET" },
       { "time": "2020-01-01T17:23:00", "value": 4.5, "method": "POST" },
       { "time": "2020-01-01T17:23:00", "value": 5.3, "method": "PUT" },
       { "time": "2020-01-01T17:23:00", "value": 2.3, "method": "DELETE" }
     ],
-    "response-time": [
+    "responseTime": [
       { "time": "2020-01-01T17:23:00", "value": 99.8, "method": "GET" },
       { "time": "2020-01-01T17:23:00", "value": 99.5, "method": "POST" },
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "PUT" },
@@ -26,20 +26,20 @@
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "DELETE" }
     ]
   },
-  "last-day": {
+  "lastDay": {
     "availability": [
       { "time": "2020-01-01T17:23:00", "value": 99.8, "method": "GET" },
       { "time": "2020-01-01T17:23:00", "value": 99.5, "method": "POST" },
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "PUT" },
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "DELETE" }
     ],
-    "error-rate": [
+    "errorRate": [
       { "time": "2020-01-01T17:23:00", "value": 3.8, "method": "GET" },
       { "time": "2020-01-01T17:23:00", "value": 4.5, "method": "POST" },
       { "time": "2020-01-01T17:23:00", "value": 5.3, "method": "PUT" },
       { "time": "2020-01-01T17:23:00", "value": 2.3, "method": "DELETE" }
     ],
-    "response-time": [
+    "responseTime": [
       { "time": "2020-01-01T17:23:00", "value": 99.8, "method": "GET" },
       { "time": "2020-01-01T17:23:00", "value": 99.5, "method": "POST" },
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "PUT" },
@@ -52,20 +52,20 @@
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "DELETE" }
     ]
   },
-  "last-week": {
+  "lastWeek": {
     "availability": [
       { "time": "2020-01-01T17:23:00", "value": 99.8, "method": "GET" },
       { "time": "2020-01-01T17:23:00", "value": 99.5, "method": "POST" },
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "PUT" },
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "DELETE" }
     ],
-    "error-rate": [
+    "errorRate": [
       { "time": "2020-01-01T17:23:00", "value": 3.8, "method": "GET" },
       { "time": "2020-01-01T17:23:00", "value": 4.5, "method": "POST" },
       { "time": "2020-01-01T17:23:00", "value": 5.3, "method": "PUT" },
       { "time": "2020-01-01T17:23:00", "value": 2.3, "method": "DELETE" }
     ],
-    "response-time": [
+    "responseTime": [
       { "time": "2020-01-01T17:23:00", "value": 99.8, "method": "GET" },
       { "time": "2020-01-01T17:23:00", "value": 99.5, "method": "POST" },
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "PUT" },
@@ -78,20 +78,20 @@
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "DELETE" }
     ]
   },
-  "last-month": {
+  "lastMonth": {
     "availability": [
       { "time": "2020-01-01T17:23:00", "value": 99.8, "method": "GET" },
       { "time": "2020-01-01T17:23:00", "value": 99.5, "method": "POST" },
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "PUT" },
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "DELETE" }
     ],
-    "error-rate": [
+    "errorRate": [
       { "time": "2020-01-01T17:23:00", "value": 3.8, "method": "GET" },
       { "time": "2020-01-01T17:23:00", "value": 4.5, "method": "POST" },
       { "time": "2020-01-01T17:23:00", "value": 5.3, "method": "PUT" },
       { "time": "2020-01-01T17:23:00", "value": 2.3, "method": "DELETE" }
     ],
-    "response-time": [
+    "responseTime": [
       { "time": "2020-01-01T17:23:00", "value": 99.8, "method": "GET" },
       { "time": "2020-01-01T17:23:00", "value": 99.5, "method": "POST" },
       { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "PUT" },

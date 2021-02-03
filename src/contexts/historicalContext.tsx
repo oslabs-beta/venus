@@ -13,10 +13,12 @@ type historicalState = {
       availability: number,
     };
     service:string;
-    serviceData: any
+    serviceData: any;
+    timeRange: any;
     setAggregate: (input:any) => void;
     setService: (input:string) => void;
     setServiceData: (input:any) => void;
+    setTimeRange: (input:any) => void;
 };
 
 export const historicalData: historicalState = {
@@ -29,9 +31,11 @@ export const historicalData: historicalState = {
   },
   service: '',
   serviceData: {},
+  timeRange: {},
   setAggregate: () => {},
   setService: () => {},
-  setServiceData: () => {}
+  setServiceData: () => {},
+  setTimeRange: () => {},
 };
 
 export const historicalContext = React.createContext<historicalState>(historicalData)
@@ -42,7 +46,8 @@ export const HistoricalProvider: React.FC = (props: any) => {
   const [aggregate, setAggregate] = useState<any>({});
   const [ service, setService] = useState<any>('')
   const [ serviceData, setServiceData ] = useState<any>({})
+  const [ timeRange, setTimeRange ] = useState<any>({})
 
-  return <historicalContext.Provider value={{ aggregate, setAggregate, service, setService, setServiceData, serviceData}}>{props.children}</historicalContext.Provider>
+  return <historicalContext.Provider value={{ aggregate, setAggregate, service, setService, setServiceData, serviceData, timeRange, setTimeRange}}>{props.children}</historicalContext.Provider>
 
 }
