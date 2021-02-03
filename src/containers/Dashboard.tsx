@@ -45,7 +45,7 @@ function Dashboard(): JSX.Element {
 
     setServices([
       {
-        service: "a",
+        service: "ab",
         load: 1,
         response_time: 1,
         error: 1,
