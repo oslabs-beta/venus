@@ -215,4 +215,4 @@ const rtData = data => {
   return [consolidatedObj, dependencyObj];
 };
 
-module.exports = { rtData };
+exports.rtData = rtData; 
