@@ -137,7 +137,7 @@ const responseData = [
   * with an identical structure to one mentioned above.
   */ 
 
-const rtData = data => {
+ const rtData = data => {
   /* consolidatedObj will be populated according to the structure necessary for the electron client to display real-time metrics */
   const consolidatedObj = {};
 
@@ -156,6 +156,16 @@ const rtData = data => {
   df['serverError'] = df['serverError'].astype('int32');
   df['noError'] = df['noError'].astype('int32');
 
+  const timestampArr = df['id'].data;
+  const reg = /^\d+/g;
+  const timestampCol = [];
+  timestampArr.forEach(timestamp => {
+    timestampCol.push(Number(timestamp.match(reg)));
+  });
+  df.addColumn({
+    column: 'Timestamp',
+    value: timestampCol,
+  }); 
 
   
   const outputTableByService = rtDataByCategory(df, 'reqHost');
@@ -197,6 +207,7 @@ const rtData = data => {
     outputTableByMethod.data.forEach(row => {
       const method = row[0];
       const methodLvlObj = rowToObj(row);
+      methodLvlObj.service = host;
       // update consolidated object with method-level data
       consolidatedObj.services[hostIndex].byMethod[method] = methodLvlObj;
     });
@@ -204,12 +215,11 @@ const rtData = data => {
   // const consolidatedObjStringify = JSON.stringify(consolidatedObj);
   // const dependencyObjStringify = JSON.stringify(dependencyObj);
   // return both stringified objects as array elements
-  console.log(consolidatedObj);
+  console.log(consolidatedObj.services[0].byMethod);
   console.log(dependencyObj);
   return [consolidatedObj, dependencyObj];
 };
 
 // rtData(responseData);
 
-// module.exports = rtData;
-exports.rtData = rtData; 
+module.exports = rtData;
