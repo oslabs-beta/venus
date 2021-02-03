@@ -1,6 +1,6 @@
 {
   "service": "google-api",
-  "last-hour": {
+  "lastHour": {
     "availability": [
       { "time":"2020-01-01T17:23:00",
         "value": 99.8, 
@@ -74,7 +74,7 @@
       }
     ]
   }, 
-  "last-day": {
+  "lastDay": {
     "availability": [
       { "time":"2020-01-01T17:23:00",
         "value": 99.8, 
@@ -148,7 +148,7 @@
       }
     ]
   }, 
-  "last-week": {
+  "lastWeek": {
     "availability": [
       { "time":"2020-01-01T17:23:00",
         "value": 99.8, 
@@ -222,7 +222,7 @@
       }
     ]
   }, 
-  "last-month": {
+  "lastMonth": {
     "availability": [
       { "time":"2020-01-01T17:23:00",
         "value": 99.8, 
