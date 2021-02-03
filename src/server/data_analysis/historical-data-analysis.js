@@ -586,7 +586,7 @@ const readLastHour = async (input) => {
 
     returnObj.service = input; 
     
-    await client.query(queryText, (err, result) => {
+    const result = await client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -637,12 +637,14 @@ const readLastHour = async (input) => {
       }
     })
 
+    return result; 
+
   } else {
     queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
 
     returnObj.service = 'aggregate'; 
     
-    await client.query(queryText, (err, result) => {
+    const result = await client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -688,6 +690,8 @@ const readLastHour = async (input) => {
         return returnObj.lastHour; 
       }
     })
+
+    return result; 
   }
 }
 
