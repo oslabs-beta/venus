@@ -10,8 +10,9 @@ import { Group } from "@visx/group";
 import { hierarchy, Tree } from "@visx/hierarchy";
 import { LinearGradient } from "@visx/gradient";
 import { pointRadial } from "d3-shape";
-import { Select } from "antd";
-// import useForceUpdate from "./useForceUpdate";
+import { treeData } from './DataFuncDepGraph'
+import Select from "antd/es/select";
+
 import {
   LinkHorizontal,
   LinkVertical,
@@ -31,7 +32,7 @@ import {
 const { Option } = Select;
 //setting typescript constraints
 const controlStyles = { fontSize: 18 };
-type Props = {
+export type Props = {
   layout: string;
   orientation: string;
   linkType: string;
@@ -60,7 +61,7 @@ function LinkControls({
   function LayoutSelect(): any {
     return (
       <Select
-        defaultValue="Polar"
+        defaultValue={layout}
         style={{ width: 120 }}
         onChange={handleChangeLayout}
       >
@@ -70,14 +71,14 @@ function LinkControls({
     );
   }
 
-  function handleChangeOrientation(value) {
+  function handleChangeOrientation(value: string) {
     setOrientation(value);
   }
  //set
   function OrientationSelect(): any {
     return (
       <Select
-        defaultValue="Horizontal"
+        defaultValue={orientation}
         style={{ width: 120 }}
         onChange={handleChangeOrientation}
       >
@@ -87,13 +88,13 @@ function LinkControls({
     );
   }
 
-  function handleChangeLinkType(value) {
+  function handleChangeLinkType(value: string) {
     setLinkType(value);
   }
   function LinkTypeSelect(): any {
     return (
       <Select
-        defaultValue="Step"
+        defaultValue={linkType}
         style={{ width: 120 }}
         onChange={handleChangeLinkType}
       >
@@ -136,7 +137,7 @@ function LinkControls({
   );
 }
 
-// here we get the Link Component
+// function for Link Component w/ type assigned properties
 
 function getLinkComponent({
   layout,
@@ -180,83 +181,6 @@ function getLinkComponent({
   }
   return LinkComponent;
 }
-
-// this is the kind of type of the tree node
-interface TreeNode {
-  name: string;
-  status: string;
-  isExpanded?: boolean;
-  children?: TreeNode[];
-}
-
-// THIS IS OUR DUMMY DATA FOR THE TREE
-
-const treeData: TreeNode = {
-  name: "CodeSmith",
-  status: "good",
-  children: [
-    {
-      name: "Google API",
-      status: "good",
-      children: [
-        { name: "GET",
-        status: "bad"},
-        { name: "POST",
-        status: "good" },
-        { name: "PUT",
-        status: "fair" },
-        { name: "DEL",
-        status: "good" },
-        ]
-    },
-    {
-      name: "Plaid API",
-      status: "good",
-      children: [
-        { name: "PUT",
-        status: "good" },
-        { name: "DEL",
-        status: "good"},
-        ]
-    },
-    {
-      name: "Solarwinds API",
-      status: "fair",
-      children: [
-        { name: "GET",
-        status: "good" }
-        ]
-    },
-    {
-      name: "Surfline API",
-        status: "fair",
-      children: [
-        { name: "GET",
-        status: "bad" },
-        { name: "POST",
-        status: "fair" },
-        { name: "PUT",
-        status: "good" },
-        { name: "DEL",
-        status: "fair" },
-        ]
-    },
-    {
-      name: "Yelp API",
-      status: "bad",
-      children: [
-        { name: "GET",
-        status: "bad" },
-        { name: "POST",
-        status: "good" },
-        { name: "PUT",
-        status: "good" },
-        { name: "DEL",
-        status: "good" },
-        ]
-    },
-  ]
-};
 
 // margin from chart to the sides 
 const defaultMargin = { top: 110, left: 110, right: 110, bottom: 110 };
@@ -392,17 +316,13 @@ function DependencyGraph({
                       {node.depth !== 0 && (
                         <rect
                           height={height}
-                          width={node.data.children ? "12%" : "5%"}
+                          width={node.data.children ? "20%" : "10%"}
                           y={-height / 2}
-                          x={node.data.children ? -(width-16) / 2 : -(width-101) / 2}
+                          x={node.data.children ? -(width-40) / 2 : -(width-100) / 2}
                           // fill of individual node boxes
-                          // {node.data.children ? "#03c0dc" : "#26deb0"}
-                          // {node.data.status === 'good' ? "#272b4d" : "#26deb0"}
                           fill={changeChildren}
                           // change border here ------------
-                          // stroke={node.data.children ? "#03c0dc" : "#26deb0"}
                           stroke= {colorChangeBorder}
-                          // stroke={(node.data.children) ? "green" : 'yellow'}
                           strokeWidth={1.75}
                           strokeDasharray={node.data.children ? "0" : "2,2"}
                           strokeOpacity={node.data.children ? 1 : 0.6}
@@ -420,16 +340,9 @@ function DependencyGraph({
                         fontFamily= 'Roboto'
                         textAnchor="middle"
                         style={{ pointerEvents: "none" }}
-                        // fill={
-                        //   node.depth === 0
-                        //     ? "black"
-                        //     : node.children
-                        //     ? "black"
-                        //     : "black"
-                        // }
                         fill={colorChangeText}
                       >
-                        {node.data.name}
+                        {node.data.service}
                       </text>
                     </Group>
                   );
@@ -444,8 +357,8 @@ function DependencyGraph({
 }
 
 function useForceUpdate() {
-  const [, setValue] = useState<number>(0);
+  const [value, setValue] = useState<number>(0);
   return () => setValue(value => value + 1); // update state to force render
 }
 
-export { DependencyGraph };
+export { DependencyGraph, treeData, getLinkComponent, LinkControls };

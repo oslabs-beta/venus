@@ -4,8 +4,8 @@
 
 const axios = require("axios");
 const express = require("express");
-// const responseTime = require('response-time');
-// const morgan = require('morgan');
+// info for global-request-logger: https://www.npmjs.com/package/global-request-logger
+// logs requests & responses
 const globalLog = require("global-request-logger");
 globalLog.initialize();
 
@@ -130,7 +130,7 @@ venus();
 //#endregion
 
 
-app.use(express.static(path.join(__dirname, "../"))); //serves the index.html
+app.use(express.static(path.join(__dirname, '../test-client/'))); //serves the index.html
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

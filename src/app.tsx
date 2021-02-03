@@ -34,3 +34,4 @@ ReactDom.render(
   </BrowserRouter>, mainElement);
 
 
+export { App };

@@ -11,7 +11,7 @@ import Input from 'antd/es/input';
 import Button from 'antd/es/button';
 import Card from 'antd/es/card';
 import Typography from "antd/es/typography";
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 
 function SignIn():JSX.Element {
@@ -33,11 +33,10 @@ function SignIn():JSX.Element {
 
   return (
     <div className="loginContainer">
+      <Title>VENUS</Title>
       <Card 
-        className="test"
-        style={{height: 'fit-content', width: 600, textAlign: 'center'}}
+        style={{height: 'fit-content', width: 500}}
         bordered={true}
-        title={<Title>VENUS</Title>}
         hoverable={true}
         >
         <Form
@@ -68,6 +67,7 @@ function SignIn():JSX.Element {
         </Form.Item>
         </Form>
       </Card>
+      <Text style={{marginTop: 10}}>Venus Beta v1.0 2021</Text>
     </div>
   )
 }

@@ -2,10 +2,8 @@
  * @name Dashboard
  * @desc Current Status page that immediately renders when user signs in. Parent container to aggregate stats
  */
-
 import { io } from "socket.io-client";
 import React, { useContext, useEffect } from "react";
-
 import { AggregateStats } from "../components/AggregateStats";
 import Divider from "antd/es/divider";
 import Table from "antd/es/table";
@@ -16,22 +14,25 @@ import { dynamicContext } from "../contexts/dynamicContext";
 import Title from "antd/es/typography/Title";
 
 
-// ec2-3-15-29-241.us-east-2.compute.amazonaws.com:8080
 function Dashboard(): JSX.Element {
   
-  const { services, setServices, aggregate, setAggregate, filter, setFilter, serviceThresholds, firstTime, setFirstTime } = useContext(dynamicContext);
+  //imported dynamic context services for conditional rendering of real time data. 
+  const { services, setServices, aggregate, setAggregate, filter, setFilter, serviceThresholds, serviceNames, setServiceNames } = useContext(dynamicContext);
   const { serverAddress } = useContext(globalContext)
-
   const dataSource: any = [];
+  
   useEffect(() => {
     setFilter(filter)
     // console.log(serverAddress)
     // const socket:any = io(serverAddress + ':8080', {
     //   transports: ["websocket"],
     // });
+    // console.log('in console')
     // socket.on("connection", () => {
     //   console.log(socket.id);
+    //   console.log('connected')
     // });
+    // console.log('past connection req')
     // socket.on("real-time-object", (output: any) => {
     //   console.log("new update");
     //   console.log(output)
@@ -39,8 +40,9 @@ function Dashboard(): JSX.Element {
     //   setAggregate(newData.aggregate);
     //   setServices(newData.services);
     //   console.log(newData.aggregate);
-    //   console.log(newData.services);
+    //   console.log(newData.services, 'services');
     // });
+
     setServices([
       {
         service: "a",
@@ -90,6 +92,150 @@ function Dashboard(): JSX.Element {
           }
         }
       },
+      {
+        service: "d",
+        load: 101,
+        response_time: 1266,
+        error: 5,
+        availability: 152,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: "0.6666666865348816 hpm",
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
+      },
+      {
+        service: "e",
+        load: 101,
+        response_time: 1266,
+        error: 5,
+        availability: 152,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: "0.6666666865348816 hpm",
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
+      },
+      {
+        service: "f",
+        load: 101,
+        response_time: 1266,
+        error: 5,
+        availability: 152,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: "0.6666666865348816 hpm",
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
+      },
+      {
+        service: "l",
+        load: 1,
+        response_time: 1,
+        error: 1,
+        availability: 1,
+        byMethod: {
+          GET: {
+            service: "a",
+            load: 99,
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
+      },
+      {
+        service: "y",
+        load: 0,
+        response_time: 1000,
+        error: 0,
+        availability: 100,
+        byMethod: {
+          GET: {
+            service:"b",
+            load: 2,
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
+      },
+      {
+        service: "p",
+        load: 101,
+        response_time: 1266,
+        error: 5,
+        availability: 152,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: "0.6666666865348816 hpm",
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
+      },
+      {
+        service: "t",
+        load: 101,
+        response_time: 1266,
+        error: 5,
+        availability: 152,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: "0.6666666865348816 hpm",
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
+      },
+      {
+        service: "x",
+        load: 101,
+        response_time: 1266,
+        error: 5,
+        availability: 152,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: "0.6666666865348816 hpm",
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
+      },
+      {
+        service: "z",
+        load: 101,
+        response_time: 1266,
+        error: 5,
+        availability: 152,
+        byMethod: {
+          GET: {
+            status: "bad",
+            load: "0.6666666865348816 hpm",
+            response_time: 12,
+            error: 5,
+            availability: 1,
+          }
+        }
+      },
     ]);
     setAggregate({
       error: 40,
@@ -98,6 +244,8 @@ function Dashboard(): JSX.Element {
       availability: 83,
       status: 'good'
     })
+
+
     // return () => socket.disconnect();
     
   }, []);
@@ -135,6 +283,7 @@ function Dashboard(): JSX.Element {
       }
       services[i].key = i;
       let status = 0;
+      serviceNames.push(services[i].service)
       if (filter[services[i].service]){
         const holder = filter[services[i].service]
         if (baseline.load_threshold < services[i].byMethod[holder].load) ++status
@@ -152,6 +301,7 @@ function Dashboard(): JSX.Element {
         dataSource.push(services[i]);
       }
     }
+    setServiceNames(serviceNames)
   }
  
   const columns: any = [
