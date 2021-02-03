@@ -205,14 +205,14 @@ function DependencyGraph({
 // sets chart point origin
   if (layout === "polar") {
     // modifies margin for "polar" layout
-    margin = { top: 250, left: 110, right: 110, bottom: 110 }
+    margin = { top: 180, left: 110, right: 110, bottom: 110 }
     origin = {
       x: innerWidth / 2,
       y: innerHeight / 4
     };
     sizeWidth = 2 * Math.PI;
     // can set how spread out chart is here
-    sizeHeight = Math.min(innerWidth, innerHeight) / 1.75;
+    sizeHeight = Math.min(innerWidth, innerHeight) / 1.5;
   } else {
     origin = { x: 0, y: 0 };
     if (orientation === "vertical") {
@@ -249,7 +249,7 @@ function DependencyGraph({
       /*------- Put our data variable in place of treeData --------*/
             root={hierarchy(treeData, (d) => (d.isExpanded ? null : d.children))}
             size={[sizeWidth, sizeHeight]}
-            separation={(a, b) => (a.parent === b.parent ? .7 : 3) / a.depth}
+            separation={(a, b) => (a.parent === b.parent ? .4 : .4) / a.depth}
           >
             {(tree) => (
               <Group top={origin.y} left={origin.x}>
