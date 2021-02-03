@@ -200,6 +200,9 @@ app.post('/login', (req, res) => {
  */
 app.get('/getHistorical/:service', 
   histController.readLastHour,
+  histController.readLastDay,
+  histController.readLastWeek,
+  histController.readLastMonth,
   (req, res) => {
 
     return res.json(res.locals.data); 
