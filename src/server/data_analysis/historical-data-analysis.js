@@ -613,6 +613,8 @@ histController.readLastHour = (req, res, next) => {
 
         rows.forEach((row) => {
           
+          console.log('result row: ', row);
+
           if(row.method === 'aggregate'){
 
             returnObj.lastHour.aggregate['availability'] = row.availability;
@@ -660,7 +662,7 @@ histController.readLastHour = (req, res, next) => {
     })
 
   } else { //If input is aggregate 
-    queryText = `timestamp) as timestamp, service, method, availability::int::float4 as availability, response_time::int::float4 as response_time, error_rate::int::float4 as error_rate, load::int::float4 as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND method = 'aggregate';`;
+    queryText = `SELECT timestamp, service, method, availability::int::float4 as availability, response_time::int::float4 as response_time, error_rate::int::float4 as error_rate, load::int::float4 as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND method = 'aggregate';`;
 
     returnObj.service = 'aggregate'; 
     
