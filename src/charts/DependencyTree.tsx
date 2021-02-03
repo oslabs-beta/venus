@@ -4,13 +4,13 @@
  * its endpoints. Child component of DependencyGraphContainer.
  * 
  */
+//import of files and dependencies for dependency graph to properly render
 import React, { useState } from "react";
 import { Group } from "@visx/group";
 import { hierarchy, Tree } from "@visx/hierarchy";
 import { LinearGradient } from "@visx/gradient";
 import { pointRadial } from "d3-shape";
 import { Select } from "antd";
-
 // import useForceUpdate from "./useForceUpdate";
 import {
   LinkHorizontal,
@@ -27,8 +27,9 @@ import {
   LinkRadialLine
 } from "@visx/shape";
 
-const { Option } = Select;
 
+const { Option } = Select;
+//setting typescript constraints
 const controlStyles = { fontSize: 18 };
 type Props = {
   layout: string;
@@ -72,7 +73,7 @@ function LinkControls({
   function handleChangeOrientation(value) {
     setOrientation(value);
   }
-
+ //set
   function OrientationSelect(): any {
     return (
       <Select
