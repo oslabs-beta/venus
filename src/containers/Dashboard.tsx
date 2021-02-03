@@ -25,21 +25,19 @@ function Dashboard(): JSX.Element {
   const dataSource: any = [];
   useEffect(() => {
     setFilter(filter)
-    console.log(serverAddress)
+    const accessToken = localStorage.getItem('accessToken');
     const socket:any = io(serverAddress + ':8080', {
       transports: ["websocket"],
+      query: { accessToken },
     });
     socket.on("connection", () => {
-      console.log(socket.id);
+      console.log('Desktop connected to client!');
     });
     socket.on("real-time-object", (output: any) => {
-      console.log("new update");
       console.log(output)
       const newData = JSON.parse(output[0]);
       setAggregate(newData.aggregate);
       setServices(newData.services);
-      console.log(newData.aggregate);
-      console.log(newData.services, 'services');
     });
     // setServices([
     //   {

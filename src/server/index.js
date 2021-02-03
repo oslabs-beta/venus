@@ -1,127 +1,156 @@
+/* 
+  * Require Statements
+  * The server function requires express, socket.io and functionality from the redis read handler, 
+  * historical data analyzer and authentication controller. 
+*/
 const express = require('express'); 
 const socket = require('socket.io'); 
+const uuid = require('uuid-random');
 const cors = require('cors'); 
+const data = require('./data_analysis/rt-data.js'); 
+const jwt = require('jsonwebtoken');
+const redis = require('./redis_handlers/real-time-read-handler.js'); 
+const { constructHistorical, histMain, writeToDB, readAll } = require('./data_analysis/historical-data-analysis.js'); 
+const authController = require('./controller.js')
+require('dotenv').config(); 
+
+
+/* 
+  * Global Middleware Functions & Port Declarations
+  * HTTP & Sockets will communicate via different ports defined by the user on their EC2 instance and should be defined in the .env file. 
+  * All HTTP requests will pass through a json parser, urlencoding mechanism and will be cors compatible.  
+*/
+const HTTP_PORT = process.env.HTTP_PORT; 
+const SOCKET_PORT = process.env.SOCKET_PORT; 
+const EC2_HOST = process.env.EC2_HOST; 
 
 const app = express(); 
-const HTTP_PORT = 3000; 
-
-const data = require('./data_analysis/rt-data.js'); 
-const { constructHistorical, main, writeToDB } = require('./data_analysis/historical-data-analysis.js'); 
-const redis = require('./redis_handlers/real-time-read-handler.js'); 
-const authController = require('./controller.js')
-
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors({origin: '*'})); 
 
-require('dotenv').config(); 
 
-const SOCKET_PORT = 8080; 
-const EC2_HOST = process.env.EC2_HOST; 
-// const EC2_HOST = config.get('EC2_HOST'); 
+/* 
+  * Buffering Mechanism for Writing to Historical Analysis
+  * Count here serves as a way to disperse the rate at which logs are added to the Buffer array, 
+  * which when full, is then passed onto the writeToDB function to be then processed and analyzed.  
+*/
 let COUNT = 0; 
 let BUFFER = []; 
 
-//Trigger historical writes in database
-main(); 
+/* 
+  * Historical Main Function To Trigger Cascading Writes
+  * This function triggers the series of setTimeout functions in the historical-data-analysis file that 
+  * write to the series of tables Venus uses to have pre-calculated data points to serve onto the front-end. 
+*/
+histMain(); 
+readAll(); 
+
+
+/* 
+ * JWT access token will have a 24 hour lifetime,
+ * given the additional security layer that will be inherently provided by EC2
+ */
+// jwt ACCESS token lifetime (in HOURS)
+const access_token_lifetime = 24;
+
+/** 
+ *  JWT token initialization.
+ *  The initial user can either store the access token secret as an environment variable or
+ *  auto-generate one. 
+ */
+process.env.ACCESS_SECRET = process.env.ACCESS_SECRET || uuuid();
 
 /**
- * JWT token logic
+ * Token lifetime (in HOURS) will be saved as an environment variable.
+ * The access token will have a 24 hour lifetime by default but can be adjuted by the user as needed. 
  */
-const jwt = require('jsonwebtoken');
-// jwt ACCESS token lifetime (in MINUTES)
-const access_token_lifetime = 600;
+process.env.ACCESS_TOKEN_LIFETIME = process.env.ACCESS_TOKEN_LIFETIME || 24;
 
-// jwt REFRESH token lifetime (in HOURS)
-const refresh_token_lifetime = 24;
-
-// FIXME store as environment variables
-let SERVER_IP = 'testserver'
-let ACCESS_SECRET = 'Wa29*#B6H^n'
-let REFRESH_SECRET = 'g#RD4dXaQH54'
-let REFRESH_TOKEN_STORED;
-
+/* SOCKET SERVER - Strictly for the socket connection between the real-time dashboard and the real-time data analysis. */
 const server = app.listen(SOCKET_PORT, EC2_HOST, () => {
   console.log(`Listening in ${SOCKET_PORT}`); 
 }); 
 
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
 const io = socket(server); 
 
-/**
- * socket.io "global handler" 
- * At this point in the flow, a JWT access token has already been generated and stored in localStorage.
- * This function verifies that the accessToken has been provided and subsequently verifies it.
- */
+
+/* Socket.io handler includes a token verification layer before establishing a socket connection */
 io.use(function (socket, next) {
   if (socket.handshake.query && socket.handshake.query.accessToken) {
-      console.log('SUCCESSFUL TOKEN HANDSHAKE')
-      jwt.verify(socket.handshake.query.accessToken, ACCESS_SECRET, (err, decoded) => {
-        console.log('VERIFIED!')
-        if (err) return next(new Error('Token authentication error!'))
-        // socket.emit('')
-        socket.emit('connection', 'connected!'); 
-        socket.decoded = decoded;
-        return next();
-      });
-    } else {
-      return next(new Error('Token authentication error!'))
-    }
-})
+      jwt.verify(socket.handshake.query.accessToken, 
+        process.env.ACCESS_SECRET, 
+        (err, decoded) => {
+          if (err) return next(new Error('Token authentication error!'))
+          socket.emit('connection', 'connected!'); 
+          return next();
+        });
+      } return next(new Error('Token expired!'))
+});
 
 io.sockets.on('connection', (socket) => {
   console.log(`New connection: ${socket.id}`); 
   sendData(socket); 
 })
 
+
+/**
+ * Send Historical Data Function 
+ * This function's primarily role is to house all of the logic needed to buffer and send log data for historical data analysis, 
+ * leveraging the COUNT and BUFFER variables declared above to write data at a pre-determined cadence.
+ * 
+ * In this example, the function triggers sendData every 3 seconds and adds to the Buffer array every 3 minutes, which then writes
+ * to the "writeToDB" function passing the buffer off to the functions over in historical-data-analysis.js for further processing. 
+ */
 async function sendData(socket){
   //Increment count everytime sendData is invoked. 
   COUNT++; 
-  console.log('COUNT:', COUNT); 
-  console.log('BUFFER:', BUFFER); 
   
-//Read last three minutes of log data from stream and store into an array of objects
+  //Read last three minutes of log data from stream and store into an array of objects.
   const streamData = await redis.readRedisStream();
   
+  //Logic should only trigger if a valid response is received from the redis read handler.
   if(streamData.length !== 0){
-    //Analyze last three minutes of stream data and store output of analysis
-    let output = data.rtData(streamData);
     
+    //Analyze last three minutes of stream data and store output of analysis.
+    let output = data.rtData(streamData);
+
     console.log('EMITTING VIA SOCKET'); 
-    //Emit output to the front-end via websocket
+    
+    //Emit output to the front-end via websocket,
     socket.emit('real-time-object', output); 
     
-    if(COUNT === 1){
-      //add output to buffer
+    //When 3 minutes have passed (i.e. count is 60, since count only increments every 3 seconds), add to buffer. 
+    if(COUNT === 60){
+      
+      //Add the log object to the buffer. 
       BUFFER.push(output[0]); 
-      //Reset count to be zero
+      
+      //Reset count for the next cycle. 
       COUNT = 0; 
       
-      if(BUFFER.length === 3){
+      if(BUFFER.length === 20){
         
         console.log('WRITE TO DB TRIGGERED!'); 
 
-        //pass buffer into historical data analysis
+        //Pass buffer into historical data analysis.
         writeToDB(BUFFER); 
         
-        //empty buffer
+        //Reset buffer for the next cycle.
         BUFFER = []; 
       }
     }
     
   } else {
 
-    if(COUNT === 1){
+    if(COUNT === 60){
       COUNT = 0; 
     }
     
     console.log('No usable data from the stream. ')
   }
   
+  //Recursive call to trigger function every 3 seconds. 
   setTimeout(() => {
     sendData(socket); 
   }, 3000); 
@@ -132,104 +161,46 @@ async function sendData(socket){
  * EXPRESS ROUTES
  */
 
- /** handler for login request
- * will check against serverIP and secret environment variables
- * if it's a match, will generate an access token and a refresh token
+ /** 
+ * Route handler for login authentication request.
+ * Will check against serverAddress and secret environment variables.
+ * If varified, will generate and return to the desktop client a JWT access token
  */
 app.post('/login', (req, res) => {
-  console.log('LOGIN BODY', req.body);
-  console.log('ENV DATA', {
-    serverAddress: `${EC2_HOST}:${HTTP_PORT}`,
-    secret: ACCESS_SECRET,
-  });
   const { serverAddress, secret } = req.body;
-  // check against environment variables
   if (
     serverAddress === `http://${EC2_HOST}`
-    && secret === ACCESS_SECRET
+    && secret === process.env.ACCESS_SECRET
   ) {
-    console.log('ADDRESS AND SECRET MATCH')
-    // generate ACCESS token
     const accessToken = jwt.sign(
-      {
-        serverAddress,
+      { 
+        serverAddress 
       },
       secret,
       {
-        expiresIn: access_token_lifetime * 60,
+        expiresIn: process.env.ACCESS_TOKEN_LIFETIME * 3600,
       },
     );
-
-    // generate REFRESH token
-    const refreshToken = jwt.sign(
-      {
-        serverAddress,
-      },
-      REFRESH_SECRET,
-      {
-        // 3600 = seconds in 1 hour
-        expiresIn: refresh_token_lifetime * 3600,
-      },
-    );
-    // FIXME update logic
-    REFRESH_TOKEN_STORED = refreshToken;
-    console.log('ACCESS TOKEN', accessToken)
-    console.log('REFRESH TOKEN', refreshToken)
-    console.log('REFRESH TOKEN STORED', REFRESH_TOKEN_STORED)
-    return res.json({
-      accessToken,
-      refreshToken,
-    });
+    return res.json(accessToken);
   }
   res.status(403).send('Incorrect credentials');
 });
 
-/**
- * Refresh token handler
- * Ensures that refreshToken is included in request body. If so, verifies against secret and generates a new
- * Access token.
+ /** 
+ * Historical Chart Data Route Handler
+ * This handler passes on the service the front-end is requesting data for and generates 
+ * a historical data object that is then served back to the front-end for display. 
  */
-app.post('/refresh_token', (req, res) => {
-  console.log('REFRESH TOKEN HANDLER INVOKED')
-  const { refreshToken } = req.body;
-  // check if refreshToken was included in body
-  if (!refreshToken) {
-    return res.sendStatus(401).json({
-      error: 'Access denied! Missing token...',
-    });
-  }
-  // query cache to ensure that token is valid
-  if (refreshToken !== REFRESH_TOKEN_STORED) {
-    return res.status(403).json({
-      error: 'Token expired!',
-    });
-  }
-  // extract payload from refresh token and generate new access token
-  const payload = jwt.verify(REFRESH_TOKEN_STORED, REFRESH_SECRET);
-  const accessToken = jwt.sign(
-    {
-      serverAddress: payload,
-    },
-    ACCESS_SECRET,
-    {
-      expiresIn: access_token_lifetime * 60,
-    },
-    // FIXME take this line out
-    (err, token) => console.error(`access token successfully created ${token}`),
-  );
-  return res.json({ accessToken });
-});
-
-
 app.get('/getHistorical', 
   authController.verify,
   (req, res) => {
     const { service } = req.body; 
-    const output = constructHistorical(service); 
-    return res.json(output); 
+    const histData = constructHistorical(service); 
+    return res.json(histData); 
 })
 
 
+/* HTTP SERVER - This server delcaration is ONLY for HTTP requests and is separate from the Socket server. */
 app.listen(HTTP_PORT, () => {
   console.log(`HTTP requests listening on port ${HTTP_PORT}`)
 })

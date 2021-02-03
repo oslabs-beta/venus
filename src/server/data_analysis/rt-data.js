@@ -166,17 +166,6 @@ const rtData = data => {
   df['serverError'] = df['serverError'].astype('int32');
   df['noError'] = df['noError'].astype('int32');
 
-  // const timestampArr = df['id'].data;
-  // const reg = /^\d+/g;
-  // const timestampCol = [];
-  // timestampArr.forEach(timestamp => {
-  //   timestampCol.push(Number(timestamp.match(reg)));
-  // });
-  // df.addColumn({
-  //   column: 'Timestamp',
-  //   value: timestampCol,
-  // }); 
-  
 
   const outputTableByService = rtDataByCategory(df, 'reqHost');
   
@@ -185,7 +174,6 @@ const rtData = data => {
    * Iterate through each row and construct the service-level object to be pushed to the array ('services' key: value)
    */
   consolidatedObj.timestamp = df['id'].data[0];
-  console.log('TIME', consolidatedObj);
   consolidatedObj.services = [];
   outputTableByService.data.forEach(row => {
     const service = row[0];
@@ -224,12 +212,7 @@ const rtData = data => {
       consolidatedObj.services[hostIndex].byMethod[method] = methodLvlObj;
     });
   });
-  // const consolidatedObjStringify = JSON.stringify(consolidatedObj);
-  // const dependencyObjStringify = JSON.stringify(dependencyObj);
-  // return both stringified objects as array elements
-  console.log(consolidatedObj);
-  console.log(dependencyObj);
   return [consolidatedObj, dependencyObj];
 };
 
-exports.rtData = rtData;
+module.exports = { rtData };

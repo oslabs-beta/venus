@@ -3,7 +3,16 @@ const { Client, Pool } = require('pg');
 const config = require('config');
 require('dotenv').config();
 
-//Specify table names
+/* 
+  * Table and Interval Declarations
+  * This historical analysis function essentially depends on us creating a
+  * cascading series of tables that capture data points at higher and higher
+  * levels of granularity. In this case, we are creating four tables that capture 
+  * data points at the 3 minute, 1 hour, 8 hour and 1 day levels of detail. 
+  * 
+  * Ultimately the purpose of hosting multiple tables is to have pre-processed data
+  * ready to be served by the front-end for display purposes. 
+*/
 const THREE_MIN_TABLE = 'three_min_table';
 const ONE_HR_TABLE = 'one_hr_table';
 const EIGHT_HR_TABLE = 'eight_hr_table'
@@ -13,17 +22,16 @@ const EIGHT_HOURS = 28800000;
 const DAY = 86400000; 
 const WEEK = 604800000; 
 
-//Boilerplate to set up postgres db (client) object
+/* BOILERPLATE CODE TO INSTANTIATE DB CONNECTION */
 const client = new Client({
-  user: 'postgres', 
-  host: 'rds-proxy-aurora-postgres.proxy-czysdiigcqcb.us-east-2.rds.amazonaws.com', 
-  database: 'postgres', 
-  password: 'lalalalovesong!', 
+  user: process.env.DB_NAME, 
+  host: process.env.DB_PROXY, 
+  database: process.env.DB_NAME, 
+  password: process.env.DB_PASS, 
   port: process.env.DB_PORT
 })
 
 client.connect();
-
 
 const test = [
   {
@@ -120,7 +128,19 @@ const test = [
   } 
 ]
 
-//writeToDB takes in a buffer of 3 min "real-time" objects and writes them to the 3-min table
+
+/* 
+  * DB WRITE FUNCTIONS
+  * This series of functions house the SQL query logic to actually read, aggregate and write the log data at successive levels of 
+  * granularity to be stored and then eventually served / read to the front-end. With the sole exception of writeToDB (which is triggered in index.js)
+  * the write functions operate in the background initiatied via histMain. 
+*/
+
+
+/* @param - Buffer Array of log objects. 
+  * This function is triggered by index.js and takes in an array of log objects at 3 minute intervals and then writes them to the 
+  * three minute database for future consumption 
+*/
 const writeToDB = (buffer) => {
 
   let queryText = `INSERT INTO ${THREE_MIN_TABLE} (timestamp, service, method, availability, response_time, error_rate, load) VALUES `; 
@@ -162,17 +182,9 @@ const writeToDB = (buffer) => {
     }
   })
 
-  client.query('SELECT * FROM three_min_table; ', (err, result) => {
-    if(err){
-      console.log(err); 
-    } else {
-      console.log(`${THREE_MIN_TABLE}...`, result.rows); 
-    }
-  })
-
 }
 
-//Write a function that reads and analyzes the last hour of 3 minute rows and writes it to the 1 hour table
+/* This function reads and analyzes the last hour of 3 minute rows and writes it to the 1 hour table */
 const writeOneHourIncrements = () => {
 
   //Query for overall average
@@ -298,7 +310,7 @@ const writeOneHourIncrements = () => {
 
 } 
 
-//Write a function that reads and analyzes the last eight hours of 1 hour rows and writes it to the 8 hour table
+/* This function reads and analyzes the last eight hours of 1 hour rows and writes it to the 8 hour table */
 const writeEightHourIncrements = () => {
   
   //Query for overall average
@@ -415,7 +427,7 @@ const writeEightHourIncrements = () => {
 
 } 
 
-//Write a function that reads and analyzes the last day of 8 hour rows and writes it to the one day table
+/* This function reads and analyzes the last day of 8 hour rows and writes it to the one day table */
 const writeOneDayIncrements = () => {
 
   //Query for overall average
@@ -531,7 +543,32 @@ const writeOneDayIncrements = () => {
   })
 } 
 
-//Reading rows from the last hour for consumption on the front-end
+/* Main function initiaties all of the set timeouts necessary to begin the cascading write process. */
+const histMain = () => {
+
+  setTimeout(() => {
+    writeOneHourIncrements(); 
+  }, HOUR)
+
+  setTimeout(() => {
+    writeEightHourIncrements(); 
+  }, EIGHT_HOURS)
+
+  setTimeout(() => {
+    writeOneDayIncrements(); 
+  }, DAY)
+}
+
+
+
+
+/* 
+  * DB READ FUNCTIONS
+  * This series of functions essentially function as middleware to construct the historical data object needed for display purposes. 
+  * They are stitched together by the constructHistorical function which is the only middleware function at the index.js server level. 
+*/
+
+/* This function reads rows from the 3 minute table for the last hour and appends to the historical data object to be consumed on the front end. */
 const readLastHour = (input) => {
   //Query for ALL rows in the last hour 
   
@@ -649,7 +686,7 @@ const readLastHour = (input) => {
   }
 }
 
-//Reading rows from the last day for consumption on the front-end
+/* This function reads rows from the 1 hour table for the last day and appends to the historical data object to be consumed on the front end. */
 const readLastDay = (input) => {
   //Query for ALL rows in the last hour 
   
@@ -767,7 +804,7 @@ const readLastDay = (input) => {
   }
 }
 
-//Reading rows from the last week for consumption on the front-end
+/* This function reads rows from the 8 hour table for the last week and appends to the historical data object to be consumed on the front end. */
 const readLastWeek = (input) => {
   //Query for ALL rows in the last hour 
   
@@ -885,7 +922,7 @@ const readLastWeek = (input) => {
   }
 }
 
-//Reading rows from the last month for consumption on the front-end
+/* This function reads rows from the one day table for the last month and appends to the historical data object to be consumed on the front end. */
 const readLastMonth = (input) => {
   //Query for ALL rows in the last hour 
   
@@ -1003,32 +1040,11 @@ const readLastMonth = (input) => {
   }
 }
 
-//Function to convert unix time into a number
-const unixStringToNumber = (unixString) => {
-
-  let unix = unixString.slice(0, unixString.length - 2);
-  
-  unix = new Number(unix); 
-  
-  return unix; 
-}
-
-//Function to convert unix time into a timestamp consumable by the front-end
-const unixToTimestamp = (unixString) => {
-
-  const unix = new Number(unixString); 
-
-  let date = new Date(unix); 
-
-  date = JSON.stringify(date); 
-
-  date = date.slice(1, date.length - 6); 
-
-  return date; 
-
-}
-
-//Historical read object constructor function
+/* 
+  * HISTORICAL DATA OBJECT CONSTRUCTOR FUNCTION
+  * This function stitches all of the write functions above in order to output one consolidated historical data object
+  * that is then consumed by the front-end for display purposes. 
+*/
 const constructHistorical = async (input) => {
   
   const obj = {};
@@ -1043,29 +1059,66 @@ const constructHistorical = async (input) => {
   return obj; 
 }
 
-/*
-  Main function initiaties all of the set timeouts necessary to begin the cascading write process. 
-  Note that this operates on a separate cadence than the function that initially writes to the 3 min table (that function is triggered manually in the index.js file whenever the buffer becomes full).
-*/
-const main = () => {
 
-  setTimeout(() => {
-    writeOneHourIncrements(); 
-  }, HOUR)
 
-  setTimeout(() => {
-    writeEightHourIncrements(); 
-  }, EIGHT_HOURS)
+/* This is a helper function converts the unix timestamp passed in from the redis stream into a number. */
+const unixStringToNumber = (unixString) => {
 
-  setTimeout(() => {
-    writeOneDayIncrements(); 
-  }, DAY)
+  let unix = unixString.slice(0, unixString.length - 2);
+  
+  unix = new Number(unix); 
+  
+  return unix; 
+}
+
+/* This is a helper function converts the unix timestamp into a Postgres compatible timestamp. */
+const unixToTimestamp = (unixString) => {
+
+  const unix = new Number(unixString); 
+
+  let date = new Date(unix); 
+
+  date = JSON.stringify(date); 
+
+  date = date.slice(1, date.length - 6); 
+
+  return date; 
 
 }
 
-// histWriteToDB(test); 
-// readAndWriteLastHour(); 
-// const testService = 'curriculum-api.codesmith.io'
-// readLastHour(testService); 
+const readAll = () => {
+  client.query('SELECT * FROM three_min_table; ', (err, result) => {
+    if(err){
+      console.log(err); 
+    } else {
+      console.log(`${THREE_MIN_TABLE}...`, result.rows); 
+    }
+  })
+  
+  client.query('SELECT * FROM one_hr_table; ', (err, result) => {
+    if(err){
+      console.log(err); 
+    } else {
+      console.log(`${ONE_HR_TABLE}...`, result.rows); 
+    }
+  })
 
-module.exports = {constructHistorical, main, writeToDB}; 
+  client.query('SELECT * FROM eight_hr_table; ', (err, result) => {
+    if(err){
+      console.log(err); 
+    } else {
+      console.log(`${EIGHT_HR_TABLE}...`, result.rows); 
+    }
+  })
+
+  client.query('SELECT * FROM one_day_table; ', (err, result) => {
+    if(err){
+      console.log(err); 
+    } else {
+      console.log(`${ONE_DAY_TABLE}...`, result.rows); 
+    }
+  })
+}
+
+
+module.exports = {constructHistorical, histMain, writeToDB, readAll }; 
