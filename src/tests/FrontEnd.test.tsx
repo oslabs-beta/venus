@@ -139,9 +139,9 @@ describe('Enzyme testing is in progress', () => {
 
 import { render } from "@testing-library/react";
 import { SignIn } from "../containers/SignInContainer";
-import { ChartContainer,  Availability, LoadChart} from "../containers/ChartContainer";
+import { ChartContainer,  Availability, LoadChart, } from "../containers/ChartContainer";
 import { MainDisplay} from "../containers/MainDisplay";
-import { mount } from 'enzyme';
+// import { shallow } from 'enzyme';
 import ReactDOM from "react-dom";
 // describe('enzyme test for react', () => {
 //   it(('checking the sign in', () => {
@@ -198,13 +198,10 @@ describe('snapshot testing for chart container', () => {
 
 })
   describe('chart container component', () => {
-    const onCountChange = jest.fn();
-    let wrapper;
-    beforeEach(() => {
-      wrapper = mount(<ChartContainer setAggregate={onCountChange}/>);
-    })
     it('renders', () => {
-      expect(2+2).toEqual(4)
+    let wrapper: any = shallow(<ChartContainer />).context;
+
+      expect(wrapper.contains(<AggregateStats />)).toEqual(true);
     })
 
     // it("renders without crashing", () => {

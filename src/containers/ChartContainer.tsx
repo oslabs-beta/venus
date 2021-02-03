@@ -126,4 +126,4 @@ function ChartContainer(): JSX.Element {
   )
 }
 }
-export { ChartContainer, Availability, LoadChart, Button }
+export { ChartContainer, Availability, LoadChart, Button, AggregateStats }
