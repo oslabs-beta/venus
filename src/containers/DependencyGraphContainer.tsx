@@ -22,8 +22,8 @@ function DependencyGraphContainer(): JSX.Element{
         load={aggregate.load}
         availability={aggregate.availability}
         />
-          <Divider><Title level={3}>Service Endpoints and Method Dependencies</Title></Divider>
-          <Card hoverable={true} style={{width: 'total width'}}>
+         <Divider><Title level={3}>Dependency graph</Title></Divider>
+          <Card hoverable={true} style={{width: 848}}>
             <DependencyGraph width={600} height={600} />
           </Card>
     </div>
