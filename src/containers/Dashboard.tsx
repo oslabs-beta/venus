@@ -309,8 +309,14 @@ function Dashboard(): JSX.Element {
       title: "Service",
       dataIndex: "service",
       key: "service",
-      sorter: (a:any, b:any) => columns[0].key.sort(a.key.localeCompare(b.key))
+      sorter: {
+        compare: (a:any, b:any) => a.error - b.error,
+      }
+      //(a:any, b:any) => columns[0].key.sort(a.key.localeCompare(b.key))
     },
+    // sorter:{
+    //   compare: (a:any, b:any) => a.error - b.error,
+    // }
     {
       title: "Status",
       dataIndex: "status",
