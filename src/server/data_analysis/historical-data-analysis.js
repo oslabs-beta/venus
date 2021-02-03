@@ -138,7 +138,8 @@ const test = [
 */
 
 
-/* @param - Buffer Array of log objects. 
+/** 
+  * @param {buffer} - Array of log objects. 
   * This function is triggered by index.js and takes in an array of log objects at 3 minute intervals and then writes them to the 
   * three minute database for future consumption 
 */
@@ -563,16 +564,16 @@ const histMain = () => {
 
 
 
-/* 
+/**  
   * DB READ FUNCTIONS
+  * @param {input} - A string that's either the name of the service or the string 'aggregate'
   * This series of functions essentially function as middleware to construct the historical data object needed for display purposes. 
   * They are stitched together by the constructHistorical function which is the only middleware function at the index.js server level. 
 */
 
 /* This function reads rows from the 3 minute table for the last hour and appends to the historical data object to be consumed on the front end. */
-const readLastHour = (input) => {
+const readLastHour = async (input) => {
   
-
   console.log('Invoked readLastHour...')
 
   let queryText = ''; 
@@ -585,7 +586,7 @@ const readLastHour = (input) => {
 
     returnObj.service = input; 
     
-    client.query(queryText, (err, result) => {
+    await client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -641,7 +642,7 @@ const readLastHour = (input) => {
 
     returnObj.service = 'aggregate'; 
     
-    client.query(queryText, (err, result) => {
+    await client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -655,7 +656,6 @@ const readLastHour = (input) => {
         returnObj['lastHour']['load'] = [];
 
         rows.forEach((row) => {
-          // if(row.service !== input){
 
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
@@ -681,7 +681,6 @@ const readLastHour = (input) => {
               "value": row.load, 
               "service": row.service
             })
-          // }
         })
         
         console.log(returnObj.lastHour); 
@@ -693,7 +692,7 @@ const readLastHour = (input) => {
 }
 
 /* This function reads rows from the 1 hour table for the last day and appends to the historical data object to be consumed on the front end. */
-const readLastDay = (input) => {
+const readLastDay = async (input) => {
   //Query for ALL rows in the last hour 
   
   let queryText = ''; 
@@ -705,7 +704,7 @@ const readLastDay = (input) => {
 
     returnObj.service = input; 
     
-    client.query(queryText, (err, result) => {
+    await client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -759,7 +758,7 @@ const readLastDay = (input) => {
 
     returnObj.service = 'aggregate'; 
     
-    client.query(queryText, (err, result) => {
+    await client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -811,7 +810,7 @@ const readLastDay = (input) => {
 }
 
 /* This function reads rows from the 8 hour table for the last week and appends to the historical data object to be consumed on the front end. */
-const readLastWeek = (input) => {
+const readLastWeek = async (input) => {
   //Query for ALL rows in the last hour 
   
   let queryText = ''; 
@@ -823,7 +822,7 @@ const readLastWeek = (input) => {
 
     returnObj.service = input; 
     
-    client.query(queryText, (err, result) => {
+    await client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -877,7 +876,7 @@ const readLastWeek = (input) => {
 
     returnObj.service = 'aggregate'; 
     
-    client.query(queryText, (err, result) => {
+    await client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -929,7 +928,7 @@ const readLastWeek = (input) => {
 }
 
 /* This function reads rows from the one day table for the last month and appends to the historical data object to be consumed on the front end. */
-const readLastMonth = (input) => {
+const readLastMonth = async (input) => {
   //Query for ALL rows in the last hour 
   
   let queryText = ''; 
@@ -941,7 +940,7 @@ const readLastMonth = (input) => {
 
     returnObj.service = input; 
     
-    client.query(queryText, (err, result) => {
+    await client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -995,7 +994,7 @@ const readLastMonth = (input) => {
 
     returnObj.service = 'aggregate'; 
     
-    client.query(queryText, (err, result) => {
+    await client.query(queryText, (err, result) => {
       if(err){
         console.log(err); 
       } else {
@@ -1066,7 +1065,6 @@ const constructHistorical = async (input) => {
 
   return obj; 
 }
-
 
 
 /* This is a helper function converts the unix timestamp passed in from the redis stream into a number. */
