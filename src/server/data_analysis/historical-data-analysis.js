@@ -20,7 +20,8 @@ const ONE_DAY_TABLE = 'one_day_table';
 const HOUR = 3600000; 
 const EIGHT_HOURS = 28800000;  
 const DAY = 86400000; 
-const WEEK = 604800000; 
+const WEEK = 604800000;
+const MONTH =  2629800000; 
 
 /* BOILERPLATE CODE TO INSTANTIATE DB CONNECTION */
 const client = new Client({
