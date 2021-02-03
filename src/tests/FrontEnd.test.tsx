@@ -139,6 +139,7 @@ describe('Enzyme testing is in progress', () => {
 
 import { render } from "@testing-library/react";
 import { SignIn } from "../containers/SignInContainer";
+import { MainDisplay } from "../containers/MainDisplay";
 // import ReactDOM from "react-dom";
 // describe('enzyme test for react', () => {
 //   it(('checking the sign in', () => {
@@ -168,8 +169,28 @@ import { SignIn } from "../containers/SignInContainer";
       const { queryByTestId } = render(<SignIn />);
       const addSignInButton = queryByTestId("signin-button");
       expect(addSignInButton).toBeInTheDocument();
+    })   
+    
+    it('expects signin card to be in SignIn component', () => {
+      const { queryByTestId } = render(<SignIn />);
+      const addSignInButton = queryByTestId("signin-card");
+      expect(addSignInButton).toBeInTheDocument();
     })     
 
+    it('expects "Enter Secret" component to be in SignIn component', () => {
+      const { queryByTestId } = render(<SignIn />);
+      const addSignInButton = queryByTestId("signin-secret");
+      expect(addSignInButton).toBeInTheDocument();
+    })     
+
+  })
+
+  describe('checking cards in chart container', () => {
+    it('expects "Enter Secret" component to be in SignIn component', () => {
+      const { queryByTestId } = render(<MainDisplay />);
+      const addMainDisplay = queryByTestId("menuItem1");
+      expect(addMainDisplay).toBeInTheDocument();
+    })   
 
   })
   

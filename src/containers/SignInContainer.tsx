@@ -35,6 +35,7 @@ function SignIn():JSX.Element {
   return (
     <div className="loginContainer">
       <Card 
+        data-testid="signin-card"
         style={{height: 'fit-content', width: 600, textAlign: 'center'}}
         bordered={true}
         title={<Title>VENUS</Title>}
@@ -61,7 +62,10 @@ function SignIn():JSX.Element {
             name="secret"
             rules={[{ required: true, message: 'Please enter valid Secret.' }]}
           >
-            <Input.Password placeholder="Enter Secret" />
+            <Input.Password 
+              data-testid="signin-secret"
+              placeholder="Enter Secret" 
+            />
           </Form.Item>
 
           <Form.Item {...tailLayout}>
