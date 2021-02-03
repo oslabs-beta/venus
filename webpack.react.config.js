@@ -16,6 +16,18 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
+          options: 
+              {  
+                plugins: [
+                  [
+                    "import",
+                    {
+                      "libraryName": "antd",
+                      "style": "index.css"
+                    }
+                  ]
+                ]
+              }
         },
       },
       {

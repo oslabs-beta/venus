@@ -274,9 +274,7 @@ function Dashboard(): JSX.Element {
         load={aggregate.load}
         availability={aggregate.availability}
       />
-      <Divider>
-        <Title level={3}>Current Status</Title>
-      </Divider>
+
       <Table
         bordered
         scroll={{y: "67vh"}}

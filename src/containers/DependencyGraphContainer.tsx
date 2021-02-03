@@ -4,7 +4,8 @@ import { DependencyGraph} from '../charts/DependencyTree'
 import { AggregateStats } from '../components/AggregateStats';
 import { dynamicContext } from '../contexts/dynamicContext';
 import Divider from 'antd/es/divider';
-import Title from 'antd/es/typography/Title';
+import Typography from 'antd/es/typography';
+const { Title } = Typography
 
 function DependencyGraphContainer(): JSX.Element{
   
@@ -22,7 +23,7 @@ function DependencyGraphContainer(): JSX.Element{
         availability={aggregate.availability}
         />
          <Divider><Title level={3}>Dependency graph</Title></Divider>
-          <Card hoverable={true} style={{width: 848}}>
+          <Card hoverable={true} style={{width: 'total width'}}>
             <DependencyGraph width={600} height={600} />
           </Card>
     </div>

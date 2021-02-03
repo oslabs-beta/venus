@@ -35,6 +35,7 @@ function SignIn():JSX.Element {
   return (
     <div className="loginContainer">
       <Card 
+        data-testid="signin-card"
         style={{height: 'fit-content', width: 600, textAlign: 'center'}}
         bordered={true}
         title={<Title>VENUS</Title>}
@@ -42,11 +43,13 @@ function SignIn():JSX.Element {
         >
         <Form
           {...layout}
+          data-testid="Login-form"
           name="Login"
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}>
           <Form.Item
+            data-testid="serverIP-form"
             label="Server Address"
             name="serverIP"
             rules={[{ required: true, message: 'Please enter valid Server Address.' }]}
@@ -54,15 +57,19 @@ function SignIn():JSX.Element {
             <Input placeholder="Enter Server Address"/>
           </Form.Item>
           <Form.Item
+            data-testid="secret-form"
             label="Secret"
             name="secret"
             rules={[{ required: true, message: 'Please enter valid Secret.' }]}
           >
-            <Input.Password placeholder="Enter Secret" />
+            <Input.Password 
+              data-testid="signin-secret"
+              placeholder="Enter Secret" 
+            />
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" data-testid="signin-button">
               Sign In
             </Button>
         </Form.Item>

@@ -55,7 +55,7 @@ function LinkControls({
     return (
       <Select
         defaultValue={layout}
-        style={{ width: 120 }}
+        style={{ width: 140 }}
         onChange={handleChangeLayout}
       >
         <Option value="polar">Polar</Option>
@@ -71,7 +71,7 @@ function LinkControls({
     return (
       <Select
         defaultValue={orientation}
-        style={{ width: 120 }}
+        style={{ width: 140 }}
         onChange={handleChangeOrientation}
       >
         <Option value="horizontal">Horizontal</Option>
@@ -87,7 +87,7 @@ function LinkControls({
     return (
       <Select
         defaultValue={linkType}
-        style={{ width: 120 }}
+        style={{ width: 140 }}
         onChange={handleChangeLinkType}
       >
         <Option value="diagonal">Diagonal</Option>
@@ -103,15 +103,15 @@ function LinkControls({
       <label>layout: </label>&nbsp;
       <LayoutSelect width={200}/>
       &nbsp;&nbsp;
-      <label>orientation: </label>&nbsp;
+      <label>Orientation: </label>&nbsp;
       <OrientationSelect />
       &nbsp;&nbsp;
-      <label>link: </label>&nbsp;
+      <label>Link: </label>&nbsp;
       <LinkTypeSelect />
       {linkType === "step" && layout !== "polar" && (
         <>
           &nbsp;&nbsp;
-          <label>step:</label>&nbsp;
+          {/* <label>step:</label>&nbsp;
           <input
             onClick={(e) => e.stopPropagation()}
             type="range"
@@ -121,7 +121,7 @@ function LinkControls({
             onChange={(e) => setStepPercent(Number(e.target.value))}
             value={stepPercent}
             disabled={linkType !== "step" || layout === "polar"}
-          />
+          /> */}
         </>
       )}
       <br />
@@ -182,6 +182,7 @@ export type LinkTypesProps = {
   height: number;
   margin?: { top: number; right: number; bottom: number; left: number };
 };
+
 // renders the graph
 function DependencyGraph({
   width: totalWidth,
@@ -204,14 +205,14 @@ function DependencyGraph({
 // sets chart point origin
   if (layout === "polar") {
     // modifies margin for "polar" layout
-    margin = { top: 250, left: 110, right: 110, bottom: 110 }
+    margin = { top: 180, left: 110, right: 110, bottom: 110 }
     origin = {
       x: innerWidth / 2,
       y: innerHeight / 4
     };
     sizeWidth = 2 * Math.PI;
     // can set how spread out chart is here
-    sizeHeight = Math.min(innerWidth, innerHeight) / 1.75;
+    sizeHeight = Math.min(innerWidth, innerHeight) / 1.5;
   } else {
     origin = { x: 0, y: 0 };
     if (orientation === "vertical") {
@@ -245,10 +246,10 @@ function DependencyGraph({
         <rect width={totalWidth+200} height={totalHeight} rx={14} fill="#f5f5f5" />
         <Group top={margin.top} left={margin.left}>
           <Tree
-          // put our data variable in place of treeData
+      /*------- Put our data variable in place of treeData --------*/
             root={hierarchy(treeData, (d) => (d.isExpanded ? null : d.children))}
             size={[sizeWidth, sizeHeight]}
-            separation={(a, b) => (a.parent === b.parent ? .7 : 3) / a.depth}
+            separation={(a, b) => (a.parent === b.parent ? .4 : .4) / a.depth}
           >
             {(tree) => (
               <Group top={origin.y} left={origin.x}>
@@ -308,9 +309,9 @@ function DependencyGraph({
                       {node.depth !== 0 && (
                         <rect
                           height={height}
-                          width={node.data.children ? "20%" : "10%"}
+                          width={node.data.children ? "24%" : "10%"}
                           y={-height / 2}
-                          x={node.data.children ? -(width-40) / 2 : -(width-100) / 2}
+                          x={node.data.children ? -(width-18) / 2 : -(width-100) / 2}
                           // fill of individual node boxes
                           fill={changeChildren}
                           // change border here ------------

@@ -4,3 +4,4 @@ dist/.gitignore
 package-lock.json
 dist/
 .env
+ds.store
