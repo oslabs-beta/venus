@@ -101,7 +101,7 @@ function LinkControls({
     <div>
       {/* <div width={totalWidth+200}></div> */}
       <label>layout: </label>&nbsp;
-      <LayoutSelect />
+      <LayoutSelect width={200}/>
       &nbsp;&nbsp;
       <label>Orientation: </label>&nbsp;
       <OrientationSelect />
@@ -243,7 +243,7 @@ function DependencyGraph({
       <svg width={600} height={600}>
         <LinearGradient id="links-gradient" from="#fd9b93" to="#fe6e9e" />
         // can change rectangle color
-        <rect width={totalWidth} height={totalHeight} rx={14} fill="#f5f5f5" />
+        <rect width={totalWidth+200} height={totalHeight} rx={14} fill="#f5f5f5" />
         <Group top={margin.top} left={margin.left}>
           <Tree
       /*------- Put our data variable in place of treeData --------*/
