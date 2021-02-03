@@ -641,6 +641,8 @@ histController.readLastHour = (req, res, next) => {
         
         console.log(returnObj.lastHour); 
 
+        res.locals.data['lastHour'] = {}; 
+
         res.locals.data.lastHour = returnObj.lastHour; 
 
         return next(); 
@@ -699,6 +701,8 @@ histController.readLastHour = (req, res, next) => {
         })
         
         console.log(returnObj.lastHour);
+
+        res.locals.data['lastHour'] = {}; 
 
         res.locals.data.lastHour = returnObj.lastHour;
         
@@ -768,6 +772,8 @@ histController.readLastDay = (req, res, next) => {
         
         console.log(returnObj.lastDay); 
 
+        res.locals.data['lastDay'] = {}; 
+
         res.locals.data.lastDay = returnObj.lastDay; 
 
         // return returnObj.lastDay; 
@@ -824,6 +830,8 @@ histController.readLastDay = (req, res, next) => {
         })
         
         console.log(returnObj.lastDay); 
+
+        res.locals.data['lastDay'] = {}; 
 
         res.locals.data.lastDay = returnObj.lastDay;
 
@@ -894,6 +902,8 @@ histController.readLastWeek = (req, res, next) => {
         
         console.log(returnObj.lastWeek); 
 
+        res.locals.data['lastWeek'] = {}; 
+
         res.locals.data.lastWeek = returnObj.lastWeek; 
 
         // return returnObj.lastWeek;
@@ -950,6 +960,8 @@ histController.readLastWeek = (req, res, next) => {
         })
         
         console.log(returnObj.lastWeek); 
+
+        res.locals.data['lastWeek'] = {}; 
 
         res.locals.data.lastWeek = returnObj.lastWeek;
 
@@ -1020,6 +1032,8 @@ histController.readLastMonth = (req, res, next) => {
         
         console.log(returnObj.lastMonth); 
 
+        res.locals.data['lastMonth'] = {}; 
+
         res.locals.data.lastMonth = returnObj.lastMonth;
 
         // return returnObj.lastMonth; 
@@ -1075,7 +1089,9 @@ histController.readLastMonth = (req, res, next) => {
           // }
         })
         
-        console.log(returnObj.lastMonth); 
+        console.log(returnObj.lastMonth);
+        
+        res.locals.data['lastMonth'] = {}; 
 
         res.locals.data.lastMonth = returnObj.lastMonth;
 
