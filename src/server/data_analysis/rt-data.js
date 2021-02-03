@@ -220,6 +220,4 @@ const responseData = [
   return [consolidatedObj, dependencyObj];
 };
 
-// rtData(responseData);
-
-module.exports = rtData;
+exports.rtData = rtData;
