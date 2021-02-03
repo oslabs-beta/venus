@@ -23,6 +23,8 @@ const DAY = 86400000;
 const WEEK = 604800000;
 const MONTH =  2629800000; 
 
+const histObj = {}; 
+
 /* BOILERPLATE CODE TO INSTANTIATE DB CONNECTION */
 const client = new Client({
   user: process.env.DB_NAME, 
@@ -633,6 +635,8 @@ const readLastHour = async (input) => {
         
         console.log(returnObj.lastHour); 
 
+        histObj['lastHour'] = returnObj.lastHour; 
+
         return returnObj.lastHour; 
       }
     })
@@ -686,7 +690,9 @@ const readLastHour = async (input) => {
             })
         })
         
-        console.log(returnObj.lastHour); 
+        console.log(returnObj.lastHour);
+        
+        histObj['lastHour'] = returnObj.lastHour;
 
         return returnObj.lastHour; 
       }
@@ -1056,20 +1062,32 @@ const readLastMonth = async (input) => {
   * This function stitches all of the write functions above in order to output one consolidated historical data object
   * that is then consumed by the front-end for display purposes. 
 */
+// const constructHistorical = async (input) => {
+  
+//   histObj['service'] = input; 
+
+//   histObj['lastHour'] = await readLastHour(input); 
+//   histObj['lastDay'] = await readLastDay(input); 
+//   histObj['lastWeek'] = await readLastWeek(input); 
+//   histObj['lastMonth'] = await readLastMonth(input); 
+
+//   console.log('FULLY FORMED HISTORICAL OBJECT: ', histObj); 
+
+//   return histObj; 
+// }
+
 const constructHistorical = async (input) => {
   
-  const obj = {};
-  
-  obj['service'] = input; 
+  histObj['service'] = input; 
 
-  obj['lastHour'] = await readLastHour(input); 
-  obj['lastDay'] = await readLastDay(input); 
-  obj['lastWeek'] = await readLastWeek(input); 
-  obj['lastMonth'] = await readLastMonth(input); 
+  readLastHour(input); 
+  readLastDay(input); 
+  readLastWeek(input); 
+  readLastMonth(input); 
 
-  console.log('FULLY FORMED HISTORICAL OBJECT: ', obj); 
+  console.log('FULLY FORMED HISTORICAL OBJECT: ', histObj); 
 
-  return obj; 
+  return histObj; 
 }
 
 
