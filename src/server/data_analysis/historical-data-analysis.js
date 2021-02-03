@@ -620,7 +620,7 @@ histController.readLastHour = (req, res, next) => {
             returnObj.lastHour.aggregate['load'] = row.load; 
           }
           
-          if(row.service === input && row.method !== 'aggregate'){
+          if(row.service === service && row.method !== 'aggregate'){
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
@@ -768,7 +768,7 @@ histController.readLastDay = (req, res, next) => {
           }
 
 
-          if(row.service === input && row.method !== 'aggregate'){
+          if(row.service === service && row.method !== 'aggregate'){
 
             //Create availability property and push to array
             returnObj['lastDay']['availability'].push({
@@ -915,7 +915,7 @@ histController.readLastWeek = (req, res, next) => {
             returnObj.lastWeek.aggregate['load'] = row.load; 
           }
 
-          if(row.service === input && row.method !== 'aggregate'){
+          if(row.service === service && row.method !== 'aggregate'){
 
             //Create availability property and push to array
             returnObj['lastWeek']['availability'].push({
@@ -1062,7 +1062,7 @@ histController.readLastMonth = (req, res, next) => {
             returnObj.lastMonth.aggregate['load'] = row.load; 
           }
           
-          if(row.service === input && row.method !== 'aggregate'){
+          if(row.service === service && row.method !== 'aggregate'){
 
             //Create availability property and push to array
             returnObj['lastMonth']['availability'].push({
