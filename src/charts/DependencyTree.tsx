@@ -10,9 +10,9 @@ import { Group } from "@visx/group";
 import { hierarchy, Tree } from "@visx/hierarchy";
 import { LinearGradient } from "@visx/gradient";
 import { pointRadial } from "d3-shape";
-import { treeData} from './DataFuncDepGraph'
-import { Select } from "antd";
-// import useForceUpdate from "./useForceUpdate";
+import { treeData } from './DataFuncDepGraph'
+import Select from "antd/es/select";
+
 import {
   LinkHorizontal,
   LinkVertical,

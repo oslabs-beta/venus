@@ -114,5 +114,4 @@ export const DynamicProvider: React.FC = (props: any) => {
   const [serviceNames, setServiceNames] = useState<any>([])
 
 return <dynamicContext.Provider value={{services, setServices, aggregate, setAggregate, dependencyGraph, setDependencyGraph, filter, setFilter, serviceThresholds, setServiceThresholds, serviceNames, setServiceNames}}>{props.children}</dynamicContext.Provider>
-
 }
