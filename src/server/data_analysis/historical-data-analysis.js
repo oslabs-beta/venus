@@ -637,6 +637,7 @@ const readLastHour = async (input) => {
       }
     })
 
+    console.log('result: ', result); 
     return result; 
 
   } else {
@@ -691,6 +692,7 @@ const readLastHour = async (input) => {
       }
     })
 
+    console.log('result: ', result);
     return result; 
   }
 }
