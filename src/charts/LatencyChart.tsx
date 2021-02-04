@@ -10,10 +10,10 @@ const Latency: React.FC = () => {
   const { aggregate, serviceData } = useContext(historicalContext)
   
   let config = {
-    data: serviceData.responseTime,
-    xField: 'time',
+    data: serviceData.response_time,
+    xField: "timestamp",
     yField: 'value',
-    seriesField: 'method',
+    seriesField: 'service',
     xAxis: { type: 'time' },
     yAxis : { 
       label: {

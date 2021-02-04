@@ -11,12 +11,12 @@ function ErrorRate(): JSX.Element {
   const { serviceData } = useContext(historicalContext);
 
   let config = {
-            data: serviceData.errorRate,
-            xField: "time",
+            data: serviceData.error_rate,
+            xField: "timestamp",
             yField: "value",
-            seriesField: "method",
+            seriesField: "service",
           };
-  console.log(config.data, 'config errorRate')
+  console.log(config.data, 'config error_rate')
   return <Area {...config} autoFit={true} />;
 }
 export { ErrorRate };

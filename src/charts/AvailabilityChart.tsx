@@ -11,9 +11,9 @@ const Availability: React.FC = () => {
   //set ContextAPI state object
   let config = {
     data: serviceData.availability,
-    xField: 'time',
+    xField: "timestamp",
     yField: 'value',
-    seriesField: 'method',
+    seriesField: 'service',
     xAxis: { type: 'time' },
     yAxis : { 
       label: {

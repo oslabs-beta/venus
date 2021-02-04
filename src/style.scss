@@ -113,5 +113,12 @@
   height: 100%;
 }
 
+.textBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // align-items: center;
+}
+
 //box-shadow: 0px 4px 4px 0px rgba(90, 93, 112, 0.6)
 // box-shadow: rgba(46, 45, 45, 0.16) 0px 3px 6px, rgba(46, 45, 45, 0.16) 0px 3px 6px;

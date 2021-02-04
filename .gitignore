@@ -3,4 +3,5 @@ pack-lock.json
 dist/.gitignore
 package-lock.json
 dist/
+src/.DS_store
 .env

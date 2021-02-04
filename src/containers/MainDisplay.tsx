@@ -88,14 +88,16 @@ function MainDisplay(): JSX.Element {
                     </Menu.Item>
                     <div style={{ width: 200, justifyContent: "center" }}>
                       <Button
+                      
                         onClick={showModal}
-                        block={true}
+                        block={false}
                         type={"primary"}
                         style={{
                           position: "absolute",
                           zIndex: 10,
                           bottom: 20,
-                          marginBottom: 80,
+                          marginBottom: 70,
+                          marginLeft: 50,
                         }}
                       >
                         Sign Out

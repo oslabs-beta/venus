@@ -23,246 +23,44 @@ function Dashboard(): JSX.Element {
   
   useEffect(() => {
     setFilter(filter)
-    // console.log(serverAddress)
-    // const socket:any = io(serverAddress + ':8080', {
-    //   transports: ["websocket"],
-    // });
-    // console.log('in console')
-    // socket.on("connection", () => {
-    //   console.log(socket.id);
-    //   console.log('connected')
-    // });
-    // console.log('past connection req')
-    // socket.on("real-time-object", (output: any) => {
-    //   console.log("new update");
-    //   console.log(output)
-    //   const newData = JSON.parse(output[0]);
-    //   setAggregate(newData.aggregate);
-    //   setServices(newData.services);
-    //   console.log(newData.aggregate);
-    //   console.log(newData.services, 'services');
-    // });
+    console.log(serverAddress)
+    const socket:any = io(serverAddress + ':8080', {
+      transports: ["websocket"],
+    });
+    console.log('in console')
+    socket.on("connection", () => {
+      console.log(socket.id);
+      console.log('connected')
+    });
+    console.log('past connection req')
+    socket.on("real-time-object", (output: any) => {
+      console.log("new update");
+      console.log(output)
+      const newData = JSON.parse(output[0]);
+      setAggregate(newData.aggregate);
+      setServices(newData.services);
+      console.log(newData.aggregate);
+      console.log(newData.services, 'services');
+    });
 
-    setServices([
-      {
-        service: "ab",
-        load: 1,
-        response_time: 1,
-        error: 1,
-        availability: 1,
-        byMethod: {
-          GET: {
-            service: "a",
-            load: 99,
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "b",
-        load: 0,
-        response_time: 1000,
-        error: 0,
-        availability: 100,
-        byMethod: {
-          GET: {
-            service:"b",
-            load: 2,
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "c",
-        load: 101,
-        response_time: 1266,
-        error: 5,
-        availability: 152,
-        byMethod: {
-          GET: {
-            status: "bad",
-            load: "0.6666666865348816 hpm",
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "d",
-        load: 101,
-        response_time: 1266,
-        error: 5,
-        availability: 152,
-        byMethod: {
-          GET: {
-            status: "bad",
-            load: "0.6666666865348816 hpm",
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "e",
-        load: 101,
-        response_time: 1266,
-        error: 5,
-        availability: 152,
-        byMethod: {
-          GET: {
-            status: "bad",
-            load: "0.6666666865348816 hpm",
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "f",
-        load: 101,
-        response_time: 1266,
-        error: 5,
-        availability: 152,
-        byMethod: {
-          GET: {
-            status: "bad",
-            load: "0.6666666865348816 hpm",
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "l",
-        load: 1,
-        response_time: 1,
-        error: 1,
-        availability: 1,
-        byMethod: {
-          GET: {
-            service: "a",
-            load: 99,
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "y",
-        load: 0,
-        response_time: 1000,
-        error: 0,
-        availability: 100,
-        byMethod: {
-          GET: {
-            service:"b",
-            load: 2,
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "p",
-        load: 101,
-        response_time: 1266,
-        error: 5,
-        availability: 152,
-        byMethod: {
-          GET: {
-            status: "bad",
-            load: "0.6666666865348816 hpm",
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "t",
-        load: 101,
-        response_time: 1266,
-        error: 5,
-        availability: 152,
-        byMethod: {
-          GET: {
-            status: "bad",
-            load: "0.6666666865348816 hpm",
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "x",
-        load: 101,
-        response_time: 1266,
-        error: 5,
-        availability: 152,
-        byMethod: {
-          GET: {
-            status: "bad",
-            load: "0.6666666865348816 hpm",
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-      {
-        service: "z",
-        load: 101,
-        response_time: 1266,
-        error: 5,
-        availability: 152,
-        byMethod: {
-          GET: {
-            status: "bad",
-            load: "0.6666666865348816 hpm",
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      },
-    ]);
-    setAggregate({
-      error: 40,
-      response_time: 1278,
-      load: 2,
-      availability: 83,
-      status: 'good'
-    })
-
-
-    // return () => socket.disconnect();
+    return () => socket.disconnect();
     
   }, []);
 
-
+  
   if (serviceThresholds.length > 0){
-
+      console.log('made it')
       for (let i = 0; i < services.length; i++){
       let status = 0
       if (filter[services[i].service]){
+        console.log(filter)
         const holder = filter[services[i].service]
         if (serviceThresholds[i].load_threshold < services[i].byMethod[holder].load) ++status
         if (serviceThresholds[i].error_threshold < services[i].byMethod[holder].error) ++status
         if (serviceThresholds[i].response_time_threshold < services[i].byMethod[holder].response_time) ++status
         if (serviceThresholds[i].availability_threshold > services[i].byMethod[holder].availability) ++status
         services[i].byMethod[holder].status = status
-        dataSource.push(services[i].byMethod[holder]);
+        dataSource.push(services[i].byMethod[holder]); 
       } else {
         console.log(serviceThresholds, services[i])
         if (serviceThresholds[i].load_threshold < services[i].load) ++status
