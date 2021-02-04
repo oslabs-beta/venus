@@ -34,12 +34,12 @@ function FormDropDown (props:any): JSX.Element{
 	}
 
 	function onFocus() {
-  	console.log('focus');
+    console.log('focus');
 	}
-
-	function onSearch(val:any) {
-		console.log('search:', val);
-	}
+  
+    function onSearch(val:any) {
+      console.log('search:', val);
+}
 
   return (
   <Select
