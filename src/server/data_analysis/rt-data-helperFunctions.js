@@ -95,6 +95,9 @@ function rtDataByCategory(df, category) {
   const clientErrorRateColMethod = dfFinal.client_err_count
     .div(dfFinal[categoryCountLabel])
     .mul(100);
+
+    console.log( 'dfFinal[categoryCountLabel]',dfFinal[categoryCountLabel])
+    console.log( 'dfFinal.client_err_count',dfFinal.client_err_count)
   
   dfFinal.addColumn({
     column: 'Client Error (%)',
