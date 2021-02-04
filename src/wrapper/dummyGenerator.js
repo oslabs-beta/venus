@@ -51,18 +51,31 @@ const generateLogs = () => {
   let noError = 0; 
   let resMessage = 'OK'; 
 
-  
 
-  if(statusCodeDB[serviceIndex] >= 500){
-      serverError = 1; 
-      resMessage = 'Server Error'; 
-    } else if (statusCodeDB[serviceIndex] >= 400){
+  if(serviceIndex){
+    if(serviceIndex === 2 || serviceIndex === 3){
       clientError = 1; 
-      resMessage = 'Client Error'; 
-    } else {
+      resMessage = 'Client Error';
+    } else if (serviceIndex === 4){
+      serverError = 1; 
+      resMessage = 'Server Error';
+    } else if (serviceIndex === 1){
       noError = 1; 
       resMessage = 'OK';
     }
+  }
+  
+
+  // if(statusCodeDB[serviceIndex] >= 500){
+  //     serverError = 1; 
+  //     resMessage = 'Server Error'; 
+  //   } else if (statusCodeDB[serviceIndex] >= 400){
+  //     clientError = 1; 
+  //     resMessage = 'Client Error'; 
+  //   } else {
+  //     noError = 1; 
+  //     resMessage = 'OK';
+  //   }
 
 
   log['reqHost'] = reqHostDB[serviceIndex];
