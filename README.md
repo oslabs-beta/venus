@@ -1,6 +1,6 @@
 
-<a href="#"><img src="./assets/venus.png" align-items="center" height="175" /></a>
-# Venus
+<img src="./assets/venus.png" align-items="center" height="175" />
+<h1 align-items="center">Venus</h1>
 
 
 #
@@ -16,7 +16,6 @@
 - [Motivation](#motivation)
 - [Features](#features)
 - [A Brief Overview of Venus](#A-Brief-Overview-of-the-Venus-Orbit)
-- [Demo](#demo)
 - [Getting Started with Venus](#Getting-started-with-venus)
   - [Clone the Repo](#Clone-the-repo)
   - [Install Dependencies and Run Scripts](#Install-Dependencies-and-run-scripts)
