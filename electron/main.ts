@@ -10,8 +10,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1372,
     height: 833,
-    maxWidth: 1439,
-    maxHeight:990,
+    // maxWidth: 1439,
+    // maxHeight:990,
     minWidth: 1372,
     minHeight: 833,
     //  // this will give us our icon shown in the task bar or dock. This will also give you a small icon in the top left of your Windows app.

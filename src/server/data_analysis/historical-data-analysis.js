@@ -535,19 +535,19 @@ histController.readLastHour = (req, res, next) => {
             })
 
             returnObj['lastHour']['error_rate'].push({
-              "timestamp": unixToTimestamp(row.timestamp).slice(10, 19), 
+              "timestamp": unixToTimestamp(row.timestamp), 
               "value": Number(row.error_rate), 
               "service": row.method
             })
 
             returnObj['lastHour']['response_time'].push({
-              "timestamp": unixToTimestamp(row.timestamp).slice(10, 19), 
+              "timestamp": unixToTimestamp(row.timestamp), 
               "value": Number(row.response_time), 
               "service": row.method
             })
 
             returnObj['lastHour']['load'].push({
-              "timestamp": unixToTimestamp(row.timestamp).slice(10, 19), 
+              "timestamp": unixToTimestamp(row.timestamp), 
               "value": Number(row.load), 
               "service": row.method
             })
@@ -605,19 +605,19 @@ histController.readLastHour = (req, res, next) => {
             })
 
             returnObj['lastHour']['error_rate'].push({
-              "timestamp": unixToTimestamp(row.timestamp).slice(10, 19), 
+              "timestamp": unixToTimestamp(row.timestamp), 
               "value": Number(row.error_rate), 
               "service": row.service
             })
 
             returnObj['lastHour']['response_time'].push({
-              "timestamp": unixToTimestamp(row.timestamp).slice(10, 19), 
+              "timestamp": unixToTimestamp(row.timestamp), 
               "value": Number(row.response_time), 
               "service": row.service
             })
 
             returnObj['lastHour']['load'].push({
-              "timestamp": unixToTimestamp(row.timestamp).slice(10, 19), 
+              "timestamp": unixToTimestamp(row.timestamp), 
               "value": Number(row.load), 
               "service": row.service
             })
