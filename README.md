@@ -167,7 +167,7 @@ Sanjay Lavingia, Mike Soennichsen, Julie Wu, Will Bladon, Justin Cohen, and the 
 
 ## License
 
-Venus is <a href="#"><img src="./src/assets/mit-logo-color.png" alt="MIT" title="MIT" align="center" height="20" /></a> [licensed.](https://github.com/oslabs-beta/Venus/blob/master/LICENSE.md) 
+#MIT
 
 
 #
