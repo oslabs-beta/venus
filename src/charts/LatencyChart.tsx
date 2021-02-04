@@ -14,7 +14,11 @@ const Latency: React.FC = () => {
     xField: "timestamp",
     yField: 'value',
     seriesField: 'service',
-    xAxis: { type: 'time' },
+    xAxis: { 
+      // type: 'time' 
+      show: true,
+        formatter: (val: any) => new Date(val)
+    },
     yAxis : { 
       label: {
         formatter: function formatter(v:any) {
@@ -22,6 +26,7 @@ const Latency: React.FC = () => {
             return ''.concat(s, ',');
           });
         },
+        
       },
     },
   };
