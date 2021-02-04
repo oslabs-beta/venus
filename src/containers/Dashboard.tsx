@@ -24,10 +24,8 @@ function Dashboard(): JSX.Element {
   const list: string[] = [];
   useEffect(() => {
     setFilter(filter)
-    const accessToken = localStorage.getItem('accessToken');
     const socket:any = io(serverAddress + ':8080', {
       transports: ["websocket"],
-      query: { accessToken },
     });
     console.log('in console')
     socket.on("connection", () => {
@@ -36,13 +34,11 @@ function Dashboard(): JSX.Element {
     });
     console.log('past connection req')
     socket.on("real-time-object", (output: any) => {
-      console.log(output)
       const newData = JSON.parse(output[0]);
+      
       setAggregate(newData.aggregate);
       setServices(newData.services);
     });
-  
-
     return () => socket.disconnect();
     
   }, []);
@@ -73,7 +69,6 @@ function Dashboard(): JSX.Element {
       }
     }
   } else {
-    
     for (let i = 0; i < services.length; i++) {
       const baseline: any = {
         availability_threshold: 99,
@@ -138,7 +133,7 @@ function Dashboard(): JSX.Element {
       render: (text:string, record:any,) => (<FormDropDown record={record} />),
     },
     {
-      title: "Availability",
+      title: "Availability (%)",
       dataIndex: "availability",
       key: "availability",
       sorter:{
@@ -147,7 +142,7 @@ function Dashboard(): JSX.Element {
 
     },
     {
-      title: "Response Time",
+      title: "Response Time (ms)",
       dataIndex: "response_time",
       key: "response_time",
       sorter:{
@@ -155,7 +150,7 @@ function Dashboard(): JSX.Element {
       }
     },
     {
-      title: "Load",
+      title: "Load (hpm)",
       dataIndex: "load",
       key: "load",
       sorter:{
@@ -163,7 +158,7 @@ function Dashboard(): JSX.Element {
       }
     },
     {
-      title: "Error",
+      title: "Response Error (%)",
       dataIndex: "error",
       key: "error",
       sorter:{

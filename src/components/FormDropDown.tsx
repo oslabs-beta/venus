@@ -19,6 +19,7 @@ function FormDropDown (props:any): JSX.Element{
   
 	function onChange(value:string ) {
     if (filter[props.record.service]){
+      console.log(props.record.service)
       delete filter[props.record.service]
       filter[props.record.service] = value
       setFilter(filter)

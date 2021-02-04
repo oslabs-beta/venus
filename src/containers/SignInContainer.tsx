@@ -49,22 +49,16 @@ function SignIn():JSX.Element {
           initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
+          style={{marginTop: 25}}
           >
           <Form.Item
+            
             className= "textBox"
             name="serverIP"
             rules={[{ required: true, message: 'Please enter valid Server Address.' }]}
           >
-            <Input placeholder="Enter Server Address"/>
+            <Input.Password placeholder="Enter Server Address"/>
           </Form.Item>
-          <Form.Item
-          className= "textBox"
-            name="secret"
-            rules={[{ required: true, message: 'Please enter valid Secret.' }]}
-          >
-            <Input.Password placeholder="Enter Secret" />
-          </Form.Item>
-
           <Form.Item {...tailLayout}>
             <Button className= "textBox" type="primary" htmlType="submit" style={{marginLeft: 15}}>
               Sign In
