@@ -16,6 +16,7 @@ function LoadChart(): JSX.Element {
     yField: "value",
     seriesField: "method",
   };
+  console.log(config.data, 'config load')
   return <Area {...config} autoFit={true} />;
 }
 export { LoadChart };

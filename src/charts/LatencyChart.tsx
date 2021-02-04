@@ -25,6 +25,7 @@ const Latency: React.FC = () => {
       },
     },
   };
+  console.log(config.data, 'config responseTime')
   return <Line {...config} />;
 };
 

@@ -6,12 +6,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { CardDropDown } from "../components/CardDropDown";
 import { historicalContext } from "../contexts/historicalContext";
 import { dynamicContext } from "../contexts/dynamicContext";
-import { globalContext } from '../contexts/globalContext'
+import { globalContext } from "../contexts/globalContext";
 import { AggregateStats } from "../components/AggregateStats";
 import { Availability } from "../charts/AvailabilityChart";
 import { LoadChart } from "../charts/LoadChart";
-import { ErrorRate } from '../charts/ErrorRate';
-import { Latency } from '../charts/LatencyChart'
+import { ErrorRate } from "../charts/ErrorRate";
+import { Latency } from "../charts/LatencyChart";
 import Row from "antd/es/row";
 import Col from "antd/es/col";
 import Card from "antd/es/card";
@@ -36,7 +36,7 @@ function ChartContainer(): JSX.Element {
     currentRange,
     setCurrentRange,
   } = useContext(historicalContext);
-  const { serverAddress } = useContext(globalContext)
+  const { serverAddress } = useContext(globalContext);
   const { serviceNames } = useContext(dynamicContext);
   const test: any = {
     status: 0,
@@ -45,23 +45,27 @@ function ChartContainer(): JSX.Element {
     error: 12,
     availability: 12,
   };
- 
+
   useEffect(() => {
-    setAggregate(test);
-    setServiceData(dummyData.lastHour)
-    setTimeRange(dummyData)
-    setBool(true);
-    setService('aggregate')
-    //serverAddress from globalContext is required to enable access via axios fetch request
-    // axios.get(serverAddress +':3000/getHistorical/aggregate').then(function(response){
-    //    setServiceData(response.data.lastHour)
-    //    setTimeRange(response.data)
-    //    setBool(true);
-    //    setService('aggregate')
-    // })
-    // .catch(function(error){
-    //   console.log(error,'error')
-    // })
+    // setAggregate(test);
+    // setServiceData(dummyData.lastHour);
+    // setTimeRange(dummyData);
+    // setBool(true);
+    // setService("aggregate");
+    axios
+      .get(serverAddress + ":3000/getHistorical/aggregate")
+      .then(function (response) { 
+        console.log(response.data)
+        setServiceData(response.data.lastHour);
+        setTimeRange(response.data);
+        setService("aggregate");
+        setAggregate(response.data.lastHour.aggregate);
+      }).then(function(response){
+        setBool(true);
+      })
+      .catch(function (error) {
+        console.log(error, "error");
+      });
   }, []);
 
   // temporal options for chart displays
@@ -71,25 +75,25 @@ function ChartContainer(): JSX.Element {
     { label: "Last Week", value: "lastWeek" },
     { label: "Last Month", value: "lastMonth" },
   ];
-  console.log(timeRange)
+  console.log(timeRange);
 
-  // Radio Data selection function. 
+  // Radio Data selection function.
   const filterData = (e: any) => {
     console.log("radio checked", e.target.value);
-    setServiceData(timeRange[e.target.value])
-    setCurrentRange(e.target.value)
-
+    setServiceData(timeRange[e.target.value]);
+    setCurrentRange(e.target.value);
   };
-console.log(currentRange, 'currentRange')
+  console.log(currentRange, "currentRange");
   const refreshData = () => {
     // axios.get('ec2instance'+':3000/getHistorical/' + service).then(function(response){
-    //   console.log(response)
-    //   setServiceData(response)
+    //   console.log(response.data)
+    //   setTimeRange(response.data)
+    //   setServiceData(response.data[currentRange])
     // })
     // .catch(function(error){
     //   console.log(error,'< error')
     // })
-    console.log('data refreshed')
+    console.log("data refreshed");
   };
 
   if (!bool) {

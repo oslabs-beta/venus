@@ -8,7 +8,7 @@ import Area from "@ant-design/charts/es/area";
 import { historicalContext } from "../contexts/historicalContext";
 function ErrorRate(): JSX.Element {
   
-  const { timeRange, serviceData } = useContext(historicalContext);
+  const { serviceData } = useContext(historicalContext);
 
   let config = {
             data: serviceData.errorRate,
@@ -16,7 +16,7 @@ function ErrorRate(): JSX.Element {
             yField: "value",
             seriesField: "method",
           };
-
+  console.log(config.data, 'config errorRate')
   return <Area {...config} autoFit={true} />;
 }
 export { ErrorRate };

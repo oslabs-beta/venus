@@ -1,21 +1,12 @@
-{ "aggregate":{
-  "lastHour": {
-    "availability": [
-      { "time": "2020-01-01T17:23:00", "value": 99.8, "method": "GET" },
-      { "time": "2020-01-01T17:23:00", "value": 99.5, "method": "POST" },
-      { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "PUT" },
-      { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "DELETE" }
-    ]
-  }
-},
+{
   "service": "google-api",
   "lastHour": {
-    "availability": [
-      { "time": "2020-01-01T17:23:00", "value": 99.8, "method": "GET" },
-      { "time": "2020-01-01T17:23:00", "value": 99.5, "method": "POST" },
-      { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "PUT" },
-      { "time": "2020-01-01T17:23:00", "value": 99.3, "method": "DELETE" }
-    ],
+    "aggregate": {
+      "availability": 100,
+      "error_rate": 8,
+      "response_time": 408,
+      "load": 38
+    },
     "errorRate": [
       { "time": "2020-01-01T17:23:00", "value": 3.8, "method": "GET" },
       { "time": "2020-01-01T17:23:00", "value": 4.5, "method": "POST" },
