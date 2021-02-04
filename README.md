@@ -1,6 +1,7 @@
 
-
+<div align="center">
   <img src="./assets/venus.png" align="center" height="175" style="max-width:100%;" />
+  </div>
 
 <h1 align="center">Venus</h1>
 
