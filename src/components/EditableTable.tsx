@@ -1,3 +1,8 @@
+/**
+ * @name EditableTable
+ * @desc Child of ServiceSettingsContainer, allows users to set persistent thresholds   
+**/
+
 import React, { useState, useContext } from 'react';
 import { Table, InputNumber, Popconfirm, Form, Typography } from 'antd';
 import { dynamicContext } from '../contexts/dynamicContext';

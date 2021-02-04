@@ -1,38 +1,47 @@
 /**
  * @name CardDropDown
- * @desc Child of ChartContainer, Displays drop down menu where user can select from available services
+ * @desc Child of ChartContainer, Displays drop down menu where user can select from available services. 
+ *       Services are gathered from the dynamic context.  
 **/
 
 import React, { useContext, useEffect } from 'react'
 import Select from 'antd/es/select';
 import { historicalContext } from '../contexts/historicalContext';
 import { dynamicContext } from '../contexts/dynamicContext';
+import { globalContext } from '../contexts/globalContext';
+import axios from "axios";
 
-
-function CardDropDown (props:any): JSX.Element{
+function CardDropDown (): JSX.Element{
   
+
+  const { setService, setTimeRange, setServiceData, setAggregate, currentRange } = useContext(historicalContext)
+  const { serverAddress } = useContext(globalContext)
+  const { serviceNames } = useContext(dynamicContext)
   let aggregate: JSX.Element = <Select.Option value={'aggregate'} key={10000}>{'Aggregate'}</Select.Option>
+  
+  
   const dropDownOptions: any[] =[aggregate];
-  for (let i = 0; i < props.services.length; i++){
-    dropDownOptions.push(
-      <Select.Option value={props.services[i]} key={i}>{props.services[i]}</Select.Option>
+ 
+    for (let i = 0; i < serviceNames.length; i++){
+      dropDownOptions.push(
+      <Select.Option value={serviceNames[i]} key={i}>{serviceNames[i]}</Select.Option>
     )
   }
-  const { setService, setTimeRange, currentRange } = useContext(historicalContext)
+
+
 	function onChange(value:string) {
     console.log(value)
-    // axios.get('ec2instance'+':3000/getHistorical/' + value).then(function(response){
-    //   console.log(response)
-    //   setServiceData(response.data[currentRange])
-    //  setTimeRange(response.data)
-    // })
-    // .catch(function(error){
-    //   console.log(error,'< error')
-    // })
-    // fetch request to route for data.
-    // data is then brought into state and updated. otherwise, create a larger pool for an initial pull
+    axios.get(serverAddress +':3000/getHistorical/' + value)
+    .then(function(response){
+      setServiceData(response.data[currentRange]);
+      setTimeRange(response.data);
+      setAggregate(response.data[currentRange].aggregate);
+    })
+    .catch(function(error){
+      console.log(error,'< error')
+    })
     setService(value)
-    }
+  }
     
 	function onSearch(val:any) {
 		console.log('search:', val);

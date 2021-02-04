@@ -18,8 +18,9 @@ function FormDropDown (props:any): JSX.Element{
   const { filter, setFilter } = useContext(dynamicContext)
   
 	function onChange(value:string ) {
-    if (value === 'ALL METHODS' && filter[props.record.service]){
+    if (filter[props.record.service]){
       delete filter[props.record.service]
+      filter[props.record.service] = value
       setFilter(filter)
       console.log(filter)
     } else {
@@ -34,12 +35,12 @@ function FormDropDown (props:any): JSX.Element{
 	}
 
 	function onFocus() {
-  	console.log('focus');
+    console.log('focus');
 	}
-
-	function onSearch(val:any) {
-		console.log('search:', val);
-	}
+  
+    function onSearch(val:any) {
+      console.log('search:', val);
+}
 
   return (
   <Select
