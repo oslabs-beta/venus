@@ -28,6 +28,7 @@ const Latency: React.FC = () => {
             return ''.concat(s, ',');
           });
         },
+        min: 500
       },
     },
     animation: {
