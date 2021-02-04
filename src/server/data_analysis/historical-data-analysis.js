@@ -750,6 +750,8 @@ histController.readLastDay = (req, res, next) => {
       if(err){
         console.log(err); 
       } else {
+
+        console.log('Result from readLastDay query...', result.rows); 
         
         const rows = result.rows; 
 
@@ -824,6 +826,8 @@ histController.readLastDay = (req, res, next) => {
       } else {
         
         const rows = result.rows; 
+
+        console.log('Result from readLastDay query...', result.rows); 
 
         returnObj['lastDay'] = {};
         returnObj['lastDay']['aggregate'] = {}; 
@@ -905,6 +909,8 @@ histController.readLastWeek = (req, res, next) => {
         
         const rows = result.rows; 
 
+        console.log('Result from readLastWeek query...', result.rows); 
+
         returnObj['lastWeek'] = {};
         returnObj['lastWeek']['aggregate'] = {}; 
         returnObj['lastWeek']['availability'] = [];
@@ -973,6 +979,8 @@ histController.readLastWeek = (req, res, next) => {
       } else {
         
         const rows = result.rows; 
+
+        console.log('Result from readLastWeek query...', result.rows); 
 
         returnObj['lastWeek'] = {};
         returnObj['lastWeek']['aggregate'] = {}; 
@@ -1053,6 +1061,8 @@ histController.readLastMonth = (req, res, next) => {
       } else {
         
         const rows = result.rows; 
+
+        console.log('Result from readLastMonth query...', result.rows); 
        
         returnObj['lastMonth'] = {};
         returnObj['lastMonth']['aggregate'] = {}; 
@@ -1121,6 +1131,8 @@ histController.readLastMonth = (req, res, next) => {
       } else {
         
         const rows = result.rows; 
+
+        console.log('Result from readLastMonth query...', result.rows); 
 
         returnObj['lastMonth'] = {};
         returnObj['lastMonth']['aggregate'] = {}; 
