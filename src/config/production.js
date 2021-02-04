@@ -1,13 +1,10 @@
 module.exports = {
   venus: {
-    // endpoints_exclude object will contain all UNTRACKED API dependency endpoints 
-    // boolean value pair allows for easy on/off tracking switch  
-    
-    // req / res properties 
-      // necessary: ALL_CAPS
-      // optional: set to false by default
-    endpoints: {
-      'https://curriculum-api.codesmith.io/messages': false,
+    /**
+     * OPTIONAL: add any endpoints below with the value 'true' to EXCLUDE from the analysis
+     */
+    endpointsExcluded: {
+      'localhost': true,
     },
   },
   STREAM_KEY : 'logstream',

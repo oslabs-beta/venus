@@ -95,16 +95,10 @@ const readRedisStream = async () => {
   streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
 
   console.log('XRANGE, response with reply transformer'); 
-  // console.log(streamEntries); 
+  console.log(streamEntries); 
 
   return streamEntries; 
 
 }
 
 exports.readRedisStream = readRedisStream; 
-
-// try {
-//   setInterval(async () => { await readRedisStream()}, PING_RATE); 
-// } catch (e) {
-//   console.error(e); 
-// }

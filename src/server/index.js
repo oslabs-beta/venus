@@ -10,8 +10,8 @@ const cors = require('cors');
 const data = require('./data_analysis/rt-data.js'); 
 const jwt = require('jsonwebtoken');
 const redis = require('./redis_handlers/real-time-read-handler.js'); 
-const { constructHistorical, histMain, writeToDB, readLastHour, readAll } = require('./data_analysis/historical-data-analysis.js'); 
-const authController = require('./controller.js')
+const { histMain, writeToDB, histController, readAll } = require('./data_analysis/historical-data-analysis.js'); 
+const authController = require('./controllers/authController.js')
 require('dotenv').config(); 
 
 
@@ -43,8 +43,8 @@ let BUFFER = [];
   * This function triggers the series of setTimeout functions in the historical-data-analysis file that 
   * write to the series of tables Venus uses to have pre-calculated data points to serve onto the front-end. 
 */
-// histMain(); 
-// readLastHour('aggregate'); 
+histMain(); 
+readAll(); 
 // readLastHour('curriculum-api.codesmith.io'); 
 // readAll(); 
 // constructHistorical('aggregate');
@@ -109,6 +109,9 @@ io.sockets.on('connection', (socket) => {
 async function sendData(socket){
   //Increment count everytime sendData is invoked. 
   COUNT++; 
+
+  console.log('COUNT: ', COUNT);
+  console.log('BUFFER: ', BUFFER); 
   
   //Read last three minutes of log data from stream and store into an array of objects.
   const streamData = await redis.readRedisStream();
@@ -128,7 +131,7 @@ async function sendData(socket){
     if(COUNT === 60){
       
       //Add the log object to the buffer. 
-      BUFFER.push(output[0]); 
+      BUFFER.push(output[2]); 
       
       //Reset count for the next cycle. 
       COUNT = 0; 
@@ -195,12 +198,15 @@ app.post('/login', (req, res) => {
  * This handler passes on the service the front-end is requesting data for and generates 
  * a historical data object that is then served back to the front-end for display. 
  */
-app.get('/getHistorical', 
-  authController.verify,
+app.get('/getHistorical/:service',
+  histController.readLastHour,
+  histController.readLastDay,
+  histController.readLastWeek,
+  histController.readLastMonth,
   (req, res) => {
-    const { service } = req.body; 
-    const histData = constructHistorical(service); 
-    return res.json(histData); 
+
+    return res.json(res.locals.data); 
+
 })
 
 

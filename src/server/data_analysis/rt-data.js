@@ -212,7 +212,11 @@ const rtData = data => {
       consolidatedObj.services[hostIndex].byMethod[method] = methodLvlObj;
     });
   });
-  return [consolidatedObj, dependencyObj];
+
+  const sconsolidatedObj = JSON.stringify(consolidatedObj);
+  const sdependencyObj = JSON.stringify(dependencyObj); 
+
+  return [sconsolidatedObj, sdependencyObj, consolidatedObj, dependencyObj];
 };
 
-module.exports = { rtData };
+exports.rtData = rtData; 
