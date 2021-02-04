@@ -1,25 +1,24 @@
+/**
+ * @name SignInContainer
+ * @desc Component that renders to the page upon initial load of application for user to sign in
+ * 
+ */
 import React, { useContext, useState } from "react";
-// import data from '../../session_storage/storage.json'
 import { globalContext } from '../contexts/globalContext' 
 import Form from 'antd/es/form';
 import Input from 'antd/es/input';
 import Button from 'antd/es/button';
 import Card from 'antd/es/card';
 import Typography from "antd/es/typography";
-const { Title } = Typography;
+import logo from '../logo/venus.png';
+const { Title, Text } = Typography;
 
 
 function SignIn():JSX.Element {
   const { verification, setVerification, setServerAddress, } = useContext(globalContext)
   const onFinish = (values: any) => {
-
-    // create get request here to ratify the tokenization process. 
-    // currently compares to a local json file. 
-    // commmit token to local state.
-    // if(data[values.serverIP]){
       setServerAddress(values.serverIP)
       setVerification(true)
-    // } 
   }
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
@@ -34,10 +33,13 @@ function SignIn():JSX.Element {
 
   return (
     <div className="loginContainer">
+      <img src={logo} alt="logo" className="logo"/>
+      <Title>VENUS</Title>
+      
       <Card 
-        style={{height: 'fit-content', width: 600, textAlign: 'center'}}
+        className="signInCard"
+        style={{height: 'fit-content', width: 380, boxShadow: "rgba(46, 45, 45, 0.16) 0px 3px 6px, rgba(46, 45, 45, 0.16) 0px 3px 6px"}}
         bordered={true}
-        title={<Title>VENUS</Title>}
         hoverable={true}
         >
         <Form
@@ -45,16 +47,17 @@ function SignIn():JSX.Element {
           name="Login"
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}>
+          onFinishFailed={onFinishFailed}
+          >
           <Form.Item
-            label="Server Address"
+            className= "textBox"
             name="serverIP"
             rules={[{ required: true, message: 'Please enter valid Server Address.' }]}
           >
             <Input placeholder="Enter Server Address"/>
           </Form.Item>
           <Form.Item
-            label="Secret"
+          className= "textBox"
             name="secret"
             rules={[{ required: true, message: 'Please enter valid Secret.' }]}
           >
@@ -62,12 +65,14 @@ function SignIn():JSX.Element {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button className= "textBox" type="primary" htmlType="submit" style={{marginLeft: 15}}>
+            
               Sign In
             </Button>
         </Form.Item>
         </Form>
       </Card>
+      <Text style={{marginTop: 10}}>Venus Beta v1.0 2021</Text>
     </div>
   )
 }

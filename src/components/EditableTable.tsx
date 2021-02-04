@@ -3,8 +3,6 @@ import { Table, InputNumber, Popconfirm, Form, Typography } from 'antd';
 import { dynamicContext } from '../contexts/dynamicContext';
 
 
-
-
 const EditableCell = ({
   editing,
   dataIndex,
@@ -34,9 +32,9 @@ const EditableCell = ({
   );
 };
 
-const EditableTable2 = () => {
+const EditableTable = () => {
   const { services, serviceThresholds, setServiceThresholds} = useContext(dynamicContext)
-  const originData:any = [];
+  const originData:any[] = [];
   if (serviceThresholds.length > 0) {
     for (let i = 0; i < serviceThresholds.length; i++) {
       originData.push(serviceThresholds[i])
@@ -74,7 +72,7 @@ const EditableTable2 = () => {
     setEditingKey('');
   };
 
-  const save = async (key) => {
+  const save = async (key: any) => {
     try {
       const row = await form.validateFields();
       const newData = [...data];
@@ -90,7 +88,6 @@ const EditableTable2 = () => {
         setData(newData);
         setEditingKey('');
       }
-      console.log(data)
     } catch (errInfo) {
       console.log('Validate Failed:', errInfo);
     }
@@ -169,7 +166,7 @@ const EditableTable2 = () => {
 
     return {
       ...col,
-      onCell: (record) => ({
+      onCell: (record: any) => ({
         record,
         inputType: col.dataIndex === 'number',
         dataIndex: col.dataIndex,
@@ -180,7 +177,7 @@ const EditableTable2 = () => {
   });
   setServiceThresholds(data)
   return (
-    <Form form={form} component={false}>
+    <Form form={form} component={false} >
       <Table
         components={{
           body: {
@@ -188,13 +185,15 @@ const EditableTable2 = () => {
           },
         }}
         bordered
+        style={{width: '100%'}}
         dataSource={data}
         columns={mergedColumns}
         rowClassName="editable-row"
         pagination={false}
+        scroll={{y: "67vh"}}
       />
     </Form>
   );
 };
 
-export { EditableTable2 }
+export { EditableTable }

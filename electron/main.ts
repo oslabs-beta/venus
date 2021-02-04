@@ -2,33 +2,33 @@ import { app, BrowserWindow, Menu } from "electron";
 import * as path from "path";
 import * as url from "url";
 
+
+
 let mainWindow: Electron.BrowserWindow | null;
 const menu = Menu
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 1024,
-    height: 768,
-    // maxWidth:1450,
-    // maxHeight:850,
+    width: 1372,
+    height: 833,
+    maxWidth: 1439,
+    maxHeight:990,
+    minWidth: 1372,
+    minHeight: 833,
     //  // this will give us our icon shown in the task bar or dock. This will also give you a small icon in the top left of your Windows app.
     // icon: __dirname + '/app/assets/img/icon.png',
-    // darkTheme - Forces using dark theme for the window, only works on some GTK+3 desktop environments. Default is false.
-    darkTheme: true,
-  // if application has a non-white background color
-    backgroundColor: 'black', 
    webPreferences: {
       // Whether node integration is enabled
       nodeIntegration: true,
     // When false, it will disable the same-origin policy (usually using testing websites by people)
     // and set allowRunningInsecureContent to true if this options has not been set by user. Default is true.
-      webSecurity: false,
+      webSecurity: true,
       // stops console from opening upon load
     },
   });
 
   if (process.env.NODE_ENV === "development") {
     mainWindow.loadURL(`http://localhost:4000`);
-    mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
   } else {
     mainWindow.loadURL(
       url.format({
@@ -54,52 +54,5 @@ app.on('activate', function () {
   // dock icon is clicked and there are no other windows open.
   if (BrowserWindow.getAllWindows().length === 0) createWindow()
 })
-
-
-// this whole chunck is for commands like copy and paste to be available
-//
-// if (process.platform === 'darwin') { 
-//   var template = [{ 
-//     label: 'FromScratch', 
-//     submenu: [{ 
-//       label: 'Quit', 
-//       accelerator: 'CmdOrCtrl+Q', 
-//       click: function() { 
-//         app.quit(); 
-//       } 
-//     }] 
-//   }, { 
-//     label: 'Edit', 
-//     submenu: [{ 
-//       label: 'Undo', 
-//       accelerator: 'CmdOrCtrl+Z', 
-//       selector: 'undo:' 
-//     }, { 
-//       label: 'Redo', 
-//       accelerator: 'Shift+CmdOrCtrl+Z', 
-//       selector: 'redo:' 
-//     }, { 
-//       type: 'separator'
-//     }, { 
-//       label: 'Cut', 
-//       accelerator: 'CmdOrCtrl+X', 
-//       selector: 'cut:' 
-//     }, { 
-//       label: 'Copy', 
-//       accelerator: 'CmdOrCtrl+C', 
-//       selector: 'copy:'
-//     }, { 
-//       label: 'Paste', 
-//       accelerator: 'CmdOrCtrl+V', 
-//       selector: 'paste:' 
-//     }, { 
-//       label: 'Select All', 
-//       accelerator: 'CmdOrCtrl+A', 
-//       selector: 'selectAll:' 
-//     }] 
-//   }];
-//   var osxMenu = menu.buildFromTemplate(template);
-//   menu.setApplicationMenu(osxMenu);
-// }
 
 app.allowRendererProcessReuse = true;

@@ -1,30 +1,21 @@
 /**
  * @name AggregateStats
- * @desc Child of Dashboard (no children), Indiviual Service Card showing aggregate stats of 
- * particular service
+ * @desc Child container rendered in DependencyGraph, ChartContainer, ServiceSettingsContainer, and Dashboard.
+ *  Service cards that render on top of each page, displaying Aggregate stats of application
  */
 import React from 'react'
 import Statistic from 'antd/es/statistic'
 import Card from 'antd/es/card'
 import Row from 'antd/es/row'
+import Space from 'antd/es/space';
 import Col from 'antd/es/col'
 
-
-type colors = {
-	good: string
-	fair: string
-	bad: string
-}
-const color: colors = {
-	good: '#52c41a',
-	fair: '#fa8c16',
-	bad: '#f5222d'
-}
 
 function AggregateStats(props: any): JSX.Element{
     return (
 	<div className="cardRow">
 	<Row gutter={32}>
+		<Space className="cardRow" direction="horizontal">
 				<Col span={4}>
 			<div className="aggregate">
 					<Card bordered={true} bodyStyle={{width: "190px"}} hoverable={true}>
@@ -33,23 +24,11 @@ function AggregateStats(props: any): JSX.Element{
 							title="Title"
 							value="System"
 							precision={2}
-							// valueStyle={{ color: color.good }}
+			
 						/>
 					</Card>
 			</div>
 				</Col>
-				{/* <Col span={4}>
-				<div className="aggregate">
-					<Card bordered={true} bodyStyle={{width: "190px"}} hoverable={true}>
-						<Statistic
-							title="Health"
-							value={'GOOD'}
-							precision={2}
-							// valueStyle={{ color: color.bad }}
-						/>
-					</Card>
-					</div>
-				</Col> */}
 				<Col span={4}>
 				<div className="aggregate">
 					<Card className="aggregateCards" bordered={true} bodyStyle={{width: "190px"}} hoverable={true}>
@@ -58,14 +37,14 @@ function AggregateStats(props: any): JSX.Element{
 							title="Availability"
 							value={props.availability}
 							precision={2}
-							// valueStyle={{ color: color.good }}
+							
 							suffix="%"
 		
 						/>
 					</Card>
 					</div>
 				</Col>
-		<Col span={4}>
+				<Col span={4}>
 				<div className="aggregate">
 					<Card bordered={true} bodyStyle={{width: "190px"}} hoverable={true}>
 						<Statistic
@@ -106,7 +85,8 @@ function AggregateStats(props: any): JSX.Element{
 					</Card>
 					</div>
 				</Col>
-			</Row>
+			</Space>
+		</Row>
 	</div>
   )
 };

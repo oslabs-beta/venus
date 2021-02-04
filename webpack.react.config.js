@@ -1,6 +1,11 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+let options = {
+  "libraryName": "antd",
+  "style": true,
+}
+
 module.exports = {
   resolve: {
     extensions: [".tsx", ".ts", ".js", ".less"],
@@ -16,6 +21,11 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
+          options: {
+            plugins: [
+              ['import', { libraryName: "antd", style: true }]
+          ]
+          }
         },
       },
       {
@@ -30,7 +40,7 @@ module.exports = {
         test: /\.less$/,
         use: [
         { loader: "style-loader"},
-        { loader: "css-loader?modules"},
+        { loader: "css-loader"},
         { loader: "less-loader",
         options: {
           lessOptions:{
@@ -39,7 +49,15 @@ module.exports = {
       }
       }
 ]
-      }
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
   devServer: {

@@ -1,3 +1,7 @@
+/**
+ * @name globalContext
+ * @desc Context container that, when updated with the right credentials, allows user to access app
+ */
 import React, { useState } from 'react'; 
 
 export type GlobalState = {

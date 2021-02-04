@@ -5,6 +5,7 @@ import { MainDisplay } from './containers/MainDisplay'
 import { ContextProvider } from './contexts/globalContext'
 // import SignInContainer from './containers/SignInContainer'
 import { BrowserRouter  } from 'react-router-dom';
+import { SignIn } from './containers/SignInContainer';
 
 const App: React.FC = () => {
   const [urls, setUrls] = useState<string[]>([])
