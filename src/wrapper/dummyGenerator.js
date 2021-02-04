@@ -35,8 +35,8 @@ const pathDB = {
 const statusCodeDB = {
   1: 200,
   2: 403,
-  3: 410,
-  4: 505
+  4: 410,
+  3: 505
 };
 
 
@@ -51,44 +51,28 @@ const generateLogs = () => {
   let noError = 0; 
   let resMessage = 'OK'; 
 
-
-  if(serviceIndex){
-    if(serviceIndex === 2 || serviceIndex === 3){
-      clientError = 1; 
-      resMessage = 'Client Error';
-    } else if (serviceIndex === 4){
+  if(statusCodeDB[serviceIndex] >= 500){
       serverError = 1; 
-      resMessage = 'Server Error';
-    } else if (serviceIndex === 1){
+      resMessage = 'Server Error'; 
+    } else if (statusCodeDB[serviceIndex] >= 400){
+      clientError = 1; 
+      resMessage = 'Client Error'; 
+    } else {
       noError = 1; 
       resMessage = 'OK';
     }
-  }
-  
-
-  // if(statusCodeDB[serviceIndex] >= 500){
-  //     serverError = 1; 
-  //     resMessage = 'Server Error'; 
-  //   } else if (statusCodeDB[serviceIndex] >= 400){
-  //     clientError = 1; 
-  //     resMessage = 'Client Error'; 
-  //   } else {
-  //     noError = 1; 
-  //     resMessage = 'OK';
-  //   }
-
 
   log['reqHost'] = reqHostDB[serviceIndex];
   log['reqMethod'] = methodDB[(Math.floor(Math.random() * 5)) + 1];
   log['reqPath'] = pathDB[serviceIndex];
   log['reqUrl'] = urlDB[serviceIndex];
-  log['resStatusCode'] = statusCodeDB[(Math.floor(Math.random() * 4) + 1)]; 
+  log['resStatusCode'] = statusCodeDB[serviceIndex]; 
   log['clientError'] = clientError;
   log['serverError'] = serverError;
   log['noError'] = noError;
   log['resMessage'] = resMessage;
   log['cycleDuration'] = (Math.random() * 1000 + 600); 
-
+  console.log(log);
   return log; 
 
 }
@@ -96,4 +80,4 @@ const generateLogs = () => {
 setInterval(() => {
   const log = generateLogs(); 
   redisStream.writeRedisStream('logstream', log);  
-}, 300)
+}, 1000)
