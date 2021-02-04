@@ -166,6 +166,10 @@ const rtData = data => {
   df['serverError'] = df['serverError'].astype('int32');
   df['noError'] = df['noError'].astype('int32');
 
+  df.sort_values({
+    by: 'reqHost',
+    inplace: true,
+  });
 
   const outputTableByService = rtDataByCategory(df, 'reqHost');
   
