@@ -38,6 +38,7 @@ function Dashboard(): JSX.Element {
       setAggregate(newData.aggregate);
       setServices(newData.services);
       const dependencyGraph = JSON.parse(output[1])
+      // console.log('in dashboard with depgraphdata', dependencyGraph)
     });
 
     return () => socket.disconnect();
