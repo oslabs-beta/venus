@@ -2,6 +2,7 @@
  * @name Dashboard
  * @desc Current Status page that immediately renders when user signs in. Parent container to aggregate stats
  */
+
 import { io } from "socket.io-client";
 import React, { useContext, useEffect } from "react";
 import { AggregateStats } from "../components/AggregateStats";
@@ -20,7 +21,7 @@ function Dashboard(): JSX.Element {
   const { services, setServices, aggregate, setAggregate, filter, setFilter, serviceThresholds, serviceNames, setServiceNames } = useContext(dynamicContext);
   const { serverAddress } = useContext(globalContext)
   const dataSource: any = [];
-  
+  const list: string[] = [];
   useEffect(() => {
     setFilter(filter)
     const accessToken = localStorage.getItem('accessToken');
@@ -40,24 +41,26 @@ function Dashboard(): JSX.Element {
       setAggregate(newData.aggregate);
       setServices(newData.services);
     });
+  
 
     return () => socket.disconnect();
     
   }, []);
-
   
   if (serviceThresholds.length > 0){
-      console.log('made it')
       for (let i = 0; i < services.length; i++){
       let status = 0
       if (filter[services[i].service]){
         console.log(filter)
+        
         const holder = filter[services[i].service]
         if (serviceThresholds[i].load_threshold < services[i].byMethod[holder].load) ++status
         if (serviceThresholds[i].error_threshold < services[i].byMethod[holder].error) ++status
         if (serviceThresholds[i].response_time_threshold < services[i].byMethod[holder].response_time) ++status
         if (serviceThresholds[i].availability_threshold > services[i].byMethod[holder].availability) ++status
         services[i].byMethod[holder].status = status
+        services[i].byMethod[holder].byMethod = Object.keys(services[i].byMethod)
+        console.log(services[i].byMethod[holder])
         dataSource.push(services[i].byMethod[holder]); 
       } else {
         console.log(serviceThresholds, services[i])
@@ -70,6 +73,7 @@ function Dashboard(): JSX.Element {
       }
     }
   } else {
+    
     for (let i = 0; i < services.length; i++) {
       const baseline: any = {
         availability_threshold: 99,
@@ -79,7 +83,7 @@ function Dashboard(): JSX.Element {
       }
       services[i].key = i;
       let status = 0;
-      serviceNames.push(services[i].service)
+      list.push(services[i].service)
       if (filter[services[i].service]){
         const holder = filter[services[i].service]
         if (baseline.load_threshold < services[i].byMethod[holder].load) ++status
@@ -87,6 +91,7 @@ function Dashboard(): JSX.Element {
         if (baseline.response_time_threshold < services[i].byMethod[holder].response_time) ++status
         if (baseline.availability_threshold > services[i].byMethod[holder].availability) ++status
         services[i].byMethod[holder].status = status
+        services[i].byMethod[holder].byMethod = Object.keys(services[i].byMethod)
         dataSource.push(services[i].byMethod[holder]);
       } else {
         if (baseline.load_threshold < services[i].load) ++status
@@ -97,8 +102,10 @@ function Dashboard(): JSX.Element {
         dataSource.push(services[i]);
       }
     }
-    setServiceNames(serviceNames)
-  }
+    if (serviceNames.length < list.length)
+      setServiceNames(list)
+    }
+    
  
   const columns: any = [
     {
@@ -108,11 +115,7 @@ function Dashboard(): JSX.Element {
       sorter: {
         compare: (a:any, b:any) => a.error - b.error,
       }
-      //(a:any, b:any) => columns[0].key.sort(a.key.localeCompare(b.key))
     },
-    // sorter:{
-    //   compare: (a:any, b:any) => a.error - b.error,
-    // }
     {
       title: "Status",
       dataIndex: "status",
