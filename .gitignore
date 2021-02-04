@@ -2,6 +2,5 @@ node_modules
 pack-lock.json
 package-lock.json
 dist/
-.env
 src/.DS_Store
 src/tests/.DS_Store
