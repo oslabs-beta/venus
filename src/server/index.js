@@ -198,7 +198,8 @@ app.post('/login', (req, res) => {
  * This handler passes on the service the front-end is requesting data for and generates 
  * a historical data object that is then served back to the front-end for display. 
  */
-app.get('/getHistorical/:service', 
+app.get('/getHistorical/:service',
+  authController.verify,
   histController.readLastHour,
   histController.readLastDay,
   histController.readLastWeek,
