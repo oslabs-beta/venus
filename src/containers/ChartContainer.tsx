@@ -116,7 +116,7 @@ function ChartContainer(): JSX.Element {
           <Title level={3}>Historical Status</Title>
         </Divider>
         <div className="rangeSelectorContainer">
-          <CardDropDown services={} />
+          <CardDropDown services={serviceNames} />
           <Radio.Group
             style={{ marginLeft: "10px" }}
             optionType="button"

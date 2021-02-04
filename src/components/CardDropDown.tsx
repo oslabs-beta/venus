@@ -11,17 +11,41 @@ import { dynamicContext } from '../contexts/dynamicContext';
 import { globalContext } from '../contexts/globalContext';
 import axios from "axios";
 
-function CardDropDown (props:any): JSX.Element{
+function CardDropDown (): JSX.Element{
   
+
   const { setService, setTimeRange, setServiceData, setAggregate, currentRange } = useContext(historicalContext)
   const { serverAddress } = useContext(globalContext)
+  const { serviceNames } = useContext(dynamicContext)
   let aggregate: JSX.Element = <Select.Option value={'aggregate'} key={10000}>{'Aggregate'}</Select.Option>
+  
+  
   const dropDownOptions: any[] =[aggregate];
-  for (let i = 0; i < props.services.length; i++){
-    dropDownOptions.push(
-      <Select.Option value={props.services[i]} key={i}>{props.services[i]}</Select.Option>
+  // useEffect(() => {
+  //   console.log(props.services)
+  //   for (let i = 0; i < props.services.length; i++){
+  //     dropDownOptions.push(
+  //     <Select.Option value={props.services[i]} key={i}>{props.services[i]}</Select.Option>
+  //   )
+  // }
+  // }, [])
+
+  // useEffect(() => {
+    for (let i = 0; i < serviceNames.length; i++){
+      dropDownOptions.push(
+      <Select.Option value={serviceNames[i]} key={i}>{serviceNames[i]}</Select.Option>
     )
   }
+  // }, [])
+
+
+  // const dropDownOptions: any[] =[aggregate];
+  // console.log(props.services)
+  // for (let i = 0; i < props.services.length; i++){
+  //   dropDownOptions.push(
+  //     <Select.Option value={props.services[i]} key={i}>{props.services[i]}</Select.Option>
+  //   )
+  // }
 	function onChange(value:string) {
     console.log(value)
     axios.get(serverAddress +':3000/getHistorical/' + value)

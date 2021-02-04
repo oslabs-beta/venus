@@ -21,7 +21,7 @@ function Dashboard(): JSX.Element {
   const { services, setServices, aggregate, setAggregate, filter, setFilter, serviceThresholds, serviceNames, setServiceNames } = useContext(dynamicContext);
   const { serverAddress } = useContext(globalContext)
   const dataSource: any = [];
-  
+  const list: string[] = [];
   useEffect(() => {
     setFilter(filter)
     console.log(serverAddress)
@@ -36,7 +36,7 @@ function Dashboard(): JSX.Element {
     console.log('past connection req')
     socket.on("real-time-object", (output: any) => {
       console.log("new update");
-      console.log(output)
+      console.log(output[0])
       const newData = JSON.parse(output[0]);
       setAggregate(newData.aggregate);
       setServices(newData.services);
@@ -50,7 +50,6 @@ function Dashboard(): JSX.Element {
   }, []);
   
   if (serviceThresholds.length > 0){
-      console.log('made it')
       for (let i = 0; i < services.length; i++){
       let status = 0
       if (filter[services[i].service]){
@@ -76,6 +75,7 @@ function Dashboard(): JSX.Element {
       }
     }
   } else {
+    
     for (let i = 0; i < services.length; i++) {
       const baseline: any = {
         availability_threshold: 99,
@@ -85,7 +85,7 @@ function Dashboard(): JSX.Element {
       }
       services[i].key = i;
       let status = 0;
-      serviceNames.push(services[i].service)
+      list.push(services[i].service)
       if (filter[services[i].service]){
         const holder = filter[services[i].service]
         if (baseline.load_threshold < services[i].byMethod[holder].load) ++status
@@ -104,8 +104,10 @@ function Dashboard(): JSX.Element {
         dataSource.push(services[i]);
       }
     }
-    setServiceNames(serviceNames)
-  }
+    if (serviceNames.length < list.length)
+      setServiceNames(list)
+    }
+    
  
   const columns: any = [
     {
