@@ -12,10 +12,11 @@ import { dynamicContext } from '../contexts/dynamicContext';
 import Divider from 'antd/es/divider';
 import Typography from 'antd/es/typography';
 const { Title } = Typography
+import { changeChildArr, test, treeData } from '../charts/dataFuncDepGraph'
 
 function DependencyGraphContainer(): JSX.Element{
   const { serverAddress } = useContext(globalContext)
-  const { aggregate, services, setAggregate,setServices } = useContext(dynamicContext)
+  const { aggregate, services, dependencyGraph, setAggregate,setServices, setDependencyGraph } = useContext(dynamicContext)
   useEffect(() => {
     
    
@@ -36,12 +37,23 @@ function DependencyGraphContainer(): JSX.Element{
       setServices(newData.services);
       console.log(newData.aggregate);
       console.log(newData.services, 'services');
+      console.log('heres where we start with Newdata.services', newData.services);
+      console.log('and heres our services', services, 'and dependencyGraph in data coming back', newData.dependencyGraph)
+      console.log(' heres where well parse the services coming in', changeChildArr(newData.services))
+      console.log(' heres what the dummy data parse looks like', changeChildArr(test.services))
+      // console.log('is this the corret format for the dependency graph data going to graph?', newData.dependencyGraph);
+      const dataForDep = {
+        service: "Services",
+        status: 'good',
+        children: changeChildArr(newData.services)}
+        setDependencyGraph(dataForDep)
+        console.log(dataForDep, treeData)
     });
 
     return () => socket.disconnect();
     
   }, []);
-
+  console.log('dep graph data in context', dependencyGraph)
   return(
     <div id="chartContainer">
         <AggregateStats 

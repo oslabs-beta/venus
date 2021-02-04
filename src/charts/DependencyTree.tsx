@@ -56,7 +56,7 @@ function LinkControls({
   setStepPercent
 }: Props) {
 
-  function handleChangeLayout(value) {
+  function handleChangeLayout(value: any) {
     setLayout(value);
   }
 
@@ -199,6 +199,7 @@ function DependencyGraph({
   height: totalHeight,
   margin = defaultMargin
 }: LinkTypesProps) {
+  const { dependencyGraph, setDependencyGraph } = useContext(dynamicContext)
   // set default mode
   const [layout, setLayout] = useState<string>("polar");
   const [orientation, setOrientation] = useState<string>("horizontal");
@@ -233,7 +234,8 @@ function DependencyGraph({
       sizeHeight = innerWidth;
     }
   }
-
+console.log('dtata from dep graph context in graph', dependencyGraph)
+console.log('current data in graph', treeData)
   const LinkComponent = getLinkComponent({ layout, linkType, orientation });
 // can modify components here i.e. color, stroke size
   return totalWidth < 10 ? null : (
@@ -257,7 +259,7 @@ function DependencyGraph({
         <Group top={margin.top} left={margin.left}>
           <Tree
       /*------- Put our data variable in place of treeData --------*/
-            root={hierarchy(treeData, (d) => (d.isExpanded ? null : d.children))}
+            root={hierarchy(dependencyGraph, (d) => (d.isExpanded ? null : d.children))}
             size={[sizeWidth, sizeHeight]}
             separation={(a, b) => (a.parent === b.parent ? .4 : .4) / a.depth}
           >
@@ -319,9 +321,9 @@ function DependencyGraph({
                       {node.depth !== 0 && (
                         <rect
                           height={height}
-                          width={node.data.children ? "24%" : "10%"}
+                          width={node.data.children ? "32%" : "12%"}
                           y={-height / 2}
-                          x={node.data.children ? -(width-18) / 2 : -(width-100) / 2}
+                          x={node.data.children ? -(width+30) / 2 : -(width-90) / 2}
                           // fill of individual node boxes
                           fill={changeChildren}
                           // change border here ------------
