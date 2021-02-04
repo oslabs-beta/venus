@@ -114,17 +114,12 @@ npm run dev:electron
 - <a href="#"><img src="./assets/js-logo-color.png" alt="JavaScript" title="JavaScript" align="center" height="30" /></a>
 
 - <a href="#"><img src="./assets/react-logo-color.png" alt="React" title="React" align="center" height="30" /></a>
-  * React Router
-  * React Context API/ React Hooks
 
 - <a href="#"><img src="./assets/aws-logo-color.png" alt="AWS" title="AWS" align="center" height="30" /></a> 
-  * Elasticache
-  * EC2
-  * RDS
 
 - <a href="#"><img src="./assets/postgres-logo-color.png" alt="PostgreSQL" title="PostgreSQL" height="30" /></a>
 
-- <a href="#"><img src=".assets/Redis_Logo.svg.png" alt="Redis" title="Redis" height="30" /></a> 
+- <a href="#"><img src="./assets/Redis_Logo.svg.png" alt="Redis" title="Redis" height="30" /></a> 
 
 - <a href="#"><img src="./assets/websockets-logo.png" alt="Websockets" title="Websockets" height="30" /></a> 
 
@@ -133,11 +128,12 @@ npm run dev:electron
 - <a href="#"><img src="./assets/express-logo-color.png" alt="Express" title="Express" height="30" /></a> 
 
 - <a href="#"><img src="./assets/antdesign-logo.png" alt="antDesign" title="antDesign" height="30" />  Ant Design</a> 
-  - Ant Design Charting Libraries 
 
 - <a href="#"><img src="./assets/Visx-D3-React-logo.jpeg" alt="Visx" title="Visx" height="35" /></a>  
 
-- <a href="#"><img src="./assets/jest-logo-color.png" alt="Jest" title="Jest" height="30" /></a>  <a href="#"><img src="./src/assets/enzyme-logo-color.png" alt="Enzyme" title="Enzyme" height="30" /></a>
+- <a href="#"><img src="./assets/jest-logo-color.png" alt="Jest" title="Jest" height="30" /></a>  
+
+- <a href="#"><img src="./assets/enzyme-logo-color.png" alt="Enzyme" title="Enzyme" height="30" /></a>
 
 <br>
 
