@@ -15,9 +15,14 @@ const Availability: React.FC = () => {
     yField: 'value',
     seriesField: 'service',
     xAxis: { 
-      type: 'time', 
+      label: {
+        formatter: function formatter(v:any) {
+          return v.slice(11,19); 
+        }
+     } 
     },
     yAxis : { 
+      min: 70,
       label: {
         formatter: function formatter(v:any) {
           return ''.concat(v).replace(/\d{1,3}(?=(\d{3})+$)/g, function (s) {
