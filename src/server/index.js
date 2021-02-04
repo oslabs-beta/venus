@@ -45,7 +45,6 @@ let BUFFER = [];
 */
 histMain(); 
 readAll(); 
-// readLastHour('aggregate'); 
 // readLastHour('curriculum-api.codesmith.io'); 
 // readAll(); 
 // constructHistorical('aggregate');
