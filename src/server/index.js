@@ -137,7 +137,7 @@ async function sendData(socket){
       
       if(BUFFER.length === 5){
         
-      console.log('WRITE TO DB TRIGGERED!'); 
+        console.log('WRITE TO DB TRIGGERED!'); 
 
       //Pass buffer into historical data analysis.
       writeToDB(BUFFER); 
