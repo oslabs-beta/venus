@@ -1112,10 +1112,9 @@ const unixToTimestamp = (unixString) => {
 
   let date = new Date(unix); 
 
-  // date = JSON.stringify(date); 
-  date = date.toDateString()
+  date = JSON.stringify(date); 
 
-  // date = date.slice(1, date.length - 6); 
+  date = date.slice(1, date.length - 6); 
 
   return date; 
 
