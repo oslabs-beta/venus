@@ -2,6 +2,8 @@
 
 # Venus
 
+<a href="#"><img src="./src/assets/venus.png" alt="Electron" title="Electron" align-items="center" height="400" /></a>
+
 #
 ![Build Passing](https://img.shields.io/badge/build-passing-blue)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/oslabs-beta/venus)
@@ -27,8 +29,9 @@ Venus is a self-hosted service monitoring tool for growing projects.  Venus prov
 - [A Brief Overview of Venus](#A-Brief-Overview-of-the-Venus-Orbit)
 - [Demo](#demo)
 - [Getting Started with Venus](#Getting-started-with-venus)
-    - [Configuring the Agent](#Configuring-the-Agent-with-Node.js-and-AWS-Elasticache)
-    - [Install Dependencies and Run](#Install-Dependencies-and-run-Venus)
+  - [Clone the Repo](#Clone-the-repo)
+  - [Install Dependencies and Run Scripts](#Install-Dependencies-and-run-scripts)
+  - [Configuring the Agent](#Configuring-the-Agent-with-Node.js-and-AWS-Elasticache)
 - [Technologies](#technologies)
 - [Contributing](#contributing)
 - [License](#license)
@@ -87,11 +90,9 @@ insert demo here
 <br>
 
 # Getting Started With Venus 
-1. 
 
-<br>
 
-## Configuring the Agent with Node.js and AWS Elasticache.
+## Clone the Repo
 
 ```
 git clone https://github.com/oslabs-beta/venus.git
@@ -99,9 +100,8 @@ git clone https://github.com/oslabs-beta/venus.git
 
 <br>
 
-## Install Dependencies and run Venus
+## Install Dependencies and Run Scripts
 
-Within the Venus parent directory:
 ```
 npm install
 ```
@@ -113,6 +113,10 @@ then
 ```
 npm run dev:electron
 ```
+
+## Configuring the Agent with Node.js and AWS Elasticache.
+
+
 
 <br>
 
@@ -132,22 +136,22 @@ npm run dev:electron
   * EC2
   * RDS
 
-- <a href="#"><img src="./src/assets/postgres-logo-color.png" alt="PostgreSQL" title="PostgreSQL" align="center" height="30" /></a>
+- <a href="#"><img src="./src/assets/postgres-logo-color.png" alt="PostgreSQL" title="PostgreSQL" height="30" /></a>
 
-- <a href="#"><img src="./src/assets/Redis_Logo.svg.png" alt="Redis" title="Redis" align="center" height="30" /></a> 
+- <a href="#"><img src="./src/assets/Redis_Logo.svg.png" alt="Redis" title="Redis" height="30" /></a> 
 
-- <a href="#"><img src="./src/assets/websockets-logo.png" alt="Websockets" title="Websockets" align="center" height="30" /></a> 
+- <a href="#"><img src="./src/assets/websockets-logo.png" alt="Websockets" title="Websockets" height="30" /></a> 
 
-- <a href="#"><img src="./src/assets/danfo-js-logo.png" alt="Danfo.js" title="Danfo.js" align="center" height="25" /></a> 
+- <a href="#"><img src="./src/assets/danfo-js-logo.png" alt="Danfo.js" title="Danfo.js" height="25" /></a> 
 
-- <a href="#"><img src="./src/assets/express-logo-color.png" alt="Express" title="Express" align="center" height="30" /></a> 
+- <a href="#"><img src="./src/assets/express-logo-color.png" alt="Express" title="Express" height="30" /></a> 
 
-- <a href="#"><img src="./src/assets/antdesign-logo.png" alt="antDesign" title="antDesign" align="center" height="30" />  Ant Design</a> 
+- <a href="#"><img src="./src/assets/antdesign-logo.png" alt="antDesign" title="antDesign" height="30" />  Ant Design</a> 
   - Ant Design Charting Libraries 
 
-- <a href="#"><img src="./src/assets/Visx-D3-React-logo.jpeg" alt="Visx" title="Visx" align="center" height="35" /></a>  
+- <a href="#"><img src="./src/assets/Visx-D3-React-logo.jpeg" alt="Visx" title="Visx" height="35" /></a>  
 
-- <a href="#"><img src="./src/assets/jest-logo-color.png" alt="Jest" title="Jest" align="center" height="25" /></a> / <a href="#"><img src="./src/assets/enzyme-logo-color.png" alt="Enzyme" title="Enzyme" align="center" height="25" /></a>
+- <a href="#"><img src="./src/assets/jest-logo-color.png" alt="Jest" title="Jest" height="30" /></a> / <a href="#"><img src="./src/assets/enzyme-logo-color.png" alt="Enzyme" title="Enzyme" height="30" /></a>
 
 <br>
 
