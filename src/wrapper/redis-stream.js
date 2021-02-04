@@ -6,8 +6,12 @@ const Redis = require('ioredis');
 /**
  * initiate Redis instance
  */
-const redisConfig = config.get('redisConnect');
-const redis = new Redis(redisConfig);
+// const redisConfig = config.get('redisConnect');
+// const redis = new Redis(redisConfig);
+const redis = new Redis({
+  host: process.env.REDIS_HOST, 
+  port: process.env.REDIS_PORT
+});
 redis.on('connect', () => {
   console.log('Redis is connected!');
 });
@@ -18,7 +22,8 @@ redis.on('connect', () => {
 const redisStream = {};
 
 /* assign stream name from config file to module property */
-redisStream.streamName = config.get('redisStream.REDIS_STREAM_NAME');
+// redisStream.streamName = config.get('redisStream.REDIS_STREAM_NAME');
+redisStream.streamName = process.env.STREAM_KEY;
 
 /**
  * Function to append log object to Redis stream.
