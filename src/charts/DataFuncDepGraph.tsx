@@ -8,11 +8,12 @@ interface IByMethod {
 
 interface IService {
     service?:string;
-    status: string;
-    load: string;
+    status?: number | string;
+    load: number | string;
     response_time: number;
     error: number;
     availability: number;
+    key?: number;
     byMethod?: IByMethod
 
 }

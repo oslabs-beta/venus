@@ -21,6 +21,7 @@ type dynamicState = {
   dependencyGraph: {
     service: string,
     status: string,
+    isExpanded?: boolean,
     children: any[]
   };
   filter: any,

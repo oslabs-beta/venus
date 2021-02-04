@@ -1,5 +1,5 @@
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Group } from "@visx/group";
 import { hierarchy, Tree } from "@visx/hierarchy";
 import { LinearGradient } from "@visx/gradient";
@@ -8,6 +8,8 @@ import { AggregateStats } from '../components/AggregateStats';
 import { changeChildArr, changeData, treeData} from './DataFuncDepGraph'
 import { Select } from "antd";
 import { dynamicContext } from '../contexts/dynamicContext';
+import { globalContext } from "../contexts/globalContext"
+import { io } from "socket.io-client";
 
 // import useForceUpdate from "./useForceUpdate";
 import {
@@ -26,7 +28,8 @@ import {
 } from "@visx/shape";
 
 const { Option } = Select;
-const { services } = useContext(dynamicContext)
+// const { dependencyGraph } = useContext(dynamicContext)
+// console.log('these are the services from context', dependencyGraph)
 const controlStyles = { fontSize: 28 };
 export type Props = {
   layout: string;
@@ -102,7 +105,7 @@ function LinkControls({
     <div>
       {/* <div width={totalWidth+200}></div> */}
       <label>layout: </label>&nbsp;
-      <LayoutSelect width={200}/>
+      <LayoutSelect />
       &nbsp;&nbsp;
       <label>Orientation: </label>&nbsp;
       <OrientationSelect />
@@ -225,8 +228,35 @@ function DependencyGraph({
     }
   }
 
+// ------ websockets to get data ------- //
+const { dependencyGraph, services,setServices, filter, setFilter, } = useContext(dynamicContext)
+const { serverAddress } = useContext(globalContext)
+console.log('services in depgraph', services)
+  const dataSource: any = [];
+  useEffect(():any => {
+    setFilter(filter)
+    const accessToken = localStorage.getItem('accessToken');
+    const socket:any = io(serverAddress + ':8080', {
+      transports: ["websocket"],
+      query: { accessToken },
+    });
+    socket.on("connection", () => {
+      console.log('Dependency Graph connected with socket.on');
+    });
+    socket.on("real-time-object", (output: any) => {
+      console.log(output)
+      const newData = JSON.parse(output[0]);
+      // setAggregate(newData.aggregate);
+      setServices(newData.services);
+    });
+  })
   const LinkComponent = getLinkComponent({ layout, linkType, orientation });
 // can modify components here i.e. color, stroke size
+
+console.log('dependency graph data from context', dependencyGraph)
+console.log('heres what the services will look like', services )
+console.log('if we semi-ignore typescript and try to use the data parser on this', changeChildArr(services))
+console.log('dummy data', treeData)
   return totalWidth < 10 ? null : (
     <div>
       <br />
@@ -244,7 +274,7 @@ function DependencyGraph({
       <svg width={600} height={600}>
         <LinearGradient id="links-gradient" from="#fd9b93" to="#fe6e9e" />
         // can change rectangle color
-        <rect width={totalWidth+200} height={totalHeight} rx={14} fill="#f5f5f5" />
+        <rect width={totalWidth} height={totalHeight} rx={14} fill="#f5f5f5" />
         <Group top={margin.top} left={margin.left}>
           <Tree
       /*------- Put our data variable in place of treeData --------*/
