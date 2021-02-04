@@ -565,6 +565,7 @@ histController.readLastHour = (req, res, next) => {
     })
 
   } else { //If input is aggregate 
+    
     queryText = `SELECT timestamp, service, method, availability, response_time, error_rate, load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND method = 'aggregate';`;
 
     returnObj.service = 'aggregate'; 
