@@ -599,7 +599,7 @@ histController.readLastHour = (req, res, next) => {
           } else {
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
-              "timestamp": unixToTimestamp(row.timestamp).slice(10, 19), 
+              "timestamp": unixToTimestamp(row.timestamp), 
               "value": Number(row.availability), 
               "service": row.service
             })
