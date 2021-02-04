@@ -145,7 +145,10 @@ function rtDataByCategory(df, category) {
    */
   outputTable[categoryCountLabel] = outputTable[categoryCountLabel].div(STREAM_WINDOW);
 
-  outputTable.
+  outputTable.sort_values({
+    by: 'reqHost',
+    inplace: true,
+  });
 
   return outputTable;
 }
