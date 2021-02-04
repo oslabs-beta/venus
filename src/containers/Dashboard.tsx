@@ -23,9 +23,10 @@ function Dashboard(): JSX.Element {
   
   useEffect(() => {
     setFilter(filter)
-    console.log(serverAddress)
+    const accessToken = localStorage.getItem('accessToken');
     const socket:any = io(serverAddress + ':8080', {
       transports: ["websocket"],
+      query: { accessToken },
     });
     console.log('in console')
     socket.on("connection", () => {
@@ -34,13 +35,10 @@ function Dashboard(): JSX.Element {
     });
     console.log('past connection req')
     socket.on("real-time-object", (output: any) => {
-      console.log("new update");
       console.log(output)
       const newData = JSON.parse(output[0]);
       setAggregate(newData.aggregate);
       setServices(newData.services);
-      console.log(newData.aggregate);
-      console.log(newData.services, 'services');
     });
 
     return () => socket.disconnect();

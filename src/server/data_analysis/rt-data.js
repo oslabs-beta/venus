@@ -137,6 +137,16 @@ const responseData = [
   * with an identical structure to one mentioned above.
   */ 
 
+ /**
+ * @param {array} data -> array of log objects
+ * @returns single nested object with two properties: 'services' and 'aggregate'
+  * Value of 'services' property is an array of objects. Each object includes consolidated metrics by service, as well as a byMethod property. 
+    * Value of 'byMethod' property is a nested object, where each key represents a request method (GET / POST / PUT / DELETE / PATCH), 
+    * and the value is an object with consolidated metrics at that request level
+  * Value of 'aggregate' property is an object with aggregate stats for the entire data set, as well as a byMethod property,
+  * with an identical structure to one mentioned above.
+  */ 
+
 const rtData = data => {
   /* consolidatedObj will be populated according to the structure necessary for the electron client to display real-time metrics */
   const consolidatedObj = {};
@@ -156,14 +166,18 @@ const rtData = data => {
   df['serverError'] = df['serverError'].astype('int32');
   df['noError'] = df['noError'].astype('int32');
 
+  df.sort_values({
+    by: 'reqHost',
+    inplace: true,
+  });
 
-  
   const outputTableByService = rtDataByCategory(df, 'reqHost');
   
   /**
    * Each row in the outputTable includes consolidated metrics by service.
    * Iterate through each row and construct the service-level object to be pushed to the array ('services' key: value)
    */
+  consolidatedObj.timestamp = df['id'].data[0];
   consolidatedObj.services = [];
   outputTableByService.data.forEach(row => {
     const service = row[0];
@@ -197,18 +211,16 @@ const rtData = data => {
     outputTableByMethod.data.forEach(row => {
       const method = row[0];
       const methodLvlObj = rowToObj(row);
+      methodLvlObj.service = host;
       // update consolidated object with method-level data
       consolidatedObj.services[hostIndex].byMethod[method] = methodLvlObj;
     });
   });
-  const consolidatedObjStringify = JSON.stringify(consolidatedObj);
-  const dependencyObjStringify = JSON.stringify(dependencyObj);
-  // return both stringified objects as array elements
-  console.log(consolidatedObj);
-  console.log(dependencyObj);
-  return [consolidatedObjStringify, dependencyObjStringify];
+
+  const sconsolidatedObj = JSON.stringify(consolidatedObj);
+  const sdependencyObj = JSON.stringify(dependencyObj); 
+
+  return [sconsolidatedObj, sdependencyObj, consolidatedObj, dependencyObj];
 };
 
-rtData(responseData);
-
-// module.exports = rtData;
+exports.rtData = rtData; 
