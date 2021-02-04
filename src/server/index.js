@@ -121,6 +121,11 @@ async function emitData(socket){
     //Emit output to the front-end via websocket,
     socket.emit('real-time-object', output); 
   }
+
+  //Recursive call to trigger function every second. 
+  setTimeout(() => {
+    emitData(socket); 
+  }, 3000); 
     
 }
 
