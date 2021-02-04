@@ -1121,7 +1121,7 @@ histController.readLastMonth = (req, res, next) => {
 
   } else {
 
-    queryText = `SELECT timestamp, service, method, availability, response_time, error_rate, load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - MONTH}::BIGINT AND method = 'aggregate';`;
+    queryText = `SELECT timestamp, service, method, availability, response_time, error_rate, load FROM ${ONE_DAY_TABLE} WHERE timestamp >= ${Date.now() - MONTH}::BIGINT AND method = 'aggregate';`;
 
     returnObj.service = 'aggregate'; 
     
