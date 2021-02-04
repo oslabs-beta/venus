@@ -1,15 +1,11 @@
 
-
+<a href="#"><img src="./assets/venus.png" align-items="center" height="175" /></a>
 # Venus
 
-<a href="#"><img src="./assets/venus.png" align-items="center" height="200" /></a>
 
 #
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/oslabs-beta/venus)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
-
-
-Venus is a self-hosted service monitoring tool for growing projects.  Venus provides real time and historic data metrics of your services and their endpoint methods. Use Venus to verify that these services and their endpoint dependencies are operating properly.
 
 
 ## Table of Contents
@@ -42,7 +38,7 @@ Venus is a lightweight, self-hosted service monitoring tool that provides custom
 
 ## Motivation
 
-As architectures shift more towards distributed and cloud based systems, the need for centralized and singular source of truth of end point services has grown in value. While many of these services exist as large packages, Venus aims to give users a flexible suite of baseline statistics on their deployed apps. 
+As the popularity of distributed server architectures has grown, so has the need for a centralized and singular source of truth on the health. While many of these services exist as large packages, Venus aims to give users a flexible suite of baseline statistics on their deployed apps. Additionally, Venus is configured within AWS so users will have direct access to their logs and only pay market rate for storage and computation as their apps grow in size. 
 
 <br>
 
@@ -50,9 +46,8 @@ As architectures shift more towards distributed and cloud based systems, the nee
 * Real-time rolling averages on service specific KPIs including Availability, Response Time, Load, and Response Error.
 * Service specific KPI threshold settings for quick glance report cards.
 * Historic panel data on KPI statistics for Past Hour, Past Day, Past Week, Past Month intervals.
-* Real-time dependency graph visualizer that maps service structure and statistics. 
+* Dependency Graph visual that maps service structure and methods. 
 * Server side authentication for secure storage and distribution of analytics. 
-* Secure Session authentication.
 
 <br>
 
@@ -60,8 +55,8 @@ As architectures shift more towards distributed and cloud based systems, the nee
 
 <img src="./assets/VenusFlow.jpg" align-items="center" width="100%" />
 
-
 There are three key phases of The Venus Orbit:
+
 1. Collecting your data: 
   - When deploying instances of their app, users will require in a Node.js wrapper that intercepts and logs all HTTP/HTTPS requests to external service dependencies. Each wrapper is configured to write these logs to an AWS Elasticache hosted Redis Cluster in a readable stream. The Redis cluster serves as a secure temporary storage for the raw log data, following LRU queue/cache protocols. 
 2. Analyzing your data: 
@@ -72,10 +67,6 @@ There are three key phases of The Venus Orbit:
  - Service specific analytics will populate the dashboard and will continue to give users updates on their server until they end their session by navigating to the Sign Out tab. A signout wipes all session data and returns users to the Venus login page.   
 
 
-
-## Demo
-
-insert demo here
 
 #
 ##### Return to [Top](#Venus)
@@ -95,6 +86,8 @@ git clone https://github.com/oslabs-beta/venus.git
 
 ## Install Dependencies and Run Scripts
 
+within the parent directory of Venus download the dependencies. 
+
 ```
 npm install
 ```
@@ -102,7 +95,7 @@ run
 ```
 npm run dev:react
 ```
-then
+then in a second concurrent terminal run
 ```
 npm run dev:electron
 ```
