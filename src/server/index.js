@@ -93,24 +93,16 @@ io.use(function (socket, next) {
 
 io.sockets.on('connection', (socket) => {
   console.log(`New connection: ${socket.id}`); 
-  sendData(socket); 
+  emitData(socket); 
 })
 
 
 /**
- * Send Historical Data Function 
- * This function's primarily role is to house all of the logic needed to buffer and send log data for historical data analysis, 
- * leveraging the COUNT and BUFFER variables declared above to write data at a pre-determined cadence.
- * 
- * In this example, the function triggers sendData every 3 seconds and adds to the Buffer array every 3 minutes, which then writes
- * to the "writeToDB" function passing the buffer off to the functions over in historical-data-analysis.js for further processing. 
+ * Emit Data Function 
+ * This function's primarily role is to, upon socket connection, run the real-time data analysis and emit the result to 
+ * the front-end.
  */
-async function sendData(socket){
-  //Increment count everytime sendData is invoked. 
-  COUNT++; 
-
-  console.log('COUNT: ', COUNT);
-  console.log('BUFFER: ', BUFFER); 
+async function emitData(socket){
   
   //Read last three minutes of log data from stream and store into an array of objects.
   const streamData = await redis.readRedisStream();
@@ -125,9 +117,42 @@ async function sendData(socket){
     
     //Emit output to the front-end via websocket,
     socket.emit('real-time-object', output); 
+  }
+
+  //Recursive call to trigger function every second. 
+  setTimeout(() => {
+    emitData(socket); 
+  }, 3000); 
     
-    //When 3 minutes have passed (i.e. count is 60, since count only increments every 3 seconds), add to buffer. 
-    if(COUNT === 5){
+}
+
+
+/**
+ * Send Data Function 
+ * This function's primarily role is to house all of the logic needed to buffer and send log data for historical data analysis, 
+ * leveraging the COUNT and BUFFER variables declared above to write data at a pre-determined cadence.
+ * 
+ * In this example, the function triggers sendData every 3 seconds and adds to the Buffer array every 3 minutes, which then writes
+ * to the "writeToDB" function passing the buffer off to the functions over in historical-data-analysis.js for further processing. 
+ */
+async function sendData(){
+  //Increment count everytime sendData is invoked. 
+  COUNT++; 
+
+  console.log('COUNT: ', COUNT);
+  console.log('BUFFER: ', BUFFER); 
+  
+  //Read last three minutes of log data from stream and store into an array of objects.
+  const streamData = await redis.readRedisStream();
+  
+  //Logic should only trigger if a valid response is received from the redis read handler.
+  if(streamData.length !== 0){
+    
+    //Analyze last three minutes of stream data and store output of analysis.
+    let output = data.rtData(streamData);
+    
+    //When 1 minutes have passed (i.e. count is 20, since count only increments every 3 seconds), add to buffer. 
+    if(COUNT % 20 === 0){
       
       //Add the log object to the buffer. 
       BUFFER.push(output[2]); 
@@ -137,7 +162,7 @@ async function sendData(socket){
       
       if(BUFFER.length === 5){
         
-      console.log('WRITE TO DB TRIGGERED!'); 
+        console.log('WRITE TO DB TRIGGERED!'); 
 
       //Pass buffer into historical data analysis.
       writeToDB(BUFFER); 
@@ -148,20 +173,18 @@ async function sendData(socket){
     }
     
   } else {
-
-    if(COUNT === 5){
-      COUNT = 0; 
-    }
     
     console.log('No usable data from the stream. ')
   }
   
-  //Recursive call to trigger function every 3 seconds. 
+  //Recursive call to trigger function every second. 
   setTimeout(() => {
-    sendData(socket); 
+    sendData(); 
   }, 3000); 
 }
 
+/* Trigger sendData once the instance is spun up. */
+sendData(); 
 
 /**
  * EXPRESS ROUTES

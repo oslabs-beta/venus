@@ -94,8 +94,8 @@ const readRedisStream = async () => {
 
   streamEntries = await redis.xrange(STREAM_KEY, startTime, endTime); 
 
-  console.log('XRANGE, response with reply transformer'); 
-  console.log(streamEntries); 
+  console.log(`Read from the Redis Stream at at ${INTERVAL / 60000} interval.`); 
+  // console.log(streamEntries); 
 
   return streamEntries; 
 
