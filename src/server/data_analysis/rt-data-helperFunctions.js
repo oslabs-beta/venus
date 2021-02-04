@@ -201,6 +201,9 @@ function aggregateStatsToObj(df) {
   console.log('Total Responses: ', totalResponses);
   console.log('Total Client Errors: ', totalClientErrors);
   console.log('Total Server Errors: ', totalServerErrors);
+
+  console.log('Error Rate: ', newObj.error);
+  console.log('Availability: ', newObj.availability); 
   
   /* iterate through each request method and invoke rowToObj to construct method-level object */
   aggregateOutputTable.data.forEach((row) => {
