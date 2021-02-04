@@ -590,8 +590,7 @@ histController.readLastHour = (req, res, next) => {
 
   if(service !== 'aggregate'){
 
-    // queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - 1000000000}::BIGINT AND service = '${service}' GROUP BY service, method;`;
-    queryText = `SELECT timestamp, service, method, availability::int::float4 as availability, response_time::int::float4 as response_time, error_rate::int::float4 as error_rate, load::int::float4 as load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = '${service}';`;
+    queryText = `SELECT timestamp, service, method, availability, response_time, error_rate, load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = '${service}' AND method != 'aggregate';`;
 
     returnObj.service = service; 
     
@@ -734,7 +733,6 @@ histController.readLastHour = (req, res, next) => {
 
 /* This function reads rows from the 1 hour table for the last day and appends to the historical data object to be consumed on the front end. */
 histController.readLastDay = (req, res, next) => {
-  //Query for ALL rows in the last hour 
   
   const { service } = req.params;
 
@@ -743,8 +741,9 @@ histController.readLastDay = (req, res, next) => {
   const returnObj = {}; 
 
   if(service !== 'aggregate'){
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - EIGHT_HOURS}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
 
+    queryText = `SELECT timestamp, service, method, availability, response_time, error_rate, load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND service = '${service}' AND method != 'aggregate';`;
+    
     returnObj.service = service; 
     
     client.query(queryText, (err, result) => {
@@ -813,7 +812,9 @@ histController.readLastDay = (req, res, next) => {
     })
 
   } else {
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - EIGHT_HOURS}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
+    
+    queryText = `SELECT timestamp, service, method, availability, response_time, error_rate, load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND method = 'aggregate';`;
+
 
     returnObj.service = 'aggregate'; 
     
@@ -892,7 +893,8 @@ histController.readLastWeek = (req, res, next) => {
   const returnObj = {}; 
 
   if(service !== 'aggregate'){
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
+
+    queryText = `SELECT timestamp, service, method, availability, response_time, error_rate, load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - WEEK}::BIGINT AND service = '${service}' AND method != 'aggregate';`;
 
     returnObj.service = service; 
     
@@ -960,7 +962,8 @@ histController.readLastWeek = (req, res, next) => {
     })
 
   } else {
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - DAY}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
+
+    queryText = `SELECT timestamp, service, method, availability, response_time, error_rate, load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - WEEK}::BIGINT AND method = 'aggregate';`;
 
     returnObj.service = 'aggregate'; 
     
@@ -1031,7 +1034,6 @@ histController.readLastWeek = (req, res, next) => {
 
 /* This function reads rows from the one day table for the last month and appends to the historical data object to be consumed on the front end. */
 histController.readLastMonth = (req, res, next) => {
-  //Query for ALL rows in the last hour 
   
   const { service } = req.params;
 
@@ -1040,7 +1042,8 @@ histController.readLastMonth = (req, res, next) => {
   const returnObj = {}; 
 
   if(service !== 'aggregate'){
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${ONE_DAY_TABLE} WHERE timestamp >= ${Date.now() - WEEK}::BIGINT AND service = '${service}' AND method != 'aggregate' GROUP BY service, method;`;
+
+    queryText = `SELECT timestamp, service, method, availability, response_time, error_rate, load FROM ${ONE_DAY_TABLE} WHERE timestamp >= ${Date.now() - MONTH}::BIGINT AND service = '${service}' AND method != 'aggregate';`;
 
     returnObj.service = service; 
     
@@ -1107,7 +1110,8 @@ histController.readLastMonth = (req, res, next) => {
     })
 
   } else {
-    queryText = `SELECT MAX(timestamp) as timestamp, service, method, AVG(availability::int::float4) as availability, AVG(response_time::int::float4) as response_time, AVG(error_rate::int::float4) as error_rate, AVG(load::int::float4) as load FROM ${EIGHT_HR_TABLE} WHERE timestamp >= ${Date.now() - WEEK}::BIGINT AND method = 'aggregate' GROUP BY service, method;`;
+
+    queryText = `SELECT timestamp, service, method, availability, response_time, error_rate, load FROM ${ONE_HR_TABLE} WHERE timestamp >= ${Date.now() - MONTH}::BIGINT AND method = 'aggregate';`;
 
     returnObj.service = 'aggregate'; 
     

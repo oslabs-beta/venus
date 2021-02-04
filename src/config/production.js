@@ -4,7 +4,7 @@ module.exports = {
        * OPTIONAL: add any endpoints below with the value 'true' to EXCLUDE from the analysis
        */
       endpointsExcluded: {
-        'http://localhost/': true,
+        'localhost': true,
       },
   },
   STREAM_KEY : 'logstream',
