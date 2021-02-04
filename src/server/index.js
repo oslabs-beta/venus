@@ -177,8 +177,8 @@ async function sendData(){
   }, 3000); 
 }
 
-
-
+/* Trigger sendData once the instance is spun up. */
+sendData(); 
 
 /**
  * EXPRESS ROUTES
