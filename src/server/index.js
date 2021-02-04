@@ -135,16 +135,16 @@ async function sendData(socket){
       //Reset count for the next cycle. 
       COUNT = 0; 
       
-      if(BUFFER.length === 20){
+      // if(BUFFER.length === 20){
         
-        console.log('WRITE TO DB TRIGGERED!'); 
+      console.log('WRITE TO DB TRIGGERED!'); 
 
-        //Pass buffer into historical data analysis.
-        writeToDB(BUFFER); 
+      //Pass buffer into historical data analysis.
+      writeToDB(BUFFER); 
         
-        //Reset buffer for the next cycle.
-        BUFFER = []; 
-      }
+      //Reset buffer for the next cycle.
+      BUFFER = []; 
+      // }
     }
     
   } else {
