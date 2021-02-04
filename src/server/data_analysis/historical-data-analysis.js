@@ -494,7 +494,7 @@ histController.readLastHour = (req, res, next) => {
 
   if(service !== 'aggregate'){
 
-    queryText = `SELECT timestamp, service, method, availability, response_time, error_rate, load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND service = '${service}' AND method != 'aggregate';`;
+    queryText = `SELECT timestamp, service, method, availability, response_time, error_rate, load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR/100}::BIGINT AND service = '${service}' AND method != 'aggregate';`;
 
     returnObj.service = service; 
     
@@ -529,25 +529,25 @@ histController.readLastHour = (req, res, next) => {
           if(row.service === service && row.method !== 'aggregate'){
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(11, -1), 
               "value": Number(row.availability), 
               "service": row.method
             })
 
             returnObj['lastHour']['error_rate'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(11, -1), 
               "value": Number(row.error_rate), 
               "service": row.method
             })
 
             returnObj['lastHour']['response_time'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(11, -1), 
               "value": Number(row.response_time), 
               "service": row.method
             })
 
             returnObj['lastHour']['load'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(11, -1), 
               "value": Number(row.load), 
               "service": row.method
             })
@@ -565,7 +565,7 @@ histController.readLastHour = (req, res, next) => {
     })
 
   } else { //If input is aggregate 
-    queryText = `SELECT timestamp, service, method, availability, response_time, error_rate, load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR}::BIGINT AND method = 'aggregate';`;
+    queryText = `SELECT timestamp, service, method, availability, response_time, error_rate, load FROM ${THREE_MIN_TABLE} WHERE timestamp >= ${Date.now() - HOUR/100}::BIGINT AND method = 'aggregate';`;
 
     returnObj.service = 'aggregate'; 
     
@@ -598,25 +598,25 @@ histController.readLastHour = (req, res, next) => {
           } else {
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(11, -1), 
               "value": Number(row.availability), 
               "service": row.service
             })
 
             returnObj['lastHour']['error_rate'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(11, -1), 
               "value": Number(row.error_rate), 
               "service": row.service
             })
 
             returnObj['lastHour']['response_time'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(11, -1), 
               "value": Number(row.response_time), 
               "service": row.service
             })
 
             returnObj['lastHour']['load'].push({
-              "timestamp": unixToTimestamp(row.timestamp), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(11, -1), 
               "value": Number(row.load), 
               "service": row.service
             })
