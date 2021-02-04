@@ -37,7 +37,7 @@ redisStream.streamName = process.env.STREAM_KEY;
  */
 redisStream.writeRedisStream = (streamName, logObj) => {
   // FIXME for testing purposes -- delete before final shipping
-  console.log(`Redis received log: ${logObj}`);
+  console.log(`Redis received log:`, logObj);
 
   /**
    * error object constructor
