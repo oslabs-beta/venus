@@ -7,8 +7,8 @@ import React, { useContext, useEffect,} from 'react';
 import Card from 'antd/es/card';
 import { DependencyGraph } from '../charts/DependencyTree'
 import { AggregateStats } from '../components/AggregateStats';
+import { globalContext } from "../contexts/globalContext"
 import { dynamicContext } from '../contexts/dynamicContext';
-import { globalContext } from '../contexts/globalContext';
 import Divider from 'antd/es/divider';
 import Title from 'antd/es/typography/Title';
 
@@ -58,4 +58,3 @@ function DependencyGraphContainer(): JSX.Element{
 };
 
 export { DependencyGraphContainer };
-
