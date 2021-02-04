@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Group } from "@visx/group";
 import { hierarchy, Tree } from "@visx/hierarchy";
 import { LinearGradient } from "@visx/gradient";
@@ -7,6 +7,7 @@ import { pointRadial } from "d3-shape";
 import { AggregateStats } from '../components/AggregateStats';
 import { changeChildArr, changeData, treeData} from './DataFuncDepGraph'
 import { Select } from "antd";
+import { dynamicContext } from '../contexts/dynamicContext';
 
 // import useForceUpdate from "./useForceUpdate";
 import {
@@ -25,7 +26,7 @@ import {
 } from "@visx/shape";
 
 const { Option } = Select;
-
+const { services } = useContext(dynamicContext)
 const controlStyles = { fontSize: 28 };
 export type Props = {
   layout: string;
