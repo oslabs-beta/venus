@@ -171,6 +171,8 @@ const rtData = data => {
     inplace: true,
   });
 
+  df.print()
+  
   const outputTableByService = rtDataByCategory(df, 'reqHost');
   
   /**
