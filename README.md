@@ -2,17 +2,15 @@
 
 # Venus
 
-<a href="#"><img src="./assets/venus.png" alt="Electron" title="Electron" align-items="center" height="400" /></a>
+<a href="#"><img src="./assets/venus.png" align-items="center" height="200" /></a>
 
 #
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/oslabs-beta/venus)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-### ⭐ Star us on GitHub ⭐
 
 Venus is a self-hosted service monitoring tool for growing projects.  Venus provides real time and historic data metrics of your services and their endpoint methods. Use Venus to verify that these services and their endpoint dependencies are operating properly.
 
-<br>
 
 ## Table of Contents
 
