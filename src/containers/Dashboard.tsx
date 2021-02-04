@@ -2,6 +2,7 @@
  * @name Dashboard
  * @desc Current Status page that immediately renders when user signs in. Parent container to aggregate stats
  */
+
 import { io } from "socket.io-client";
 import React, { useContext, useEffect } from "react";
 import { AggregateStats } from "../components/AggregateStats";
@@ -23,53 +24,28 @@ function Dashboard(): JSX.Element {
   
   useEffect(() => {
     setFilter(filter)
-    // console.log(serverAddress)
-    // const socket:any = io(serverAddress + ':8080', {
-    //   transports: ["websocket"],
-    // });
-    // console.log('in console')
-    // socket.on("connection", () => {
-    //   console.log(socket.id);
-    //   console.log('connected')
-    // });
-    // console.log('past connection req')
-    // socket.on("real-time-object", (output: any) => {
-    //   console.log("new update");
-    //   console.log(output)
-    //   const newData = JSON.parse(output[0]);
-    //   setAggregate(newData.aggregate);
-    //   setServices(newData.services);
-    //   console.log(newData.aggregate);
-    //   console.log(newData.services, 'services');
-    // });
+    console.log(serverAddress)
+    const socket:any = io(serverAddress + ':8080', {
+      transports: ["websocket"],
+    });
+    console.log('in console')
+    socket.on("connection", () => {
+      console.log(socket.id);
+      console.log('connected')
+    });
+    console.log('past connection req')
+    socket.on("real-time-object", (output: any) => {
+      console.log("new update");
+      console.log(output)
+      const newData = JSON.parse(output[0]);
+      setAggregate(newData.aggregate);
+      setServices(newData.services);
+      console.log(newData.aggregate);
+      console.log(newData.services, 'services');
+    });
+  
 
-    setServices([
-      {
-        service: "ab",
-        load: 1,
-        response_time: 1,
-        error: 1,
-        availability: 1,
-        byMethod: {
-          GET: {
-            service: "a",
-            load: 99,
-            response_time: 12,
-            error: 5,
-            availability: 1,
-          }
-        }
-      }
-    ]);
-    setAggregate({
-      error: 40,
-      response_time: 1278,
-      load: 2,
-      availability: 83,
-      status: 'good'
-    })
-
-    // return () => socket.disconnect();
+    return () => socket.disconnect();
     
   }, []);
   
@@ -139,11 +115,7 @@ function Dashboard(): JSX.Element {
       sorter: {
         compare: (a:any, b:any) => a.error - b.error,
       }
-      //(a:any, b:any) => columns[0].key.sort(a.key.localeCompare(b.key))
     },
-    // sorter:{
-    //   compare: (a:any, b:any) => a.error - b.error,
-    // }
     {
       title: "Status",
       dataIndex: "status",
