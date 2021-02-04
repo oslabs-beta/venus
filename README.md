@@ -2,7 +2,7 @@
 
   <img src="./assets/venus.png" align="center" height="175" />
 
-<h1 align-items="center">Venus</h1>
+<h1 align="center">Venus</h1>
 
 
 #
