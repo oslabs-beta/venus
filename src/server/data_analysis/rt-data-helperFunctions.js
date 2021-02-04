@@ -169,10 +169,7 @@ function rowToObj(row, service = false) {
   newObj.response_time = Math.round(row[2]);
   newObj.error = Math.round(row[3]);
   newObj.availability = Math.round(100 - row[4]);
-  // newObj.timestamp = String(row[5]);
-
-  console.log('Error Rate: ', newObj.error);
-  console.log('Availability: ', newObj.availability); 
+  // newObj.timestamp = String(row[5]); 
 
 
   return newObj;
