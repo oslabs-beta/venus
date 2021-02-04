@@ -17,7 +17,6 @@ const Latency: React.FC = () => {
     xAxis: { 
       type: 'time', 
      },
-     smooth: true,
     yAxis : { 
       label: {
         formatter: function formatter(v:any) {

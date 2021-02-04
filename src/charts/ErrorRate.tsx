@@ -14,7 +14,7 @@ function ErrorRate(): JSX.Element {
             data: serviceData.error_rate,
             xField: "timestamp",
             yField: "value",
-            seriesField: "service",
+            seriesField: "service"
           };
   console.log(config.data, 'config error_rate')
   return <Area {...config} autoFit={true} />;
