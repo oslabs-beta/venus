@@ -1,5 +1,5 @@
 
-<img src="./assets/venus.png" align-items="center" height="175" />
+<center><img src="./assets/venus.png" align-items="center" height="175" /></center>
 <h1 align-items="center">Venus</h1>
 
 
