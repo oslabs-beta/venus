@@ -81,7 +81,7 @@ function rtDataByCategory(df, category) {
     right: clientErrorDFMethod,
     on: [`${category}`],
     how: 'left',
-  });
+  }); 
 
   /**
    * Client Error Rate is calculated as:
@@ -169,7 +169,9 @@ function rowToObj(row, service = false) {
   newObj.response_time = Math.round(row[2]);
   newObj.error = Math.round(row[3]);
   newObj.availability = Math.round(100 - row[4]);
-  // newObj.timestamp = String(row[5]);
+  // newObj.timestamp = String(row[5]); 
+
+
   return newObj;
 }
 

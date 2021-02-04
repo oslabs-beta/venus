@@ -37,13 +37,13 @@ type dynamicState = {
     error_threshold?: number, 
     key?: number
   }[]
-  serviceNames: string[]
+  serviceNames: any
   setServices: (input:any[]) => void;
   setAggregate: (input:any) => void;
   setDependencyGraph: (input:any) => void;
   setFilter: (input:any) => void;
   setServiceThresholds: (input:any) => void;
-  setServiceNames: (input:string[]) => void
+  setServiceNames: (input:any) => void
 };
 
 export const liveData: dynamicState = {

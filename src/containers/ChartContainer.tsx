@@ -1,6 +1,6 @@
 /**
  * @name ChartContainer
- * @desc Child of Dashboard, Parent container that holds and displays each Chart
+ * @desc Child of Main Container container that holds and displays each Chart.
  */
 import React, { useContext, useEffect, useState } from "react";
 import { CardDropDown } from "../components/CardDropDown";
@@ -21,7 +21,6 @@ import Title from "antd/es/typography/Title";
 import Radio from "antd/es/radio";
 import Button from "antd/es/button";
 import axios from "axios";
-import dummyData from "../../session_storage/dummy_data.json";
 function ChartContainer(): JSX.Element {
   const [bool, setBool] = useState(false);
   const {
@@ -80,15 +79,17 @@ function ChartContainer(): JSX.Element {
   };
   console.log(currentRange, "currentRange");
   const refreshData = () => {
-    // axios.get('ec2instance'+':3000/getHistorical/' + service).then(function(response){
-    //   console.log(response.data)
-    //   setTimeRange(response.data)
-    //   setServiceData(response.data[currentRange])
-    // })
-    // .catch(function(error){
-    //   console.log(error,'< error')
-    // })
-    console.log("data refreshed");
+    if (service === ''){
+
+    }
+    axios.get(serverAddress + ':3000/getHistorical/' + service).then(function(response){
+      console.log(response.data)
+      setTimeRange(response.data)
+      setServiceData(response.data[currentRange])
+    })
+    .catch(function(error){
+      console.log(error)
+    })
   };
 
   if (!bool) {
@@ -133,13 +134,13 @@ function ChartContainer(): JSX.Element {
         </div>
         <Row gutter={[32, 32]}>
           <Col span={12}>
-            <Title level={5}>Availability</Title>
+            <Title level={5}>Availability Rate (%)</Title>
             <Card bordered={true} hoverable={true} style={{ width: "500px" }}>
               <Availability />
             </Card>
           </Col>
           <Col span={12}>
-            <Title level={5}>Latency</Title>
+            <Title level={5}>Response Time (ms)</Title>
             <Card bordered={true} hoverable={true} style={{ width: "500px" }}>
               <Latency />
             </Card>
@@ -147,13 +148,13 @@ function ChartContainer(): JSX.Element {
         </Row>
         <Row gutter={[32, 32]}>
           <Col span={12}>
-            <Title level={5}>Error Rate</Title>
+            <Title level={5}>Error Rate (%)</Title>
             <Card bordered={true} hoverable={true} style={{ width: "500px" }}>
               <ErrorRate />
             </Card>
           </Col>
           <Col span={12}>
-            <Title level={5}>Load</Title>
+            <Title level={5}>Load (hpm)</Title>
             <Card bordered={true} hoverable={true} style={{ width: "500px" }}>
               <LoadChart />
             </Card>
