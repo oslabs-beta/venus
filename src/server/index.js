@@ -46,7 +46,6 @@ let BUFFER = [];
 histMain(); 
 readAll(); 
 // readLastHour('curriculum-api.codesmith.io'); 
-// readAll(); 
 // constructHistorical('aggregate');
 // constructHistorical('curriculum-api.codesmith.io');
 
@@ -81,15 +80,15 @@ const io = socket(server);
 
 /* Socket.io handler includes a token verification layer before establishing a socket connection */
 io.use(function (socket, next) {
-  if (socket.handshake.query && socket.handshake.query.accessToken) {
-      jwt.verify(socket.handshake.query.accessToken, 
-        process.env.ACCESS_SECRET, 
-        (err, decoded) => {
-          if (err) return next(new Error('Token authentication error!'))
+  // if (socket.handshake.query && socket.handshake.query.accessToken) {
+  //     jwt.verify(socket.handshake.query.accessToken, 
+  //       process.env.ACCESS_SECRET, 
+  //       (err, decoded) => {
+  //         if (err) return next(new Error('Token authentication error!'))
           socket.emit('connection', 'connected!'); 
           return next();
-        });
-      } return next(new Error('Token expired!'))
+      //   });
+      // } return next(new Error('Token expired!'))
 });
 
 io.sockets.on('connection', (socket) => {
@@ -128,7 +127,7 @@ async function sendData(socket){
     socket.emit('real-time-object', output); 
     
     //When 3 minutes have passed (i.e. count is 60, since count only increments every 3 seconds), add to buffer. 
-    if(COUNT === 60){
+    if(COUNT === 5){
       
       //Add the log object to the buffer. 
       BUFFER.push(output[2]); 
@@ -136,21 +135,21 @@ async function sendData(socket){
       //Reset count for the next cycle. 
       COUNT = 0; 
       
-      if(BUFFER.length === 20){
+      if(BUFFER.length === 5){
         
-        console.log('WRITE TO DB TRIGGERED!'); 
+      console.log('WRITE TO DB TRIGGERED!'); 
 
-        //Pass buffer into historical data analysis.
-        writeToDB(BUFFER); 
+      //Pass buffer into historical data analysis.
+      writeToDB(BUFFER); 
         
-        //Reset buffer for the next cycle.
-        BUFFER = []; 
+      //Reset buffer for the next cycle.
+      BUFFER = []; 
       }
     }
     
   } else {
 
-    if(COUNT === 60){
+    if(COUNT === 5){
       COUNT = 0; 
     }
     

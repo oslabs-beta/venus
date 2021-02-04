@@ -144,6 +144,12 @@ function rtDataByCategory(df, category) {
    * Calculation is done at the end given that the original figures are needed for the percentage calculations
    */
   outputTable[categoryCountLabel] = outputTable[categoryCountLabel].div(STREAM_WINDOW);
+
+  outputTable.sort_values({
+    by: `${categoryLabel}`,
+    inplace: true,
+  });
+
   return outputTable;
 }
 
