@@ -99,11 +99,8 @@ io.sockets.on('connection', (socket) => {
 
 /**
  * Emit Data Function 
- * This function's primarily role is to house all of the logic needed to buffer and send log data for historical data analysis, 
- * leveraging the COUNT and BUFFER variables declared above to write data at a pre-determined cadence.
- * 
- * In this example, the function triggers sendData every 3 seconds and adds to the Buffer array every 3 minutes, which then writes
- * to the "writeToDB" function passing the buffer off to the functions over in historical-data-analysis.js for further processing. 
+ * This function's primarily role is to, upon socket connection, run the real-time data analysis and emit the result to 
+ * the front-end.
  */
 async function emitData(socket){
   
@@ -129,6 +126,15 @@ async function emitData(socket){
     
 }
 
+
+/**
+ * Send Data Function 
+ * This function's primarily role is to house all of the logic needed to buffer and send log data for historical data analysis, 
+ * leveraging the COUNT and BUFFER variables declared above to write data at a pre-determined cadence.
+ * 
+ * In this example, the function triggers sendData every 3 seconds and adds to the Buffer array every 3 minutes, which then writes
+ * to the "writeToDB" function passing the buffer off to the functions over in historical-data-analysis.js for further processing. 
+ */
 async function sendData(){
   //Increment count everytime sendData is invoked. 
   COUNT++; 
