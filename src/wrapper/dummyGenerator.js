@@ -34,9 +34,15 @@ const pathDB = {
 
 const statusCodeDB = {
   1: 200,
-  2: 403,
-  4: 410,
-  3: 505
+  2: 200,
+  3: 200,
+  4: 200,
+  5: 200,
+  6: 200,
+  7: 200,
+  8: 403,
+  9: 410,
+  10: 505
 };
 
 
@@ -44,7 +50,8 @@ const generateLogs = () => {
 
   const log = {}; 
 
-  const serviceIndex = Math.floor(Math.random() * 4) + 1; 
+  const serviceIndex = Math.floor(Math.random() * 10) + 1; 
+  const generalIndex = Math.floor(Math.random() * 4) + 1; 
 
   let clientError = 0;
   let serverError = 0;
@@ -62,10 +69,10 @@ const generateLogs = () => {
       resMessage = 'OK';
     }
 
-  log['reqHost'] = reqHostDB[serviceIndex];
+  log['reqHost'] = reqHostDB[generalIndex];
   log['reqMethod'] = methodDB[(Math.floor(Math.random() * 5)) + 1];
-  log['reqPath'] = pathDB[serviceIndex];
-  log['reqUrl'] = urlDB[serviceIndex];
+  log['reqPath'] = pathDB[generalIndex];
+  log['reqUrl'] = urlDB[generalIndex];
   log['resStatusCode'] = statusCodeDB[serviceIndex]; 
   log['clientError'] = clientError;
   log['serverError'] = serverError;
