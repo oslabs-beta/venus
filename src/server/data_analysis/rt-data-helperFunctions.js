@@ -37,6 +37,8 @@ function rtDataByCategory(df, category) {
   /* Final DataFrame that will include columns with the calculated metrics */  
   let dfFinal;      
 
+  dfNewByCategory.print(); 
+
   /**
    * Timestamp is calculated as the minimum time stamp within each category. 
    */
