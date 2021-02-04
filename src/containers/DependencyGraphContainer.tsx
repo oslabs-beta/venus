@@ -39,7 +39,7 @@ function DependencyGraphContainer(): JSX.Element{
         availability={aggregate.availability}
         />
          <Divider><Title level={3}>Dependency graph</Title></Divider>
-          <Card hoverable={true} style={{width: 'fit-content'}}>
+          <Card hoverable={true} style={{width: 'total width'}}>
             <DependencyGraph width={600} height={600} />
           </Card>
     </div>
