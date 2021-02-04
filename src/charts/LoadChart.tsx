@@ -30,6 +30,15 @@ function LoadChart(): JSX.Element {
     xField: "timestamp",
     yField: "value",
     seriesField: "service",
+    xAxis: {
+      max: 15, 
+    },
+    animation: {
+      appear: {
+        animation: 'path-in',
+        duration: 1000,
+      },
+    },
   };
   console.log(config.data, 'config load')
   return <Area {...config} autoFit={true} />;

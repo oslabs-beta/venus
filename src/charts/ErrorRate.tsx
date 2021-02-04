@@ -14,7 +14,20 @@ function ErrorRate(): JSX.Element {
             data: serviceData.error_rate,
             xField: "timestamp",
             yField: "value",
-            seriesField: "service"
+            yAxis: {
+              min: -5,
+              max: 1000
+            },
+            xAxis: {
+              max: 15
+            },
+            seriesField: "service", 
+            animation: {
+              appear: {
+                animation: 'path-in',
+                duration: 1000,
+              },
+            },
           };
   console.log(config.data, 'config error_rate')
   return <Area {...config} autoFit={true} />;

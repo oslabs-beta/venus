@@ -127,7 +127,7 @@ async function sendData(socket){
     socket.emit('real-time-object', output); 
     
     //When 3 minutes have passed (i.e. count is 60, since count only increments every 3 seconds), add to buffer. 
-    if(COUNT === 5){
+    if(COUNT % 5 === 0){
       
       //Add the log object to the buffer. 
       BUFFER.push(output[2]); 
@@ -148,10 +148,6 @@ async function sendData(socket){
     }
     
   } else {
-
-    if(COUNT === 5){
-      COUNT = 0; 
-    }
     
     console.log('No usable data from the stream. ')
   }

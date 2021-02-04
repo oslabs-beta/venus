@@ -15,7 +15,7 @@ const Latency: React.FC = () => {
     yField: 'value',
     seriesField: 'service',
     xAxis: { 
-      type: 'time', 
+      // max: 15
      },
     yAxis : { 
       label: {
@@ -24,6 +24,12 @@ const Latency: React.FC = () => {
             return ''.concat(s, ',');
           });
         },
+      },
+    },
+    animation: {
+      appear: {
+        animation: 'path-in',
+        duration: 1000,
       },
     },
   };
