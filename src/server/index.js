@@ -151,8 +151,8 @@ async function sendData(){
     //Analyze last three minutes of stream data and store output of analysis.
     let output = data.rtData(streamData);
     
-    //When 3 minutes have passed (i.e. count is 60, since count only increments every 3 seconds), add to buffer. 
-    if(COUNT % 10 === 0){
+    //When 1 minutes have passed (i.e. count is 20, since count only increments every 3 seconds), add to buffer. 
+    if(COUNT % 20 === 0){
       
       //Add the log object to the buffer. 
       BUFFER.push(output[2]); 

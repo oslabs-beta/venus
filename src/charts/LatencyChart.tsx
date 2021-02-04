@@ -31,7 +31,7 @@ const Latency: React.FC = () => {
         },
       },
       min: 900, 
-      max: 1400
+      max: 1300
     },
     animation: {
       appear: {

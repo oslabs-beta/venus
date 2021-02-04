@@ -22,7 +22,6 @@ const Availability: React.FC = () => {
      } 
     },
     yAxis : { 
-      max: 120,
       min: 60,
       label: {
         formatter: function formatter(v:any) {
