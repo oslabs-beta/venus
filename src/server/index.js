@@ -168,7 +168,7 @@ async function sendData(){
   
   //Recursive call to trigger function every second. 
   setTimeout(() => {
-    emitData(); 
+    sendData(); 
   }, 3000); 
 }
 
