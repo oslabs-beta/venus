@@ -58,7 +58,7 @@ As architectures shift more towards distributed and cloud based systems, the nee
 
 ## A Brief Overview of the Venus Orbit 
 
--- Insert flow chart of data. 
+<img src="./assets/VenusFlow.jpg" align-items="center" height="200" />
 
 
 There are three key phases of The Venus Orbit:
