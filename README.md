@@ -146,12 +146,10 @@ Development of Venus is open source on GitHub through the tech accelerator umbre
 ### Potential for Improvement
 * The addition of Metrics for dynamic and historic data.
 * Webhook integration for user alerts on threshold triggers.
-* Persistent user thresholds. 
-*
+* DB storage for user thresholds. 
+
 
 <br>
-
-
 
 - [Contributing](https://github.com/oslabs-beta/Venus/blob/main/CONTRIBUTING.md)
 
@@ -165,11 +163,7 @@ Development of Venus is open source on GitHub through the tech accelerator umbre
 * Evan Perlman [evperlman](https://github.com/evperlman)
 
 # Special Thanks:
-Sanjay Lavingia
-Mike Soennichsen 
-Julie Wu
-Will Bladon
-Justin Cohen 
+Sanjay Lavingia, Mike Soennichsen, Julie Wu, Will Bladon, Justin Cohen, and the many other talented individuals in the OS Labs community who gave us thoughtful feedback and guidance.  
 
 ## License
 
