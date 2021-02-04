@@ -165,7 +165,7 @@ Development of Venus is open source on GitHub through the tech accelerator umbre
 * Evan Perlman [evperlman](https://github.com/evperlman)
 
 ## Special Thanks:
-Sanjay Lavingia, Mike Soennichsen, Julie Wu, Will Bladon, Justin Cohen, Nick de los Santos Jr. and the many other talented individuals in the OS Labs community who gave us thoughtful feedback and guidance.  
+Sanjay Lavingia, Shyam Venkataraman, Kesav Mulakaluri, Santosh Mohan, Mike Soennichsen, Julie Wu, Will Bladon, Justin Cohen and Nick de los Santos Jr. for their thoughtful feedback and guidance.  
 
 ## License
 
