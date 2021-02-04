@@ -44,7 +44,7 @@ let BUFFER = [];
   * write to the series of tables Venus uses to have pre-calculated data points to serve onto the front-end. 
 */
 histMain(); 
-readAll(); 
+// readAll(); 
 // readLastHour('curriculum-api.codesmith.io'); 
 // readAll(); 
 // constructHistorical('aggregate');
@@ -81,15 +81,15 @@ const io = socket(server);
 
 /* Socket.io handler includes a token verification layer before establishing a socket connection */
 io.use(function (socket, next) {
-  if (socket.handshake.query && socket.handshake.query.accessToken) {
-      jwt.verify(socket.handshake.query.accessToken, 
-        process.env.ACCESS_SECRET, 
-        (err, decoded) => {
-          if (err) return next(new Error('Token authentication error!'))
+  // if (socket.handshake.query && socket.handshake.query.accessToken) {
+  //     jwt.verify(socket.handshake.query.accessToken, 
+  //       process.env.ACCESS_SECRET, 
+  //       (err, decoded) => {
+  //         if (err) return next(new Error('Token authentication error!'))
           socket.emit('connection', 'connected!'); 
           return next();
-        });
-      } return next(new Error('Token expired!'))
+      //   });
+      // } return next(new Error('Token expired!'))
 });
 
 io.sockets.on('connection', (socket) => {
