@@ -196,6 +196,11 @@ function aggregateStatsToObj(df) {
   // newObj.timestamp = String(df['Timestamp'].min());
   const aggregateOutputTable = rtDataByCategory(df, 'reqMethod');
   newObj.byMethod = {};
+
+  console.log('Total Requests: ', totalRequests) 
+  console.log('Total Responses: ', totalResponses);
+  console.log('Total Client Errors: ', totalClientErrors);
+  console.log('Total Server Errors: ', totalServerErrors);
   
   /* iterate through each request method and invoke rowToObj to construct method-level object */
   aggregateOutputTable.data.forEach((row) => {
