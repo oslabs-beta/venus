@@ -117,7 +117,6 @@ function changeChildArr(arr: IService[]): TreeNode[]{
         const objReqs = []
         // create request types objs to be put in the req methods array for each endpoint obj
         for (let key in obj.byMethod){
-          console.log('this should be the error number', obj.byMethod[key].error)
             const reqType: any = {
             // declare the service type to a service key
             service: key,
@@ -125,14 +124,11 @@ function changeChildArr(arr: IService[]): TreeNode[]{
             // I purposely declared the obj as "any" type so I could turn the key to a string here
             // status: obj.byMethod[key].status}
             }
-            // renders coorect statuses for children based on errors
+            // renders correct statuses for children based on errors
             reqType['status'] = (obj.byMethod[key].error < 20) ? 'good' : (obj.byMethod[key].error >= 20 && obj.byMethod[key].error <40) ? "fair" : (obj.byMethod[key].error >= 40) ? 'bad' : 'bad'
-            console.log('current method', reqType)
             // push to req methods array for each endpoint obj
             objReqs.push(reqType)
         }
-        // make sure the status is correct for the inner service
-console.log('object', obj, 'and its error rate', obj.error)
         // renders correct statuses for inner services based on errors
         const errorStat = (obj.error < 20) ? 'good' : (obj.error >= 20 && obj.error < 40) ? "fair" : (obj.error >= 40) ? 'bad' : 'bad'
         // the new Obj for each service w/ type
@@ -140,9 +136,6 @@ console.log('object', obj, 'and its error rate', obj.error)
             service: obj.service,
             status: errorStat
            }
-           console.log('this is the new object', newObj)
-           
-           
 
  /* -----------THIS IS WHERE YOU WOULD CHANGE "children" to "methods" ------- */
  

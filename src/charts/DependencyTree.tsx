@@ -216,7 +216,7 @@ function DependencyGraph({
 // sets chart point origin
   if (layout === "polar") {
     // modifies margin for "polar" layout
-    margin = { top: 180, left: 110, right: 110, bottom: 110 }
+    margin = { top: 205, left: 110, right: 110, bottom: 110 }
     origin = {
       x: innerWidth / 2,
       y: innerHeight / 4
