@@ -530,25 +530,25 @@ histController.readLastHour = (req, res, next) => {
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
+              "value": Number(row.availability), 
               "method": row.method
             })
 
             returnObj['lastHour']['error_rate'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
+              "value": Number(row.error_rate), 
               "method": row.method
             })
 
             returnObj['lastHour']['response_time'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
+              "value": Number(row.response_time), 
               "method": row.method
             })
 
             returnObj['lastHour']['load'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
+              "value": Number(row.load), 
               "method": row.method
             })
           }
@@ -599,25 +599,25 @@ histController.readLastHour = (req, res, next) => {
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
+              "value": Number(row.availability), 
               "service": row.service
             })
 
             returnObj['lastHour']['error_rate'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
+              "value": Number(row.error_rate), 
               "service": row.service
             })
 
             returnObj['lastHour']['response_time'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
+              "value": Number(row.response_time), 
               "service": row.service
             })
 
             returnObj['lastHour']['load'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
+              "value": Number(row.load), 
               "service": row.service
             })
           }
@@ -683,25 +683,25 @@ histController.readLastDay = (req, res, next) => {
             //Create availability property and push to array
             returnObj['lastDay']['availability'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
+              "value": Number(row.availability), 
               "method": row.method
             })
 
             returnObj['lastDay']['error_rate'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
+              "value": Number(row.error_rate), 
               "method": row.method
             })
 
             returnObj['lastDay']['response_time'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
+              "value": Number(row.response_time), 
               "method": row.method
             })
 
             returnObj['lastDay']['load'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
+              "value": Number(row.load), 
               "method": row.method
             })
           }
@@ -754,25 +754,25 @@ histController.readLastDay = (req, res, next) => {
             //Create availability property and push to array
             returnObj['lastDay']['availability'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
+              "value": Number(row.availability), 
               "service": row.service
             })
 
             returnObj['lastDay']['error_rate'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
+              "value": Number(row.error_rate), 
               "service": row.service
             })
 
             returnObj['lastDay']['response_time'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
+              "value": Number(row.response_time), 
               "service": row.service
             })
 
             returnObj['lastDay']['load'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
+              "value": Number(row.load), 
               "service": row.service
             })
           }
@@ -837,25 +837,25 @@ histController.readLastWeek = (req, res, next) => {
             //Create availability property and push to array
             returnObj['lastWeek']['availability'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
+              "value": Number(row.availability), 
               "method": row.method
             })
 
             returnObj['lastWeek']['error_rate'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
+              "value": Number(row.error_rate), 
               "method": row.method
             })
 
             returnObj['lastWeek']['response_time'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
+              "value": Number(row.response_time), 
               "method": row.method
             })
 
             returnObj['lastWeek']['load'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
+              "value": Number(row.load), 
               "method": row.method
             })
           }
@@ -989,25 +989,25 @@ histController.readLastMonth = (req, res, next) => {
             //Create availability property and push to array
             returnObj['lastMonth']['availability'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
+              "value": Number(row.availability), 
               "method": row.method
             })
 
             returnObj['lastMonth']['error_rate'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
+              "value": Number(row.error_rate), 
               "method": row.method
             })
 
             returnObj['lastMonth']['response_time'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
+              "value": Number(row.response_time), 
               "method": row.method
             })
 
             returnObj['lastMonth']['load'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
+              "value": Number(row.load), 
               "method": row.method
             })
           }
@@ -1058,25 +1058,25 @@ histController.readLastMonth = (req, res, next) => {
             //Create availability property and push to array
             returnObj['lastMonth']['availability'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.availability, 
+              "value": Number(row.availability), 
               "service": row.service
             })
 
             returnObj['lastMonth']['error_rate'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.error_rate, 
+              "value": Number(row.error_rate), 
               "service": row.service
             })
 
             returnObj['lastMonth']['response_time'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.response_time, 
+              "value": Number(row.response_time), 
               "service": row.service
             })
 
             returnObj['lastMonth']['load'].push({
               "timestamp": unixToTimestamp(row.timestamp), 
-              "value": row.load, 
+              "value": Number(row.load), 
               "service": row.service
             })
           }

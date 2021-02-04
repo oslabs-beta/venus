@@ -1,11 +1,11 @@
 module.exports = {
   venus: {
     /**
-       * OPTIONAL: add any endpoints below with the value 'true' to EXCLUDE from the analysis
-       */
-      endpointsExcluded: {
-        'localhost': true,
-      },
+     * OPTIONAL: add any endpoints below with the value 'true' to EXCLUDE from the analysis
+     */
+    endpointsExcluded: {
+      'localhost': true,
+    },
   },
   STREAM_KEY : 'logstream',
   INTERVAL : 3000,
