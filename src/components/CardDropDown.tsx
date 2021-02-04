@@ -21,31 +21,14 @@ function CardDropDown (): JSX.Element{
   
   
   const dropDownOptions: any[] =[aggregate];
-  // useEffect(() => {
-  //   console.log(props.services)
-  //   for (let i = 0; i < props.services.length; i++){
-  //     dropDownOptions.push(
-  //     <Select.Option value={props.services[i]} key={i}>{props.services[i]}</Select.Option>
-  //   )
-  // }
-  // }, [])
-
-  // useEffect(() => {
+ 
     for (let i = 0; i < serviceNames.length; i++){
       dropDownOptions.push(
       <Select.Option value={serviceNames[i]} key={i}>{serviceNames[i]}</Select.Option>
     )
   }
-  // }, [])
 
 
-  // const dropDownOptions: any[] =[aggregate];
-  // console.log(props.services)
-  // for (let i = 0; i < props.services.length; i++){
-  //   dropDownOptions.push(
-  //     <Select.Option value={props.services[i]} key={i}>{props.services[i]}</Select.Option>
-  //   )
-  // }
 	function onChange(value:string) {
     console.log(value)
     axios.get(serverAddress +':3000/getHistorical/' + value)

@@ -106,7 +106,6 @@ function Dashboard(): JSX.Element {
       setServiceNames(list)
     }
     
- 
   const columns: any = [
     {
       title: "Service",
