@@ -38,7 +38,7 @@ function SignIn():JSX.Element {
       
       <Card 
         className="signInCard"
-        style={{height: 'fit-content', width: 500, boxShadow: "rgba(46, 45, 45, 0.16) 0px 3px 6px, rgba(46, 45, 45, 0.16) 0px 3px 6px"}}
+        style={{height: 'fit-content', width: 380, boxShadow: "rgba(46, 45, 45, 0.16) 0px 3px 6px, rgba(46, 45, 45, 0.16) 0px 3px 6px"}}
         bordered={true}
         hoverable={true}
         >
@@ -50,14 +50,14 @@ function SignIn():JSX.Element {
           onFinishFailed={onFinishFailed}
           >
           <Form.Item
-            // label="Server"
+            className= "textBox"
             name="serverIP"
             rules={[{ required: true, message: 'Please enter valid Server Address.' }]}
           >
             <Input placeholder="Enter Server Address"/>
           </Form.Item>
           <Form.Item
-            // label="Secret"
+          className= "textBox"
             name="secret"
             rules={[{ required: true, message: 'Please enter valid Secret.' }]}
           >
@@ -65,7 +65,8 @@ function SignIn():JSX.Element {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit" style={{marginLeft: 37}}>
+            <Button className= "textBox" type="primary" htmlType="submit" style={{marginLeft: 15}}>
+            
               Sign In
             </Button>
         </Form.Item>
