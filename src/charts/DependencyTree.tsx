@@ -216,7 +216,7 @@ function DependencyGraph({
 // sets chart point origin
   if (layout === "polar") {
     // modifies margin for "polar" layout
-    margin = { top: 205, left: 110, right: 110, bottom: 110 }
+    margin = { top: 190, left: 110, right: 110, bottom: 110 }
     origin = {
       x: innerWidth / 2,
       y: innerHeight / 4
@@ -234,8 +234,8 @@ function DependencyGraph({
       sizeHeight = innerWidth;
     }
   }
-console.log('dtata from dep graph context in graph', dependencyGraph)
-console.log('current data in graph', treeData)
+// console.log('data from dep graph context in graph', dependencyGraph)
+// console.log('current data in graph', treeData)
   const LinkComponent = getLinkComponent({ layout, linkType, orientation });
 // can modify components here i.e. color, stroke size
   return totalWidth < 10 ? null : (
@@ -258,7 +258,7 @@ console.log('current data in graph', treeData)
         <rect width={totalWidth} height={totalHeight} rx={14} fill="#f5f5f5" />
         <Group top={margin.top} left={margin.left}>
           <Tree
-      /*------- Put our data variable in place of treeData --------*/
+      /*------- Put our data from context in place of dummy data ('treeData') --------*/
             root={hierarchy(dependencyGraph, (d) => (d.isExpanded ? null : d.children))}
             size={[sizeWidth, sizeHeight]}
             separation={(a, b) => (a.parent === b.parent ? .4 : .4) / a.depth}
