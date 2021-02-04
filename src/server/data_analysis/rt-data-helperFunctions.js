@@ -83,6 +83,8 @@ function rtDataByCategory(df, category) {
     how: 'left',
   });
 
+  dfFinal.print(); 
+
   /**
    * Client Error Rate is calculated as:
    *  responses with a status code matching the client error category (per errCode_Config.js) 
