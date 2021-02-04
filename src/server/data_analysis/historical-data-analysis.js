@@ -36,101 +36,6 @@ const client = new Client({
 
 client.connect();
 
-const test = [
-  {
-     timestamp: '1612165090715-0',
-      services: [
-        {
-          service: 'curriculum-api.codesmith.io',
-          load: 15,
-          response_time: 1198,
-          error: 56,
-          availability: 100,
-          byMethod: {
-            GET: {
-            load: 20, 
-            response_time: 1292, 
-            availability: 299, 
-            error: 12
-            }, 
-            PUT: {
-              load: 20, 
-              response_time: 1292, 
-              availability: 299, 
-              error: 34
-            }, 
-            POST: {
-              load: 20, 
-              response_time: 1292, 
-              availability: 299, 
-              error: 32
-            } 
-        },
-      }
-    ], 
-    aggregate: {
-      error: 56,
-      load: 15,
-      response_time: 500,
-      availability: 50,
-      byMethod: { 
-        GET: {
-          load: 20, 
-          response_time: 1292, 
-          availability: 299, 
-          error: 39
-        } 
-      }
-    }
-  },
-  {
-    timestamp: '1612165090650-0',
-      services: [
-        {
-          service: 'google-weather-api',
-          load: 15,
-          response_time: 1198,
-          error: 56,
-          availability: 100,
-          byMethod: {
-            GET: {
-            load: 20, 
-            response_time: 1292, 
-            availability: 299, 
-            error: 32
-            }, 
-            PUT: {
-              load: 20, 
-              response_time: 1292, 
-              availability: 299, 
-              error: 12
-            }, 
-            POST: {
-              load: 20, 
-              response_time: 1292, 
-              availability: 299, 
-              error: 53
-            } 
-        },
-      }
-    ], 
-    aggregate: {
-      error: 56,
-      load: 15,
-      response_time: 1000,
-      availability: 100,
-      byMethod: { 
-        GET: {
-          load: 20, 
-          response_time: 1292, 
-          availability: 299, 
-          error: 65
-        } 
-      }
-    }
-  } 
-]
-
 
 /* 
   * DB WRITE FUNCTIONS
@@ -567,10 +472,9 @@ const histMain = () => {
 
 
 /**  
-  * DB READ FUNCTIONS
-  * @param {input} - A string that's either the name of the service or the string 'aggregate'
-  * This series of functions essentially function as middleware to construct the historical data object needed for display purposes. 
-  * They are stitched together by the constructHistorical function which is the only middleware function at the index.js server level. 
+  * DB READ CONTROLLER FUNCTIONS
+  * This series of functions essentially middleware construct the historical data object needed for display purposes. 
+  * These functions are invoked by making an API request to '/getHistorical'
 */
 
 /* This function reads rows from the 3 minute table for the last hour and appends to the historical data object to be consumed on the front end. */
@@ -1188,26 +1092,6 @@ histController.readLastMonth = (req, res, next) => {
       }
     })
   }
-}
-
-/* 
-  * HISTORICAL DATA OBJECT CONSTRUCTOR FUNCTION
-  * This function stitches all of the write functions above in order to output one consolidated historical data object
-  * that is then consumed by the front-end for display purposes. 
-*/
-
-const constructHistorical = async (input) => {
-  
-  histObj['service'] = input; 
-
-  await readLastHour(input); 
-  await readLastDay(input); 
-  await readLastWeek(input); 
-  await readLastMonth(input); 
-
-  console.log('FULLY FORMED HISTORICAL OBJECT: ', histObj); 
-
-  return histObj; 
 }
 
 /* This is a helper function converts the unix timestamp passed in from the redis stream into a number. */

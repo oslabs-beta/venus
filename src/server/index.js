@@ -11,7 +11,7 @@ const data = require('./data_analysis/rt-data.js');
 const jwt = require('jsonwebtoken');
 const redis = require('./redis_handlers/real-time-read-handler.js'); 
 const { histMain, writeToDB, histController, readAll } = require('./data_analysis/historical-data-analysis.js'); 
-const authController = require('./controller.js')
+const authController = require('./controllers/authController.js')
 require('dotenv').config(); 
 
 
