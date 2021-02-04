@@ -1,7 +1,7 @@
 
-<center>
-  <img src="./assets/venus.png" align-items="center" height="175" />
-</center>
+
+  <img src="./assets/venus.png" align="center" height="175" />
+
 <h1 align-items="center">Venus</h1>
 
 
