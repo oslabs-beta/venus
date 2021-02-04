@@ -153,7 +153,7 @@ npm run dev:electron
 
 ## Contributing
 
-Development of Chronos is open source on GitHub through the tech accelerator umbrella OS Labs, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Chronos.
+Development of Venus is open source on GitHub through the tech accelerator umbrella OS Labs, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Venus.
 
 
 
@@ -187,7 +187,10 @@ Justin Cohen
 
 ## License
 
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+## License
+
+Venus is <a href="#"><img src="./src/assets/mit-logo-color.png" alt="MIT" title="MIT" align="center" height="20" /></a> [licensed.](https://github.com/oslabs-beta/Venus/blob/master/LICENSE.md) 
+
 
 #
 #### [Return to Top](#Venus)
