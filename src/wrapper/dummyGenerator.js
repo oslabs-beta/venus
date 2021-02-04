@@ -79,7 +79,6 @@ const generateLogs = () => {
   log['noError'] = noError;
   log['resMessage'] = resMessage;
   log['cycleDuration'] = (Math.random() * 1000 + 600); 
-  console.log(log);
   return log; 
 
 }
