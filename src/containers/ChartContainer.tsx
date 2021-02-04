@@ -134,13 +134,13 @@ function ChartContainer(): JSX.Element {
         </div>
         <Row gutter={[32, 32]}>
           <Col span={12}>
-            <Title level={5}>Availability</Title>
+            <Title level={5}>Availability Rate (%)</Title>
             <Card bordered={true} hoverable={true} style={{ width: "500px" }}>
               <Availability />
             </Card>
           </Col>
           <Col span={12}>
-            <Title level={5}>Latency</Title>
+            <Title level={5}>Response Time (ms)</Title>
             <Card bordered={true} hoverable={true} style={{ width: "500px" }}>
               <Latency />
             </Card>
@@ -148,13 +148,13 @@ function ChartContainer(): JSX.Element {
         </Row>
         <Row gutter={[32, 32]}>
           <Col span={12}>
-            <Title level={5}>Error Rate</Title>
+            <Title level={5}>Error Rate (%)</Title>
             <Card bordered={true} hoverable={true} style={{ width: "500px" }}>
               <ErrorRate />
             </Card>
           </Col>
           <Col span={12}>
-            <Title level={5}>Load</Title>
+            <Title level={5}>Load (hpm)</Title>
             <Card bordered={true} hoverable={true} style={{ width: "500px" }}>
               <LoadChart />
             </Card>

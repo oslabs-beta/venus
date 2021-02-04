@@ -45,6 +45,6 @@ function LoadChart(): JSX.Element {
     },
   };
   console.log(config.data, 'config load')
-  return <Area {...config} autoFit={true} />;
+  return <Area {...config} />;
 }
 export { LoadChart };
