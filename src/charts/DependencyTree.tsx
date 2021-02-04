@@ -5,13 +5,17 @@
  * 
  */
 //import of files and dependencies for dependency graph to properly render
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Group } from "@visx/group";
 import { hierarchy, Tree } from "@visx/hierarchy";
 import { LinearGradient } from "@visx/gradient";
 import { pointRadial } from "d3-shape";
 import { treeData } from './DataFuncDepGraph'
 import Select from "antd/es/select";
+import { dynamicContext } from '../contexts/dynamicContext';
+import { globalContext } from "../contexts/globalContext"
+import { io } from "socket.io-client";
+const { Option } = Select;
 
 import {
   LinkHorizontal,
@@ -29,8 +33,6 @@ import {
 } from "@visx/shape";
 
 
-const { Option } = Select;
-//setting typescript constraints
 const controlStyles = { fontSize: 18 };
 export type Props = {
   layout: string;
@@ -109,7 +111,7 @@ function LinkControls({
     <div>
       {/* <div width={totalWidth+200}></div> */}
       <label>layout: </label>&nbsp;
-      <LayoutSelect width={200}/>
+      <LayoutSelect />
       &nbsp;&nbsp;
       <label>Orientation: </label>&nbsp;
       <OrientationSelect />
@@ -251,7 +253,7 @@ function DependencyGraph({
       <svg width={600} height={600}>
         <LinearGradient id="links-gradient" from="#fd9b93" to="#fe6e9e" />
         // can change rectangle color
-        <rect width={totalWidth+200} height={totalHeight} rx={14} fill="#f5f5f5" />
+        <rect width={totalWidth} height={totalHeight} rx={14} fill="#f5f5f5" />
         <Group top={margin.top} left={margin.left}>
           <Tree
       /*------- Put our data variable in place of treeData --------*/

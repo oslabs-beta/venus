@@ -23,10 +23,8 @@ function Dashboard(): JSX.Element {
   
   useEffect(() => {
     setFilter(filter)
-    const accessToken = localStorage.getItem('accessToken');
     const socket:any = io(serverAddress + ':8080', {
       transports: ["websocket"],
-      query: { accessToken },
     });
     console.log('in console')
     socket.on("connection", () => {
@@ -39,6 +37,7 @@ function Dashboard(): JSX.Element {
       const newData = JSON.parse(output[0]);
       setAggregate(newData.aggregate);
       setServices(newData.services);
+      const dependencyGraph = JSON.parse(output[1])
     });
 
     return () => socket.disconnect();

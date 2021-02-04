@@ -47,11 +47,6 @@ function ChartContainer(): JSX.Element {
   };
 
   useEffect(() => {
-    // setAggregate(test);
-    // setServiceData(dummyData.lastHour);
-    // setTimeRange(dummyData);
-    // setBool(true);
-    // setService("aggregate");
     axios
       .get(serverAddress + ":3000/getHistorical/aggregate")
       .then(function (response) { 
@@ -168,5 +163,5 @@ function ChartContainer(): JSX.Element {
     );
   }
 }
-}
+
 export { ChartContainer, Availability, LoadChart, Button, AggregateStats }
