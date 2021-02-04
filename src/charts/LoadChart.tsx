@@ -27,13 +27,14 @@ function LoadChart(): JSX.Element {
     xField: "timestamp",
     yField: "value",
     seriesField: "service",
-    autoAdjust: true,
     xAxis: {
-      max: 15,
       label: {
         formatter: function formatter(v:any) {
           return v.slice(11,19); 
         }
+     }, 
+     yAxis: {
+       max: 200
      } 
     },
     animation: {
