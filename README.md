@@ -1,6 +1,6 @@
 
 <div align="center">
-  <img src="./assets/venus.png" />
+  <img src="./assets/venus.png" width="175px"/>
   </div>
 
 <h1 align="center">Venus</h1>
