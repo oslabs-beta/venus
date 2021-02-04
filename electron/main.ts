@@ -12,8 +12,8 @@ function createWindow() {
     height: 833,
     // maxWidth: 1439,
     // maxHeight:990,
-    minWidth: 1372,
-    minHeight: 833,
+    minWidth: 1800,
+    minHeight: 800,
     //  // this will give us our icon shown in the task bar or dock. This will also give you a small icon in the top left of your Windows app.
     // icon: __dirname + '/app/assets/img/icon.png',
    webPreferences: {
