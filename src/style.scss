@@ -1,15 +1,22 @@
-@import '~antd/dist/antd.css';
+@import "~antd/dist/antd.css";
+
+
+.logo {
+  width: 178px;
+  margin-bottom: 25px;
+}
 .parentCardContainer {
   display: flex;
   flex-direction: row;
 }
+
 .loginContainer {
- display: flex;
- flex-direction: column;
- height: 100vh;
- justify-content: center;
- align-items: center;
- background: linear-gradient(45deg, hsla(0, 0%, 0%, 1) 24%, hsla(332, 71%, 47%, 1) 100%);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5f5;
 }
 
 .rangeSelectorContainer {
@@ -19,12 +26,22 @@
   justify-content: center;
   align-items: center;
 }
+// .signInCard {
+//   boxShadow: "5px 8px 24px 5px rgba(208, 216, 243, 0.6)" 
+// }
+.loading {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  place-content: center;
+  padding-top: 350px !important;
+}
 
 .rangeSelector {
   margin-left: 10px;
 }
 
-.rangeSelector:hover{
+.rangeSelector:hover {
   cursor: pointer;
   text-decoration: underline;
 }
@@ -46,13 +63,7 @@
   flex-direction: column;
   height: 5px;
 }
-.cardRow {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-  border-right: 20px;
-}
+
 .addService {
   width: 100%;
   height: 100%;
@@ -62,6 +73,7 @@
   display: flex;
   flex-direction: row;
 }
+
 .title {
   margin-left: 20px;
   margin-top: 20px;
@@ -74,7 +86,7 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-  overflow: auto
+  overflow: auto;
 }
 .dataContainer {
   border: 1px solid black;
@@ -82,10 +94,9 @@
   margin: 5px;
   align-items: center;
   justify-content: center;
-  align-self: center
+  align-self: center;
 }
 #chartContainer {
-  flex-grow: 10;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -94,10 +105,20 @@
   height: 100%;
 }
 #dashboard {
-  //flex-grow: 10;
-  // justify-content: stretch;
-  // align-items: stretch;
   display: flex;
+  justify-content: flex-start;
+  align-items: center;
   flex-direction: column;
   padding: 20px 20px;
+  height: 100%;
 }
+
+.textBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // align-items: center;
+}
+
+//box-shadow: 0px 4px 4px 0px rgba(90, 93, 112, 0.6)
+// box-shadow: rgba(46, 45, 45, 0.16) 0px 3px 6px, rgba(46, 45, 45, 0.16) 0px 3px 6px;

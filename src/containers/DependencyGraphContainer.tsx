@@ -1,18 +1,46 @@
-import React, { Component, useContext, useEffect, useState } from 'react';
+/**
+ * @name DependencyGraphContainer
+ * @desc Parent container that holds both Aggregate stats and DependencyTree
+ */
+import { io } from "socket.io-client";
+import React, { useContext, useEffect,} from 'react';
 import Card from 'antd/es/card';
-import { DependencyGraph} from '../charts/DependencyTree'
+import { DependencyGraph } from '../charts/DependencyTree'
 import { AggregateStats } from '../components/AggregateStats';
+import { globalContext } from "../contexts/globalContext"
 import { dynamicContext } from '../contexts/dynamicContext';
 import Divider from 'antd/es/divider';
 import Typography from 'antd/es/typography';
 const { Title } = Typography
 
 function DependencyGraphContainer(): JSX.Element{
-  
-  const { aggregate, services } = useContext(dynamicContext)
-  useEffect(()=> {
+  const { serverAddress } = useContext(globalContext)
+  const { aggregate, services, setAggregate,setServices } = useContext(dynamicContext)
+  useEffect(() => {
+    
+   
+    const socket:any = io(serverAddress + ':8080', {
+      transports: ["websocket"],
+    });
+    console.log('in console')
+    socket.on("connection", () => {
+      console.log(socket.id);
+      console.log('connected')
+    });
+    console.log('past connection req')
+    socket.on("real-time-object", (output: any) => {
+      console.log("new update");
+      console.log(output)
+      const newData = JSON.parse(output[0]);
+      setAggregate(newData.aggregate);
+      setServices(newData.services);
+      console.log(newData.aggregate);
+      console.log(newData.services, 'services');
+    });
 
-  },[])
+    return () => socket.disconnect();
+    
+  }, []);
 
   return(
     <div id="chartContainer">
@@ -31,4 +59,3 @@ function DependencyGraphContainer(): JSX.Element{
 };
 
 export { DependencyGraphContainer };
-

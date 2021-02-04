@@ -1,14 +1,18 @@
-
+/**
+ * @name DependencyTree
+ * @desc Visual dependency tree that renders when Depenedency Graph tab is selected. Complete display of interconnectivity of application and
+ * its endpoints. Child component of DependencyGraphContainer.
+ * 
+ */
+//import of files and dependencies for dependency graph to properly render
 import React, { useState } from "react";
 import { Group } from "@visx/group";
 import { hierarchy, Tree } from "@visx/hierarchy";
 import { LinearGradient } from "@visx/gradient";
 import { pointRadial } from "d3-shape";
-import { AggregateStats } from '../components/AggregateStats';
-import { changeChildArr, changeData, treeData} from './DataFuncDepGraph'
-import { Select } from "antd";
+import { treeData } from './DataFuncDepGraph'
+import Select from "antd/es/select";
 
-// import useForceUpdate from "./useForceUpdate";
 import {
   LinkHorizontal,
   LinkVertical,
@@ -24,9 +28,10 @@ import {
   LinkRadialLine
 } from "@visx/shape";
 
-const { Option } = Select;
 
-const controlStyles = { fontSize: 28 };
+const { Option } = Select;
+//setting typescript constraints
+const controlStyles = { fontSize: 18 };
 export type Props = {
   layout: string;
   orientation: string;
@@ -48,9 +53,11 @@ function LinkControls({
   setLinkType,
   setStepPercent
 }: Props) {
-  function handleChangeLayout(value: string) {
+
+  function handleChangeLayout(value) {
     setLayout(value);
   }
+
   function LayoutSelect(): any {
     return (
       <Select
@@ -67,6 +74,7 @@ function LinkControls({
   function handleChangeOrientation(value: string) {
     setOrientation(value);
   }
+ //set
   function OrientationSelect(): any {
     return (
       <Select
