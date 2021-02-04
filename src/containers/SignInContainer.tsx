@@ -6,21 +6,34 @@ import Input from 'antd/es/input';
 import Button from 'antd/es/button';
 import Card from 'antd/es/card';
 import Typography from "antd/es/typography";
+import authApi from '../other-modules/authApi';
+
 const { Title } = Typography;
 
 
 function SignIn():JSX.Element {
   const { verification, setVerification, setServerAddress, } = useContext(globalContext)
-  const onFinish = (values: any) => {
-
-    // create get request here to ratify the tokenization process. 
-    // currently compares to a local json file. 
-    // commmit token to local state.
-    // if(data[values.serverIP]){
-      setServerAddress(values.serverIP)
+  
+  /**
+   * Deconstruct Form values (serverAddress, secret) 
+   * invoke authApi.login (POST request), passing in serverAddress and secret 
+   * as key:values in the 'body' object
+   * Upon receiving a request, if status is 200 -> authentication was successful
+   * Store accessToken in locakStorage, serverAddress in state and 
+   * set verification boolean to true
+   */
+   const onFinish = async (values: any) => {
+    const { serverAddress, secret } = values;
+    const res = await authApi.login({ serverAddress, secret });
+    if (res.status === 200) {
+      const { accessToken, refreshToken } = res.data;
+      localStorage.setItem('accessToken', accessToken)
+      localStorage.setItem('refreshToken', refreshToken)
+      setServerAddress(values.serverAddress)
       setVerification(true)
-    // } 
+    }
   }
+  
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
   };

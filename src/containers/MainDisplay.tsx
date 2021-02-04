@@ -35,6 +35,8 @@ function MainDisplay(): JSX.Element {
 
   const handleSignout = () => {
     console.log('handleSignout')
+    // remove token from localStorage
+    localStorage.removeItem('accessToken')
     setIsModalVisible(false);
     setVerification(false)
     console.log(isModalVisible)

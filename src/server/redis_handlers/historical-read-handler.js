@@ -2,9 +2,10 @@ const { read } = require('fs');
 const Redis = require('ioredis');
 const { Client, Pool } = require('pg');
 require('dotenv').config(); 
- 
+const pool = require('./db.js');
 
 //Name of stream we are reading from
+// const STREAM_KEY = process.env.STREAM_KEY; 
 const STREAM_KEY = process.env.STREAM_KEY; 
 //Interval of the stream we are processing to write to the database
 const INTERVAL = process.env.INTERVAL;
@@ -12,6 +13,8 @@ const INTERVAL = process.env.INTERVAL;
 const PING_RATE = process.env.PING_RATE; 
 //DB table name you set up in config
 const TABLE_NAME = process.env.TABLE_NAME; 
+
+const DB_NAME = process.env.DB_NAME; 
 
 //Boilerplate to set up redis object
 const redis = new Redis({
@@ -28,16 +31,14 @@ const client = new Client({
   port: process.env.DB_PORT
 })
 
-client.connect(); 
+// client.connect(); 
 
 //TEST READ TABLE FROM POSTGRES
-  client.query('SELECT * FROM logs; ', (err, result) => {
-    if(err){
-      console.log(err); 
-    } else {
-      console.log(`Read from table ${TABLE_NAME}...`, result); 
-    }
-  })
+  pool.query('SELECT * FROM logs; ')
+    .then((result) => {
+      console.log(`Read from table ${TABLE_NAME}...`, result);
+    })
+    .catch((err) => console.log(err))
 
   console.log(`Reading the stream named ${STREAM_KEY}...`); 
 
@@ -98,7 +99,7 @@ client.connect();
       queryText += ';'; 
     
       //Write the actual query to the database
-      client.query(queryText, (err, result) => {
+      pool.query(queryText,(err, result) => {
         if(err){
           console.log(err); 
         } else {

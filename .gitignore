@@ -1,7 +1,6 @@
 node_modules
 pack-lock.json
-dist/.gitignore
 package-lock.json
 dist/
-.env
-ds.store
+src/.DS_Store
+src/tests/.DS_Store
