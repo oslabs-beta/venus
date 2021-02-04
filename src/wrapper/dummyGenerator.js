@@ -85,4 +85,4 @@ const generateLogs = () => {
 setInterval(() => {
   const log = generateLogs(); 
   redisStream.writeRedisStream('logstream', log);  
-}, 1000)
+}, 300)
