@@ -14,12 +14,21 @@ function ErrorRate(): JSX.Element {
             data: serviceData.error_rate,
             xField: "timestamp",
             yField: "value",
-            yAxis: {
-              min: -5,
-              max: 1000
-            },
+            autoAdjust: true,            
             xAxis: {
-              max: 15
+              max: 15, 
+              label: {
+                formatter: function formatter(v:any) {
+                  return v.slice(11,19); 
+                }
+             }
+            },
+            yAxis: {
+              label: {
+                formatter: function formatter(v:any) {
+                  return v / 1000.0 + '%'; 
+                }
+             }
             },
             seriesField: "service", 
             animation: {

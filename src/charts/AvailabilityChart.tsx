@@ -14,7 +14,9 @@ const Availability: React.FC = () => {
     xField: "timestamp",
     yField: 'value',
     seriesField: 'service',
-    xAxis: { type: 'time' },
+    xAxis: { 
+      type: 'time', 
+    },
     yAxis : { 
       label: {
         formatter: function formatter(v:any) {

@@ -155,7 +155,7 @@ async function sendData(socket){
   //Recursive call to trigger function every 3 seconds. 
   setTimeout(() => {
     sendData(socket); 
-  }, 3000); 
+  }, 10000); 
 }
 
 
