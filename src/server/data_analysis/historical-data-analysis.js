@@ -535,19 +535,19 @@ histController.readLastHour = (req, res, next) => {
             })
 
             returnObj['lastHour']['error_rate'].push({
-              "timestamp": unixToTimestamp(row.timestamp).slice(11, 19), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(10, 19), 
               "value": Number(row.error_rate), 
               "service": row.method
             })
 
             returnObj['lastHour']['response_time'].push({
-              "timestamp": unixToTimestamp(row.timestamp).slice(11, 19), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(10, 19), 
               "value": Number(row.response_time), 
               "service": row.method
             })
 
             returnObj['lastHour']['load'].push({
-              "timestamp": unixToTimestamp(row.timestamp).slice(11, 19), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(10, 19), 
               "value": Number(row.load), 
               "service": row.method
             })
@@ -599,25 +599,25 @@ histController.readLastHour = (req, res, next) => {
           } else {
             //Create availability property and push to array
             returnObj['lastHour']['availability'].push({
-              "timestamp": unixToTimestamp(row.timestamp).slice(11, 19), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(10, 19), 
               "value": Number(row.availability), 
               "service": row.service
             })
 
             returnObj['lastHour']['error_rate'].push({
-              "timestamp": unixToTimestamp(row.timestamp).slice(11, 19), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(10, 19), 
               "value": Number(row.error_rate), 
               "service": row.service
             })
 
             returnObj['lastHour']['response_time'].push({
-              "timestamp": unixToTimestamp(row.timestamp).slice(11, 19), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(10, 19), 
               "value": Number(row.response_time), 
               "service": row.service
             })
 
             returnObj['lastHour']['load'].push({
-              "timestamp": unixToTimestamp(row.timestamp).slice(11, 19), 
+              "timestamp": unixToTimestamp(row.timestamp).slice(10, 19), 
               "value": Number(row.load), 
               "service": row.service
             })
