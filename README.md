@@ -1,16 +1,57 @@
+
+
 # Venus
 
+<a href="#"><img src="./assets/venus.png" alt="Electron" title="Electron" align-items="center" height="400" /></a>
+
+#
+![Build Passing](https://img.shields.io/badge/build-passing-blue)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/oslabs-beta/venus)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Release: 5.1](https://img.shields.io/badge/Release-v1.0-orange)
+
 A self-hosted service monitoring tool for growing projects. 
+
+### ⭐ Star us on GitHub — it helps! ⭐
+
+
+Venus is a self-hosted service monitoring tool for growing projects.  Venus provides real time and historic data metrics of your services and their endpoint methods. Use Venus to verify that these services and their endpoint dependencies are operating properly.
+
+<br>
+
+## Table of Contents
+
+[Install Dependencies](#install-dependencies)
+
+- [Description](#description)
+- [Motivation](#motivation)
+- [Features](#features)
+- [A Brief Overview of Venus](#A-Brief-Overview-of-the-Venus-Orbit)
+- [Demo](#demo)
+- [Getting Started with Venus](#Getting-started-with-venus)
+  - [Clone the Repo](#Clone-the-repo)
+  - [Install Dependencies and Run Scripts](#Install-Dependencies-and-run-scripts)
+  - [Configuring the Agent](#Configuring-the-Agent-with-Node.js-and-AWS-Elasticache)
+- [Technologies](#technologies)
+- [Contributing](#contributing)
+- [License](#license)
+
+#
+#### [Return to Top](#Venus)
+
+<br>
 
 ## Description
 
 Venus is a lightweight, self-hosted service monitoring tool that provides customizable, real-time and historical data on critical health metrics of service dependencies.
 
+<br>
 
 ## Motivation
 
 As architectures shift more towards distributed and cloud based systems, the need for centralized and singular source of truth of end point services has grown in value. While many of these services exist as large packages, Venus aims to give users a flexible suite of baseline statistics on their deployed apps. 
 
+<br>
 
 ## Features
 * Real-time rolling averages on service specific KPIs including Availability, Response Time, Load, and Response Error.
@@ -19,6 +60,8 @@ As architectures shift more towards distributed and cloud based systems, the nee
 * Real-time dependency graph visualizer that maps service structure and statistics. 
 * Server side authentication for secure storage and distribution of analytics. 
 * Secure Session authentication.
+
+<br>
 
 ## A Brief Overview of the Venus Orbit 
 
@@ -37,42 +80,100 @@ There are three key phases of The Venus Orbit:
 
 
 
-## Getting Started With Venus 
-1. 
+## Demo
 
-# Configuring the Agent with Node.js and AWS Elasticache.
+insert demo here
+
+#
+##### Return to [Top](#Venus)
+
+<br>
+
+# Getting Started With Venus 
+
+
+## Clone the Repo
 
 ```
 git clone https://github.com/oslabs-beta/venus.git
 ```
 
-# Spinning up the Venus Electron Interface
+<br>
 
-Within the Venus parent directory:
+## Install Dependencies and Run Scripts
+
 ```
 npm install
 ```
+run 
+```
+npm run dev:react
+```
+then
+```
+npm run dev:electron
+```
 
-## Technical Overview
-* Electron
-* TypeScript
-* React
-* React Router
-* AWS (Elasticache, EC2, RDS)
-* PostgreSQL
-* Redis 
-* Websockets
-* Danfo.js
-* Express
-* Ant Design
-* Ant Design Charting Libraries 
-* Visx / D3
+## Configuring the Agent with Node.js and AWS Elasticache.
 
-## Potential for Improvement
+
+
+<br>
+
+## Technologies
+- <a href="#"><img src="./assets/electron-logo-color.png" alt="Electron" title="Electron" align="center" height="30" /></a>
+
+- <a href="#"><img src="./assets/ts-logo-long-blue.png" alt="TypeScript" title="TypeScript" align="center" height="30" /></a>
+
+- <a href="#"><img src="./assets/js-logo-color.png" alt="JavaScript" title="JavaScript" align="center" height="30" /></a>
+
+- <a href="#"><img src="./assets/react-logo-color.png" alt="React" title="React" align="center" height="30" /></a>
+  * React Router
+  * React Context API/ React Hooks
+
+- <a href="#"><img src="./assets/aws-logo-color.png" alt="AWS" title="AWS" align="center" height="30" /></a> 
+  * Elasticache
+  * EC2
+  * RDS
+
+- <a href="#"><img src="./assets/postgres-logo-color.png" alt="PostgreSQL" title="PostgreSQL" height="30" /></a>
+
+- <a href="#"><img src=".assets/Redis_Logo.svg.png" alt="Redis" title="Redis" height="30" /></a> 
+
+- <a href="#"><img src="./assets/websockets-logo.png" alt="Websockets" title="Websockets" height="30" /></a> 
+
+- <a href="#"><img src="./assets/danfo-js-logo.png" alt="Danfo.js" title="Danfo.js" height="25" /></a> 
+
+- <a href="#"><img src="./assets/express-logo-color.png" alt="Express" title="Express" height="30" /></a> 
+
+- <a href="#"><img src="./assets/antdesign-logo.png" alt="antDesign" title="antDesign" height="30" />  Ant Design</a> 
+  - Ant Design Charting Libraries 
+
+- <a href="#"><img src="./assets/Visx-D3-React-logo.jpeg" alt="Visx" title="Visx" height="35" /></a>  
+
+- <a href="#"><img src="./assets/jest-logo-color.png" alt="Jest" title="Jest" height="30" /></a>  <a href="#"><img src="./src/assets/enzyme-logo-color.png" alt="Enzyme" title="Enzyme" height="30" /></a>
+
+<br>
+
+## Contributing
+
+Development of Venus is open source on GitHub through the tech accelerator umbrella OS Labs, and we are grateful to the community for contributing bugfixes and improvements. Read below to learn how you can take part in improving Venus.
+
+
+
+### Potential for Improvement
 * The addition of Metrics for dynamic and historic data.
 * Webhook integration for user alerts on threshold triggers.
 * Persistent user thresholds. 
 *
+
+<br>
+
+
+
+- [Contributing](https://github.com/oslabs-beta/Venus/blob/main/CONTRIBUTING.md)
+
+<br>
 
 ## Authors
 * Akshay Suggula [asuggula](https://github.com/asuggula)
@@ -90,4 +191,8 @@ Justin Cohen
 
 ## License
 
-Venus is <a href="#"><img src="./app/assets/mit-logo-color.png" alt="MIT" title="MIT" align="center" height="20" /></a> [licensed.]
+Venus is <a href="#"><img src="./src/assets/mit-logo-color.png" alt="MIT" title="MIT" align="center" height="20" /></a> [licensed.](https://github.com/oslabs-beta/Venus/blob/master/LICENSE.md) 
+
+
+#
+#### [Return to Top](#Venus)

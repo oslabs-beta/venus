@@ -67,7 +67,6 @@ function SignIn():JSX.Element {
 
           <Form.Item {...tailLayout}>
             <Button className= "textBox" type="primary" htmlType="submit" style={{marginLeft: 15}}>
-            
               Sign In
             </Button>
         </Form.Item>

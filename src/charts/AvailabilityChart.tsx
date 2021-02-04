@@ -6,7 +6,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Line from'@ant-design/charts/es/line';
 import { historicalContext } from '../contexts/historicalContext';     
 const Availability: React.FC = () => {
-  //set context api that broadcasts to components wrapped within it to update historical state
+  
   const { serviceData } = useContext(historicalContext)
   //set ContextAPI state object
   let config = {
