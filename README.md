@@ -40,11 +40,7 @@ Venus is a lightweight, self-hosted service monitoring tool that provides custom
 
 ## Motivation
 
-<<<<<<< HEAD
-As the popularity of distributed server architectures has grown, so has the need for a centralized and singular source of truth on the health. While many of these services exist as large packages, Venus aims to give users a flexible suite of baseline statistics on their deployed apps. Additionally, Venus is configured within AWS so users will have direct access to their logs and only pay market rate for storage and computation as their apps grow in size. 
-=======
 As the popularity of microservice architectures has grown, managing the complexity and keeping tabs on the health of service dependencies is increasingly critical. While many service monitoring solutions exist as a subset of heavier end-to-end solutions, Venus aims to provide a point solution that gives users a flexible, lightweight solution that enables them to monitor KPIs on all of their applications. Additionally, Venus is self-hosted and therefore users only incur costs for storage and compute. 
->>>>>>> main
 
 <br>
 
