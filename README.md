@@ -88,6 +88,9 @@ Given Venus's open source, self-hosted nature - it will ultimately depend on you
 
 ## Clone the Repo
 
+Clone the repo onto your either your local machine or a compute resource like EC2. You'll need to run two instances to spin up both the client-side GUI as well as the Venus server. 
+
+
 ```
 git clone https://github.com/oslabs-beta/venus.git
 ```
@@ -143,14 +146,23 @@ venusWrapper();
 Now the wrapper function `venusWrapper()` will log all outbound HTTP / HTTPS requests from your application and write to the Redis stream!
 
 
-# Running the Electron Application
+## Running the Electron Application
 
-In order to run the electron application, run both of the following commands in separate terminals inside the Venus parent directory.
+Run both of the following commands in separate terminals inside the Venus parent directory to spin up the Electron GUI
+
 ```
 npm run dev:react
 ```
 ```
 npm run dev:electron
+```
+
+## Running the Venus server
+
+Run the following command inside of the Venus parent directory to spin up the Venus server
+
+```
+npm run server-test
 ```
 
 <br>
