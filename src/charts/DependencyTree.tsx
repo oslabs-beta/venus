@@ -246,11 +246,13 @@ function DependencyGraph({
     }
   }
 
-  function removeChildren (node:any) {
-      node.data.isExpanded = !node.data.isExpanded;
-      console.log(node);
-      forceUpdate();
-    }
+// can add a feature to remove the children nodes instead of orientation change in a future version
+  // function removeChildren (node:any) {
+  //     node.data.isExpanded = !node.data.isExpanded;
+  //     console.log(node);
+  //     forceUpdate();
+  //   }
+
 // console.log('data from dep graph context in graph', dependencyGraph)
 // console.log('current data in graph', treeData)
   const LinkComponent = getLinkComponent({ layout, linkType, orientation });
@@ -307,6 +309,7 @@ function DependencyGraph({
                   } else if (orientation === "vertical") {
                     top = node.y;
                     left = node.x;
+                    // can add a feature to remove the children nodes instead of orientation change in a future version
                     // removeChildren(node)
                     console.log('data input for vert', node)
                     
