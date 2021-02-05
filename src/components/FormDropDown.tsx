@@ -18,12 +18,16 @@ function FormDropDown (props:any): JSX.Element{
   const { filter, setFilter } = useContext(dynamicContext)
   
 	function onChange(value:string ) {
+    console.log(filter, 'before change')
     if (filter[props.record.service]){
+      // if ()
+      console.log(props.record.service)
       delete filter[props.record.service]
       filter[props.record.service] = value
       setFilter(filter)
-      console.log(filter)
+      console.log(filter, 'in if')
     } else {
+    console.log(filter, 'in else')
     filter[props.record.service] = value
     setFilter(filter)
     console.log(filter)
