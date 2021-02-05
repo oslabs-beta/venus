@@ -45,6 +45,7 @@ function SignIn():JSX.Element {
         >
         <Form
           {...layout}
+          data-testid="Login-form"
           name="Login"
           initialValues={{ remember: true }}
           onFinish={onFinish}

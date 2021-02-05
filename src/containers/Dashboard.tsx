@@ -38,6 +38,8 @@ function Dashboard(): JSX.Element {
       
       setAggregate(newData.aggregate);
       setServices(newData.services);
+      const dependencyGraph = JSON.parse(output[1])
+      console.log('in dashboard with dependency graph context', dependencyGraph)
     });
     return () => socket.disconnect();
     
@@ -175,9 +177,7 @@ function Dashboard(): JSX.Element {
         load={aggregate.load}
         availability={aggregate.availability}
       />
-      <Divider>
-        <Title level={3}>Current Status</Title>
-      </Divider>
+
       <Table
         bordered
         scroll={{y: "67vh"}}
