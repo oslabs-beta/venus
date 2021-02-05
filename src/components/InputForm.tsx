@@ -7,7 +7,6 @@ import Button from 'antd/es/button';
 import Space from 'antd/es/space';
 import Select from 'antd/es/select'
 import React, { useContext, useState, useEffect, ContextType } from 'react';
-import { myContext } from '../contexts/globalContext';
 const { Option } = Select;
 const {verification, setVerfication} = useContext(myContext)
 
