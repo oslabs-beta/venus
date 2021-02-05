@@ -4,7 +4,7 @@
  * its endpoints. Child component of DependencyGraphContainer.
  * 
  */
-//import of files and dependencies for dependency graph to properly render
+
 import React, { useState } from "react";
 import { Group } from "@visx/group";
 import { hierarchy, Tree } from "@visx/hierarchy";
@@ -12,6 +12,7 @@ import { LinearGradient } from "@visx/gradient";
 import { pointRadial } from "d3-shape";
 import { treeData } from './DataFuncDepGraph'
 import Select from "antd/es/select";
+const { Option } = Select;
 
 import {
   LinkHorizontal,
@@ -29,8 +30,7 @@ import {
 } from "@visx/shape";
 
 
-const { Option } = Select;
-//setting typescript constraints
+
 const controlStyles = { fontSize: 18 };
 export type Props = {
   layout: string;

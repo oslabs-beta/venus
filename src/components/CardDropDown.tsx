@@ -28,13 +28,13 @@ function CardDropDown (): JSX.Element{
     )
   }
 
-
 	function onChange(value:string) {
     console.log(value)
     axios.get(serverAddress +':3000/getHistorical/' + value)
     .then(function(response){
       setServiceData(response.data[currentRange]);
       setTimeRange(response.data);
+      console.log(response.data[currentRange], 'get aggregate')
       setAggregate(response.data[currentRange].aggregate);
     })
     .catch(function(error){

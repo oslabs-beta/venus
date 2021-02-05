@@ -18,7 +18,7 @@ const Latency: React.FC = () => {
     xAxis: { 
       label: {
          formatter: function formatter(v:any) {
-           return v.slice(11,19); 
+           return v.slice(11,16); 
          }
       }
      },
