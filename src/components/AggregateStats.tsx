@@ -1,7 +1,7 @@
 /**
  * @name AggregateStats
  * @desc Child container rendered in DependencyGraph, ChartContainer, ServiceSettingsContainer, and Dashboard.
- *  Service cards that render on top of each page, displaying Aggregate stats of application
+ *  Displays service cards that render on top of each page, giving Aggregate stats of the system or selected service.
  */
 import React from 'react'
 import Statistic from 'antd/es/statistic'
@@ -24,7 +24,6 @@ function AggregateStats(props: any): JSX.Element{
 							title="Title"
 							value="System"
 							precision={2}
-			
 						/>
 					</Card>
 			</div>
@@ -37,9 +36,7 @@ function AggregateStats(props: any): JSX.Element{
 							title="Availability"
 							value={props.availability}
 							precision={2}
-							
 							suffix="%"
-		
 						/>
 					</Card>
 					</div>
@@ -51,7 +48,6 @@ function AggregateStats(props: any): JSX.Element{
 							title="Response Time"
 							value={props.response_time}
 							precision={2}
-							// valueStyle={{ color: color.fair }}
 							suffix="ms"
 							/>
 					</Card>
@@ -65,7 +61,6 @@ function AggregateStats(props: any): JSX.Element{
 							title="Load"
 							value={props.load}
 							precision={2}
-							// valueStyle={{ color: color.fair }}
 							suffix="hpm"
 							/>
 					</Card>
@@ -79,7 +74,6 @@ function AggregateStats(props: any): JSX.Element{
 							title="Response Error"
 							value={props.error}
 							precision={2}
-							// valueStyle={{ color: color.fair }}
 							suffix="%"
 							/>
 					</Card>

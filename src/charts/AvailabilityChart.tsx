@@ -6,7 +6,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Line from'@ant-design/charts/es/line';
 import { historicalContext } from '../contexts/historicalContext';     
 const Availability: React.FC = () => {
-  //set context api that broadcasts to components wrapped within it to update historical state
+  
   const { serviceData } = useContext(historicalContext)
   //set ContextAPI state object
   let config = {
@@ -14,8 +14,15 @@ const Availability: React.FC = () => {
     xField: "timestamp",
     yField: 'value',
     seriesField: 'service',
-    xAxis: { type: 'time' },
+    xAxis: { 
+      label: {
+        formatter: function formatter(v:any) {
+          return v.slice(11,19); 
+        }
+     } 
+    },
     yAxis : { 
+      min: 60,
       label: {
         formatter: function formatter(v:any) {
           return ''.concat(v).replace(/\d{1,3}(?=(\d{3})+$)/g, function (s) {
