@@ -80,6 +80,12 @@ There are three key phases of The Venus Orbit:
 # Getting Started With Venus 
 
 
+## A Note on Self Hosting
+
+Given Venus's open source, self-hosted nature - it will ultimately depend on you to set up the necessary caching, data store and processing services in order to utilize the full functionality of Venus. We've leveraged AWS in our implementation, but ultimately how you choose to host it is at your discretion.  
+
+
+
 ## Clone the Repo
 
 ```
@@ -90,23 +96,62 @@ git clone https://github.com/oslabs-beta/venus.git
 
 ## Install Dependencies and Run Scripts
 
-within the parent directory of Venus download the dependencies. 
+Within the parent directory of Venus download all of the dependencies. 
 
 ```
 npm install
 ```
-run 
+
+
+## Configuring the Venus Instance
+
+The instructions below outline the use case for someone hosting their application on AWS. However, note that the configuration of Venus will ultimately depend on the storage, caching, and compute provide of choice. 
+
+First update the `.env` and `src/config` files with all of the necessary inputs needed to set up the application: 
+
+```
+STREAM_KEY = 'stream_name' // Name of the redis stream 
+REDIS_HOST = 'redis.cache.amazonaws.com' // Link where your Redis caching is hosted
+REDIS_PORT = 6379 // Redis port to interact with 
+DB_NAME = 'AWS_RDS_user' // Database username
+DB_PASS = 'AWS_RDS_pass' // Database password (if leveraging authentication)
+AWS_REGION = 'us-east-2' // Region your database is hosted in (if using AWS)
+DB_HOST = 'db.cluser.aws-region.rds.amazonaws.com' // Database host link
+DB_PROXY = 'rds-proxy-aurora-postgres.proxy-id.aws-geo.rds.amazonaws.com' // Database proxy link (if using RDS proxy)
+DB_PORT = 5432 // Database port to access DB instances
+EC2_HOST = 'ec2.amazonaws.com' // EC2 link if deploying Venus in the cloud
+HTTP_PORT = 3000 // HTTP server port
+SOCKET_PORT = 8080 // // Socket port
+```
+
+Once you've configured the Venus instance with all of the necessary cloud services, the next step will be to implement the wrapper into your application's code. 
+
+
+## Setting up the Wrapper
+
+In order to set up the wrapper, you'll need to require it inside of your server file as follows: 
+
+```javascript
+const express = require('express');
+const app = express();
+
+/** VENUS AGENT */
+const venusWrapper = require('../wrapper/venus-wrapper');
+venusWrapper();
+```
+
+Now the wrapper function `venusWrapper()` will log all outbound HTTP / HTTPS requests from your application and write to the Redis stream!
+
+
+# Running the Electron Application
+
+In order to run the electron application, run both of the following commands in separate terminals inside the Venus parent directory.
 ```
 npm run dev:react
 ```
-then in a second concurrent terminal run
 ```
 npm run dev:electron
 ```
-
-## Configuring the Agent with Node.js and AWS Elasticache.
-
-
 
 <br>
 
