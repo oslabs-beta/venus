@@ -15,7 +15,7 @@ import { Latency } from "../charts/LatencyChart";
 import Row from "antd/es/row";
 import Col from "antd/es/col";
 import Card from "antd/es/card";
-import { Spin, Alert } from "antd";
+import { Spin } from "antd";
 import Divider from "antd/es/divider";
 import Title from "antd/es/typography/Title";
 import Radio from "antd/es/radio";
@@ -27,7 +27,6 @@ function ChartContainer(): JSX.Element {
     aggregate,
     setAggregate,
     service,
-    serviceData,
     setService,
     setServiceData,
     timeRange,
@@ -78,6 +77,7 @@ function ChartContainer(): JSX.Element {
     setCurrentRange(e.target.value);
   };
   console.log(currentRange, "currentRange");
+  
   const refreshData = () => {
     if (service === ''){
 
