@@ -13,8 +13,6 @@
 
 ## Table of Contents
 
-[Install Dependencies](#install-dependencies)
-
 - [Description](#description)
 - [Motivation](#motivation)
 - [Features](#features)
