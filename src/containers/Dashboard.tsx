@@ -21,7 +21,7 @@ function Dashboard(): JSX.Element {
   
   const { services, setServices, aggregate, setAggregate, filter, setFilter, serviceThresholds, firstTime, setFirstTime } = useContext(dynamicContext);
   const { serverAddress } = useContext(globalContext)
-
+console.log('services in dashboard', services)
   const dataSource: any = [];
   useEffect(() => {
     setFilter(filter)
