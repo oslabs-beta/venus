@@ -222,7 +222,7 @@ Development of Venus is open source on GitHub through the tech accelerator umbre
 * Evan Perlman [evperlman](https://github.com/evperlman)
 
 ## Special Thanks:
-Sanjay Lavingia, Shyam Venkataraman, Kesav Mulakaluri, Santosh Mohan, Mike Soennichsen, Julie Wu, Will Bladon, Justin Cohen and Nick de los Santos Jr. for their thoughtful feedback and guidance.  
+Sanjay Lavingia, Shyam Venkataraman, Kesav Mulakaluri, Santosh Mohan, Mike Soennichsen, Julie Wu, Will Bladon, Justin Cohen, Nick de los Santos Jr., Ricardo Pineda and Rootul Patel for their thoughtful feedback and guidance.  
 
 ## License
 
